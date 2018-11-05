@@ -1,5 +1,5 @@
 # My Studies
-My Studies is an open-source project to take part in health surveys. ‘My Studies’ is developed using [ResearchKit](https://github.com/ResearchKit/ResearchKit#charts) which is an open-source framework provided by Apple.
+My Studies is an open-source project for health surveys. ‘My Studies’ is developed using [ResearchKit](https://github.com/ResearchKit/ResearchKit#charts) which is an open-source framework provided by Apple.
 My Studies project is FISMA & HIPPA compliant.
 # Requirements
 My Studies requires Xcode 9 or newer and can be run on iOS 9,10 & 11.
