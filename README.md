@@ -28,6 +28,6 @@ direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 <li>mobileAppStudy.module
 </ul>
 
-<b>General Resources:<b> FDA Health Studies System_ Business Requirements and Functional Specifications Document_Final
+<b>General Resources:</b> FDA Health Studies System_ Business Requirements and Functional Specifications Document_Final
 
 
