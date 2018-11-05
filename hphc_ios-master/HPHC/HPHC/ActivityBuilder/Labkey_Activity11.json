@@ -1,0 +1,579 @@
+{
+    "Result":
+    
+    {
+        
+        "type": "questionnaire",
+        
+        "metadata": {
+            
+            "studyId": "CAFDA12",
+            
+            "activityId": "QR4_I4",
+            
+            "name": "QR4",
+            
+            "version": "1",
+            
+            "lastModified": "2017-04-18T18:06:40.000-0400",
+            
+            "startDate": "2017-04-25T10:22:21.000-0400",
+            
+            "endDate": "2017-06-25T10:22:21.000-0400"
+            
+        },
+        
+        "configuration": {
+            
+            "frequency": "one-time"
+            
+        },
+        
+        
+        
+        "steps": [
+                  
+                  {
+                  
+                  "type": "form",
+                  
+                  "resultType": "grouped",
+                  
+                  "key": "QR4_F1",
+                  
+                  "title": "",
+                  
+                  "text": "",
+                  
+                  "skippable": true,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": true,
+                  
+                  "repeatableText": "Add More+",
+                  
+                  "destinations": [
+                                   
+                                   {
+                                   
+                                   "condition": "",
+                                   
+                                   "destination": "QR4_I1"
+                                   
+                                   }
+                                   
+                                   ],
+                  
+                  "healthDataKey": "",
+                  
+                  "format": {},
+                  
+                  "steps": [
+                            
+                            {
+                            "type": "question",
+                            "resultType": "scale",
+                            "key": "CBQ1",
+                            "title": "Condition Branching Question One",
+                            "text": "",
+                            "skippable": true,
+                            "groupName": "",
+                            "repeatable": false,
+                            "repeatableText": "",
+                            "destinations": [
+                                             
+                                             {
+                                             "condition": "280",
+                                             "operator": "ne",
+                                             "destination": "CBQ4"
+                                             },
+                                             {
+                                             "condition": "",
+                                             "operator": "",
+                                             "destination": "CBQ3"
+                                             }
+                                             ],
+                            "healthDataKey": "",
+                            "format": {
+                            "maxValue": 1000,
+                            "minValue": 10,
+                            "step": 90,
+                            "default": 10,
+                            "vertical": false,
+                            "maxDesc": "",
+                            "minDesc": "",
+                            "maxImage": "",
+                            "minImage": ""
+                            },
+                            "steps": [],
+                            "options": []
+                            },
+                            
+                            {
+                            
+                            "type": "question",
+                            
+                            "resultType": "continuousScale",
+                            
+                            "key": "QR4_F1_Q2",
+                            
+                            "title": "Q2",
+                            
+                            "text": "QDesc2",
+                            
+                            "skippable": true,
+                            
+                            "groupName": "",
+                            
+                            "repeatable": false,
+                            
+                            "repeatableText": "",
+                            
+                            "destinations": [],
+                            
+                            "healthDataKey": "",
+                            
+                            "format": {
+                            
+                            "maxValue": 10,
+                            
+                            "minValue": 0,
+                            
+                            "default": 0,
+                            
+                            "maxFractionDigits": 3,
+                            
+                            "vertical": true,
+                            
+                            "maxDesc": "Maximum Desc",
+                            
+                            "minDesc": "Minimum Desc",
+                            
+                            "maxImage": "",
+                            
+                            "minImage": ""
+                            
+                            },
+                            
+                            "steps": [],
+                            
+                            "options": []
+                            
+                            },
+                            {
+                            "type": "question",
+                            "resultType": "scale",
+                            "key": "CBQScale",
+                            "title": "Condition Branching Question One",
+                            "text": "",
+                            "skippable": true,
+                            "groupName": "",
+                            "repeatable": false,
+                            "repeatableText": "",
+                            "destinations": [
+                                             
+                                             {
+                                             "condition": "280",
+                                             "operator": "ne",
+                                             "destination": "CBQ4"
+                                             },
+                                             {
+                                             "condition": "",
+                                             "operator": "",
+                                             "destination": "CBQ3"
+                                             }
+                                             ],
+                            "healthDataKey": "",
+                            "format": {
+                            "maxValue": 1000,
+                            "minValue": 10,
+                            "step": 90,
+                            "default": 10,
+                            "vertical": false,
+                            "maxDesc": "",
+                            "minDesc": "",
+                            "maxImage": "",
+                            "minImage": ""
+                            },
+                            "steps": [],
+                            "options": []
+                            },
+                            {
+                            
+                            "type": "question",
+                            
+                            "resultType": "date",
+                            
+                            "key": "QR4_Q7_0",
+                            
+                            "title": "Q7",
+                            
+                            "text": "QDesc7",
+                            
+                            "skippable": true,
+                            
+                            "groupName": "",
+                            
+                            "repeatable": false,
+                            
+                            "repeatableText": "",
+                            
+                            "destinations": [
+                            
+                            
+                            
+                            ],
+                            
+                            "healthDataKey": "",
+                            
+                            "format": {
+                            
+                            "style": "Date",
+                            
+                            "minDate": "",
+                            
+                            "maxDate": "",
+                            
+                            "default": ""
+                            
+                            }
+                            
+                            },
+                            {
+                            
+                            "type": "question",
+                            
+                            "resultType": "date",
+                            
+                            "key": "QR4_Q7_1",
+                            
+                            "title": "Q7",
+                            
+                            "text": "QDesc7",
+                            
+                            "skippable": true,
+                            
+                            "groupName": "",
+                            
+                            "repeatable": false,
+                            
+                            "repeatableText": "",
+                            
+                            "destinations": [
+                            
+                            
+                            
+                            ],
+                            
+                            "healthDataKey": "",
+                            
+                            "format": {
+                            
+                            "style": "Date",
+                            
+                            "minDate": "",
+                            
+                            "maxDate": "",
+                            
+                            "default": ""
+                            
+                            }
+                            }
+                            ],
+                  
+                  "options": []
+                  
+                  },
+                  {
+                  
+                  "destinations" : [
+                                    
+                                    {
+                                    
+                                    "condition" : "",
+                                    
+                                    "destination" : ""
+                                    
+                                    }
+                                    
+                                    ],
+                  
+                  "format" : {
+                  
+                  },
+                  
+                  "groupName" : "",
+                  
+                  "healthDataKey" : "",
+                  
+                  "key" : "SmokeMedForm1",
+                  
+                  "options" : [],
+                  
+                  "repeatable" : true,
+                  
+                  "repeatableText" : "add",
+                  
+                  "resultType" : "grouped",
+                  
+                  "skippable" : true,
+                  
+                  "steps" : [
+                             
+                             {
+                             
+                             "destinations"
+                             :[],
+                             
+                             "format" : {
+                             
+                             "default" : "2017-06-01T00:00:00.000-0400",
+                             
+                             "maxDate" : "",
+                             
+                             "minDate" : "",
+                             
+                             "style" : "Date"
+                             
+                             },
+                             
+                             "groupName" : "",
+                             
+                             "healthDataKey" : "",
+                             
+                             "key" : "SmokeMedStop90",
+                             
+                             "options" : [],
+                             
+                             "repeatable" : true,
+                             
+                             "repeatableText" : "",
+                             
+                             "resultType" : "date",
+                             
+                             "skippable" : true,
+                             
+                             "steps" : [],
+                             
+                             "text" : "",
+                             
+                             "title" : "First question?",
+                             
+                             "type" : "question"
+                             
+                             },
+                             
+                             {
+                             
+                             "destinations" : [],
+                             
+                             
+                             "format" : {
+                             
+                             "selectionStyle" : "Single",
+                             
+                             "textChoices" : [
+                                              
+                                              {
+                                              
+                                              "detail" : "",
+                                              
+                                              "exclusive" : 0,
+                                              
+                                              "text" : "Smoking Med 1",
+                                              
+                                              "value" : 1
+                                              
+                                              },
+                                              
+                                              {
+                                              
+                                              "detail" : "",
+                                              
+                                              "exclusive" : 0,
+                                              
+                                              "text" : "Smoking Med 2",
+                                              
+                                              "value" : 2
+                                              
+                                              }
+                                              
+                                              ]
+                             
+                             },
+                             
+                             "groupName" : "",
+                             
+                             "healthDataKey" : "",
+                             
+                             "key" : "SmokeMed3",
+                             
+                             "options" : [],
+                             
+                             "repeatable" : false,
+                             
+                             "repeatableText" : "",
+                             
+                             "resultType" : "textChoice",
+                             
+                             "skippable" : true,
+                             
+                             "steps":[],
+                             
+                             "text" : "",
+                             
+                             "title" : "What medication did you take?",
+                             
+                             "type" : "question"
+                             
+                             },
+                             
+                             {
+                             
+                             "destinations" : [],
+                             
+                             "format" : {
+                             
+                             
+                             "invalidMessage" : "",
+                             
+                             "maxLength" : 0,
+                             
+                             "multipleLines" : 0,
+                             
+                             "placeholder" : "Enter medication",
+                             
+                             "validationRegex" : ""
+                             
+                             },
+                             
+                             "groupName" : "",
+                             
+                             "healthDataKey" : "",
+                             
+                             "key" : "SmokeMedText1",
+                             
+                             "options" : [],
+                             
+                             "repeatable" : false,
+                             
+                             "repeatableText" : "",
+                             
+                             "resultType" : "text",
+                             
+                             "skippable" : true,
+                             
+                             "steps" : [],
+                             
+                             "text" : "",
+                             
+                             "title" : "If your medication is not in this list, please enter it here:",
+                             
+                             "type" : "question"
+                             
+                             },
+                             
+                             {
+                             
+                             "destinations" : [],
+                             
+                             "format" : {
+                             
+                             "default" : "2017-06-01T00:00:00.000-0400",
+                             
+                             "maxDate" : "",
+                             
+                             "minDate" : "",
+                             
+                             "style" : "Date"
+                             
+                             },
+                             
+                             "groupName" : "",
+                             
+                             "healthDataKey" : "",
+                             
+                             "key" : "SmokeMedStart1",
+                             
+                             "options" : [],
+                             
+                             "repeatable" : false,
+                             
+                             "repeatableText" : "",
+                             
+                             "resultType" : "date",
+                             
+                             "skippable" : true,
+                             
+                             "steps" : [],
+                             
+                             "text" : "",
+                             
+                             "title" : "When during your pregnancy did you start taking this medication to stop smoking?",
+                             
+                             "type" : "question"
+                             
+                             },
+                             
+                             {
+                             
+                             "destinations" 
+                             :[],
+                             
+                             "format" : {
+                             
+                             "default" : "2017-06-01T00:00:00.000-0400",
+                             
+                             "maxDate" : "",
+                             
+                             "minDate" : "",
+                             
+                             "style" : "Date"
+                             
+                             },
+                             
+                             "groupName" : "",
+                             
+                             "healthDataKey" : "",
+                             
+                             "key" : "SmokeMedStop1",
+                             
+                             "options" : [],
+                             
+                             "repeatable" : true,
+                             
+                             "repeatableText" : "",
+                             
+                             "resultType" : "date",
+                             
+                             "skippable" : true,
+                             
+                             "steps" : [],
+                             
+                             "text" : "",
+                             
+                             "title" : "When did you stop taking this medication?",
+                             
+                             "type" : "question"
+                             
+                             }
+                             
+                             ],
+                  
+                  "text" : "",
+                  
+                  "title" : "",
+                  
+                  "type" : "form"
+                  
+                  }
+                  
+                  
+                  ]
+        
+        
+        
+    }
+    
+}

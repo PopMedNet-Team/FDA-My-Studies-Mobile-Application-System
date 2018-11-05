@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>format</key>
+	<dict>
+			</dict>
+	<key>phi</key>
+	<string>NotPHI</string>
+	<key>destinations</key>
+	<array>
+		<dict>
+			<key>DestStep</key>
+			<string>Q3 </string>
+		</dict>
+		<dict>
+			<key>DestStep</key>
+			<string> Q4</string>
+		</dict>
+	</array>
+	<key>repeatableText</key>
+	<string>null</string>
+	<key>repeatable</key>
+	<false/>
+	<key>groupName</key>
+	<string>Test group</string>
+	<key>skippable</key>
+	<false/>
+	<key>text</key>
+	<string>Rate yourself out of 10?</string>
+	<key>title</key>
+	<string>How good r u in swift?</string>
+	<key>key</key>
+	<string>Q1</string>
+	<key>type</key>
+	<string>question</string>
+	<key>resultType</key>
+	<string>scale </string>
+</dict>
+</plist>

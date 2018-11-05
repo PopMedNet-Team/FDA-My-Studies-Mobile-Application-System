@@ -1,0 +1,160 @@
+{"Result":
+    
+    {
+        
+        "type": "questionnaire",
+        
+        "metadata": {
+            
+            "studyId": "CAFDA12",
+            
+            "activityId": "QR4_I4",
+            
+            "name": "QR4",
+            
+            "version": "1",
+            
+            "lastModified": "2017-04-18T18:06:40.000-0400",
+            
+            "startDate": "2017-04-25T10:22:21.000-0400",
+            
+            "endDate": "2017-06-25T10:22:21.000-0400"
+            
+        },
+        
+        "configuration": {
+            
+            "frequency":"one-time"
+            
+        },
+        
+        
+        
+        "steps": [
+                  {
+                  "type": "question",
+                  "resultType": "numeric",
+                  "key": "CBQ3",
+                  "title": "Conditional Branching Question With Numeric Reponse",
+                  "text": "",
+                  "skippable": true,
+                  "groupName": "",
+                  "repeatable": false,
+                  "repeatableText": "",
+                  "destinations": [
+                                   {
+                                   "condition": "40.0000",
+                                   "operator": "gt",
+                                   "destination": "CBQ0"
+                                   },
+                                   {
+                                   "condition": "20.0000",
+                                   "operator": "lte",
+                                   "destination": "CBQ1"
+                                   }
+                                   ],
+                  "healthDataKey": "",
+                  "format": {
+                  "style": "Decimal",
+                  "unit": "",
+                  "minValue": 0,
+                  "maxValue": 100,
+                  "placeholder": ""
+                  },
+                  "steps": [],
+                  "options": []
+                  },
+                  
+                  {
+                  "type": "question",
+                  "resultType": "height",
+                  "key": "CBQ5",
+                  "title": "Conditional Branching Question With Height Response type",
+                  "text": "",
+                  "skippable": true,
+                  "groupName": "",
+                  "repeatable": false,
+                  "repeatableText": "",
+                  "destinations": [
+                                   {
+                                   "condition": "50",
+                                   "operator": "gt",
+                                   "destination": "CBQ0"
+                                   },
+                                   {
+                                   "condition": "4",
+                                   "operator": "lte",
+                                   "destination": "CBQ1"
+                                   },
+                                   {
+                                   "condition": "",
+                                   "operator": "",
+                                   "destination": ""
+                                   }
+                                   ],
+                  "healthDataKey": "",
+                  "format": {
+                  "measurementSystem": "US",
+                  "placeholder": ""
+                  },
+                  "steps": [],
+                  "options": []
+                  },
+                  {
+                  "type": "question",
+                  "resultType": "height",
+                  "key": "CBQ0",
+                  "title": "Conditional Branching Question With Height Response type 2",
+                  "text": "",
+                  "skippable": true,
+                  "groupName": "",
+                  "repeatable": false,
+                  "repeatableText": "",
+                  "destinations": [
+                                   {
+                                   "condition": "",
+                                   "operator": "",
+                                   "destination": ""
+                                   }
+                                   ],
+                  "healthDataKey": "",
+                  "format": {
+                  "measurementSystem": "US",
+                  "placeholder": ""
+                  },
+                  "steps": [],
+                  "options": []
+                  },
+                  {
+                  "type": "question",
+                  "resultType": "height",
+                  "key": "CBQ1",
+                  "title": "Conditional Branching Question With Height Response type 3",
+                  "text": "",
+                  "skippable": true,
+                  "groupName": "",
+                  "repeatable": false,
+                  "repeatableText": "",
+                  "destinations": [
+                                   {
+                                   "condition": "",
+                                   "operator": "",
+                                   "destination": ""
+                                   }
+                                   ],
+                  "healthDataKey": "",
+                  "format": {
+                  "measurementSystem": "US",
+                  "placeholder": ""
+                  },
+                  "steps": [],
+                  "options": []
+                  }
+                  ]
+        
+        
+        
+    }
+    
+}
+

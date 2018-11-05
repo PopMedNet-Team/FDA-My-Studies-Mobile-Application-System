@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>status</key>
+		<string>Current</string>
+		<key>items</key>
+		<array>
+			<dict>
+				<key>day</key>
+				<string>Weekely</string>
+				<key>heading</key>
+				<string>1st Trimester Survey</string>
+				<key>time</key>
+				<string>Every Saturday - 02:00 PM</string>
+				<key>operation</key>
+				<string>Resume</string>
+			</dict>
+			<dict>
+				<key>day</key>
+				<string>Daily</string>
+				<key>heading</key>
+				<string>Fetal Kick counter</string>
+				<key>time</key>
+				<string>08:00 AM - 02:00 PM</string>
+				<key>operation</key>
+				<string>Start</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>status</key>
+		<string>Upcoming</string>
+		<key>items</key>
+		<array>
+			<dict>
+				<key>day</key>
+				<string>One-Time</string>
+				<key>heading</key>
+				<string>Tapping Speed</string>
+				<key>time</key>
+				<string>30 Mon, Sept 2017 - 10:30 AM</string>
+				<key>operation</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>day</key>
+				<string>Daily</string>
+				<key>heading</key>
+				<string>Survey title</string>
+				<key>time</key>
+				<string>30 Mon, Oct 2017</string>
+				<key>operation</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>status</key>
+		<string>Completed</string>
+		<key>items</key>
+		<array>
+			<dict>
+				<key>day</key>
+				<string>One-Time</string>
+				<key>heading</key>
+				<string>1st Trimester Survey</string>
+				<key>time</key>
+				<string>30 Mon, Sept 2017 - 10:30 AM</string>
+				<key>operation</key>
+				<string>Completed</string>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>

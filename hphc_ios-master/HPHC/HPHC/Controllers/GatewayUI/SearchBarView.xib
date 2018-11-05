@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SearchBarView" customModule="FDA" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="373" height="64"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyq-ug-M4x">
+                    <rect key="frame" x="307" y="27" width="48" height="30"/>
+                    <state key="normal" title="Cancel">
+                        <color key="titleColor" red="0.4239494800567627" green="0.44984912872314453" blue="0.5297245979309082" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="buttonCancelAction" destination="iN0-l3-epB" eventType="touchUpInside" id="b9r-YV-sJm"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1wb-t2-VOs">
+                    <rect key="frame" x="18" y="26" width="281" height="33"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_small" translatesAutoresizingMaskIntoConstraints="NO" id="Uy2-kH-egr">
+                            <rect key="frame" x="16" y="7" width="16" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Uy2-kH-egr" secondAttribute="height" multiplier="18:19" id="eth-Uc-k4Q"/>
+                            </constraints>
+                        </imageView>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="search" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="x0y-MY-FMc">
+                            <rect key="frame" x="48" y="7.5" width="225" height="19"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="search"/>
+                            <connections>
+                                <outlet property="delegate" destination="iN0-l3-epB" id="0Do-ze-A10"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" red="0.74509803921568629" green="0.74509803921568629" blue="0.74509803921568629" alpha="0.443359375" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Uy2-kH-egr" secondAttribute="bottom" constant="9" id="5bb-eo-pFF"/>
+                        <constraint firstAttribute="trailing" secondItem="x0y-MY-FMc" secondAttribute="trailing" constant="8" id="aqT-ED-7ef"/>
+                        <constraint firstItem="Uy2-kH-egr" firstAttribute="leading" secondItem="1wb-t2-VOs" secondAttribute="leading" constant="16" id="fpc-tO-lWb"/>
+                        <constraint firstItem="x0y-MY-FMc" firstAttribute="centerY" secondItem="1wb-t2-VOs" secondAttribute="centerY" id="hAf-xn-ZJz"/>
+                        <constraint firstItem="x0y-MY-FMc" firstAttribute="leading" secondItem="Uy2-kH-egr" secondAttribute="trailing" constant="16" id="qJd-Pl-oW4"/>
+                        <constraint firstItem="Uy2-kH-egr" firstAttribute="top" secondItem="1wb-t2-VOs" secondAttribute="top" constant="7" id="ydB-tV-mcc"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="1wb-t2-VOs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="0al-8z-41N"/>
+                <constraint firstItem="1wb-t2-VOs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="26" id="75M-Vb-BWj"/>
+                <constraint firstAttribute="bottom" secondItem="xyq-ug-M4x" secondAttribute="bottom" constant="7" id="EAG-id-Klt"/>
+                <constraint firstItem="xyq-ug-M4x" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="27" id="g6o-ud-nCY"/>
+                <constraint firstItem="xyq-ug-M4x" firstAttribute="leading" secondItem="1wb-t2-VOs" secondAttribute="trailing" constant="8" id="hgC-Cd-bfs"/>
+                <constraint firstAttribute="bottom" secondItem="1wb-t2-VOs" secondAttribute="bottom" constant="5" id="hgq-yo-Vqc"/>
+                <constraint firstAttribute="trailing" secondItem="xyq-ug-M4x" secondAttribute="trailing" constant="18" id="oTE-1i-FGx"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="buttonCancel" destination="xyq-ug-M4x" id="34b-UB-YRC"/>
+                <outlet property="textFieldSearch" destination="x0y-MY-FMc" id="4ZW-9Y-5mv"/>
+                <outlet property="viewBackground" destination="1wb-t2-VOs" id="l1d-Vj-f7w"/>
+            </connections>
+            <point key="canvasLocation" x="-12.5" y="-389"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="search_small" width="19" height="20"/>
+    </resources>
+</document>

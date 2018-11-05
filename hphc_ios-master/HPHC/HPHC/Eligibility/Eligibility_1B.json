@@ -1,0 +1,359 @@
+{
+    "Result":
+    {
+        "steps": [
+                  
+                  {
+                  
+                  "type": "question",
+                  
+                  "resultType": "boolean",
+                  
+                  "key": "QR_Q1",
+                  
+                  "title": "Q1",
+                  
+                  "text": "Are you a girl?",
+                  
+                  "skippable": false,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "",
+                  
+                  "destinations": [],
+                  
+                  "healthDataKey": "",
+                  
+                  "format": {},
+                  
+                  "steps": [],
+                  
+                  "options": []
+                  
+                  },
+                  {
+                  
+                  "type": "question",
+                  
+                  "resultType": "boolean",
+                  
+                  "key": "QR_Q2",
+                  
+                  "title": "Q2",
+                  
+                  "text": "Are you of age > 20",
+                  
+                  "skippable": false,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "",
+                  
+                  "destinations": [],
+                  
+                  "healthDataKey": "",
+                  
+                  "format": {},
+                  
+                  "steps": [],
+                  
+                  "options": []
+                  
+                  },
+                  {
+                  
+                  "type": "question",
+                  
+                  "resultType": "boolean",
+                  
+                  "key": "QR_Q3",
+                  
+                  "title": "Q3",
+                  
+                  "text": "Are you pregnant?",
+                  
+                  "skippable": false,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "",
+                  
+                  "destinations": [],
+                  
+                  "healthDataKey": "",
+                  
+                  "format": {},
+                  
+                  "steps": [],
+                  
+                  "options": []
+                  
+                  },
+                  {
+                  
+                  "type": "question",
+                  
+                  "resultType": "boolean",
+                  
+                  "key": "QR_Q4",
+                  
+                  "title": "Q4",
+                  
+                  "text": "Is this the first time you gor pregnant?",
+                  
+                  "skippable": false,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "",
+                  
+                  "destinations": [],
+                  
+                  "healthDataKey": "",
+                  
+                  "format": {},
+                  
+                  "steps": [],
+                  
+                  "options": []
+                  
+                  }
+
+                  
+                  
+                  ],
+        
+        "correctAnswers": [
+                           {
+                           "key":"QR_Q1",
+                           "answer":false
+                           },
+                           {
+                           "key":"QR_Q2",
+                           "answer":true
+                           },
+                           {
+                           "key":"QR_Q3",
+                           "answer":true
+                           },
+                           {
+                           "key":"QR_Q4",
+                           "answer":false
+                           }
+                           ],
+        
+        "comprehension": {
+            "passScore": 3,
+            "questions": [
+                          {
+                          
+                          "type": "question",
+                          "resultType": "textChoice",
+                          "key": "14",
+                          "title": "",
+                          "text": "y hjgghfjgh urut  jnhjrdty bnhfght fgfghfghgh",
+                          "skippable": false,
+                          "groupName": "",
+                          "repeatable": false,
+                          "repeatableText": "",
+                          "destinations": [],
+                          "healthDataKey": "",
+                          "format": {
+                          
+                          "selectionStyle" : "Single",
+                          
+                          "textChoices" : [
+                                           
+                                           {
+                                           
+                                           "detail" : "",
+                                           
+                                           "exclusive" : 0,
+                                           
+                                           "text" : "Smoking Med 1",
+                                           
+                                           "value" : "A"
+                                           
+                                           },
+                                           
+                                           {
+                                           
+                                           "detail" : "",
+                                           
+                                           "exclusive" : 0,
+                                           
+                                           "text" : "Smoking Med 2",
+                                           
+                                           "value" : "B"
+                                           
+                                           }
+                                           
+                                           ]
+                          
+                          },
+                          "steps": [],
+                          "options": []
+                          },
+                          {
+                          
+                          "type": "question",
+                          "resultType": "textChoice",
+                          "key": "11",
+                          "title": "",
+                          "text": "abcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdefabcdef",
+                          "skippable": false,
+                          "groupName": "",
+                          "repeatable": false,
+                          "repeatableText": "",
+                          "destinations": [],
+                          "healthDataKey": "",
+                          "format": {
+                          
+                          "selectionStyle" : "Multiple",
+                          
+                          "textChoices" : [
+                                           
+                                           {
+                                           
+                                           "detail" : "",
+                                           
+                                           "exclusive" : 0,
+                                           
+                                           "text" : "Med 1",
+                                           
+                                           "value" : "1"
+                                           
+                                           },
+                                           
+                                           {
+                                           
+                                           "detail" : "",
+                                           
+                                           "exclusive" : 0,
+                                           
+                                           "text" : "Med 2",
+                                           
+                                           "value" : "2"
+                                           
+                                           },
+                                           {
+                                           
+                                           "detail" : "",
+                                           
+                                           "exclusive" : 0,
+                                           
+                                           "text" : "Med 3",
+                                           
+                                           "value" : "3"
+                                           
+                                           }
+                                           
+                                           ]
+                          
+                          },
+                          "steps": [],
+                          "options": []
+                          
+                          },
+                          {
+                          
+                          "type": "question",
+                          "resultType": "textChoice",
+                          "key": "8",
+                          "title": "",
+                          "text": "why this kolavri di",
+                          "skippable": false,
+                          "groupName": "",
+                          "repeatable": false,
+                          "repeatableText": "",
+                          "destinations": [],
+                          "healthDataKey": "",
+                          "format": {
+                          
+                          "selectionStyle" : "Multiple",
+                          
+                          "textChoices" : [
+                                           
+                                           {
+                                           
+                                           "detail" : "",
+                                           
+                                           "exclusive" : 0,
+                                           
+                                           "text" : "A",
+                                           
+                                           "value" : "A"
+                                           
+                                           },
+                                           
+                                           {
+                                           
+                                           "detail" : "",
+                                           
+                                           "exclusive" : 0,
+                                           
+                                           "text" : "B",
+                                           
+                                           "value" : "B"
+                                           
+                                           },
+                                           {
+                                           
+                                           "detail" : "",
+                                           
+                                           "exclusive" : 0,
+                                           
+                                           "text" : "C",
+                                           
+                                           "value" : "C"
+                                           
+                                           }
+                                           
+                                           ]
+                          
+                          },
+                          "steps": [],
+                          "options": []
+                          
+                          }
+                          ],
+            "correctAnswers": [
+                               {
+                               "key": "14",
+                               "answer": [
+                                          "A"
+                                          ],
+                               "evaluation": "any"
+                               },
+                               {
+                               "key": "11",
+                               "answer": [
+                                          "1",
+                                          "2"
+                                          ],
+                               "evaluation": "any"
+                               },
+                               {
+                               "key": "8",
+                               "answer": [
+                                          "A",
+                                          "B"
+                                          ,"C"
+                                          ],
+                               "evaluation": "all"
+                               }
+                               ]
+        }
+        
+    }
+    
+}

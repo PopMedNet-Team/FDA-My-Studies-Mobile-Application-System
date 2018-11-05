@@ -1,0 +1,239 @@
+//
+//  PageViewController.swift
+//  FDA
+//
+//  Created by Ravishankar on 2/23/17.
+//  Copyright © 2017 BTC. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+protocol PageViewControllerDelegate: class {
+    
+    //Parameter count: the total number of pages.
+    func pageViewController(pageViewController: PageViewController,
+                            didUpdatePageCount count: Int)
+    
+    //Parameter index: the index of the currently visible page.
+    func pageViewController(pageViewController: PageViewController,
+                            didUpdatePageIndex index: Int)
+    
+}
+
+class PageViewController : UIPageViewController{
+    
+    weak var pageViewDelegate: PageViewControllerDelegate?
+    
+    var overview : Overview!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //self.loadTestData()
+        
+        dataSource = self
+        delegate =  self
+        
+        if let initialViewController = orderedViewControllers.first {
+            scrollToViewController(viewController: initialViewController)
+        }
+        
+        pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageCount: orderedViewControllers.count)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+    }
+    
+        
+<<<<<<< HEAD
+        //load plist info
+        
+        
+        let plistPath:String?
+        
+        if overview.type == .study {
+            
+            
+            plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory:nil)
+        }
+        else{
+            plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory:nil)
+        }
+        
+        
+        let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
+        
+        do {
+            //let response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+            
+            
+            //let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
+            var listOfOverviews:Array<OverviewSection> = []
+            for overview in arrayContent!{
+                let overviewObj = OverviewSection(detail: overview as! Dictionary<String, Any>)
+                listOfOverviews.append(overviewObj)
+            }
+            
+            //create new Overview object
+            //overview = Overview()
+            overview.type = .gateway
+            overview.sections = listOfOverviews
+            
+            //assgin to Gateway
+            // Gateway.instance.overview = overview
+            
+            
+            
+        } catch {
+            print("json error: \(error.localizedDescription)")
+        }
+        
+    }
+    
+=======
+>>>>>>> suri_develop
+    //Scrolls to the next view controller.
+    func scrollToNextViewController() {
+        if let visibleViewController = viewControllers?.first,
+            let nextViewController = pageViewController(self, viewControllerAfter: visibleViewController){
+            scrollToViewController(viewController: nextViewController)
+        }
+    }
+    
+    //Scrolls to the given 'viewController' page.
+    private func scrollToViewController(viewController: UIViewController,
+                                        direction: UIPageViewControllerNavigationDirection = .forward) {
+        setViewControllers([viewController],
+                           direction: direction,
+                           animated: true,
+                           completion: { (finished) -> Void in
+                            // Setting the view controller programmatically does not fire
+                            // any delegate methods, so we have to manually notify the
+                            // 'tutorialDelegate' of the new index.
+                            self.notifyTutorialDelegateOfNewIndex()
+        })
+    }
+    
+    //Used to Notify that the current page index was updated.
+    func notifyTutorialDelegateOfNewIndex() {
+        if let firstViewController = viewControllers?.first,
+            let index = orderedViewControllers.index(of: firstViewController) {
+            pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: index)
+        }
+    }
+    
+    //Scrolls to the view controller at the given index.
+    func scrollToViewController(index newIndex: Int) {
+        
+        
+        
+        if let firstViewController = viewControllers?.first,
+            let currentIndex = orderedViewControllers.index(of: firstViewController) {
+            let direction: UIPageViewControllerNavigationDirection = newIndex >= currentIndex ? .forward : .reverse
+            let nextViewController = orderedViewControllers[newIndex]
+            scrollToViewController(viewController: nextViewController, direction: direction)
+        }
+    }
+    
+    private(set) lazy var orderedViewControllers: [UIViewController] = {
+        
+        return self.getOverviewViewControllers()
+    }()
+    
+    private func getOverviewViewControllers() -> [UIViewController] {
+        
+        var controllers:Array<UIViewController> = []
+        var storyboard = UIStoryboard.init(name: "Login", bundle: Bundle.main)
+        
+        if overview.type == .study {
+            storyboard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
+            
+            //get first overview controller
+            let firstController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! StudyOverviewViewControllerFirst
+            firstController.overviewSectionDetail = overview.sections[0]
+            controllers.append(firstController)
+            if overview.sections.count >= 2 {
+                let sections = overview.sections.count
+                for section in 1...(sections-1) {
+                    
+                    let restControllers = storyboard.instantiateViewController(withIdentifier: "SecondViewController") as! StudyOverviewViewControllerSecond
+                    restControllers.overviewSectionDetail = overview.sections[section]
+                    controllers.append(restControllers)
+                }
+            }
+            
+        }
+        else {
+            //get first overview controller
+            let firstController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! FirstGatewayOverviewViewController
+            firstController.overviewSectionDetail = overview.sections[0]
+            controllers.append(firstController)
+            
+            let sections = overview.sections.count
+            for section in 1...(sections-1) {
+                
+                let restControllers = storyboard.instantiateViewController(withIdentifier: "SecondViewController") as! SecondGatewayOverviewViewController
+                restControllers.overviewSectionDetail = overview.sections[section]
+                controllers.append(restControllers)
+            }
+        }
+        
+        return controllers
+    }
+}
+
+//MARK: UIPageViewController DataSource
+extension PageViewController: UIPageViewControllerDataSource {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
+            return nil
+        }
+        
+        let nextIndex = viewControllerIndex + 1
+        
+        guard orderedViewControllers.count > nextIndex else {
+            return nil
+        }
+        
+        return orderedViewControllers[nextIndex]
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
+            return nil
+        }
+        
+        let previousIndex = viewControllerIndex - 1
+        
+        guard previousIndex >= 0 else {
+            return nil
+        }
+        
+        return orderedViewControllers[previousIndex]
+    }
+}
+
+//MARK: UIPageViewControllerDelegate
+extension PageViewController: UIPageViewControllerDelegate {
+    
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            didFinishAnimating finished: Bool,
+                            previousViewControllers: [UIViewController],
+                            transitionCompleted completed: Bool) {
+        self.notifyTutorialDelegateOfNewIndex()
+    }
+}
+

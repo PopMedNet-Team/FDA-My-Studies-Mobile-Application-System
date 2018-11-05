@@ -1,0 +1,43 @@
+# This file is a template, and might need editing before it works on your project.
+# Lifted from: https://about.gitlab.com/2016/03/10/setting-up-gitlab-ci-for-ios-projects/
+# This file assumes an own GitLab CI runner, setup on an OS X system.
+stages:
+  - build
+#  - test
+  - review
+ # - archive
+
+build_project:
+  stage: build
+  script:
+    - xcodebuild clean -workspace FDA/FDA.xcworkspace -scheme FDA | xcpretty
+    - xcodebuild  -workspace FDA/FDA.xcworkspace -scheme FDA -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0' | xcpretty -s
+  tags:
+    - ios
+
+#test_project:
+#    stage: test
+#    script:     
+#        - xcodebuild test -workspace FDA/FDA.xcworkspace -scheme FDA -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0' | xcpretty -s
+
+sonar_review:
+    stage: review
+    script: 
+        - swift-sonar-scanner
+    tags:
+        - ios
+
+#archive_project:
+#  stage: archive
+#  script:
+#    - xcodebuild clean archive -archivePath build/ProjectName -scheme SchemeName
+#    - xcodebuild -exportArchive -exportFormat ipa -archivePath "build/ProjectName.xcarchive" -exportPath "build/ProjectName.ipa" -exportProvisioningProfile "ProvisioningProfileName"
+#  only:
+#    - master
+#  artifacts:
+#    paths:
+#    - build/ProjectName.ipa
+#  tags:
+#    - ios_9-2
+#    - xcode_7-2
+#    - osx_10-11

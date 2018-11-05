@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ComprehensionFailure" customModule="FDA" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vkn-Is-FiS">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try Again" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="NJC-CA-ro1">
+                            <rect key="frame" x="120" y="114.5" width="135" height="50"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="kjL-rf-IRM">
+                            <rect key="frame" x="38" y="194.5" width="300" height="130"/>
+                            <string key="text">You answered one or more questions wrong. We want to make sure you understand what this study is about and what is involved. Review the consent information screens and try again.</string>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18.5"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile2" translatesAutoresizingMaskIntoConstraints="NO" id="JU5-DE-RKR">
+                            <rect key="frame" x="125" y="390" width="124" height="120"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="JU5-DE-RKR" secondAttribute="height" multiplier="31:30" id="Lj3-t5-yf6"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7l-Wh-qpO">
+                            <rect key="frame" x="113" y="566" width="150" height="40"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <color key="tintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="Retry">
+                                <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="buttonRetryAction" destination="iN0-l3-epB" eventType="touchUpInside" id="gQ2-9K-Spp"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcV-56-Hws">
+                            <rect key="frame" x="301" y="20" width="54" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="54" id="4Pb-Va-sCS"/>
+                            </constraints>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="buttonCancelAction" destination="iN0-l3-epB" eventType="touchUpInside" id="GcO-b8-6VH"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="NJC-CA-ro1" firstAttribute="centerY" secondItem="Vkn-Is-FiS" secondAttribute="centerY" multiplier="0.418741" id="5aD-Fe-PWa"/>
+                        <constraint firstItem="JU5-DE-RKR" firstAttribute="width" secondItem="Vkn-Is-FiS" secondAttribute="width" multiplier="124/375" id="75L-yl-Elf"/>
+                        <constraint firstItem="kjL-rf-IRM" firstAttribute="height" secondItem="Vkn-Is-FiS" secondAttribute="height" multiplier="130/667" id="7eS-LW-5ph"/>
+                        <constraint firstItem="JU5-DE-RKR" firstAttribute="centerY" secondItem="Vkn-Is-FiS" secondAttribute="centerY" multiplier="1.35" id="8ut-i4-ayk"/>
+                        <constraint firstItem="kjL-rf-IRM" firstAttribute="centerY" secondItem="Vkn-Is-FiS" secondAttribute="centerY" multiplier="0.778141" id="9oj-dL-Jfq"/>
+                        <constraint firstItem="NJC-CA-ro1" firstAttribute="height" secondItem="Vkn-Is-FiS" secondAttribute="height" multiplier="50/667" id="BSd-Ek-zBE"/>
+                        <constraint firstItem="b7l-Wh-qpO" firstAttribute="height" secondItem="Vkn-Is-FiS" secondAttribute="height" multiplier="40/667" id="IEx-Wf-pfh"/>
+                        <constraint firstAttribute="trailing" secondItem="dcV-56-Hws" secondAttribute="trailing" constant="20" id="IlL-b1-7s4"/>
+                        <constraint firstItem="b7l-Wh-qpO" firstAttribute="centerX" secondItem="Vkn-Is-FiS" secondAttribute="centerX" id="KeE-wE-CE2"/>
+                        <constraint firstItem="dcV-56-Hws" firstAttribute="top" secondItem="Vkn-Is-FiS" secondAttribute="top" constant="20" id="OdF-zT-58g"/>
+                        <constraint firstItem="JU5-DE-RKR" firstAttribute="centerX" secondItem="Vkn-Is-FiS" secondAttribute="centerX" id="UHw-JR-F6X"/>
+                        <constraint firstItem="NJC-CA-ro1" firstAttribute="width" secondItem="Vkn-Is-FiS" secondAttribute="width" multiplier="135/375" id="Va6-Ed-B0s"/>
+                        <constraint firstItem="kjL-rf-IRM" firstAttribute="width" secondItem="Vkn-Is-FiS" secondAttribute="width" multiplier="300/375" id="Xwr-1H-gkM"/>
+                        <constraint firstItem="NJC-CA-ro1" firstAttribute="centerX" secondItem="Vkn-Is-FiS" secondAttribute="centerX" id="bIH-Uz-mbM"/>
+                        <constraint firstItem="kjL-rf-IRM" firstAttribute="centerX" secondItem="Vkn-Is-FiS" secondAttribute="centerX" id="cMA-Tg-bJ3"/>
+                        <constraint firstItem="b7l-Wh-qpO" firstAttribute="centerY" secondItem="Vkn-Is-FiS" secondAttribute="centerY" multiplier="1.75826" id="hEA-5G-eJw"/>
+                        <constraint firstItem="b7l-Wh-qpO" firstAttribute="width" secondItem="Vkn-Is-FiS" secondAttribute="width" multiplier="150/375" id="nCr-GT-wJh"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Vkn-Is-FiS" secondAttribute="bottom" id="GOq-UP-KTS"/>
+                <constraint firstItem="Vkn-Is-FiS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ZJL-qf-g47"/>
+                <constraint firstItem="Vkn-Is-FiS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ai4-FC-O7a"/>
+                <constraint firstAttribute="trailing" secondItem="Vkn-Is-FiS" secondAttribute="trailing" id="xyn-6V-YUg"/>
+            </constraints>
+            <connections>
+                <outlet property="buttonCancel" destination="dcV-56-Hws" id="dFm-GF-7mT"/>
+                <outlet property="buttonRetry" destination="b7l-Wh-qpO" id="TiN-ja-MuZ"/>
+                <outlet property="labelDescription" destination="kjL-rf-IRM" id="HKi-1g-Fje"/>
+            </connections>
+            <point key="canvasLocation" x="24.5" y="51.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="smile2" width="122" height="119"/>
+    </resources>
+</document>

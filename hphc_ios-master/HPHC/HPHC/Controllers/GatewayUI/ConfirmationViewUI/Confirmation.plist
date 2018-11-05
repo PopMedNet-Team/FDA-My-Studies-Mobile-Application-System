@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Medication survey</string>
+		<key>placeHolder</key>
+		<string>Responsedata will be retained</string>
+        <key>type</key>
+        <string>Non-Optional</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>A study for pregnant women</string>
+		<key>placeHolder</key>
+		<string>Response data will be deleted</string>
+        <key>type</key>
+        <string>Non-Optional</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Mental health survey</string>
+        <key>placeHolder</key>
+        <string>delete</string>
+		<key>type</key>
+		<string>Optional</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Health Survey</string>
+        <key>placeHolder</key>
+        <string>retain</string>
+		<key>type</key>
+		<string>Optional</string>
+	</dict>
+</array>
+</plist>

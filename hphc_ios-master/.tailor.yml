@@ -1,0 +1,3 @@
+exclude:
+    - '**Tests.swift'   # Ignore Swift files that end in "Tests"
+    - FDA/Pods       # Ignore Swift files under "FDA/Pods/"

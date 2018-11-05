@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>isHeaderAvailable</key>
+		<string>YES</string>
+		<key>headerText</key>
+		<string>Study Status</string>
+		<key>studyData</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>Active</string>
+				<key>isEnabled</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Closed</string>
+				<key>isEnabled</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Upcoming</string>
+				<key>isEnabled</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Paused</string>
+				<key>isEnabled</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>isHeaderAvailable</key>
+		<string>YES</string>
+		<key>headerText</key>
+		<string>Categories</string>
+		<key>studyData</key>
+		<array>
+            <dict>
+            <key>name</key>
+            <string>Biologics Safety</string>
+            <key>isEnabled</key>
+            <true/>
+        </dict>
+        <dict>
+            <key>name</key>
+            <string>Clinical Trials</string>
+            <key>isEnabled</key>
+            <true/>
+        </dict>
+        <dict>
+            <key>name</key>
+            <string>Cosmetics Safety</string>
+            <key>isEnabled</key>
+            <true/>
+        </dict>
+        <dict>
+            <key>name</key>
+            <string>Drug Safety</string>
+            <key>isEnabled</key>
+            <true/>
+        </dict>
+        <dict>
+            <key>name</key>
+            <string>Food Safety</string>
+            <key>isEnabled</key>
+            <true/>
+        </dict>
+        <dict>
+            <key>name</key>
+            <string>Medical Device Safety</string>
+            <key>isEnabled</key>
+            <true/>
+        </dict>
+        <dict>
+            <key>name</key>
+            <string>Observational Studies</string>
+            <key>isEnabled</key>
+            <true/>
+        </dict>
+        <dict>
+            <key>name</key>
+            <string>Public Health</string>
+            <key>isEnabled</key>
+            <true/>
+        </dict>
+        <dict>
+            <key>name</key>
+            <string>Radiation-Emitting Products</string>
+            <key>isEnabled</key>
+            <true/>
+        </dict>
+        <dict>
+            <key>name</key>
+            <string>Tobacco Use</string>
+            <key>isEnabled</key>
+            <true/>
+        </dict>
+		</array>
+	</dict>
+</array>
+</plist>

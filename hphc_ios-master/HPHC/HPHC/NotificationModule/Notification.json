@@ -1,0 +1,12 @@
+{"type": "Study", "aps": {
+    "alert" :     {
+        "body" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce suscipit molestie viverra. Nam fringilla efficitur arcu eget volutpat. Proin ligula nisl, condimentum non scelerisque at, egestas a metus. Etiam velit arcu, gravida eget tincidunt quis, m",
+        "title" : "FDA Health Study Management"
+    },
+    "badge" : 1,
+    "sound" : "default"
+}, "subtype": "Activity",
+    "studyId" : "study001",
+    "activityId" : "123"
+    
+}

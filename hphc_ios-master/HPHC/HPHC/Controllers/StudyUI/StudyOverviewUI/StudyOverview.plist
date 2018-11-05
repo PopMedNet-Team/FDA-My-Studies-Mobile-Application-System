@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>A Study for Pregnant Women</string>
+		<key>text</key>
+		<string>Collection of participant-provided information through a mobile device app for use in drup safety research</string>
+		<key>type</key>
+		<string></string>
+		<key>image</key>
+		<string></string>
+		<key>link</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>How data will be used?</string>
+		<key>text</key>
+		<string>The data captured from pregnant women (e.g. medical product exposures, outcomes etc.) will be linked with data from an organization, such as a clinical practise, that has access to electronic health data and this will help provide insights into the efficacy and safety of medical products.</string>
+		<key>type</key>
+		<string></string>
+		<key>image</key>
+		<string></string>
+		<key>link</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>How data will be used?</string>
+		<key>text</key>
+		<string>The data captured from pregnant women (e.g. medical product exposures, outcomes etc.) will be linked with data from an organization, such as a clinical practise, that has access to electronic health data and this will help provide insights into the efficacy and safety of medical products.</string>
+		<key>type</key>
+		<string></string>
+		<key>image</key>
+		<string></string>
+		<key>link</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>How data will be used?</string>
+		<key>text</key>
+		<string>The data captured from pregnant women (e.g. medical product exposures, outcomes etc.) will be linked with data from an organization, such as a clinical practise, that has access to electronic health data and this will help provide insights into the efficacy and safety of medical products.</string>
+		<key>type</key>
+		<string></string>
+		<key>image</key>
+		<string></string>
+		<key>link</key>
+		<string></string>
+	</dict>
+</array>
+</plist>

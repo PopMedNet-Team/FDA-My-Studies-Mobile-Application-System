@@ -1,0 +1,321 @@
+{"Result":
+    
+    {
+        
+        "type": "questionnaire",
+        
+        "metadata": {
+            
+            "studyId": "CAFDA12",
+            
+            "activityId": "QR4_I4",
+            
+            "name": "QR4",
+            
+            "version": "1",
+            
+            "lastModified": "2017-04-18T18:06:40.000-0400",
+            
+            "startDate": "2017-04-25T10:22:21.000-0400",
+            
+            "endDate": "2017-06-25T10:22:21.000-0400"
+            
+        },
+        
+        "configuration": {
+            
+            "frequency":"one-time"
+            
+        },
+        
+        
+        
+        "steps": [
+                  {
+                  "type": "question",
+                  "resultType": "continuousScale",
+                  "key": "CBQ221",
+                  "title": "Condition Branching Question With Continues Scale",
+                  "text": "",
+                  "skippable": true,
+                  "groupName": "",
+                  "repeatable": false,
+                  "repeatableText": "",
+                  "destinations": [
+                                  
+                                   {
+                                   "condition": "800.0",
+                                   "operator": "e",
+                                   "destination": "CBQ4"
+                                   },
+                                   {
+                                   "condition": "",
+                                   "operator": "",
+                                   "destination": "CBQ1"
+                                   }
+                                   ],
+                  "healthDataKey": "",
+                  "format": {
+                  
+                  "maxValue": -1,
+                  
+                  "minValue": -10,
+                  
+                  "default": 0,
+                  
+                  "maxFractionDigits": 3,
+                  
+                  "vertical": false,
+                  
+                  "maxDesc": "Maximum Desc",
+                  
+                  "minDesc": "Minimum Desc",
+                  
+                  "maxImage": "",
+                  
+                  "minImage": ""
+                  
+                  },
+                  "steps": [],
+                  "options": []
+                  },
+                  {
+                  "type": "question",
+                  "resultType": "scale",
+                  "key": "CBQ1",
+                  "title": "Condition Branching Question One",
+                  "text": "",
+                  "skippable": true,
+                  "groupName": "",
+                  "repeatable": false,
+                  "repeatableText": "",
+                  "destinations": [
+                                   
+                                   {
+                                   "condition": "280",
+                                   "operator": "ne",
+                                   "destination": "CBQ4"
+                                   },
+                                   {
+                                   "condition": "",
+                                   "operator": "",
+                                   "destination": "CBQ3"
+                                   }
+                                   ],
+                  "healthDataKey": "",
+                  "format": {
+                  "maxValue": 1000,
+                  "minValue": 10,
+                  "step": 90,
+                  "default": 10,
+                  "vertical": false,
+                  "maxDesc": "",
+                  "minDesc": "",
+                  "maxImage": "",
+                  "minImage": ""
+                  },
+                  "steps": [],
+                  "options": []
+                  },
+                  {
+                  "type": "question",
+                  "resultType": "numeric",
+                  "key": "CBQ3",
+                  "title": "Conditional Branching Question With Numeric Reponse",
+                  "text": "",
+                  "skippable": true,
+                  "groupName": "",
+                  "repeatable": false,
+                  "repeatableText": "",
+                  "destinations": [
+                                   
+                                   {
+                                   "condition": "40.0000",
+                                   "operator": "ne",
+                                   "destination": ""
+                                   },
+                                   {
+                                   "condition": "",
+                                   "operator": "",
+                                   "destination": "CBQ4"
+                                   }
+                                   ],
+                  "healthDataKey": "",
+                  "format": {
+                  "style": "Decimal",
+                  "unit": "",
+                  "minValue": 0,
+                  "maxValue": 100,
+                  "placeholder": ""
+                  },
+                  "steps": [],
+                  "options": []
+                  },
+                  {
+                  "type": "question",
+                  "resultType": "numeric",
+                  "key": "CBQ4",
+                  "title": "Conditional Branching Question With Numeric Reponse Last",
+                  "text": "",
+                  "skippable": true,
+                  "groupName": "",
+                  "repeatable": false,
+                  "repeatableText": "",
+                  "destinations": [
+                                   
+                                   {
+                                   "condition": "50.0000",
+                                   "operator": "ne",
+                                   "destination": "CBQ5"
+                                   },
+                                   {
+                                   "condition": "",
+                                   "operator": "",
+                                   "destination": ""
+                                   }
+                                   ],
+                  "healthDataKey": "",
+                  "format": {
+                  "style": "Decimal",
+                  "unit": "",
+                  "minValue": 0,
+                  "maxValue": 100,
+                  "placeholder": ""
+                  },
+                  "steps": [],
+                  "options": []
+                  },
+                  {
+                  "type": "question",
+                  "resultType": "timeInterval",
+                  "key": "CBQ5",
+                  "title": "Conditional Branching Question With Time interval response",
+                  "text": "",
+                  "skippable": true,
+                  "groupName": "",
+                  "repeatable": false,
+                  "repeatableText": "",
+                  "destinations": [
+                                   {
+                                   "condition": "3600",
+                                   "operator": "e",
+                                   "destination": "CBQ8"
+                                   },
+                                   {
+                                   "condition": "3600",
+                                   "operator": "lt",
+                                   "destination": "CBQ7"
+                                   },
+                                   {
+                                   "condition": "",
+                                   "operator": "",
+                                   "destination": "CBQ6"
+                                   }
+                                   ],
+                  "healthDataKey": "",
+                  "format": {
+                  "default": 60,
+                  "step": 1
+                  },
+                  "steps": [],
+                  "options": []
+                  },
+                  {
+                  "type": "question",
+                  "resultType": "timeInterval",
+                  "key": "CBQ6",
+                  "title": "Conditional Branching Question With Time interval response 2nd Last",
+                  "text": "",
+                  "skippable": true,
+                  "groupName": "",
+                  "repeatable": false,
+                  "repeatableText": "",
+                  "destinations": [
+                                   {
+                                   "condition": "3600",
+                                   "operator": "ne",
+                                   "destination": "CBQ8"
+                                   },
+                                   {
+                                   "condition": "",
+                                   "operator": "",
+                                   "destination": ""
+                                   }
+                                   ],
+                  "healthDataKey": "",
+                  "format": {
+                  "default": 60,
+                  "step": 1
+                  },
+                  "steps": [],
+                  "options": []
+                  },
+                  {
+                  "type": "question",
+                  "resultType": "timeInterval",
+                  "key": "CBQ7",
+                  "title": "Conditional Branching Question With Time interval response Last",
+                  "text": "",
+                  "skippable": true,
+                  "groupName": "",
+                  "repeatable": false,
+                  "repeatableText": "",
+                  "destinations": [
+                                   {
+                                   "condition": "3600",
+                                   "operator": "gt",
+                                   "destination": "CBQ8"
+                                   },
+                                   {
+                                   "condition": "",
+                                   "operator": "",
+                                   "destination": ""
+                                   }
+                                   ],
+                  "healthDataKey": "",
+                  "format": {
+                  "default": 60,
+                  "step": 1
+                  },
+                  "steps": [],
+                  "options": []
+                  },
+                  {
+                  "type": "question",
+                  "resultType": "timeInterval",
+                  "key": "CBQ8",
+                  "title": "Conditional Branching Question With Time interval response  Last 8",
+                  "text": "",
+                  "skippable": true,
+                  "groupName": "",
+                  "repeatable": false,
+                  "repeatableText": "",
+                  "destinations": [
+                                   
+                                   {
+                                   "condition": "3480",
+                                   "operator": "lt",
+                                   "destination": ""
+                                   },
+                                   {
+                                   "condition": "",
+                                   "operator": "",
+                                   "destination": ""
+                                   }
+                                   ],
+                  "healthDataKey": "",
+                  "format": {
+                  "default": 60,
+                  "step": 1
+                  },
+                  "steps": [],
+                  "options": []
+                  }
+                  ]
+        
+        
+        
+    }
+    
+}
+

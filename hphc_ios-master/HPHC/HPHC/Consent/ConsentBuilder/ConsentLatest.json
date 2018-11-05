@@ -1,0 +1,52 @@
+{"eligibility": {
+    "correctAnswers" : [
+                {
+            "answer" : 0,
+            "key" : ""
+        }
+    ],
+    "test" : [],
+    "tokenTitle" : "This study allows only pre-screened participants to join the study. If you are one, please enter the enrollment token provided to you for this study.",
+    "type" : "token"
+}, "consent": {
+    "comprehension" : {
+        "correctAnswers" :[],
+        "passScore" : 0,
+        "questions" : [
+        ]
+    },
+    "review" :{
+        "reasonForConsent" : "By Agreeing this you confirm that you read the consent and that you wish to take part in this research study",
+        "reviewHTML" : ""
+    },
+    "sharing" : {
+        "allowWithoutSharing" : 0,
+        "learnMore" : "",
+        "longDesc" : "",
+        "shortDesc" : "",
+        "text" : "",
+        "title" : ""
+    },
+    "version" : "1.0",
+    "visualScreens" : [
+                {
+            "description" : "",
+            "html" : "<div class='g'><div data-hveid='48' data-ved='0ahUKEwj_yqmYvpnUAhXBK48KHQmhCfQQFQgwKAMwBA'><div class='rc'><div class='s'><div><span class='st' data-hveid='54' data-ved='0ahUKEwj_yqmYvpnUAhXBK48KHQmhCfQQ4EUINjAE'>n the United States and Canada, this time zone is generically called the Pacific Time Zone (PT). Specifically, it uses Pacific Standard Time (PST) when observing standard time (late autumn to early spring), and <i>Pacific Daylight Time</i> (PDT) when observing daylight saving time (early spring to late autumn).</span></div></div></div></div></div><div class='g'><div data-hveid='55' data-ved='0ahUKEwj_yqmYvpnUAhXBK48KHQmhCfQQFQg3KAQwBQ'><div class='rc'><div class='g'><div data-hveid='48' data-ved='0ahUKEwj_yqmYvpnUAhXBK48KHQmhCfQQFQgwKAMwBA'><div class='rc'><div class='s'><div><span class='st' data-hveid='54' data-ved='0ahUKEwj_yqmYvpnUAhXBK48KHQmhCfQQ4EUINjAE'>n the United States and Canada, this time zone is generically called the Pacific Time Zone (PT). Specifically, it uses Pacific Standard Time (PST) when observing standard time (late autumn to early spring), and <i>Pacific Daylight Time</i> (PDT) when observing daylight saving time (early spring to late autumn).</span></div></div></div></div></div><div class='g'><div data-hveid='55' data-ved='0ahUKEwj_yqmYvpnUAhXBK48KHQmhCfQQFQg3KAQwBQ'><div class='rc'><br data-mce-bogus='1'></div></div></div></div></div></div>",
+            "text" : "n the United States and Canada, this time zone is generically called the Pacific Time Zone (PT). Specifically, it uses Pacific Standard Time (PST) when observing standard time (late autumn to early spring), and Pacific Daylight Time (PDT) when observing daylight saving time (early spring to late autumn).",
+            "title" : "Overview",
+            "type" : "overview",
+            "url" : "",
+            "visualStep" : 0
+        },
+                       {
+                       "description" : "",
+                       "html" : "<div class='g'><div data-hveid='48' data-ved='0ahUKEwj_yqmYvpnUAhXBK48KHQmhCfQQFQgwKAMwBA'><div class='rc'><div class='s'><div><span class='st' data-hveid='54' data-ved='0ahUKEwj_yqmYvpnUAhXBK48KHQmhCfQQ4EUINjAE'>n the United States and Canada, this time zone is generically called the Pacific Time Zone (PT). Specifically, it uses Pacific Standard Time (PST) when observing standard time (late autumn to early spring), and <i>Pacific Daylight Time</i> (PDT) when observing daylight saving time (early spring to late autumn).</span></div></div></div></div></div><div class='g'><div data-hveid='55' data-ved='0ahUKEwj_yqmYvpnUAhXBK48KHQmhCfQQFQg3KAQwBQ'><div class='rc'><div class='g'><div data-hveid='48' data-ved='0ahUKEwj_yqmYvpnUAhXBK48KHQmhCfQQFQgwKAMwBA'><div class='rc'><div class='s'><div><span class='st' data-hveid='54' data-ved='0ahUKEwj_yqmYvpnUAhXBK48KHQmhCfQQ4EUINjAE'>n the United States and Canada, this time zone is generically called the Pacific Time Zone (PT). Specifically, it uses Pacific Standard Time (PST) when observing standard time (late autumn to early spring), and <i>Pacific Daylight Time</i> (PDT) when observing daylight saving time (early spring to late autumn).</span></div></div></div></div></div><div class='g'><div data-hveid='55' data-ved='0ahUKEwj_yqmYvpnUAhXBK48KHQmhCfQQFQg3KAQwBQ'><div class='rc'><br data-mce-bogus='1'></div></div></div></div></div></div>",
+                       "text" : "n the United States and Canada, this time zone is generically called the Pacific Time Zone (PT). Specifically, it uses Pacific Standard Time (PST) when observing standard time (late autumn to early spring), and Pacific Daylight Time (PDT) when observing daylight saving time (early spring to late autumn).",
+                       "title" : "Overview",
+                       "type" : "overview",
+                       "url" : "",
+                       "visualStep" : 1
+                       }
+    ]
+}
+}

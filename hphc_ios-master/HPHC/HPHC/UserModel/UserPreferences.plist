@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>message</key>
+	<string>User preferences fetched successfully</string>
+	<key>settings</key>
+	<dict>
+		<key>remoteNotifications</key>
+		<true/>
+		<key>localNotifications</key>
+		<false/>
+		<key>touchId</key>
+		<true/>
+		<key>passCode</key>
+		<false/>
+	</dict>
+	<key>Info</key>
+	<dict>
+		<key>OS</key>
+		<string></string>
+		<key>appVersion</key>
+		<string></string>
+		<key>deviceToken</key>
+		<string></string>
+	</dict>
+	<key>studies</key>
+	<array>
+		<dict>
+			<key>studyId</key>
+			<string>121</string>
+			<key>status</key>
+			<string>Completed</string>
+			<key>bookmarked</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>studyId</key>
+			<string>122</string>
+			<key>status</key>
+			<string>InProgress</string>
+			<key>bookmarked</key>
+			<true/>
+		</dict>
+	</array>
+	<key>activities</key>
+	<array>
+		<dict>
+			<key>activityId</key>
+			<string>151</string>
+			<key>studyId</key>
+			<string>121</string>
+			<key>status</key>
+			<string>&quot;Completed&quot;</string>
+			<key>bookmarked</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>activityId</key>
+			<string>152</string>
+			<key>studyId</key>
+			<string>122</string>
+			<key>status</key>
+			<string>&quot;InProgress&quot;</string>
+			<key>bookmarked</key>
+			<false/>
+		</dict>
+	</array>
+</dict>
+</plist>

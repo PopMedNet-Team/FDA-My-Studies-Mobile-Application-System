@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>message</key>
+        <string>User Registered successfully</string>
+        <key>UserId</key>
+        <string>119</string>
+        <key>verified</key>
+        <true/>
+        <key>auth</key>
+        <string>aes1313aad</string>
+    </dict>
+</plist>
