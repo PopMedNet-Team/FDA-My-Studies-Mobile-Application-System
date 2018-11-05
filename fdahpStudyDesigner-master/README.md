@@ -1,4 +1,4 @@
-# FDA Health Study Web Configuration Portal
+# FDA My Studies Web Configuration Portal
 Project description goes here
 
 ## Getting Started
