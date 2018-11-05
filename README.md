@@ -19,7 +19,7 @@ direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 
 <b>Code and documents needed for the Storage environment include</b>
 <ul>
-</li>FDA_WCP_UR_AppSetup.pdf
+<li>FDA_WCP_UR_AppSetup.pdf
 <li>
 <li>
 </ul>
