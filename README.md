@@ -5,8 +5,8 @@ The storage environment is an extension of existing platform called Labkey Serve
 direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 
 <b>Code and documents needed for the iOS and Andriod applications include:</b>
-<ul>
-<li>
+<ul>FDA_Android_AppSetup.pdf
+<li>FDA_iOS_AppSetup.pdf
 <li>
 </ul>
 
@@ -17,7 +17,7 @@ direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 </ul>
 
 <b>Code and documents needed for the Storage environment include</b>
-<ul>
+<ul>FDA_WCP_UR_AppSetup.pdf
 <li>
 <li>
 </ul>
