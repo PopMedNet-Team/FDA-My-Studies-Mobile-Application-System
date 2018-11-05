@@ -1,4 +1,4 @@
-# FDA-User Reg WS
+# FDA My Studies User Reg WS
 
 This project consists of APIs that required for MyStudies User registration.This project is developed in Spring MVC framework on Labkey environment.
 
