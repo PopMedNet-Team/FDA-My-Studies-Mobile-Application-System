@@ -8,20 +8,26 @@ direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 <ul>
 <li>FDA_Android_AppSetup.pdf
 <li>FDA_iOS_AppSetup.pdf
-<li>
+<li>hphcAndroid-master
+<li>hphc_ios-master
 </ul>
 
 <b>Code and documents needed for the Web Configuration Portal include:</b>
 <ul>
-<li>
-<li>
+<li>FDA-HPHI-StudyDesignerWS-master
+<li>fda-resources-master
+<li>fdahpStudyDesigner-master
 </ul>
 
 <b>Code and documents needed for the Storage environment include</b>
 <ul>
 <li>FDA_WCP_UR_AppSetup.pdf
-<li>
-<li>
+<li>FDA-HPHI-UserRegWS-master
+<li>Lab Key Documentation
+<li>mobileAppStudy-hosting17.1
+<li>mobileAppStudy.module
 </ul>
+
+<b>General Resources:<b> FDA Health Studies System_ Business Requirements and Functional Specifications Document_Final
 
 
