@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:background="@color/tab_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lin_layout_hours"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:text="@string/set_remainder"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <NumberPicker
+                android:id="@+id/picker_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:theme="@style/AppTheme.Picker" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/hour_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="35dp"
+                android:alpha=".5"
+                android:gravity="center_vertical"
+                android:text="@string/hour"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+            <NumberPicker
+                android:id="@+id/picker_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:theme="@style/AppTheme.Picker" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/min_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:alpha=".5"
+                android:gravity="center_vertical"
+                android:text="@string/minute"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/doneBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:text="@string/done"
+            android:textColor="@color/colorSecondaryStatBar"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

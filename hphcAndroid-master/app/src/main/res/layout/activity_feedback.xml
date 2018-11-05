@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/activity_signup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/submitButton"
+        style="@style/TextType2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/rectangle_black_white"
+        android:gravity="center"
+        android:text="@string/submit"
+        android:textColor="@color/colorPrimary"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/hrline8"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/submitButton"
+        android:layout_marginBottom="15dp"
+        android:background="@color/colorSecondaryBg"/>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/topView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        android:clickable="false"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/back_btn1_grey"/>
+            </RelativeLayout>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/title"
+                style="@style/TextType2"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="@string/feedback"
+                android:textColor="@color/colorPrimaryBlack"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/hrLine1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/topView"
+        android:background="@color/colorSecondaryBg"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/hrline8"
+        android:layout_below="@id/hrLine1"
+        android:paddingTop="18dp">
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/feedback_label"
+            style="@style/contactUsTextField"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/feedback_text"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/hrLine2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/feedback_label"
+            android:layout_marginTop="18dp"
+            android:background="@color/colorSecondaryBg"/>
+
+        <RelativeLayout
+            android:id="@+id/subjectlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hrLine2"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:paddingRight="20dp">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/subjecttitle"
+                style="@style/contactUsTextField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/subject"
+                />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:layout_toRightOf="@+id/subjecttitle"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="@string/enter_subject"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/colorPrimaryBlack"
+                android:textColorHint="@color/colorSecondary"
+                android:textCursorDrawable="@drawable/custom_cursor_drawable"
+                />
+
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/hrLine3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/subjectlayout"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorSecondaryBg"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/feedbacktitle"
+            style="@style/contactUsTextField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hrLine3"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/feedbacktitle"
+            />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/edittxt_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/feedbacktitle"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="@string/enter_feedback"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="@color/colorPrimaryBlack"
+            android:textColorHint="@color/colorSecondary"
+            android:textCursorDrawable="@drawable/custom_cursor_drawable"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

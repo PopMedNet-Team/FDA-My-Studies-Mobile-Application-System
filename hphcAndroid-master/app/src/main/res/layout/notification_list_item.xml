@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:paddingTop="24dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/notification_msg"
+            style="@style/TextType2"
+            android:text=""
+            android:textColor="@color/colorPrimaryBlack" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/dayTimeDisplay"
+            style="@style/TextType3"
+            android:layout_below="@id/notification_msg"
+            android:layout_marginTop="5dp"
+            android:text=""
+            android:textColor="@color/colorSecondary" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="@color/colorSecondaryBg" />
+
+</LinearLayout>
+

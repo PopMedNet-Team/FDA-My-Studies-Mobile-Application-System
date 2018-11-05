@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp"
+        android:paddingLeft="18dp"
+        android:paddingTop="24dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/studyImg"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="3dp"
+            android:background="@color/colorSecondaryBg"
+            android:scaleType="centerCrop" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/studyImg"
+            android:layout_marginTop="7dp">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/stateIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bullet" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/state"
+                style="@style/TextType5"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/stateIcon"
+                android:text="@string/active1"
+                android:textColor="@color/colorSecondary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/second_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/studyImg"
+            android:paddingRight="18dp">
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/study_title"
+                style="@style/TextType2"
+                android:text=""
+                android:textColor="@color/colorPrimaryBlack" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/study_title_latin"
+                style="@style/TextType3"
+                android:layout_below="@id/study_title"
+                android:maxLines="1"
+                android:text=""
+                android:textColor="@color/colorPrimaryBlack" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/sponser"
+                style="@style/TextType3"
+                android:layout_below="@id/study_title_latin"
+                android:layout_marginTop="7dp"
+                android:maxLines="1"
+                android:text=""
+                android:textColor="@color/colorSecondary" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="@color/colorSecondaryBg" />
+
+</LinearLayout>
+

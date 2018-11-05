@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp"
+        android:paddingLeft="18dp"
+        android:paddingTop="24dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/studyImg"
+            android:layout_width="81dp"
+            android:layout_height="81dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="3dp"
+            android:background="@color/colorSecondaryBg"
+            android:scaleType="centerCrop" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/mImgTitle"
+            style="@style/TextType5wMatchParent"
+            android:layout_alignBottom="@id/studyImg"
+            android:layout_alignLeft="@id/studyImg"
+            android:layout_alignRight="@id/studyImg"
+            android:background="#96000000"
+            android:ellipsize="end"
+            android:padding="4dp"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="@color/white" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/studyImg"
+            android:layout_marginTop="7dp">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/stateIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bullet" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/state"
+                style="@style/TextType5"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/stateIcon"
+                android:text="@string/active1"
+                android:textColor="@color/colorSecondary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/second_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/studyImg">
+
+            <RelativeLayout
+                android:id="@+id/prg_rel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/statusImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/yet_to_join_icn1" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/status"
+                    style="@style/TextType4"
+                    android:layout_alignBaseline="@id/statusImg"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/statusImg"
+                    android:text="@string/yet_to_join"
+                    android:textColor="@color/colorPrimary" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp"
+                android:paddingBottom="7dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="1dp">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/statusImgRight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/star_grey"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/right_padding_set_rel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/prg_rel"
+                android:layout_marginTop="5dp"
+                android:paddingRight="18dp">
+
+                <RelativeLayout
+                    android:id="@+id/inside_secd_box_rel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/study_title"
+                        style="@style/TextType2"
+                        android:text=""
+                        android:textColor="@color/colorPrimaryBlack" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/study_title_latin"
+                        style="@style/TextType3"
+                        android:layout_below="@id/study_title"
+                        android:text=""
+                        android:textColor="@color/colorPrimaryBlack" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/sponser"
+                        style="@style/TextType3"
+                        android:layout_below="@id/study_title_latin"
+                        android:layout_marginTop="7dp"
+                        android:text=""
+                        android:textColor="@color/colorSecondary" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/completion_rel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/inside_secd_box_rel"
+                    android:layout_marginTop="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/completion"
+                            style="@style/TextType4"
+                            android:text="@string/completion"
+                            android:textColor="@color/colorPrimaryBlack" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/completion_val"
+                            style="@style/TextType4"
+                            android:layout_marginLeft="1dp"
+                            android:layout_toRightOf="@id/completion"
+                            android:text="0%"
+                            android:textColor="@color/colorPrimary" />
+
+                        <ProgressBar
+                            android:id="@+id/progressBar1"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp"
+                            android:layout_alignBottom="@+id/completion"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/completion_val"
+                            android:paddingRight="0dp"
+                            android:progress="50"
+                            android:progressDrawable="@drawable/custom_progress_bar" />
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="invisible">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/adherence"
+                            style="@style/TextType4"
+                            android:text="@string/adherence"
+                            android:textColor="@color/colorSecondary" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/adherence_val"
+                            style="@style/TextType4"
+                            android:layout_toRightOf="@id/adherence"
+                            android:text="0%"
+                            android:textColor="@color/colorPrimary" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/completion_rel"
+                    android:layout_marginTop="3dp"
+                    android:visibility="invisible">
+
+                    <!--<ProgressBar
+                        android:id="@+id/progressBar1"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="4dp"
+                        android:layout_weight="2.25"
+                        android:paddingRight="0dp"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/custom_progress_bar" />-->
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar2"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="4dp"
+                        android:layout_weight="2.25"
+                        android:paddingRight="0dp"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/custom_progress_bar" />
+                </LinearLayout>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="@color/colorSecondaryBg" />
+
+</LinearLayout>
+

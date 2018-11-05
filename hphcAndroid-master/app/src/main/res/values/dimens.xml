@@ -1,0 +1,19 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="studyActivityValSize">34sp</dimen>
+    <dimen name="force_upgrade_size">34sp</dimen>
+    <dimen name="headlinSize">30sp</dimen>
+    <dimen name="textType1Size">22sp</dimen>
+    <dimen name="textTypeMenuItemSize">20sp</dimen>
+    <!--Body Text2 18 pt here 16sp-->
+    <dimen name="textType2Size">16sp</dimen>
+    <dimen name="textType3Size">14sp</dimen>
+    <dimen name="textType4Size">12sp</dimen>
+    <dimen name="textType5Size">10sp</dimen>
+    <dimen name="radius">10dp</dimen>
+    <dimen name="rsb_margin_left">32dp</dimen>
+    <dimen name="rsb_margin_right">32dp</dimen>
+</resources>

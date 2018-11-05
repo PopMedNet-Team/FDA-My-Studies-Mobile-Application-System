@@ -1,0 +1,13 @@
+#labkey-main-title { display: none;}
+a.labkey-main-title { display: none;}
+div.labkey-webpart-menu p a { font-size: 14px;}
+div.labkey-webpart-menu div.labkey-wiki p { padding: 0 2px 2px;}
+span.java-keyword { color: blue;}
+span.java-quote { color: green;}
+span.xml-tag { color: blue;}
+span.xml-quote { color: green;}
+span.xml-comment { color: red;}
+span.sql-keyword { color: blue;}
+.labkey-app-bar-replicate { padding-left: 0; padding-right: 0; position: absolute; top: 75px; z-index: -1; height: 26px; max-width: 100%}
+.main-menu-replicate { padding-left: 0; padding-right: 0; position: absolute; top: 47px; z-index: -1; height: 26px; max-width: 100%}
+.labkey-menu-constraint, .labkey-app-menu-constraint { width: 98.5vw; position: relative;}

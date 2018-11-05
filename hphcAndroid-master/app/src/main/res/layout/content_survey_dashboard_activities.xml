@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_survey_dashboard_activities"
+    android:layout_width="match_parent"
+    android:layout_height="130dp">
+
+    <RelativeLayout
+        android:id="@+id/mRelActivitiesLayout"
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:background="@color/white"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="14dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/mActivitiesLabel"
+            style="@style/TextType3"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/current_activities1"
+            android:textColor="@color/colorPrimaryBlack" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/mActivitiesLabel"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".995"
+                android:gravity="center">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/mTodayActivitiesCompletedValue1"
+                    style="@style/TextType1"
+                    android:layout_centerHorizontal="true"
+                    android:text="2"
+                    android:textColor="@color/colorPrimary" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/mTodayActivitiesCompletedLabel1"
+                    style="@style/TextType4"
+                    android:layout_below="@id/mTodayActivitiesCompletedValue1"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/completed4"
+                    android:textColor="@color/colorPrimary" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/mTodayActivitiesCompletedDetails1"
+                    style="@style/TextType4"
+                    android:layout_below="@id/mTodayActivitiesCompletedLabel1"
+                    android:layout_centerHorizontal="true"
+                    android:text="1 Survey, 1 Task"
+                    android:textColor="@color/colorSecondary" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight=".01"
+                android:background="@color/colorSecondaryBg" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".995"
+                android:gravity="center">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/mTodayActivitiesCompletedValue2"
+                    style="@style/TextType1"
+                    android:layout_centerHorizontal="true"
+                    android:text="3"
+                    android:textColor="@color/colorPrimary" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/mTodayActivitiesCompletedLabel2"
+                    style="@style/TextType4"
+                    android:layout_below="@id/mTodayActivitiesCompletedValue2"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/pending1"
+                    android:textColor="@color/colorPrimary" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/mTodayActivitiesCompletedDetails2"
+                    style="@style/TextType4"
+                    android:layout_below="@id/mTodayActivitiesCompletedLabel2"
+                    android:layout_centerHorizontal="true"
+                    android:text="1 Survey, 1 Task"
+                    android:textColor="@color/colorSecondary" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

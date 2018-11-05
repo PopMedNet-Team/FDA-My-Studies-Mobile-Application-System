@@ -1,0 +1,14 @@
+.help-block{
+    position: relative;
+    margin-top: 0;
+}
+.help-block ul li{
+    display: none;
+}
+.help-block ul{
+    position: absolute;
+    font-size: 12px;
+}
+.help-block ul li:first-child{
+    display: inherit;
+}

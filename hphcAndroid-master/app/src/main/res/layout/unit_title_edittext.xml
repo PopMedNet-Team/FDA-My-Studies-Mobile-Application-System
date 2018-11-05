@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/rsb_item_size_default"
+        android:textColor="?attr/colorAccent"
+        android:textSize="16sp"
+        tools:text="title"
+        />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+        <EditText
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:minHeight="@dimen/rsb_item_size_default"
+            android:singleLine="true"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="14sp"
+            android:paddingRight="50dp"
+            tools:text="value"
+            />
+
+        <TextView
+            android:id="@+id/txtunit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/value"
+            android:layout_alignBottom="@+id/value"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="10dp"
+            tools:text="adsad"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

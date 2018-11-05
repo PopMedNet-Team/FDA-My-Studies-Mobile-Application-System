@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_survey_dashboard_activities"
+    android:layout_width="match_parent"
+    android:layout_height="130dp">
+
+    <RelativeLayout
+        android:id="@+id/mRectBoxLayout"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/blue_radius_dashboard">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/mStatsIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mTotalHoursSleep"
+                style="@style/TextType4"
+                android:layout_below="@id/mStatsIcon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/white" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mTotalHoursSleepVal"
+                style="@style/TextType1"
+                android:layout_below="@id/mTotalHoursSleep"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text=""
+                android:textColor="@color/white" />
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mUnit"
+                style="@style/TextType4"
+                android:layout_below="@id/mTotalHoursSleepVal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text=""
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/content_feta_kick_counter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:scrollbars="none">
+
+    <RelativeLayout
+        android:id="@+id/timerlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/alaram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/time_icn1"/>
+
+        <TextView
+            android:id="@+id/mTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alaram"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:text="00:00:00"
+            android:textColor="@color/colorSecondary"
+            android:textSize="28sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/counterlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timerlayout"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/mTotalCount"
+            style="@style/TextType1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/kick_count"
+            android:textColor="@color/colorPrimaryBlack"
+            android:textSize="22sp"/>
+
+        <EditText
+            android:id="@+id/kickcounter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mTotalCount"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="00"
+            android:inputType="number"
+            android:maxLength="3"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"
+            android:textCursorDrawable="@drawable/custom_cursor_drawable"
+            android:textSize="80sp"/>
+        <ImageView
+            android:id="@+id/editButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/kickcounter"
+            android:layout_toRightOf="@+id/kickcounter"
+            android:background="@drawable/edit_icn1"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone"/>
+
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/counterlayout"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:alpha=".3"
+        android:background="@color/colorSecondary"/>
+
+    <RelativeLayout
+        android:id="@+id/timereditlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/divider"
+        android:layout_marginTop="20dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/instructionlayout"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/mTapStart"
+                style="@style/TextType2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/record_kick"
+                android:textColor="@color/colorSecondary"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/starttxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/start_timer"
+                android:textColor="@color/colorSecondary"
+                android:textSize="16sp"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/instructionlayout">
+
+            <ImageView
+                android:id="@+id/tapbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/kick_btn1"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/startTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/start_buttn1"/>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

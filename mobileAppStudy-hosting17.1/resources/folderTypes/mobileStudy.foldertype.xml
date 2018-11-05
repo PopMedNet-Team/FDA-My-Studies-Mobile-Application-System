@@ -1,0 +1,42 @@
+<folderType xmlns="http://labkey.org/data/xml/folderType" xmlns:mp="http://labkey.org/moduleProperties/xml/">
+    <name>Mobile App Study</name>
+    <description>The default folder type to support Mobile App Study Data Management and Analysis</description>
+    <folderTabs>
+        <folderTab>
+            <name>setup</name>
+            <caption>Setup</caption>
+            <selectors>
+            </selectors>
+            <requiredWebParts>
+            </requiredWebParts>
+            <preferredWebParts>
+                <webPart>
+                    <name>Mobile App Study Setup</name>
+                    <location>body</location>
+                </webPart>
+                <webPart>
+                    <name>Enrollment Token Batches</name>
+                    <location>body</location>
+                </webPart>
+            </preferredWebParts>
+            <permissions>
+                <permission>org.labkey.api.security.permissions.AdminPermission</permission>
+            </permissions>
+        </folderTab>
+        <!--<folderTab>-->
+            <!--<name>surveyResponses</name>-->
+            <!--<caption>Survey Responses</caption>-->
+            <!--<selectors>-->
+            <!--</selectors>-->
+            <!--<requiredWebParts>-->
+            <!--</requiredWebParts>-->
+            <!--<preferredWebParts>-->
+            <!--</preferredWebParts>-->
+        <!--</folderTab>-->
+    </folderTabs>
+    <modules>
+        <moduleName>List</moduleName>
+        <moduleName>MobileAppStudy</moduleName>
+    </modules>
+    <menubarEnabled>true</menubarEnabled>
+</folderType>

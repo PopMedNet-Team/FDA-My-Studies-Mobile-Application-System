@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <View
+        android:id="@+id/blackView"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryBlack" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/bgImg"
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img2" />
+
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@id/bgImg"
+                android:layout_alignTop="@+id/bgImg"
+                android:alpha=".6"
+                android:background="@android:color/black" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/title"
+                style="@style/Titles"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="155dp"
+                android:gravity="center"
+                android:text="@string/data_used"
+                android:textColor="@android:color/white" />
+
+            <View
+                android:id="@+id/adjustContentCentral"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="165dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/adjustContentCentral"
+                android:layout_below="@id/bgImg"
+                android:gravity="center">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/desc"
+                    style="@style/TextType2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:gravity="center"
+                    android:text="@string/gateway_des1"
+                    android:textColor="@color/colorPrimaryBlack" />
+            </RelativeLayout>
+
+            <!--<LinearLayout
+                android:id="@+id/bottom_bar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_alignParentBottom="true"
+                android:baselineAligned="true"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <RelativeLayout
+                    android:id="@+id/mVisitWebsiteButtonLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.4">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/mVisitWebsiteButton"
+                        style="@style/TextType2"
+                        android:layout_centerInParent="true"
+                        android:text="@string/visit_website"
+                        android:textColor="@color/white" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/center"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".2">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/hrLine2"
+                        android:layout_width="1dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:alpha=".4"
+                        android:background="@android:color/white" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/mLernMoreButtonLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.4">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/mLernMoreButton"
+                        style="@style/TextType2"
+                        android:layout_centerInParent="true"
+                        android:text="@string/view_consent"
+                        android:textColor="@color/white" />
+
+                </RelativeLayout>
+
+            </LinearLayout>-->
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/hrLine1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_above="@id/bottom_bar"
+                android:alpha=".1"
+                android:background="@color/colorPrimaryBlack" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

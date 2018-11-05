@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/submit_btn">
+    <stroke
+        android:width="0.75dp"
+        android:color="@color/colorPrimary" />
+    <!--removed width from size, because i need to get matach parent-->
+    <size android:height="44dp" />
+    <corners android:radius="4dp" />
+    <solid android:color="@android:color/white" />
+</shape>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:tables xmlns:ns="http://labkey.org/data/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://labkey.org/data/xml ../../../../../schemas/tableInfo.xsd">
+    <ns:table tableName="EnrollmentToken" tableDbType="TABLE">
+        <ns:columns>
+            <ns:column columnName="RowId">
+                <ns:isHidden>true</ns:isHidden>
+            </ns:column>
+            <ns:column columnName="Token"/>
+            <ns:column columnName="BatchId">
+                <ns:isHidden>true</ns:isHidden>
+                <ns:fk>
+                    <ns:fkColumnName>RowId</ns:fkColumnName>
+                    <ns:fkTable>EnrollmentTokenBatch</ns:fkTable>
+                    <ns:fkDbSchema>mobileappstudy</ns:fkDbSchema>
+                </ns:fk>
+            </ns:column>
+            <ns:column columnName="ParticipantId">
+                <ns:isHidden>true</ns:isHidden>
+            </ns:column>
+            <ns:column columnName="Created">
+                <ns:isHidden>true</ns:isHidden>
+            </ns:column>
+            <ns:column columnName="CreatedBy">
+                <ns:isHidden>true</ns:isHidden>
+            </ns:column>
+            <ns:column columnName="Container">
+                <ns:isHidden>true</ns:isHidden>
+            </ns:column>
+        </ns:columns>
+    </ns:table>
+    <ns:table tableName="Study" tableDbType="TABLE">
+        <ns:columns>
+            <ns:column columnName="RowId"/>
+            <ns:column columnName="ShortName"/>
+            <ns:column columnName="Created"/>
+            <ns:column columnName="CreatedBy"/>
+            <ns:column columnName="Modified"/>
+            <ns:column columnName="ModifiedBy"/>
+            <ns:column columnName="Container"/>
+            <ns:column columnName="CollectionEnabled">
+                <ns:defaultValue>false</ns:defaultValue>
+            </ns:column>
+        </ns:columns>
+    </ns:table>
+    <ns:table tableName="EnrollmentTokenBatch" tableDbType="TABLE">
+        <ns:columns>
+            <ns:column columnName="RowId">
+                <ns:columnTitle>Batch Id</ns:columnTitle>
+            </ns:column>
+            <ns:column columnName="Count">
+                <ns:columnTitle>Tokens Generated</ns:columnTitle>
+                <ns:formatString>#,###</ns:formatString>
+            </ns:column>
+            <ns:column columnName="Created"/>
+            <ns:column columnName="CreatedBy"/>
+            <ns:column columnName="Container">
+                <ns:isHidden>true</ns:isHidden>
+            </ns:column>
+        </ns:columns>
+    </ns:table>
+    <ns:table tableName="Participant" tableDbType="TABLE">
+        <ns:columns>
+            <ns:column columnName="RowId" >
+                <ns:columnTitle>Participant Id</ns:columnTitle>
+            </ns:column>
+            <ns:column columnName="AppToken"/>
+            <ns:column columnName="StudyId">
+                <ns:fk>
+                    <ns:fkColumnName>RowId</ns:fkColumnName>
+                    <ns:fkTable>Study</ns:fkTable>
+                    <ns:fkDbSchema>mobileappstudy</ns:fkDbSchema>
+                </ns:fk>
+            </ns:column>
+            <ns:column columnName="Status" >
+                <ns:fk>
+                    <ns:fkDbSchema>mobileappstudy</ns:fkDbSchema>
+                    <ns:fkTable>ParticipantStatus</ns:fkTable>
+                    <ns:fkColumnName>rowId</ns:fkColumnName>
+                </ns:fk>
+            </ns:column>
+            <ns:column columnName="Created"/>
+            <ns:column columnName="Container"/>
+        </ns:columns>
+    </ns:table>
+    <ns:table tableName="Response" tableDbType="TABLE">
+        <ns:titleColumn>RowId</ns:titleColumn>
+        <ns:columns>
+            <ns:column columnName="RowId">
+                <ns:columnTitle>Response Id</ns:columnTitle>
+            </ns:column>
+            <ns:column columnName="Data">
+                <ns:displayColumnFactory>
+                    <ns:className>org.labkey.api.data.JsonPrettyPrintDisplayColumnFactory</ns:className>
+                </ns:displayColumnFactory>
+            </ns:column>
+            <ns:column columnName="ParticipantId">
+                <ns:fk>
+                    <ns:fkColumnName>RowId</ns:fkColumnName>
+                    <ns:fkTable>Participant</ns:fkTable>
+                    <ns:fkDbSchema>mobileappstudy</ns:fkDbSchema>
+                </ns:fk>
+            </ns:column>
+            <ns:column columnName="AppToken"/>
+            <ns:column columnName="SurveyVersion"/>
+            <ns:column columnName="ActivityId"/>
+            <ns:column columnName="Status">
+                <ns:fk>
+                    <ns:fkDbSchema>mobileappstudy</ns:fkDbSchema>
+                    <ns:fkTable>ResponseStatus</ns:fkTable>
+                    <ns:fkColumnName>rowId</ns:fkColumnName>
+                </ns:fk>
+            </ns:column>
+            <ns:column columnName="Processed"/>
+            <ns:column columnName="ProcessedBy">
+                <ns:fk>
+                    <ns:fkDbSchema>core</ns:fkDbSchema>
+                    <ns:fkTable>Users</ns:fkTable>
+                    <ns:fkColumnName>userId</ns:fkColumnName>
+                </ns:fk>
+            </ns:column>
+            <ns:column columnName="ErrorMessage">
+                <ns:displayColumnFactory>
+                    <ns:className>org.labkey.api.data.ExpandableTextDisplayColumnFactory</ns:className>
+                </ns:displayColumnFactory>
+            </ns:column>
+            <ns:column columnName="Container"/>
+            <ns:column columnName="Created"/>
+            <ns:column columnName="CreatedBy"/>
+        </ns:columns>
+    </ns:table>
+    <ns:table tableName="ResponseMetadata" tableDbType="TABLE">
+        <ns:titleColumn>RowId</ns:titleColumn>
+        <ns:columns>
+            <ns:column columnName="RowId"/>
+            <ns:column columnName="ListName"/>
+            <ns:column columnName="ActivityId"/>
+            <ns:column columnName="FieldName"/>
+            <ns:column columnName="StartTime"/>
+            <ns:column columnName="EndTime"/>
+            <ns:column columnName="Skipped"/>
+            <ns:column columnName="Container"/>
+            <ns:column columnName="Created"/>
+            <ns:column columnName="ParticipantId">
+                <ns:fk>
+                    <ns:fkColumnName>RowId</ns:fkColumnName>
+                    <ns:fkTable>Participant</ns:fkTable>
+                    <ns:fkDbSchema>mobileappstudy</ns:fkDbSchema>
+                </ns:fk>
+            </ns:column>
+        </ns:columns>
+    </ns:table>
+</ns:tables>

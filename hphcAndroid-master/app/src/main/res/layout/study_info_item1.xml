@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/bgImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/bgImg"
+        android:layout_alignTop="@+id/bgImg"
+        android:alpha=".6"
+        android:background="@android:color/black" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/adjustTopbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize" />
+
+            <View
+                android:id="@+id/adjustContentCentral"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="150dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/adjustContentCentral"
+                android:layout_below="@id/adjustTopbar"
+                android:gravity="center">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/title"
+                    style="@style/Titles"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="A Study for Pregnant\nWomen"
+                    android:textColor="@android:color/white" />
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/desc"
+                    style="@style/TextType2"
+                    android:layout_below="@id/title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="@string/gateway_des1"
+                    android:textColor="@android:color/white" />
+
+                <RelativeLayout
+                    android:id="@+id/watch_video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/desc"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal"
+                    android:padding="10dp">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/videoIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/play_button1" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/watchVideoLabel"
+                        style="@style/TextType2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/videoIcon"
+                        android:text="@string/watch_video"
+                        android:textColor="@android:color/white" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <!--<RelativeLayout
+                android:id="@+id/bottom_bar_same_gateway_activity"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_alignParentBottom="true">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/visitWebsite"
+                    style="@style/TextType2"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/visit_website"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>-->
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

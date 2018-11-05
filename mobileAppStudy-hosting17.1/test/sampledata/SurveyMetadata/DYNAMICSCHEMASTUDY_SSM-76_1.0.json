@@ -1,0 +1,35 @@
+{
+	"message": "SUCCESS",
+	"activity": {
+		"type": "task",
+		"metadata": {
+			"studyId": "DYNAMICSCHEMASTUDY",
+			"activityId": "SSM-76",
+			"name": "Study with active tasks",
+			"version": "1.0",
+			"lastModified": "2017-05-10T07:59:20.000-0400",
+			"startDate": "2017-05-11T08:56:00.000-0400",
+			"endDate": "2017-08-19T23:59:59.000-0400"
+		},
+		"steps": [
+			{
+				"type": "task",
+				"resultType": "spatialSpanMemory",
+				"key": "spatialSpan",
+				"text": "",
+				"options": [],
+				"format": {
+					"duration": "01.00"
+				},
+				"title": "Spatial Span Memory Active Task",
+				"skippable": false,
+				"groupName": "",
+				"repeatable": false,
+				"repeatableText": "",
+				"destinations": [],
+				"healthDataKey": "",
+				"steps": []
+			}
+		]
+	}
+}

@@ -1,0 +1,101 @@
+
+/*Note: additional per theme color styles set for this panel in themeStylesheet.jsp*/
+
+.labkey-notification-panel
+{
+    position:fixed; right:0; top:0;
+    height:100%;
+    width:400px;
+    z-index: 2147483630; /* see relationship to value for miniprofiler */
+}
+.labkey-notification, .labkey-notification-none
+{
+    padding: 10px 15px;
+}
+.labkey-notification-inbox
+{
+    font-size: 15px;
+}
+.labkey-notification-type-label
+{
+    font-weight: bold;
+    padding: 10px 5px;
+    border-bottom: solid #aaaaaa 1px;
+    margin: 0 10px 10px 10px;
+}
+.labkey-notification-close
+{
+    float: right;
+    height: 32px;
+    border-left: solid #aaaaaa 1px;
+    padding-left: 10px;
+}
+.labkey-notification-title
+{
+    padding: 20px 15px;
+    font-weight:bold;
+    text-transform: uppercase;
+}
+.labkey-notification-footer
+{
+    position: absolute;
+    bottom: 0;
+    padding: 15px;
+    width: 100%;
+}
+.labkey-notification-createdby
+{
+    display: inline-block;
+    white-space: nowrap;
+    width: 300px;
+    text-overflow: ellipsis;
+}
+.labkey-notification-body
+{
+    white-space: nowrap;
+    width: 300px;
+    height: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.labkey-notification-body-expand
+{
+    height: 105px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+.labkey-notification-icon
+{
+    float: left;
+    font-size: 18px;
+    margin-right: 8px;
+    padding: 7px;
+}
+.labkey-notification-toggle
+{
+    padding-left: 1px;
+}
+.labkey-notification-times, .labkey-notification-toggle
+{
+    display: block;
+    font-size: 16px;
+}
+.labkey-notification-times
+{
+    padding-bottom: 3px;
+}
+.labkey-notification-clear-all
+{
+    position: fixed;
+    top: 20px;
+    right: 15px;
+}
+.labkey-notification:hover,
+.labkey-notification-footer span:hover,
+.labkey-notification-times:hover,
+.labkey-notification-toggle:hover,
+.labkey-notification-clear-all:hover,
+.labkey-notification-panel a:hover
+{
+    cursor: pointer;
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#007cba</color>
+    <color name="colorPrimaryBlack">#000000</color>
+    <!--colorGrey-->
+    <color name="colorSecondary">#8c95a3</color>
+    <color name="colorSecondaryStatBar">#49b6e5</color>
+    <color name="colorSecondaryBg">#d8e3e6</color>
+    <color name="tab_color">#252937</color>
+    <color name="bullet_green_color">#4CAF50</color>
+    <color name="rectangle_yellow">#f5af37</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#ff0000</color>
+
+    // remove debug value using
+    <color name="colorPrimaryDark">#016b9f</color>
+    <color name="colorAccent">#016b9f</color>
+
+    <color name="dark_gray">#cccccc</color>
+    <color name="black_shade">#666666</color>
+    <color name="search_bg">#eceded</color>
+</resources>

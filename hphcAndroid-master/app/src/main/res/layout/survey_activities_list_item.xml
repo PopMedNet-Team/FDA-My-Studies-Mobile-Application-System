@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/stateLayout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/colorSecondaryBg"
+        android:gravity="center_vertical"
+        android:paddingLeft="18dp"
+        android:visibility="gone">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/state"
+            style="@style/TextType3"
+            android:text="@string/current1"
+            android:textColor="@color/colorSecondary" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:paddingTop="24dp">
+
+        <RelativeLayout
+            android:id="@+id/box1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/surveyIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:src="@drawable/survey_icn_small" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/box2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/box1">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/whenWasSurvey"
+                style="@style/TextType4"
+                android:text=""
+                android:textColor="@color/colorPrimary" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/run"
+                style="@style/TextType4wMatchParent"
+                android:layout_toRightOf="@+id/whenWasSurvey"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/colorSecondary" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/surveyTitle"
+                style="@style/TextType2"
+                android:layout_below="@id/whenWasSurvey"
+                android:layout_marginTop="2dp"
+                android:text=""
+                android:textColor="@color/colorPrimaryBlack" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/time"
+                style="@style/TextType4wMatchParent"
+                android:layout_below="@id/surveyTitle"
+                android:layout_marginTop="5dp"
+                android:layout_toLeftOf="@+id/process"
+                android:paddingRight="10dp"
+                android:text=""
+                android:textColor="@color/colorPrimaryBlack"
+                android:visibility="gone" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/date"
+                style="@style/TextType4wMatchParent"
+                android:layout_below="@id/time"
+                android:layout_marginTop="5dp"
+                android:layout_toLeftOf="@+id/process"
+                android:paddingRight="10dp"
+                android:text=""
+                android:textColor="@color/colorPrimaryBlack" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/process"
+                style="@style/TextType5"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/surveyTitle"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rectangle_yellow"
+                android:text=""
+                android:textColor="@android:color/white" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/more"
+                style="@style/TextType5"
+                android:layout_below="@id/date"
+                android:layout_marginTop="3dp"
+                android:paddingBottom="2dp"
+                android:paddingRight="10dp"
+                android:paddingTop="2dp"
+                android:text=""
+                android:textColor="@color/colorSecondary"
+                android:visibility="gone" />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/hrLine1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="@color/colorSecondaryBg" />
+
+    <RelativeLayout
+        android:id="@+id/container2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="24dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:paddingTop="24dp"
+        android:visibility="gone">
+
+        <android.support.v7.widget.AppCompatTextView
+            style="@style/TextType2"
+            android:text="@string/activities_not_found"
+            android:textColor="@color/colorPrimaryBlack" />
+    </RelativeLayout>
+
+</LinearLayout>
+

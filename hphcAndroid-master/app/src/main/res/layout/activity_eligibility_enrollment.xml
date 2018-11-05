@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/topView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:clickable="false"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/backeligibility" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/title"
+                style="@style/TextType2"
+                android:layout_centerVertical="true"
+                android:text=""
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@+id/backBtn"
+                android:textColor="@color/white" />
+
+            <RelativeLayout
+                android:id="@+id/cancelBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/cancelTxt"
+                    style="@style/TextType3"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/cancel"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/headerline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/topView"
+        android:background="@color/colorSecondaryBg" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/headerline"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp">
+
+                <TextView
+                    android:id="@+id/enrollmentdesc"
+                    style="@style/TextType2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="90dp"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/colorPrimaryBlack" />
+
+                <RelativeLayout
+                    android:id="@+id/enrollmentidLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/enrollmentdesc"
+                    android:gravity="center">
+
+                    <EditText
+                        android:id="@+id/enrollmentidtxt"
+                        style="@style/signUpEditText"
+                        android:layout_margin="15dp"
+                        android:gravity="center"
+                        android:hint="@string/enter_enrollmentid"
+                        android:inputType="text" />
+                </RelativeLayout>
+
+
+                <View
+                    android:id="@+id/mHrLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/enrollmentidLayout"
+                    android:background="@color/colorSecondaryBg" />
+
+                <TextView
+                    android:id="@+id/submitbutton"
+                    style="@style/TextType2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/mHrLine"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="70dp"
+                    android:background="@drawable/rectangle_black_white"
+                    android:gravity="center"
+                    android:text="@string/submit"
+                    android:textColor="@color/colorPrimary" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

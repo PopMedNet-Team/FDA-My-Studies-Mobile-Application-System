@@ -1,0 +1,16 @@
+{
+  "message": "SUCCESS",
+  "activity": {
+    "type": "",
+    "metadata": {
+      "studyId": "",
+      "activityId": "",
+      "name": "",
+      "version": "",
+      "lastModified": "",
+      "startDate": "",
+      "endDate": ""
+    },
+    "steps": []
+  }
+}

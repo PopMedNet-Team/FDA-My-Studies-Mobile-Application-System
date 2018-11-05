@@ -1,0 +1,121 @@
+{
+    "message": "SUCCESS",
+    "activity":
+    {
+        "metadata": {
+            "activityId": "NewSurvey",
+            "version": "9"
+        },
+        "steps": [
+            {
+                "key": "ScaleField",
+                "resultType": "scale",
+                "type": "question"
+            },
+            {
+                "key": "ContinusousScaleField",
+                "resultType": "continuousScale",
+                "type": "question"
+            },
+            {
+                "key": "IntegerField",
+                "format": {
+                    "style": "Integer"
+                },
+                "resultType": "numeric",
+                "type": "question"
+            },
+            {
+                "key": "DoubleField",
+                "format": {
+                    "style": "Decimal"
+                },
+                "resultType": "numeric",
+                "type": "question"
+            },
+            {
+                "key": "DateTimeField",
+                "format": {
+                    "style": "Date-Time"
+                },
+                "resultType": "date",
+                "type": "question"
+            },
+            {
+                "key": "DateField",
+                "format": {
+                    "style": "Date"
+                },
+                "resultType": "date",
+                "type": "question"
+            },
+            {
+                "key": "BooleanField",
+                "resultType": "boolean",
+                "type": "question"
+            },
+            {
+                "key": "TextChoiceField",
+                "resultType": "textChoice",
+                "repeatable": true,
+                "type": "question"
+            },
+            {
+                "key": "TextScaleField",
+                "resultType": "textScale",
+                "type": "question"
+            },
+            {
+                "key": "ValuePickerField",
+                "resultType": "valuePicker",
+                "type": "question"
+            },
+            {
+                "key": "ImageChoiceField",
+                "resultType": "imageChoice",
+                "type": "question"
+            },
+            {
+                "key": "TimeOfDayField",
+                "resultType": "timeOfDay",
+                "type": "question"
+            },
+            {
+                "key": "MaxTextField",
+                "format": {
+                    "maxLength": 0
+                },
+                "resultType": "text",
+                "type": "question"
+            },
+            {
+                "key": "ShortTextField",
+                "format": {
+                    "maxLength": 250
+                },
+                "resultType": "text",
+                "type": "question"
+            },
+            {
+                "key": "EmailField",
+                "resultType": "email",
+                "type": "question"
+            },
+            {
+                "key": "TimeIntervalField",
+                "resultType": "timeInterval",
+                "type": "question"
+            },
+            {
+                "key": "HeightField",
+                "resultType": "height",
+                "type": "question"
+            },
+            {
+                "key": "LocationField",
+                "resultType": "location",
+                "type": "question"
+            }
+        ]
+    }
+}
