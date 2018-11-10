@@ -20,58 +20,79 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.hphc.mystudies.model;
+package com.hphc.mystudies.bean;
 
 /**
- * Created by Ravinder on 3/15/2017.
+ * @author Ravinder
+ * @since 2/3/2017
  */
-import org.labkey.api.data.Entity;
-import java.util.Date;
-public class PasswordHistory extends Entity
-{
-    private Integer _Id;
-    private String _Password;
-    private String _UserId;
+public class SettingsBean {
 
-    public Integer getId()
+    private Boolean _remoteNotifications;
+    private Boolean _localNotifications;
+    private Boolean _touchId;
+    private Boolean _passcode;
+    private String _reminderLeadTime;
+    private String _locale = "";
+
+    public Boolean getRemoteNotifications()
     {
-        return _Id;
+        return _remoteNotifications;
     }
 
-    public void setId(Integer id)
+    public void setRemoteNotifications(Boolean remoteNotifications)
     {
-        _Id = id;
+        _remoteNotifications = remoteNotifications;
     }
 
-    public String getPassword()
+    public Boolean getLocalNotifications()
     {
-        return _Password;
+        return _localNotifications;
     }
 
-    public void setPassword(String password)
+    public void setLocalNotifications(Boolean localNotifications)
     {
-        _Password = password;
+        _localNotifications = localNotifications;
     }
 
-    public String getUserId()
+    public Boolean getTouchId()
     {
-        return _UserId;
+        return _touchId;
     }
 
-    public void setUserId(String userId)
+    public void setTouchId(Boolean touchId)
     {
-        _UserId = userId;
+        _touchId = touchId;
     }
 
-    @Override
-    public Date getCreated()
+    public Boolean getPasscode()
     {
-        return super.getCreated();
+        return _passcode;
     }
 
-    @Override
-    public void setCreated(Date created)
+    public void setPasscode(Boolean passcode)
     {
-        super.setCreated(created);
+        _passcode = passcode;
     }
+
+    public String getReminderLeadTime()
+    {
+        return _reminderLeadTime;
+    }
+
+    public void setReminderLeadTime(String reminderLeadTime)
+    {
+        _reminderLeadTime = reminderLeadTime;
+    }
+
+    public String getLocale()
+    {
+        return _locale;
+    }
+
+    public void setLocale(String locale)
+    {
+        _locale = locale;
+    }
+
 }

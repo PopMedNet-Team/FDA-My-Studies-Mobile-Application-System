@@ -27,10 +27,11 @@ import org.labkey.api.data.Entity;
 import java.util.Date;
 
 /**
- * Created by Ravinder on 1/31/2017.
+ * @author Ravinder
+ * @since 1/31/2017
  */
-public class ParticipantStudies extends Entity
-{
+public class ParticipantStudies extends Entity {
+
     private Integer _Id;
     private String _StudyId;
     private String _Status;
@@ -163,4 +164,5 @@ public class ParticipantStudies extends Entity
     {
         _Adherence = adherence;
     }
+
 }

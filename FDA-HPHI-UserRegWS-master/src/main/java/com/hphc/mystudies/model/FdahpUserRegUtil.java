@@ -61,15 +61,13 @@ import org.labkey.api.resource.FileResource;
 import static org.labkey.api.util.StringUtilsLabKey.DEFAULT_CHARSET;
 
 /**
- * Created by Ravinder on 2/1/2017.
+ * @author Ravinder
+ * @since 2/1/2017
  */
-public class FdahpUserRegUtil
-{
+public class FdahpUserRegUtil {
     private static final Logger _log = Logger.getLogger(FdahpUserRegUtil.class);
 
-
-
-    public enum ErrorCodes{
+    public enum ErrorCodes {
         INVALID_INPUT("INVALID_INPUT"),
         UNKNOWN("UNKNOWN"),
         STATUS_100("100"), // OK
@@ -130,14 +128,17 @@ public class FdahpUserRegUtil
         DEVICE_ANDROID("android"),
         DEVICE_IOS("ios"),
         INVALID_REFRESHTOKEN("Invalid refresh token.");
+
         private final String value;
+
         ErrorCodes(final String newValue){
             value=newValue;
         }
+
         public String getValue() { return value; }
     }
 
-    public static String commaSeparatedString(List<String> studyIds){
+    public static String commaSeparatedString(List<String> studyIds) {
         if (studyIds.size() > 0) {
             StringBuilder studyBuilder = new StringBuilder();
             for (String n : studyIds) {
@@ -150,7 +151,7 @@ public class FdahpUserRegUtil
         }
     }
 
-    public static void getFailureResponse(String status, String title, String message ,HttpServletResponse response){
+    public static void getFailureResponse(String status, String title, String message, HttpServletResponse response) {
         try {
             response.setHeader("status", status);
             response.setHeader("title", title);
@@ -172,6 +173,7 @@ public class FdahpUserRegUtil
             _log.info("FdahpUserRegUtil - getFailureResponse() :: ERROR " , e);
         }
     }
+
     public static String getEncryptedString(String input) {
         StringBuffer sb = new StringBuffer();
         if(StringUtils.isNotEmpty(input)){
@@ -219,7 +221,7 @@ public class FdahpUserRegUtil
         return getToday;
     }
 
-    public static String getFormattedDateTimeZone(String input, String inputFormat, String outputFormat){
+    public static String getFormattedDateTimeZone(String input, String inputFormat, String outputFormat) {
         String output = "";
         try{
             if(StringUtils.isNotEmpty(input)){
@@ -234,17 +236,17 @@ public class FdahpUserRegUtil
         return output;
     }
 
-    public static String getEncodeString(String value){
+    public static String getEncodeString(String value) {
         byte[] encodedBytes = Base64.encodeBase64(value.getBytes(DEFAULT_CHARSET));
         return new String(encodedBytes, DEFAULT_CHARSET);
-
     }
-    public static String getDecodeString(String values){
+
+    public static String getDecodeString(String values) {
         byte[] decodedBytes = Base64.decodeBase64(values);
         return new String(decodedBytes, DEFAULT_CHARSET);
     }
 
-    public static boolean sendemail(String email, String subject, String messageBody) throws Exception{
+    public static boolean sendemail(String email, String subject, String messageBody) throws Exception {
 
         boolean sentMail = false;
 
@@ -289,16 +291,16 @@ public class FdahpUserRegUtil
 
         return sentMail;
     }
-    public static Properties getProperties(){
+
+    public static Properties getProperties() {
         Properties prop = new Properties();
         InputStream input = null;
-        try{
-
+        try {
             Module m =  ModuleLoader.getInstance().getModule(FdahpUserRegWSModule.NAME);
             InputStream is = m.getResourceStream("constants/message.properties");
             prop.load(is);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             _log.error("ERROR:  getProperties() - ",e);
         }
         return prop;
@@ -311,11 +313,12 @@ public class FdahpUserRegUtil
         try {
             date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateNow);
         } catch (Exception e) {
-            _log.error("FdahpUserRegUtil - getCurrentUtilDateTime() : ",e);
+            _log.error("FdahpUserRegUtil - getCurrentUtilDateTime() : ", e);
 
         }
         return date;
     }
+
     public static Date addMinutes(String currentDate, int minutes) {
         Date futureDate = null;
         try {
@@ -326,11 +329,12 @@ public class FdahpUserRegUtil
             Date newDate = cal.getTime();
             futureDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(newDate));
         } catch (Exception e) {
-            _log.error("FdahpUserRegUtil - addHours() : ",e);
+            _log.error("FdahpUserRegUtil - addHours() : ", e);
         }
         return futureDate;
     }
-    public static Date addHours(String currentDate, int hours){
+
+    public static Date addHours(String currentDate, int hours) {
         Date futureDate = null;
         try {
             Date dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(currentDate);
@@ -340,12 +344,12 @@ public class FdahpUserRegUtil
             Date newDate = cal.getTime();
             futureDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(newDate));
         } catch (Exception e) {
-            _log.error("FdahpUserRegUtil - addHours() : ",e);
+            _log.error("FdahpUserRegUtil - addHours() : ", e);
         }
         return futureDate;
     }
 
-    public static Date addDays(String currentDate, int days){
+    public static Date addDays(String currentDate, int days) {
         Date futureDate = null;
         try {
             Date dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(currentDate);
@@ -360,8 +364,7 @@ public class FdahpUserRegUtil
         return futureDate;
     }
 
-    public static void sendMessage(String subject, String bodyHtml, String recipients)
-    {
+    public static void sendMessage(String subject, String bodyHtml, String recipients) {
         Properties configProp = FdahpUserRegUtil.getProperties();
         try
         {
@@ -378,7 +381,8 @@ public class FdahpUserRegUtil
             _log.error("Unable to send email ", e);
         }
     }
-    public static void pushNotification(NotificationBean notificationBean){
+
+    public static void pushNotification(NotificationBean notificationBean) {
         Properties configProp = FdahpUserRegUtil.getProperties();
         try{
             _log.info("pushNotification");
@@ -407,12 +411,14 @@ public class FdahpUserRegUtil
                     .build();
             service.push(tokens, customPayload);
             _log.info("pushNotification Ends");
-        }catch (Exception e){
+        } catch (Exception e) {
             _log.error("pushNotification ", e);
         }
     }
+
     public static String getStandardFileName(String StudyId, String userId,String version) {
         String dateTime = new SimpleDateFormat("MMddyyyyHHmmss").format(new Date());
         return StudyId + "_" + userId+ "_"+version+ "_"+ dateTime+".pdf";
     }
+
 }

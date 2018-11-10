@@ -22,9 +22,6 @@
  */
 package com.hphc.mystudies;
 
-/**
- * Created by Ravinder on 5/16/2017.
- */
 import org.labkey.api.audit.AbstractAuditTypeProvider;
 import org.labkey.api.audit.AuditTypeEvent;
 import org.labkey.api.audit.AuditTypeProvider;
@@ -35,12 +32,13 @@ import org.labkey.api.query.FieldKey;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-public class FdaAuditProvider extends AbstractAuditTypeProvider implements AuditTypeProvider
-{
+/**
+ * @author Ravinder
+ * @since 5/16/2017
+ */
+public class FdaAuditProvider extends AbstractAuditTypeProvider implements AuditTypeProvider {
+
     public static final String EVENT_TYPE = "FDA User Registration Events";
     public static final String FDA_AUDIT_EVENT = "FdaUserRegistrationAuditEvent";
     public static final String COLUMN_NAME_USERID = "userId";
@@ -83,15 +81,13 @@ public class FdaAuditProvider extends AbstractAuditTypeProvider implements Audit
         return "Information about general changes to Fda Registration Services.";
     }
 
-
-    public static  class FdaAuditDomainKind extends AbstractAuditDomainKind{
+    public static class FdaAuditDomainKind extends AbstractAuditDomainKind {
         public static final String NAME = "FdaUserRegistrationAuditDomain";
         public static String NAMESPACE_PREFIX = "Audit-" + NAME;
 
         private final Set<PropertyDescriptor> _fields;
 
-        public FdaAuditDomainKind()
-        {
+        public FdaAuditDomainKind() {
             super(FDA_AUDIT_EVENT);
 
             Set<PropertyDescriptor> fields = new LinkedHashSet<>();
@@ -152,7 +148,8 @@ public class FdaAuditProvider extends AbstractAuditTypeProvider implements Audit
         public FdaAuditEvent(){
             super();
         }
-        public FdaAuditEvent(String eventType,String container, String comment){
+
+        public FdaAuditEvent(String eventType,String container, String comment) {
             super(FDA_AUDIT_EVENT,container,comment);
         }
 
@@ -185,5 +182,7 @@ public class FdaAuditProvider extends AbstractAuditTypeProvider implements Audit
         {
             _userId = userId;
         }
+
     }
+
 }

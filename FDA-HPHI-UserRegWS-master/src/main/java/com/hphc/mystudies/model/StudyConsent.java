@@ -20,44 +20,92 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.hphc.mystudies.bean;
+package com.hphc.mystudies.model;
+
+import org.labkey.api.data.Entity;
 
 /**
- * Created by Ravinder on 3/13/2017.
+ * @author Ravinder
+ * @since 3/13/2017
  */
-public class ConsentBean
-{
-    private String _version;
-    private String _status;
-    private  String _pdf;
+public class StudyConsent extends Entity {
 
-    public String getVersion()
+    private Integer _Id;
+    private String _UserId;
+    private String _StudyId;
+    private String _Status;
+    private String _Version;
+    private String _Pdf;
+    private String _PdfPath;
+
+    public Integer getId()
     {
-        return _version;
+        return _Id;
     }
 
-    public void setVersion(String version)
+    public void setId(Integer id)
     {
-        _version = version;
+        _Id = id;
+    }
+
+    public String getUserId()
+    {
+        return _UserId;
+    }
+
+    public void setUserId(String userId)
+    {
+        _UserId = userId;
+    }
+
+    public String getStudyId()
+    {
+        return _StudyId;
+    }
+
+    public void setStudyId(String studyId)
+    {
+        _StudyId = studyId;
     }
 
     public String getStatus()
     {
-        return _status;
+        return _Status;
     }
 
     public void setStatus(String status)
     {
-        _status = status;
+        _Status = status;
+    }
+
+    public String getVersion()
+    {
+        return _Version;
+    }
+
+    public void setVersion(String version)
+    {
+        _Version = version;
     }
 
     public String getPdf()
     {
-        return _pdf;
+        return _Pdf;
     }
 
     public void setPdf(String pdf)
     {
-        _pdf = pdf;
+        _Pdf = pdf;
     }
+
+    public String getPdfPath()
+    {
+        return _PdfPath;
+    }
+
+    public void setPdfPath(String pdfPath)
+    {
+        _PdfPath = pdfPath;
+    }
+
 }

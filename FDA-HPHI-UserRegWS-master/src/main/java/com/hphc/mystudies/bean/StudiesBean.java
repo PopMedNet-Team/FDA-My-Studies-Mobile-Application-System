@@ -23,28 +23,18 @@
 package com.hphc.mystudies.bean;
 
 /**
- * Created by Ravinder on 2/7/2017.
+ * @author Ravinder
+ * @since 2/7/2017
  */
-public class ActivitiesBean
-{
-    private String _activityId="";
-    private String _studyId="";
-    private String _activityVersion="";
-    private String _status="";
-    private Boolean _bookmarked;
-    private String _activityRunId="";
-    private String  _activityState;
-    private ActivityRunBean _activityRun;
+public class StudiesBean {
 
-    public String getActivityId()
-    {
-        return _activityId;
-    }
-
-    public void setActivityId(String activityId)
-    {
-        _activityId = activityId;
-    }
+    private String _studyId = "";
+    private String _status = "";
+    private Boolean bookmarked;
+    private String _enrolledDate = "";
+    private Integer _completion;
+    private Integer _adherence;
+    private String _participantId;
 
     public String getStudyId()
     {
@@ -54,16 +44,6 @@ public class ActivitiesBean
     public void setStudyId(String studyId)
     {
         _studyId = studyId;
-    }
-
-    public String getActivityVersion()
-    {
-        return _activityVersion;
-    }
-
-    public void setActivityVersion(String activityVersion)
-    {
-        _activityVersion = activityVersion;
     }
 
     public String getStatus()
@@ -78,41 +58,52 @@ public class ActivitiesBean
 
     public Boolean getBookmarked()
     {
-        return _bookmarked;
+        return bookmarked;
     }
 
     public void setBookmarked(Boolean bookmarked)
     {
-        _bookmarked = bookmarked;
+        this.bookmarked = bookmarked;
     }
 
-    public String getActivityRunId()
+    public String getEnrolledDate()
     {
-        return _activityRunId;
+        return _enrolledDate;
     }
 
-    public void setActivityRunId(String activityRunId)
+    public void setEnrolledDate(String enrolledDate)
     {
-        _activityRunId = activityRunId;
+        _enrolledDate = enrolledDate;
     }
 
-    public ActivityRunBean getActivityRun()
+    public Integer getCompletion()
     {
-        return _activityRun;
+        return _completion;
     }
 
-    public void setActivityRun(ActivityRunBean activityRun)
+    public void setCompletion(Integer completion)
     {
-        _activityRun = activityRun;
+        _completion = completion;
     }
 
-    public String getActivityState()
+    public Integer getAdherence()
     {
-        return _activityState;
+        return _adherence;
     }
 
-    public void setActivityState(String activityState)
+    public void setAdherence(Integer adherence)
     {
-        _activityState = activityState;
+        _adherence = adherence;
     }
+
+    public String getParticipantId()
+    {
+        return _participantId;
+    }
+
+    public void setParticipantId(String participantId)
+    {
+        _participantId = participantId;
+    }
+
 }

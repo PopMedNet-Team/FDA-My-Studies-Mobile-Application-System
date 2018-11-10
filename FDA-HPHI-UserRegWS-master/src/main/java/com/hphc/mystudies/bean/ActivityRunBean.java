@@ -23,74 +23,42 @@
 package com.hphc.mystudies.bean;
 
 /**
- * Created by Ravinder on 2/3/2017.
+ * @author Ravinder
+ * @since 4/27/2017
  */
-public class SettingsBean
-{
-    private Boolean _remoteNotifications;
-    private Boolean _localNotifications;
-    private Boolean _touchId;
-    private Boolean _passcode;
-    private String _reminderLeadTime;
-    private String _locale="";
+public class ActivityRunBean {
 
-    public Boolean getRemoteNotifications()
+    private Integer _total;
+    private Integer _completed;
+    private Integer _missed;
+
+    public Integer getTotal()
     {
-        return _remoteNotifications;
+        return _total;
     }
 
-    public void setRemoteNotifications(Boolean remoteNotifications)
+    public void setTotal(Integer total)
     {
-        _remoteNotifications = remoteNotifications;
+        _total = total;
     }
 
-    public Boolean getLocalNotifications()
+    public Integer getCompleted()
     {
-        return _localNotifications;
+        return _completed;
     }
 
-    public void setLocalNotifications(Boolean localNotifications)
+    public void setCompleted(Integer completed)
     {
-        _localNotifications = localNotifications;
+        _completed = completed;
     }
 
-    public Boolean getTouchId()
+    public Integer getMissed()
     {
-        return _touchId;
+        return _missed;
     }
 
-    public void setTouchId(Boolean touchId)
+    public void setMissed(Integer missed)
     {
-        _touchId = touchId;
-    }
-
-    public Boolean getPasscode()
-    {
-        return _passcode;
-    }
-
-    public void setPasscode(Boolean passcode)
-    {
-        _passcode = passcode;
-    }
-
-    public String getReminderLeadTime()
-    {
-        return _reminderLeadTime;
-    }
-
-    public void setReminderLeadTime(String reminderLeadTime)
-    {
-        _reminderLeadTime = reminderLeadTime;
-    }
-
-    public String getLocale()
-    {
-        return _locale;
-    }
-
-    public void setLocale(String locale)
-    {
-        _locale = locale;
+        _missed = missed;
     }
 }

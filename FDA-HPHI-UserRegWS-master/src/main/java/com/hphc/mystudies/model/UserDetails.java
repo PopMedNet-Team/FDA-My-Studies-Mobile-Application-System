@@ -30,10 +30,11 @@ import org.labkey.api.util.GUID;
 import java.util.Date;
 
 /**
- * Created by Ravinder on 1/31/2017.
+ * @author Ravinder
+ * @since 1/31/2017
  */
-public class UserDetails extends Entity
-{
+public class UserDetails extends Entity {
+
     private Integer _Id;
     private String _FirstName;
     private String _LastName;
@@ -244,4 +245,5 @@ public class UserDetails extends Entity
     {
         _PasswordUpdatedDate = passwordUpdatedDate;
     }
+
 }

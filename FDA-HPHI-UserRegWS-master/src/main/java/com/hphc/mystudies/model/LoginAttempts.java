@@ -20,88 +20,60 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.hphc.mystudies.bean;
+package com.hphc.mystudies.model;
+
+import java.util.Date;
+import org.labkey.api.data.Entity;
 
 /**
- * Created by Ravinder on 2/7/2017.
+ * @author Ravinder
+ * @since 5/18/2017
  */
-public class StudiesBean
-{
-    private String _studyId="";
-    private String _status="";
-    private Boolean bookmarked;
-    private String _enrolledDate="";
-    private Integer _completion;
-    private Integer _adherence;
-    private String _participantId;
+public class LoginAttempts extends Entity {
 
-    public String getStudyId()
+    private Integer _Id;
+    private String _Email;
+    private Date _LastModified;
+    private Integer _Attempts;
+
+    public Integer getId()
     {
-        return _studyId;
+        return _Id;
     }
 
-    public void setStudyId(String studyId)
+    public void setId(Integer id)
     {
-        _studyId = studyId;
+        _Id = id;
     }
 
-    public String getStatus()
+    public String getEmail()
     {
-        return _status;
+        return _Email;
     }
 
-    public void setStatus(String status)
+    public void setEmail(String email)
     {
-        _status = status;
+        _Email = email;
     }
 
-    public Boolean getBookmarked()
+    public Date getLastModified()
     {
-        return bookmarked;
+        return _LastModified;
     }
 
-    public void setBookmarked(Boolean bookmarked)
+    public void setLastModified(Date lastModified)
     {
-        this.bookmarked = bookmarked;
+        _LastModified = lastModified;
     }
 
-    public String getEnrolledDate()
+    public Integer getAttempts()
     {
-        return _enrolledDate;
+        return _Attempts;
     }
 
-    public void setEnrolledDate(String enrolledDate)
+    public void setAttempts(Integer attempts)
     {
-        _enrolledDate = enrolledDate;
+        _Attempts = attempts;
     }
 
-    public Integer getCompletion()
-    {
-        return _completion;
-    }
-
-    public void setCompletion(Integer completion)
-    {
-        _completion = completion;
-    }
-
-    public Integer getAdherence()
-    {
-        return _adherence;
-    }
-
-    public void setAdherence(Integer adherence)
-    {
-        _adherence = adherence;
-    }
-
-    public String getParticipantId()
-    {
-        return _participantId;
-    }
-
-    public void setParticipantId(String participantId)
-    {
-        _participantId = participantId;
-    }
 }
