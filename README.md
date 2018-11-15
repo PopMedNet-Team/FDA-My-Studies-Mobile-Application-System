@@ -4,7 +4,7 @@ portal (WCP), and storage environment. The mobile apps and WCP were developed by
 The storage environment is an extension of existing platform called Labkey Server (V17.1), offered by Labkey Corporation. All development occured under the 
 direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 
-<b>Code and documents needed for the iOS and Andriod applications include:</b>
+<b>Code and documents needed for the iOS and Android applications include:</b>
 <ul>
 <li>FDA_Android_AppSetup.pdf
 <li>FDA_iOS_AppSetup.pdf
