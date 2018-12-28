@@ -20,44 +20,62 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.hphc.mystudies.bean;
+package com.hphc.mystudies.model;
+
+import org.labkey.api.data.Entity;
 
 /**
- * Created by Ravinder on 2/3/2017.
+ * @author Ravinder
+ * @since 3/15/2017
  */
-public class ProfileBean
-{
-   // private String _firstName="";
-   // private String _lastName="";
-    private String _emailId="";
+import java.util.Date;
 
-   /* public String getFirstName()
+public class PasswordHistory extends Entity {
+
+    private Integer _Id;
+    private String _Password;
+    private String _UserId;
+
+    public Integer getId()
     {
-        return _firstName;
+        return _Id;
     }
 
-    public void setFirstName(String firstName)
+    public void setId(Integer id)
     {
-        _firstName = firstName;
+        _Id = id;
     }
 
-    public String getLastName()
+    public String getPassword()
     {
-        return _lastName;
+        return _Password;
     }
 
-    public void setLastName(String lastName)
+    public void setPassword(String password)
     {
-        _lastName = lastName;
-    }*/
-
-    public String getEmailId()
-    {
-        return _emailId;
+        _Password = password;
     }
 
-    public void setEmailId(String emailId)
+    public String getUserId()
     {
-        _emailId = emailId;
+        return _UserId;
     }
+
+    public void setUserId(String userId)
+    {
+        _UserId = userId;
+    }
+
+    @Override
+    public Date getCreated()
+    {
+        return super.getCreated();
+    }
+
+    @Override
+    public void setCreated(Date created)
+    {
+        super.setCreated(created);
+    }
+
 }

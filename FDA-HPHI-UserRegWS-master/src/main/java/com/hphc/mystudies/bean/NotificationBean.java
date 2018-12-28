@@ -25,7 +25,8 @@ package com.hphc.mystudies.bean;
 import org.json.JSONArray;
 
 /**
- * Created by Ravinder on 5/3/2017.
+ * @author Ravinder
+ * @since 5/3/2017
  */
 public class NotificationBean
 {
@@ -129,4 +130,5 @@ public class NotificationBean
     {
         _deviceType = deviceType;
     }
+
 }

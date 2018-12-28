@@ -27,10 +27,11 @@ import org.labkey.api.action.ReturnUrlForm;
 import java.util.Date;
 
 /**
- * Created by Ravinder on 2/2/2017.
+ * @author Ravinder
+ * @since 2/2/2017
  */
-public class ParticipantForm extends ReturnUrlForm
-{
+public class ParticipantForm extends ReturnUrlForm {
+
     private String _userId;
     private String _firstName;
     private String _lastName;
@@ -187,4 +188,5 @@ public class ParticipantForm extends ReturnUrlForm
     {
         _tempPasswordDate = tempPasswordDate;
     }
+
 }

@@ -23,41 +23,43 @@
 package com.hphc.mystudies.bean;
 
 /**
- * Created by Ravinder on 2/7/2017.
+ * @author Ravinder
+ * @since 2/3/2017
  */
-public class InfoBean
-{
-    String _os="";
-    String _appVersion="";
-    String _deviceToken="";
+public class ParticipantInfoBean {
 
-    public String getOs()
+    private String _studyId="";
+    private String _participantId="";
+    private String _enrolledDate="";
+
+    public String getStudyId()
     {
-        return _os;
+        return _studyId;
     }
 
-    public void setOs(String os)
+    public void setStudyId(String studyId)
     {
-        _os = os;
+        _studyId = studyId;
     }
 
-    public String getAppVersion()
+    public String getParticipantId()
     {
-        return _appVersion;
+        return _participantId;
     }
 
-    public void setAppVersion(String appVersion)
+    public void setParticipantId(String participantId)
     {
-        _appVersion = appVersion;
+        _participantId = participantId;
     }
 
-    public String getDeviceToken()
+    public String getEnrolledDate()
     {
-        return _deviceToken;
+        return _enrolledDate;
     }
 
-    public void setDeviceToken(String deviceToken)
+    public void setEnrolledDate(String enrolledDate)
     {
-        _deviceToken = deviceToken;
+        _enrolledDate = enrolledDate;
     }
+
 }

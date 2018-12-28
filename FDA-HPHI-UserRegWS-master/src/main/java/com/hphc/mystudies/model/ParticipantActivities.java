@@ -25,10 +25,11 @@ package com.hphc.mystudies.model;
 import org.labkey.api.data.Entity;
 
 /**
- * Created by Ravinder on 1/31/2017.
+ * @author Ravinder
+ * @since 1/31/2017
  */
-public class ParticipantActivities extends Entity
-{
+public class ParticipantActivities extends Entity {
+
     private Integer _Id;
     private String _ParticipantId;
     private String _StudyId;
@@ -184,4 +185,5 @@ public class ParticipantActivities extends Entity
     {
         _Missed = missed;
     }
+
 }

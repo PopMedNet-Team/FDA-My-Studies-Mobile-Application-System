@@ -27,10 +27,11 @@ import org.labkey.api.data.Entity;
 import java.util.Date;
 
 /**
- * Created by Ravinder on 1/31/2017.
+ * @author Ravinder
+ * @since 1/31/2017
  */
-public class AuthInfo extends Entity
-{
+public class AuthInfo extends Entity {
+
     private int _AuthId;
     private String _ParticipantId;
     private String _DeviceToken;
@@ -42,7 +43,7 @@ public class AuthInfo extends Entity
     private String _AndroidAppVersion;
 
     private Date _SessionExpiredDate;
-    private Boolean _RemoteNotificationFlag=false;
+    private Boolean _RemoteNotificationFlag = false;
     private String _RefreshToken;
 
 

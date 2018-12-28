@@ -23,41 +23,43 @@
 package com.hphc.mystudies.bean;
 
 /**
- * Created by Ravinder on 2/3/2017.
+ * @author Ravinder
+ * @since 3/13/2017
  */
-public class ParticipantInfoBean
-{
-    private String _studyId="";
-    private String _participantId="";
-    private String _enrolledDate="";
+public class ConsentBean {
 
-    public String getStudyId()
+    private String _version;
+    private String _status;
+    private  String _pdf;
+
+    public String getVersion()
     {
-        return _studyId;
+        return _version;
     }
 
-    public void setStudyId(String studyId)
+    public void setVersion(String version)
     {
-        _studyId = studyId;
+        _version = version;
     }
 
-    public String getParticipantId()
+    public String getStatus()
     {
-        return _participantId;
+        return _status;
     }
 
-    public void setParticipantId(String participantId)
+    public void setStatus(String status)
     {
-        _participantId = participantId;
+        _status = status;
     }
 
-    public String getEnrolledDate()
+    public String getPdf()
     {
-        return _enrolledDate;
+        return _pdf;
     }
 
-    public void setEnrolledDate(String enrolledDate)
+    public void setPdf(String pdf)
     {
-        _enrolledDate = enrolledDate;
+        _pdf = pdf;
     }
+
 }

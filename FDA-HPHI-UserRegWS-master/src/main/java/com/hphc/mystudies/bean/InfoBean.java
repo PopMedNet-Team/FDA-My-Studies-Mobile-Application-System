@@ -20,89 +20,45 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.hphc.mystudies.model;
+package com.hphc.mystudies.bean;
 
 /**
- * Created by Ravinder on 3/13/2017.
+ * @author Ravinder
+ * @since 2/7/2017
  */
-import org.labkey.api.data.Entity;
-public class StudyConsent extends Entity
+public class InfoBean
 {
-    private Integer _Id;
-    private String _UserId;
-    private String _StudyId;
-    private String _Status;
-    private String _Version;
-    private String _Pdf;
-    private String _PdfPath;
+    String _os="";
+    String _appVersion="";
+    String _deviceToken="";
 
-    public Integer getId()
+    public String getOs()
     {
-        return _Id;
+        return _os;
     }
 
-    public void setId(Integer id)
+    public void setOs(String os)
     {
-        _Id = id;
+        _os = os;
     }
 
-    public String getUserId()
+    public String getAppVersion()
     {
-        return _UserId;
+        return _appVersion;
     }
 
-    public void setUserId(String userId)
+    public void setAppVersion(String appVersion)
     {
-        _UserId = userId;
+        _appVersion = appVersion;
     }
 
-    public String getStudyId()
+    public String getDeviceToken()
     {
-        return _StudyId;
+        return _deviceToken;
     }
 
-    public void setStudyId(String studyId)
+    public void setDeviceToken(String deviceToken)
     {
-        _StudyId = studyId;
-    }
-
-    public String getStatus()
-    {
-        return _Status;
-    }
-
-    public void setStatus(String status)
-    {
-        _Status = status;
-    }
-
-    public String getVersion()
-    {
-        return _Version;
-    }
-
-    public void setVersion(String version)
-    {
-        _Version = version;
-    }
-
-    public String getPdf()
-    {
-        return _Pdf;
-    }
-
-    public void setPdf(String pdf)
-    {
-        _Pdf = pdf;
-    }
-
-    public String getPdfPath()
-    {
-        return _PdfPath;
-    }
-
-    public void setPdfPath(String pdfPath)
-    {
-        _PdfPath = pdfPath;
+        _deviceToken = deviceToken;
     }
 }

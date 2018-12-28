@@ -20,44 +20,35 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package com.hphc.mystudies.bean;
+package com.hphc.mystudies;
 
-/**
- * Created by Ravinder on 4/27/2017.
- */
-public class ActivityRunBean
-{
-    private Integer _total;
-    private Integer _completed;
-    private Integer _missed;
+import org.jetbrains.annotations.NotNull;
+import org.labkey.api.data.Container;
+import org.labkey.api.data.ContainerManager.ContainerListener;
+import org.labkey.api.security.User;
+import java.util.Collections;
+import java.util.Collection;
 
-    public Integer getTotal()
+import java.beans.PropertyChangeEvent;
+
+public class FdahpUserRegWSContainerListener implements ContainerListener {
+
+    @Override
+    public void containerCreated(Container c, User user) {}
+
+    @Override
+    public void containerDeleted(Container c, User user) {}
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {}
+
+    @Override
+    public void containerMoved(Container c, Container oldParent, User user) {}
+
+    @NotNull @Override
+    public Collection<String> canMove(Container c, Container newParent, User user)
     {
-        return _total;
+        return Collections.emptyList();
     }
 
-    public void setTotal(Integer total)
-    {
-        _total = total;
-    }
-
-    public Integer getCompleted()
-    {
-        return _completed;
-    }
-
-    public void setCompleted(Integer completed)
-    {
-        _completed = completed;
-    }
-
-    public Integer getMissed()
-    {
-        return _missed;
-    }
-
-    public void setMissed(Integer missed)
-    {
-        _missed = missed;
-    }
 }
