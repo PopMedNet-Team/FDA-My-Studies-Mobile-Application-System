@@ -276,8 +276,8 @@
     <string name="active1">ACTIVE</string>
     <string name="surveys">SURVEYS</string>
     <string name="tasks">TASKS</string>
-    <string name="per_study_completion">% Study Completion</string>
-    <string name="per_study_adherence">% Study Adherence</string>
+    <string name="per_study_completion">%s Study Completion</string>
+    <string name="per_study_adherence">%s Study Adherence</string>
     <string name="statistics">Statistics</string>
     <string name="month">MONTH</string>
     <string name="week">WEEK</string>

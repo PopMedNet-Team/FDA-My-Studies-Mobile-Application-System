@@ -23,6 +23,7 @@
 package com.hphc.mystudies.studyAppModule.custom.question;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -180,6 +181,7 @@ public class LocationQuestion implements StepBody, GoogleApiClient.ConnectionCal
                                 } catch (Exception e) {
                                 }
                                 mGoogleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                                    @SuppressLint("MissingPermission")
                                     @Override
                                     public void onMapLoaded() {
                                         mGoogleMap.setMyLocationEnabled(true);
@@ -308,6 +310,7 @@ public class LocationQuestion implements StepBody, GoogleApiClient.ConnectionCal
         }
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onConnected(Bundle bundle) {
         LocationRequest mLocationRequest = LocationRequest.create();

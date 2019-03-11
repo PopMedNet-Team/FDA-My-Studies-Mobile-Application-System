@@ -245,7 +245,7 @@ public class VerificationStepActivity extends AppCompatActivity implements ApiCa
                         AppController.deleteKey(PASSCODE_KEY+pass);
                     Intent intent = new Intent(VerificationStepActivity.this, GatewayActivity.class);
                     ComponentName cn = intent.getComponent();
-                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    Intent mainIntent = Intent.makeRestartActivityTask(cn);
                     startActivity(mainIntent);
                     finish();
                 } else {

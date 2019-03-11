@@ -339,7 +339,7 @@ public class SignupActivity extends AppCompatActivity implements ApiCall.OnAsync
                 } else {
                     Intent intent = new Intent(SignupActivity.this, StudyActivity.class);
                     ComponentName cn = intent.getComponent();
-                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    Intent mainIntent = Intent.makeRestartActivityTask(cn);
                     startActivity(mainIntent);
                     finish();
                 }

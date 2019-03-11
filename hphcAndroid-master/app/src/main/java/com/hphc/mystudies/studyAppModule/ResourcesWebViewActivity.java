@@ -22,6 +22,8 @@
  */
 package com.hphc.mystudies.studyAppModule;
 
+import static android.os.Build.VERSION_CODES.M;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -59,8 +61,6 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import javax.crypto.CipherInputStream;
-
-import static android.os.Build.VERSION_CODES.M;
 
 public class ResourcesWebViewActivity extends AppCompatActivity {
     private AppCompatTextView mTitle;
@@ -142,8 +142,7 @@ public class ResourcesWebViewActivity extends AppCompatActivity {
                 try {
 
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                    shareIntent.setData(Uri.parse("mailto:"));
-                    shareIntent.setType("application/pdf");
+                    shareIntent.setDataAndType(Uri.parse("mailto:"), "application/pdf");
                     shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     shareIntent.putExtra(Intent.EXTRA_SUBJECT, mIntentTitle);
                     // if pdf then attach and send else content send

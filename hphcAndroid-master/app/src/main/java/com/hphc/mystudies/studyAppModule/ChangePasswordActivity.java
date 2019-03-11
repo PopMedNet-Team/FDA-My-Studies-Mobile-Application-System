@@ -243,7 +243,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements ApiCall
                 Toast.makeText(this, getResources().getString(R.string.password_change_message), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ChangePasswordActivity.this, StudyActivity.class);
                 ComponentName cn = intent.getComponent();
-                Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                Intent mainIntent = Intent.makeRestartActivityTask(cn);
                 startActivity(mainIntent);
                 finish();
             } else {

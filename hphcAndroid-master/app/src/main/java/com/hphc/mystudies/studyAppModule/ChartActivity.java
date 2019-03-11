@@ -476,9 +476,8 @@ public class ChartActivity extends AppCompatActivity {
 
     public void sendMail(File file, String subject) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setData(Uri.parse("mailto:"));
+        shareIntent.setDataAndType(Uri.parse("mailto:"),"text/plain");
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        shareIntent.setType("text/plain");
         Uri fileUri = FileProvider.getUriForFile(ChartActivity.this, "com.myfileprovider", file);
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri);

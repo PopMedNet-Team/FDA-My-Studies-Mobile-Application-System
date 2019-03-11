@@ -276,7 +276,7 @@ public class SurveyActivitiesFragment extends Fragment implements ApiCall.OnAsyn
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, StudyActivity.class);
                 ComponentName cn = intent.getComponent();
-                Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                Intent mainIntent = Intent.makeRestartActivityTask(cn);
                 mContext.startActivity(mainIntent);
                 ((Activity) mContext).finish();
             }
@@ -527,7 +527,7 @@ public class SurveyActivitiesFragment extends Fragment implements ApiCall.OnAsyn
                 Toast.makeText(mContext, R.string.consent_complete, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, StudyActivity.class);
                 ComponentName cn = intent.getComponent();
-                Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                Intent mainIntent = Intent.makeRestartActivityTask(cn);
                 mContext.startActivity(mainIntent);
                 ((Activity) mContext).finish();
             }
@@ -538,7 +538,7 @@ public class SurveyActivitiesFragment extends Fragment implements ApiCall.OnAsyn
                 Toast.makeText(mContext, R.string.consent_complete, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, StudyActivity.class);
                 ComponentName cn = intent.getComponent();
-                Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                Intent mainIntent = Intent.makeRestartActivityTask(cn);
                 mContext.startActivity(mainIntent);
                 ((Activity) mContext).finish();
             }

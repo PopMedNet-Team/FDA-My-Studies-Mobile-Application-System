@@ -159,7 +159,7 @@ public class ComprehensionFailureActivity extends AppCompatActivity {
             } else if (resultCode == 12345) {
                 Intent intent = new Intent(this, StudyActivity.class);
                 ComponentName cn = intent.getComponent();
-                Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                Intent mainIntent = Intent.makeRestartActivityTask(cn);
                 startActivity(mainIntent);
                 finish();
             } else {

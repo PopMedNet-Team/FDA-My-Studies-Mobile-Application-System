@@ -202,7 +202,7 @@ public class SurveyActivity extends AppCompatActivity implements View.OnClickLis
     public void onBackPressed() {
         Intent intent = new Intent(SurveyActivity.this, StudyActivity.class);
         ComponentName cn = intent.getComponent();
-        Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+        Intent mainIntent = Intent.makeRestartActivityTask(cn);
         startActivity(mainIntent);
         finish();
     }

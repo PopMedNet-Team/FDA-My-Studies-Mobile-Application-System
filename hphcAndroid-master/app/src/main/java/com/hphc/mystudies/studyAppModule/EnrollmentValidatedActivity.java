@@ -194,7 +194,7 @@ public class EnrollmentValidatedActivity extends AppCompatActivity implements Ap
             } else if (resultCode == 12345) {
                 Intent intent = new Intent(EnrollmentValidatedActivity.this, StudyActivity.class);
                 ComponentName cn = intent.getComponent();
-                Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                Intent mainIntent = Intent.makeRestartActivityTask(cn);
                 startActivity(mainIntent);
                 finish();
             } else {

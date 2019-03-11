@@ -31,8 +31,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.support.v7.app.NotificationCompat;
 
 import com.hphc.mystudies.R;
 import com.hphc.mystudies.storageModule.DBServiceSubscriber;

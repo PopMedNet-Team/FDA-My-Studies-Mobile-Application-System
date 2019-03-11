@@ -127,7 +127,7 @@ public class AppController extends Application {
 
         Intent intent = new Intent(context, StudyActivity.class);
         ComponentName cn = intent.getComponent();
-        Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+        Intent mainIntent = Intent.makeRestartActivityTask(cn);
         context.startActivity(mainIntent);
         ((Activity) context).finish();
     }

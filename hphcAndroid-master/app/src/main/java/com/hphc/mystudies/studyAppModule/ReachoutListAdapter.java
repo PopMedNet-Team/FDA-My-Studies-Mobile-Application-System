@@ -98,7 +98,7 @@ public class ReachoutListAdapter extends RecyclerView.Adapter<ReachoutListAdapte
         holder.mContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(position == 0)
+                if(holder.getAdapterPosition() == 0)
                 {
                     Intent intent = new Intent(mContext, FeedbackActivity.class);
                     mContext.startActivity(intent);

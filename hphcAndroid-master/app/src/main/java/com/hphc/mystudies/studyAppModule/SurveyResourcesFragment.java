@@ -174,7 +174,7 @@ public class SurveyResourcesFragment extends Fragment implements ApiCall.OnAsync
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, StudyActivity.class);
                 ComponentName cn = intent.getComponent();
-                Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                Intent mainIntent = Intent.makeRestartActivityTask(cn);
                 mContext.startActivity(mainIntent);
                 ((Activity) mContext).finish();
             }
@@ -216,7 +216,7 @@ public class SurveyResourcesFragment extends Fragment implements ApiCall.OnAsync
 
             Intent intent = new Intent(mContext, StudyActivity.class);
             ComponentName cn = intent.getComponent();
-            Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+            Intent mainIntent = Intent.makeRestartActivityTask(cn);
             mContext.startActivity(mainIntent);
             ((Activity) mContext).finish();
         } else if (responseCode == STUDY_INFO && response != null) {

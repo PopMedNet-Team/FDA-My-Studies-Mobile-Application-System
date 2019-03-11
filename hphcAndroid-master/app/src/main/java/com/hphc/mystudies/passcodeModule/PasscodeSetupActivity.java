@@ -158,7 +158,7 @@ public class PasscodeSetupActivity extends AppCompatActivity {
 
         Intent intent = new Intent(PasscodeSetupActivity.this, GatewayActivity.class);
         ComponentName cn = intent.getComponent();
-        Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+        Intent mainIntent = Intent.makeRestartActivityTask(cn);
         mainIntent.putExtra("from", "forgot");
         startActivity(mainIntent);
         finish();

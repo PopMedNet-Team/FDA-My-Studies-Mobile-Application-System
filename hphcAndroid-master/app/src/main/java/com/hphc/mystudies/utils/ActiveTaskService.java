@@ -49,7 +49,8 @@ public class ActiveTaskService extends Service {
     public void onCreate() {
         super.onCreate();
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "My Tag");
+        PowerManager.WakeLock wakeLock = pm
+                .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "com.hphc.mystudies.utils.ActiveTaskService:WakeLock");
         wakeLock.acquire();
     }
 

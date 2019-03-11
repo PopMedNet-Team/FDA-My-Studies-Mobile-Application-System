@@ -273,7 +273,7 @@ public class StudyListAdapter extends RecyclerView.Adapter<StudyListAdapter.Hold
                         AppController.getHelperSharedPreference().writePreference(mContext, mContext.getString(R.string.studyVersion), "" + mItems.get(holder.getAdapterPosition()).getStudyVersion());
                     } catch (Exception e) {
                     }
-                    if (mItems.get(position).getStatus().equalsIgnoreCase(mContext.getString(R.string.active)) && mItems.get(position).getStudyStatus().equalsIgnoreCase(StudyFragment.IN_PROGRESS)) {
+                    if (mItems.get(holder.getAdapterPosition()).getStatus().equalsIgnoreCase(mContext.getString(R.string.active)) && mItems.get(holder.getAdapterPosition()).getStudyStatus().equalsIgnoreCase(StudyFragment.IN_PROGRESS)) {
                         studyFragment.getStudyUpdate(mItems.get(holder.getAdapterPosition()).getStudyId(), mItems.get(holder.getAdapterPosition()).getStudyVersion(), mItems.get(holder.getAdapterPosition()).getTitle(), "", "", "", "");
                     }
                     else {

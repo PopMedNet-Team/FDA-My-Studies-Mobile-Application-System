@@ -172,10 +172,6 @@
             android:theme="@style/Theme.BackboneApp"
             android:windowSoftInputMode="stateHidden"/>
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="17d66c1b46986f6f6633cc62617443d13b9fbf1d"/>
-
         <activity
             android:name="com.hphc.mystudies.WebViewActivity"
             android:configChanges="screenLayout|orientation"

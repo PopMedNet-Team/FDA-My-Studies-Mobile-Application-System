@@ -1,0 +1,6 @@
+<lint>
+    <issue id="InvalidPackage">
+        <ignore regexp="httpclient-4.5.3.jar"/>
+        <ignore regexp="itextg-5.5.10.jar"/>
+    </issue>
+</lint>

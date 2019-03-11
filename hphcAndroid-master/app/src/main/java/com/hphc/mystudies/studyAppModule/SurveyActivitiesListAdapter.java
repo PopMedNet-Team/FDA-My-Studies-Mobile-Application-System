@@ -414,7 +414,7 @@ public class SurveyActivitiesListAdapter extends RecyclerView.Adapter<SurveyActi
                 public void onClick(View view) {
                     int p = 0;
                     try {
-                        p = timePos.get(position);
+                        p = timePos.get(holder.getAdapterPosition());
                     } catch (Exception e) {
                     }
                     CustomActivitiesDailyDialogClass c = new CustomActivitiesDailyDialogClass(mContext, mScheduledTime, p, false, SurveyActivitiesListAdapter.this);

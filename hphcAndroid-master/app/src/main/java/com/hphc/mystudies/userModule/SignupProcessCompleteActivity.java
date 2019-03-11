@@ -78,7 +78,7 @@ public class SignupProcessCompleteActivity extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(SignupProcessCompleteActivity.this, StudyActivity.class);
                     ComponentName cn = intent.getComponent();
-                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    Intent mainIntent = Intent.makeRestartActivityTask(cn);
                     startActivity(mainIntent);
                     finish();
                 }

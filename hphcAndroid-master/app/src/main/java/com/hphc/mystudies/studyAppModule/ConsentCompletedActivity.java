@@ -396,9 +396,8 @@ public class ConsentCompletedActivity extends AppCompatActivity implements ApiCa
                 @Override
                 public void onClick(View v) {
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                    shareIntent.setData(Uri.parse("mailto:"));
+                    shareIntent.setDataAndType(Uri.parse("mailto:"),"application/pdf");
                     shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.signed_consent));
-                    shareIntent.setType("application/pdf");
                     Uri fileUri = FileProvider.getUriForFile(ConsentCompletedActivity.this, "com.myfileprovider", finalMSharingFile);
                     shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri);

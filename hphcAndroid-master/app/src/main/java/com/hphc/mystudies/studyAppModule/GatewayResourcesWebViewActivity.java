@@ -87,8 +87,7 @@ public class GatewayResourcesWebViewActivity extends AppCompatActivity {
                 try {
 
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                    shareIntent.setData(Uri.parse("mailto:"));
-                    shareIntent.setType("application/pdf");
+                    shareIntent.setDataAndType(Uri.parse("mailto:"),"application/pdf");
                     shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     shareIntent.putExtra(Intent.EXTRA_SUBJECT, mIntentTitle);
 
