@@ -40,7 +40,7 @@ direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 <li>iOS 11.x  and 12.x 
 <li>ResearchKit 2.0+ 
 <li>Android KitKat to Pie
-<li>ResearchSTack 1.1.1
+<li>ResearchStack 1.1.1
  <li> Compatibility with LabKey Server 19.1.X
-   <li> Mutating APIs have been updated to require HTTP POST </ul>
+  <li> Mutating APIs have been updated to require HTTP POST </ul>
  </ul>
