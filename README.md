@@ -1,28 +1,20 @@
-# Release 2019.05:
+# FDA MyStudies Release Notes - Version 2019.05:
+
+<ul>
+ <li>Ability to schedule study activities and resources based on study enrollment (or other WCP-configured date elements) as Anchor Date.
+<li>Application Security and Compabitility Updates
+<ul>
+<li>iPhone X, XR, XS 
+<li>iOS 11.x  and 12.x 
+<li>ResearchKit 2.0+ 
+<li>Android KitKat to Pie
+<li>ResearchSTack 1.1.1
+ </ul>
+ <li> Compaitbitiy with LabKey Server 19.1.X
+ <li> Mutating APIs have been updated to require HTTP POST
 
 
-- Ability to schedule study activities and resources based on study enrollment (or other WCP-configured date elements) as Anchor Date.
-
-Application Security and Compabitility Updates
-
-iOS 
-- iPhone X, XR, XS 
-- iOS 11.x  and 12.x 
-- ResearchKit 2.0+ 
- 
-Android 
-- KitKat to Pie
-- Latest ResearchStack version 
-
- 
-- Compaitbitiy with LabKey Server 19.1.X
- 
-
-- Mutating APIs have been updated to require HTTP POST
-
-
-
-# FDA-My-Studies-Mobile-Application-System
+# FDA MyStudies Mobile Application System General Information
 This repository contains all the necessary code and documentation for running the FDA My Studies mobile applications (iOS and Android), web configuration 
 portal (WCP), and storage environment. The mobile apps and WCP were developed by Boston Technology Corporation. 
 he storage environment is an extension of an existing platform called LabKey Server (19.1.x), offered separately by LabKey Corporation under the Apache 2.0 license. All development occured under the 
