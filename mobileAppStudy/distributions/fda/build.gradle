@@ -1,0 +1,40 @@
+import org.labkey.gradle.task.ModuleDistribution
+import org.labkey.gradle.util.BuildUtils
+import org.labkey.gradle.util.GroupNames
+
+apply plugin: 'org.labkey.distribution'
+
+buildscript {
+    repositories {
+        maven {
+            url "${artifactory_contextUrl}/plugins-release"
+        }
+    }
+    dependencies {
+        classpath "org.labkey.build:gradlePlugins:${gradlePluginsVersion}"
+    }
+}
+
+BuildUtils.addModuleDistributionDependencies(project, [":server:internal",
+                                                       ":server:api",
+                                                       ":server:modules:announcements",
+                                                       ":server:modules:audit",
+                                                       ":server:modules:core",
+                                                       ":server:modules:experiment",
+                                                       ":server:modules:filecontent",
+                                                       ":server:modules:pipeline",
+                                                       ":server:modules:query",
+                                                       ":server:modules:wiki",
+                                                       ":server:optionalModules:mobileAppStudy",
+                                                       ":server:modules:list"])
+
+project.task(
+        "distribution",
+        group: GroupNames.DISTRIBUTION,
+        type: ModuleDistribution,
+        {ModuleDistribution dist ->
+            dist.subDirName='mobileAppStudy'
+            dist.includeTarGZArchive=true
+            dist.extraFileIdentifier='-mobileAppStudy'
+        }
+)

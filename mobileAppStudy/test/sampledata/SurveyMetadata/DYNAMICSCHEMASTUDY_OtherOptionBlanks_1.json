@@ -1,0 +1,27 @@
+{
+  "message": "SUCCESS",
+  "activity": {
+    "metadata": {
+      "activityId": "OtherOptionBlanks",
+      "version": "1"
+    },
+    "steps": [{
+      "key": "OtherOption",
+      "resultType": "textChoice",
+      "repeatable": true,
+      "type": "question",
+      "textChoices": [
+        {
+          "description": "required other choice",
+          "type": "text",
+          "text": "second",
+          "other": {
+            "textfieldReq": true,
+            "placeholder": "I am unknown placeholdertext",
+            "isMandatory": false
+          }
+        }
+      ]
+    }]
+  }
+}

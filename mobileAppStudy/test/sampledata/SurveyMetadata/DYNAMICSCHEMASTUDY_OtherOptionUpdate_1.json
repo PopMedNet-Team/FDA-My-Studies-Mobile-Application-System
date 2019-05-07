@@ -1,0 +1,55 @@
+{
+  "message": "SUCCESS",
+  "activity": {
+    "metadata": {
+      "activityId": "OtherOptionUpdate",
+      "version": "1"
+    },
+    "steps": [
+      {
+        "key": "NoOption",
+        "resultType": "textChoice",
+        "repeatable": true,
+        "type": "question"
+      },
+      {
+        "key": "OtherOption",
+        "resultType": "textChoice",
+        "repeatable": true,
+        "type": "question"
+      },
+      {
+        "key": "GroupedList",
+        "resultType": "grouped",
+        "type": "form",
+        "steps":[
+          {
+            "key": "OtherOption",
+            "resultType": "textChoice",
+            "repeatable": true,
+            "type": "question"
+          },
+          {
+            "key": "Norepeat",
+            "resultType": "textChoice",
+            "repeatable": false,
+            "type": "question"
+          },
+          {
+            "key": "SubGroupedList",
+            "resultType": "grouped",
+            "type": "form",
+            "steps":[
+              {
+                "key": "OtherOption",
+                "resultType": "textChoice",
+                "repeatable": true,
+                "type": "question"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
