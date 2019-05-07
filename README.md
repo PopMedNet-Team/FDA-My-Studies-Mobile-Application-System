@@ -1,5 +1,4 @@
 # FDA MyStudies Release Notes - Version 2019.05:
-
 <ul>
  <li>Ability to schedule study activities and resources based on study enrollment (or other WCP-configured date elements) as Anchor Date.
 <li>Application Security and Compabitility Updates
