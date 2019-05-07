@@ -1,4 +1,4 @@
-#Release 2019.05:
+# Release 2019.05:
 
 
 - Ability to schedule study activities and resources based on study enrollment (or other WCP-configured date elements) as Anchor Date.
