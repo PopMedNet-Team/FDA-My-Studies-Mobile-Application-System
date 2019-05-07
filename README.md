@@ -1,15 +1,17 @@
 # FDA MyStudies Release Notes - Version 2019.05:
 <ul>
- <li>Ability to schedule study activities and resources based on study enrollment (or other WCP-configured date elements) as Anchor Date.
-<li>Application Security and Compabitility Updates
-<ul>
+ <li>New Features
+ <ul><li>Ability to schedule study activities and resources based on study enrollment (or other WCP-configured date elements) as Anchor Date.</ul>
+<ul><li>Application Security and Compabitility Updates
+</ul>
+ <ul>
 <li>iPhone X, XR, XS 
 <li>iOS 11.x  and 12.x 
 <li>ResearchKit 2.0+ 
 <li>Android KitKat to Pie
 <li>ResearchSTack 1.1.1
  </ul>
- <li> Compaitbitiy with LabKey Server 19.1.X
+ <li> Compatibility with LabKey Server 19.1.X
  <li> Mutating APIs have been updated to require HTTP POST
 
 
