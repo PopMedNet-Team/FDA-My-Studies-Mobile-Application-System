@@ -1,3 +1,20 @@
+/*******************************************************************************
+ * Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ * 
+ * Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+ * Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ * PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+ * OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ ******************************************************************************/
 /*
  * Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
@@ -28,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +69,10 @@ import com.hphc.mystudies.bean.ActiveTaskActivityMetaDataResponse;
 import com.hphc.mystudies.bean.ActiveTaskActivityStepsBean;
 import com.hphc.mystudies.bean.ActiveTaskActivityStructureBean;
 import com.hphc.mystudies.bean.ActivitiesBean;
+import com.hphc.mystudies.bean.ActivityAnchorDateBean;
+import com.hphc.mystudies.bean.ActivityAnchorEndBean;
+import com.hphc.mystudies.bean.ActivityAnchorStartBean;
+import com.hphc.mystudies.bean.ActivityFrequencyAnchorRunsBean;
 import com.hphc.mystudies.bean.ActivityFrequencyBean;
 import com.hphc.mystudies.bean.ActivityFrequencyScheduleBean;
 import com.hphc.mystudies.bean.ActivityMetadataBean;
@@ -68,6 +90,7 @@ import com.hphc.mystudies.dto.ActiveTaskDto;
 import com.hphc.mystudies.dto.ActiveTaskFrequencyDto;
 import com.hphc.mystudies.dto.ActiveTaskListDto;
 import com.hphc.mystudies.dto.ActiveTaskMasterAttributeDto;
+import com.hphc.mystudies.dto.AnchorDateTypeDto;
 import com.hphc.mystudies.dto.FormMappingDto;
 import com.hphc.mystudies.dto.InstructionsDto;
 import com.hphc.mystudies.dto.QuestionReponseTypeDto;
@@ -246,6 +269,13 @@ public class ActivityMetaDataDao {
 											.setTaskSubType(StudyMetaDataConstants.ACTIVITY_AT_SPATIAL_SPAN_MEMORY);
 								}
 							}
+							/**Phase2 a code for anchor date **/
+							if(activeTaskDto.getScheduleType()!=null && !activeTaskDto.getScheduleType().isEmpty()) {
+								activityBean.setSchedulingType(activeTaskDto.getScheduleType());
+								if(activeTaskDto.getScheduleType().equals(StudyMetaDataConstants.SCHEDULETYPE_ANCHORDATE))
+									activityBean = this.getAnchordateDetailsByActivityIdForActivetask(activeTaskDto, activityBean, session);
+							}
+						    /**Phase2a code for anchor date **/
 							activitiesBeanList.add(activityBean);
 						}
 					}
@@ -309,6 +339,13 @@ public class ActivityMetaDataDao {
 											StudyMetaDataConstants.SDF_DATE_TIME_PATTERN,
 											StudyMetaDataConstants.SDF_DATE_TIME_TIMEZONE_MILLISECONDS_PATTERN));
 						}
+						/**Phase2 a code for anchor date **/
+						if(questionaire.getScheduleType()!=null && !questionaire.getScheduleType().isEmpty()) {
+							activityBean.setSchedulingType(questionaire.getScheduleType());
+							if(questionaire.getScheduleType().equals(StudyMetaDataConstants.SCHEDULETYPE_ANCHORDATE))
+								activityBean = this.getAnchordateDetailsByActivityIdForQuestionnaire(questionaire, activityBean, session);
+						}
+					    /**Phase2a code for anchor date **/
 						activitiesBeanList.add(activityBean);
 					}
 				}
@@ -925,6 +962,7 @@ public class ActivityMetaDataDao {
 			Session session) throws DAOException {
 		LOGGER.info("INFO: ActivityMetaDataDao - getFrequencyRunsDetailsForActiveTasks() :: Starts");
 		List<ActivityFrequencyScheduleBean> runDetailsBean = new ArrayList<>();
+		List<ActivityFrequencyAnchorRunsBean> anchorRunDetailsBean = new ArrayList<>();
 		try {
 			switch (activeTask.getFrequency()) {
 			case StudyMetaDataConstants.FREQUENCY_TYPE_DAILY:
@@ -940,6 +978,11 @@ public class ActivityMetaDataDao {
 				break;
 			}
 			frequencyDetails.setRuns(runDetailsBean);
+			//set AnchorRuns
+			/** Phase2a code start**/
+			anchorRunDetailsBean = this.getAcivetaskFrequencyAncorDetailsForManuallySchedule(activeTask, anchorRunDetailsBean, session);
+			frequencyDetails.setAnchorRuns(anchorRunDetailsBean);
+			/** Phase2a code End**/
 		} catch (Exception e) {
 			LOGGER.error(
 					"ActivityMetaDataDao - getFrequencyRunsDetailsForActiveTasks() :: ERROR",
@@ -1009,9 +1052,8 @@ public class ActivityMetaDataDao {
 			throws DAOException {
 		LOGGER.info("INFO: ActivityMetaDataDao - getActiveTaskFrequencyDetailsForDaily() :: Starts");
 		try {
-			if (StringUtils.isNotEmpty(activeTask.getActiveTaskLifetimeStart())
-					&& StringUtils.isNotEmpty(activeTask
-							.getActiveTaskLifetimeEnd())) {
+			if(activeTask.getScheduleType()!=null && !activeTask.getScheduleType().isEmpty() && 
+					activeTask.getScheduleType().equals(StudyMetaDataConstants.SCHEDULETYPE_ANCHORDATE)) {
 				List<ActiveTaskFrequencyDto> activeTaskDailyFrequencyList = session
 						.createQuery(
 								"from ActiveTaskFrequencyDto ATFDTO"
@@ -1047,7 +1089,48 @@ public class ActivityMetaDataDao {
 						runDetailsBean.add(dailyBean);
 					}
 				}
+			}else {
+				if (StringUtils.isNotEmpty(activeTask.getActiveTaskLifetimeStart())
+						&& StringUtils.isNotEmpty(activeTask
+								.getActiveTaskLifetimeEnd())) {
+					List<ActiveTaskFrequencyDto> activeTaskDailyFrequencyList = session
+							.createQuery(
+									"from ActiveTaskFrequencyDto ATFDTO"
+											+ " where ATFDTO.activeTaskId= :activeTaskId"
+											+ " ORDER BY ATFDTO.frequencyTime ")
+							.setInteger(
+									StudyMetaDataEnum.QF_ACTIVE_TASK_ID.value(),
+									activeTask.getId()).list();
+					if (activeTaskDailyFrequencyList != null
+							&& !activeTaskDailyFrequencyList.isEmpty()) {
+						for (int i = 0; i < activeTaskDailyFrequencyList.size(); i++) {
+							ActivityFrequencyScheduleBean dailyBean = new ActivityFrequencyScheduleBean();
+							String activeTaskStartTime;
+							String activeTaskEndTime;
+							activeTaskStartTime = activeTaskDailyFrequencyList.get(
+									i).getFrequencyTime();
+
+							if (i == (activeTaskDailyFrequencyList.size() - 1)) {
+								activeTaskEndTime = StudyMetaDataConstants.DEFAULT_MAX_TIME;
+							} else {
+								activeTaskEndTime = StudyMetaDataUtil.addSeconds(
+										StudyMetaDataUtil.getCurrentDate()
+												+ " "
+												+ activeTaskDailyFrequencyList.get(
+														i + 1).getFrequencyTime(),
+										-1);
+								activeTaskEndTime = activeTaskEndTime.substring(11,
+										activeTaskEndTime.length());
+							}
+
+							dailyBean.setStartTime(activeTaskStartTime);
+							dailyBean.setEndTime(activeTaskEndTime);
+							runDetailsBean.add(dailyBean);
+						}
+					}
+				}
 			}
+			
 		} catch (Exception e) {
 			LOGGER.error(
 					"ActivityMetaDataDao - getActiveTaskFrequencyDetailsForDaily() :: ERROR",
@@ -1318,6 +1401,7 @@ public class ActivityMetaDataDao {
 			throws DAOException {
 		LOGGER.info("INFO: ActivityMetaDataDao - getFrequencyRunsDetailsForQuestionaires() :: Starts");
 		List<ActivityFrequencyScheduleBean> runDetailsBean = new ArrayList<>();
+		List<ActivityFrequencyAnchorRunsBean> anchorRunDetailsBean = new ArrayList<>();
 		try {
 			switch (questionaire.getFrequency()) {
 			case StudyMetaDataConstants.FREQUENCY_TYPE_DAILY:
@@ -1328,11 +1412,14 @@ public class ActivityMetaDataDao {
 				runDetailsBean = this
 						.getQuestionnaireFrequencyDetailsForManuallySchedule(
 								questionaire, runDetailsBean, session);
+				/** Phase2a code start**/
+				anchorRunDetailsBean = this.getQuestionnaireFrequencyAncorDetailsForManuallySchedule(questionaire, anchorRunDetailsBean, session);
+				frequencyDetails.setAnchorRuns(anchorRunDetailsBean);
+				/** Phase2a code End**/
 				break;
 			default:
 				break;
 			}
-
 			frequencyDetails.setRuns(runDetailsBean);
 		} catch (Exception e) {
 			LOGGER.error(
@@ -1404,43 +1491,83 @@ public class ActivityMetaDataDao {
 		LOGGER.info("INFO: ActivityMetaDataDao - getQuestionnaireFrequencyDetailsForDaily() :: Starts");
 		List<QuestionnairesFrequenciesDto> dailyFrequencyList = null;
 		try {
-			if (StringUtils.isNotEmpty(questionaire.getStudyLifetimeStart())
-					&& StringUtils.isNotEmpty(questionaire
-							.getStudyLifetimeEnd())) {
-				dailyFrequencyList = session
-						.createQuery(
-								"from QuestionnairesFrequenciesDto QFDTO"
-										+ " where QFDTO.questionnairesId= :questionnairesId"
-										+ " ORDER BY QFDTO.frequencyTime")
-						.setInteger(
-								StudyMetaDataEnum.QF_QUESTIONNAIRE_ID.value(),
-								questionaire.getId()).list();
-				if (dailyFrequencyList != null && !dailyFrequencyList.isEmpty()) {
-					for (int i = 0; i < dailyFrequencyList.size(); i++) {
-						ActivityFrequencyScheduleBean dailyBean = new ActivityFrequencyScheduleBean();
-						String activeTaskStartTime;
-						String activeTaskEndTime;
-						activeTaskStartTime = dailyFrequencyList.get(i)
-								.getFrequencyTime();
+			if(questionaire.getScheduleType()!=null && !questionaire.getScheduleType().isEmpty() && 
+					questionaire.getScheduleType().equals(StudyMetaDataConstants.SCHEDULETYPE_ANCHORDATE)) {
+					dailyFrequencyList = session
+							.createQuery(
+									"from QuestionnairesFrequenciesDto QFDTO"
+											+ " where QFDTO.questionnairesId= :questionnairesId"
+											+ " ORDER BY QFDTO.frequencyTime")
+							.setInteger(
+									StudyMetaDataEnum.QF_QUESTIONNAIRE_ID.value(),
+									questionaire.getId()).list();
+					if (dailyFrequencyList != null && !dailyFrequencyList.isEmpty()) {
+						for (int i = 0; i < dailyFrequencyList.size(); i++) {
+							ActivityFrequencyScheduleBean dailyBean = new ActivityFrequencyScheduleBean();
+							String activeTaskStartTime;
+							String activeTaskEndTime;
+							activeTaskStartTime = dailyFrequencyList.get(i)
+									.getFrequencyTime();
 
-						if (i == (dailyFrequencyList.size() - 1)) {
-							activeTaskEndTime = StudyMetaDataConstants.DEFAULT_MAX_TIME;
-						} else {
-							activeTaskEndTime = StudyMetaDataUtil.addSeconds(
-									StudyMetaDataUtil.getCurrentDate()
-											+ " "
-											+ dailyFrequencyList.get(i + 1)
-													.getFrequencyTime(), -1);
-							activeTaskEndTime = activeTaskEndTime.substring(11,
-									activeTaskEndTime.length());
+							if (i == (dailyFrequencyList.size() - 1)) {
+								activeTaskEndTime = StudyMetaDataConstants.DEFAULT_MAX_TIME;
+							} else {
+								activeTaskEndTime = StudyMetaDataUtil.addSeconds(
+										StudyMetaDataUtil.getCurrentDate()
+												+ " "
+												+ dailyFrequencyList.get(i + 1)
+														.getFrequencyTime(), -1);
+								activeTaskEndTime = activeTaskEndTime.substring(11,
+										activeTaskEndTime.length());
+							}
+
+							dailyBean.setStartTime(activeTaskStartTime);
+							dailyBean.setEndTime(activeTaskEndTime);
+							runDetailsBean.add(dailyBean);
 						}
+					}
+			}else {
+				if (StringUtils.isNotEmpty(questionaire.getStudyLifetimeStart())
+						&& StringUtils.isNotEmpty(questionaire
+								.getStudyLifetimeEnd())) {
+					dailyFrequencyList = session
+							.createQuery(
+									"from QuestionnairesFrequenciesDto QFDTO"
+											+ " where QFDTO.questionnairesId= :questionnairesId"
+											+ " ORDER BY QFDTO.frequencyTime")
+							.setInteger(
+									StudyMetaDataEnum.QF_QUESTIONNAIRE_ID.value(),
+									questionaire.getId()).list();
+					if (dailyFrequencyList != null && !dailyFrequencyList.isEmpty()) {
+						for (int i = 0; i < dailyFrequencyList.size(); i++) {
+							ActivityFrequencyScheduleBean dailyBean = new ActivityFrequencyScheduleBean();
+							String activeTaskStartTime;
+							String activeTaskEndTime;
+							activeTaskStartTime = dailyFrequencyList.get(i)
+									.getFrequencyTime();
 
-						dailyBean.setStartTime(activeTaskStartTime);
-						dailyBean.setEndTime(activeTaskEndTime);
-						runDetailsBean.add(dailyBean);
+							if (i == (dailyFrequencyList.size() - 1)) {
+								activeTaskEndTime = StudyMetaDataConstants.DEFAULT_MAX_TIME;
+							} else {
+								activeTaskEndTime = StudyMetaDataUtil.addSeconds(
+										StudyMetaDataUtil.getCurrentDate()
+												+ " "
+												+ dailyFrequencyList.get(i + 1)
+														.getFrequencyTime(), -1);
+								activeTaskEndTime = activeTaskEndTime.substring(11,
+										activeTaskEndTime.length());
+							}
+
+							dailyBean.setStartTime(activeTaskStartTime);
+							dailyBean.setEndTime(activeTaskEndTime);
+							runDetailsBean.add(dailyBean);
+						}
 					}
 				}
 			}
+			
+			
+			
 		} catch (Exception e) {
 			LOGGER.error(
 					"ActivityMetaDataDao - getQuestionnaireFrequencyDetailsForDaily() :: ERROR",
@@ -4402,5 +4529,379 @@ public class ActivityMetaDataDao {
 		}
 		LOGGER.info("INFO: ActivityMetaDataDao - getDateRangeType() :: Ends");
 		return dateRangeType;
+	}
+	
+	/**
+	 * Get the questionnaire start and end date time for the provided frequency
+	 * type
+	 * 
+	 * @author BTC
+	 * @param questionaire
+	 *            {@link QuestionnairesDto}
+	 * @param activityBean
+	 *            {@link ActivitiesBean}
+	 * @param session
+	 *            {@link Session}
+	 * @return {@link ActivitiesBean}
+	 * @throws DAOException
+	 */
+	@SuppressWarnings("unchecked")
+	public ActivitiesBean getAnchordateDetailsByActivityIdForActivetask(
+			ActiveTaskDto activeTaskDto, ActivitiesBean activityBean,
+			Session session) throws DAOException {
+		LOGGER.info("INFO: ActivityMetaDataDao - getAnchordateDetailsByActivityIdForQuestionnaire() :: Starts");
+		String searchQuery = "";
+		try {
+			 ActivityAnchorDateBean activityAnchorDateBean = new ActivityAnchorDateBean(); 
+			 searchQuery = "from AnchorDateTypeDto a where a.id="+activeTaskDto.getAnchorDateId()+"";
+			 AnchorDateTypeDto anchorDateTypeDto= (AnchorDateTypeDto) session.createQuery(searchQuery).uniqueResult();
+			 if(anchorDateTypeDto!=null) {
+			     if(!anchorDateTypeDto.getName().replace(" ", "").equalsIgnoreCase(StudyMetaDataConstants.ANCHOR_TYPE_ENROLLMENTDATE)) {
+			    	 activityAnchorDateBean.setSourceType(StudyMetaDataConstants.ANCHOR_TYPE_ACTIVITYRESPONSE);
+			         searchQuery = "select s.step_short_title,qr.short_title"+
+			    			 " from questionnaires qr,questions q, questionnaires_steps s"+
+			    			 " where"+
+			    			 " s.questionnaires_id=qr.id"+
+			    			 " and s.instruction_form_id=q.id"+
+			    			 " and s.step_type='Question'"+
+			    			 " and qr.custom_study_id='"+activeTaskDto.getCustomStudyId()+"'"+
+			    			 " and qr.schedule_type='"+StudyMetaDataConstants.SCHEDULETYPE_REGULAR+"'"+
+			    			 " and qr.frequency = '"+StudyMetaDataConstants.FREQUENCY_TYPE_ONE_TIME+"'"+
+			    			 " and q.anchor_date_id="+activeTaskDto.getAnchorDateId();
+			         List<?> result = session.createSQLQuery(searchQuery).list();
+			           if (null != result && !result.isEmpty()) {
+			        		 Object[] objects = (Object[]) result.get(0);
+			        		 activityAnchorDateBean.setSourceKey((String)objects[0]);
+			        		 activityAnchorDateBean.setSourceActivityId((String)objects[1]);
+			           }else {
+			        	   String query= "";
+				           query = "select q.shortTitle, qsf.stepShortTitle ,qq.shortTitle as questionnaireShort"+
+					    			 " from QuestionsDto q,FormMappingDto fm,FormDto f,QuestionnairesStepsDto qsf,QuestionnairesDto qq"+
+					    			 " where"+
+					    			 " q.id=fm.questionId"+
+					    			 " and f.formId=fm.formId"+
+					    			 " and f.formId=qsf.instructionFormId"+
+					    			 " and qsf.stepType='Form'"+
+					    			 " and qsf.questionnairesId=qq.id"+
+					    			 " and q.anchorDateId="+activeTaskDto.getAnchorDateId()+
+					    			 " and qq.customStudyId='"+activeTaskDto.getCustomStudyId()+"'"+
+					    			 " and qq.scheduleType='"+StudyMetaDataConstants.SCHEDULETYPE_REGULAR+"'"+
+					    			 " and qq.frequency = '"+StudyMetaDataConstants.FREQUENCY_TYPE_ONE_TIME+"'";
+				           List<?> result1 = session.createQuery(query).list();
+				           if (null != result1 && !result1.isEmpty()) {
+				        	   Object[] objects = (Object[]) result1.get(0);
+				        	   activityAnchorDateBean.setSourceKey((String)objects[0]);
+			        		   activityAnchorDateBean.setSourceFormKey((String)objects[1]);
+				        	   activityAnchorDateBean.setSourceActivityId((String)objects[2]);
+				           } 
+			            }
+			         }else {
+				    	 activityAnchorDateBean.setSourceType(StudyMetaDataConstants.ANCHOR_TYPE_ENROLLMENTDATE);
+				     }   
+			         ActivityAnchorStartBean start = new ActivityAnchorStartBean();
+			         ActivityAnchorEndBean end = new ActivityAnchorEndBean();
+			         if(activeTaskDto.getFrequency().equals(StudyMetaDataConstants.FREQUENCY_TYPE_MANUALLY_SCHEDULE)) {
+							
+							List<ActiveTaskCustomFrequenciesDto> manuallyScheduleFrequencyList = session
+									.createQuery(
+											"from ActiveTaskCustomFrequenciesDto QCFDTO"
+													+ " where QCFDTO.activeTaskId="
+													+ activeTaskDto.getId()+" order by QCFDTO.id").list();
+							if (manuallyScheduleFrequencyList != null
+									&& !manuallyScheduleFrequencyList.isEmpty()) {
+								start.setAnchorDays(manuallyScheduleFrequencyList.get(0).isxDaysSign()?-manuallyScheduleFrequencyList.get(0).getTimePeriodFromDays():manuallyScheduleFrequencyList.get(0).getTimePeriodFromDays());
+								start.setTime(manuallyScheduleFrequencyList.get(0).getFrequencyTime());
+								end.setAnchorDays(manuallyScheduleFrequencyList.get(manuallyScheduleFrequencyList.size()-1).isyDaysSign()?-manuallyScheduleFrequencyList.get(manuallyScheduleFrequencyList.size()-1).getTimePeriodToDays():manuallyScheduleFrequencyList.get(manuallyScheduleFrequencyList.size()-1).getTimePeriodToDays());
+								end.setTime(manuallyScheduleFrequencyList.get(manuallyScheduleFrequencyList.size()-1).getFrequencyTime());
+							}
+			         }else if(activeTaskDto.getFrequency().equals(StudyMetaDataConstants.FREQUENCY_TYPE_DAILY)) {
+			        	 List<ActiveTaskFrequencyDto> taskFrequencyDtoList = session
+									.createQuery(
+											"from ActiveTaskFrequencyDto QCFDTO"
+													+ " where QCFDTO.activeTaskId="
+													+ activeTaskDto.getId()+" order by QCFDTO.id").list();
+			        	 
+			        	 if(taskFrequencyDtoList!=null && taskFrequencyDtoList.size()>0) {
+			        		 start.setTime(taskFrequencyDtoList.get(0).getFrequencyTime());
+			        		 end.setRepeatInterval(activeTaskDto.getRepeatActiveTask()==null?0:activeTaskDto.getRepeatActiveTask());
+			        		 end.setAnchorDays(0);
+			        		 end.setTime(StudyMetaDataConstants.DEFAULT_MAX_TIME);
+			        	 }
+			        	 
+			         }else {
+			        	 
+			        	 ActiveTaskFrequencyDto taskFrequencyDto = (ActiveTaskFrequencyDto) session
+									.createQuery(
+											"from ActiveTaskFrequencyDto QFDTO"
+													+ " where QFDTO.activeTaskId="
+													+ activeTaskDto.getId())
+									.uniqueResult();
+				         if(taskFrequencyDto!=null) {
+				        	    if(taskFrequencyDto.getTimePeriodFromDays()!=null)
+								start.setAnchorDays(taskFrequencyDto.isxDaysSign()?-taskFrequencyDto.getTimePeriodFromDays():taskFrequencyDto.getTimePeriodFromDays());
+				        	    if(activeTaskDto.getFrequency().equals(StudyMetaDataConstants.FREQUENCY_TYPE_MONTHLY) 
+				        	    		|| activeTaskDto.getFrequency().equals(StudyMetaDataConstants.FREQUENCY_TYPE_WEEKLY)) {
+				        	    	//start.setDateOfMonth(questionnairesFrequency.getFrequencyDate());
+				        	    	end.setTime(taskFrequencyDto.getFrequencyTime());
+				        	    }
+				        	    /*if(questionaire.getFrequency().equals(StudyMetaDataConstants.FREQUENCY_TYPE_WEEKLY)) {
+				        	    	start.setDayOfWeek(StudyMetaDataUtil.getDayName(questionaire.getDayOfTheWeek()));
+				        	    }*/
+								start.setTime(taskFrequencyDto.getFrequencyTime());
+								
+								end.setRepeatInterval(activeTaskDto.getRepeatActiveTask()==null?0:activeTaskDto.getRepeatActiveTask());
+								//end.setTime(time);
+								if(activeTaskDto.getFrequency().equals(StudyMetaDataConstants.FREQUENCY_TYPE_ONE_TIME)) {
+						        	 if(taskFrequencyDto.isLaunchStudy())
+						        		 start = null;
+						        	 if(taskFrequencyDto.isStudyLifeTime())
+						        		 end = null;
+						        	 else {
+						        		 end.setAnchorDays(taskFrequencyDto.isyDaysSign()?-taskFrequencyDto.getTimePeriodToDays():taskFrequencyDto.getTimePeriodToDays());
+						        		 end.setTime(StudyMetaDataConstants.DEFAULT_MAX_TIME);
+						        	 }
+						        		 
+						         }
+								
+				         }
+			         }
+			         activityAnchorDateBean.setStart(start);
+					 activityAnchorDateBean.setEnd(end);
+			     activityBean.setAnchorDate(activityAnchorDateBean);
+			 }
+			 
+		} catch (Exception e) {
+			LOGGER.error(
+					"ActivityMetaDataDao - getAnchordateDetailsByActivityIdForQuestionnaire() :: ERROR",
+					e);
+		}
+		LOGGER.info("INFO: ActivityMetaDataDao - getAnchordateDetailsByActivityIdForQuestionnaire() :: Ends");
+		return activityBean;
+	}
+	
+	/**
+	 * Get the active task frequency details for manually schedule frequency
+	 * 
+	 * @author BTC
+	 * @param activeTask
+	 *            {@link ActiveTaskDto}
+	 * @param runDetailsBean
+	 *            {@link List<ActivityFrequencyScheduleBean>}
+	 * @param session
+	 *            {@link Session}
+	 * @return {@link List<ActivityFrequencyScheduleBean>}
+	 * @throws DAOException
+	 */
+	@SuppressWarnings("unchecked")
+	public List<ActivityFrequencyAnchorRunsBean> getQuestionnaireFrequencyAncorDetailsForManuallySchedule(
+			QuestionnairesDto questionaire,
+			List<ActivityFrequencyAnchorRunsBean> anchorRunDetailsBean, Session session)
+			throws DAOException {
+		LOGGER.info("INFO: ActivityMetaDataDao - getQuestionnaireFrequencyAncorDetailsForManuallySchedule() :: Starts");
+		try {
+			List<QuestionnairesCustomFrequenciesDto> manuallyScheduleFrequencyList = session
+					.createQuery(
+							"from QuestionnairesCustomFrequenciesDto QCFDTO"
+									+ " where QCFDTO.questionnairesId="
+									+ questionaire.getId()).list();
+			if (manuallyScheduleFrequencyList != null
+					&& !manuallyScheduleFrequencyList.isEmpty()) {
+				for (QuestionnairesCustomFrequenciesDto customFrequencyDto : manuallyScheduleFrequencyList) {
+					ActivityFrequencyAnchorRunsBean activityFrequencyAnchorRunsBean = new ActivityFrequencyAnchorRunsBean();
+					activityFrequencyAnchorRunsBean.setStartDays(customFrequencyDto.isxDaysSign()?-customFrequencyDto.getTimePeriodFromDays():customFrequencyDto.getTimePeriodFromDays());
+					activityFrequencyAnchorRunsBean.setEndDays(customFrequencyDto.isyDaysSign()?-customFrequencyDto.getTimePeriodToDays():customFrequencyDto.getTimePeriodToDays());
+					activityFrequencyAnchorRunsBean.setTime(customFrequencyDto.getFrequencyTime());
+					anchorRunDetailsBean.add(activityFrequencyAnchorRunsBean);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(
+					"ActivityMetaDataDao - getQuestionnaireFrequencyAncorDetailsForManuallySchedule() :: ERROR",
+					e);
+		}
+		LOGGER.info("INFO: ActivityMetaDataDao - getQuestionnaireFrequencyAncorDetailsForManuallySchedule() :: Ends");
+		return anchorRunDetailsBean;
+	}
+	
+	/**
+	 * Get the questionnaire start and end date time for the provided frequency
+	 * type
+	 * 
+	 * @author BTC
+	 * @param questionaire
+	 *            {@link QuestionnairesDto}
+	 * @param activityBean
+	 *            {@link ActivitiesBean}
+	 * @param session
+	 *            {@link Session}
+	 * @return {@link ActivitiesBean}
+	 * @throws DAOException
+	 */
+	@SuppressWarnings("unchecked")
+	public ActivitiesBean getAnchordateDetailsByActivityIdForQuestionnaire(
+			QuestionnairesDto questionaire, ActivitiesBean activityBean,
+			Session session) throws DAOException {
+		LOGGER.info("INFO: ActivityMetaDataDao - getAnchordateDetailsByActivityIdForQuestionnaire() :: Starts");
+		String searchQuery = "";
+		try {
+			 ActivityAnchorDateBean activityAnchorDateBean = new ActivityAnchorDateBean(); 
+			 searchQuery = "from AnchorDateTypeDto a where a.id="+questionaire.getAnchorDateId()+"";
+			 AnchorDateTypeDto anchorDateTypeDto= (AnchorDateTypeDto) session.createQuery(searchQuery).uniqueResult();
+			 if(anchorDateTypeDto!=null) {
+			     if(!anchorDateTypeDto.getName().replace(" ", "").equalsIgnoreCase(StudyMetaDataConstants.ANCHOR_TYPE_ENROLLMENTDATE)) {
+			    	 activityAnchorDateBean.setSourceType(StudyMetaDataConstants.ANCHOR_TYPE_ACTIVITYRESPONSE);
+			         searchQuery = "select s.step_short_title,qr.short_title"+
+			    			 " from questionnaires qr,questions q, questionnaires_steps s"+
+			    			 " where"+
+			    			 " s.questionnaires_id=qr.id"+
+			    			 " and s.instruction_form_id=q.id"+
+			    			 " and s.step_type='Question'"+
+			    			 " and qr.custom_study_id='"+questionaire.getCustomStudyId()+"'"+
+			    			 " and qr.schedule_type='"+StudyMetaDataConstants.SCHEDULETYPE_REGULAR+"'"+
+			    			 " and qr.frequency = '"+StudyMetaDataConstants.FREQUENCY_TYPE_ONE_TIME+"'"+
+			    			 " and q.anchor_date_id="+questionaire.getAnchorDateId();
+			         List<?> result = session.createSQLQuery(searchQuery).list();
+			           if (null != result && !result.isEmpty()) {
+			        	 //for(int i=0;i<result.size();i++) {
+			        		 Object[] objects = (Object[]) result.get(0);
+			        		 activityAnchorDateBean.setSourceKey((String)objects[0]);
+			        		 activityAnchorDateBean.setSourceActivityId((String)objects[1]);
+			        	 //}
+			           }else {
+			        	   String query= "";
+				           query = "select q.shortTitle, qsf.stepShortTitle ,qq.shortTitle as questionnaireShort"+
+					    			 " from QuestionsDto q,FormMappingDto fm,FormDto f,QuestionnairesStepsDto qsf,QuestionnairesDto qq"+
+					    			 " where"+
+					    			 " q.id=fm.questionId"+
+					    			 " and f.formId=fm.formId"+
+					    			 " and f.formId=qsf.instructionFormId"+
+					    			 " and qsf.stepType='Form'"+
+					    			 " and qsf.questionnairesId=qq.id"+
+					    			 " and q.anchorDateId="+questionaire.getAnchorDateId()+
+					    			 " and qq.customStudyId='"+questionaire.getCustomStudyId()+"'"+
+					    			 " and qq.scheduleType='"+StudyMetaDataConstants.SCHEDULETYPE_REGULAR+"'"+
+					    			 " and qq.frequency = '"+StudyMetaDataConstants.FREQUENCY_TYPE_ONE_TIME+"'";
+				           List<?> result1 = session.createQuery(query).list();
+				           System.out.println("Total Number Of Records : "+result1.size());
+				           if (null != result1 && !result1.isEmpty()) {
+				        	   Object[] objects = (Object[]) result1.get(0);
+				        	   activityAnchorDateBean.setSourceKey((String)objects[0]);
+			        		   activityAnchorDateBean.setSourceFormKey((String)objects[1]);
+				        	   activityAnchorDateBean.setSourceActivityId((String)objects[2]);
+				           }
+			         }
+			         }else {
+				    	 activityAnchorDateBean.setSourceType(StudyMetaDataConstants.ANCHOR_TYPE_ENROLLMENTDATE);
+				     }   
+			         ActivityAnchorStartBean start = new ActivityAnchorStartBean();
+			         ActivityAnchorEndBean end = new ActivityAnchorEndBean();
+			         if(questionaire.getFrequency().equals(StudyMetaDataConstants.FREQUENCY_TYPE_MANUALLY_SCHEDULE)) {
+							
+							List<QuestionnairesCustomFrequenciesDto> manuallyScheduleFrequencyList = session
+									.createQuery(
+											"from QuestionnairesCustomFrequenciesDto QCFDTO"
+													+ " where QCFDTO.questionnairesId="
+													+ questionaire.getId()+" order by QCFDTO.id").list();
+							if (manuallyScheduleFrequencyList != null
+									&& !manuallyScheduleFrequencyList.isEmpty()) {
+								start.setAnchorDays(manuallyScheduleFrequencyList.get(0).isxDaysSign()?-manuallyScheduleFrequencyList.get(0).getTimePeriodFromDays():manuallyScheduleFrequencyList.get(0).getTimePeriodFromDays());
+								start.setTime(manuallyScheduleFrequencyList.get(0).getFrequencyTime());
+								end.setAnchorDays(manuallyScheduleFrequencyList.get(manuallyScheduleFrequencyList.size()-1).isyDaysSign()?-manuallyScheduleFrequencyList.get(manuallyScheduleFrequencyList.size()-1).getTimePeriodToDays():manuallyScheduleFrequencyList.get(manuallyScheduleFrequencyList.size()-1).getTimePeriodToDays());
+								end.setTime(manuallyScheduleFrequencyList.get(manuallyScheduleFrequencyList.size()-1).getFrequencyTime());
+							}
+			         }else if(questionaire.getFrequency().equals(StudyMetaDataConstants.FREQUENCY_TYPE_DAILY)) {
+			        	 List<QuestionnairesFrequenciesDto> QuestionnairesFrequenciesDtoList = session
+									.createQuery(
+											"from QuestionnairesFrequenciesDto QCFDTO"
+													+ " where QCFDTO.questionnairesId="
+													+ questionaire.getId()+" order by QCFDTO.id").list();
+			        	 
+			        	 if(QuestionnairesFrequenciesDtoList!=null && QuestionnairesFrequenciesDtoList.size()>0) {
+			        		 start.setTime(QuestionnairesFrequenciesDtoList.get(0).getFrequencyTime());
+			        		 end.setRepeatInterval(questionaire.getRepeatQuestionnaire()==null?0:questionaire.getRepeatQuestionnaire());
+			        		 start.setAnchorDays(QuestionnairesFrequenciesDtoList.get(0).isxDaysSign()?-QuestionnairesFrequenciesDtoList.get(0).getTimePeriodFromDays():QuestionnairesFrequenciesDtoList.get(0).getTimePeriodFromDays());
+			        		 end.setAnchorDays(0);
+			        		 end.setTime(StudyMetaDataConstants.DEFAULT_MAX_TIME);
+			        	 }
+			        	 
+			         }else {
+			        	 QuestionnairesFrequenciesDto questionnairesFrequency = (QuestionnairesFrequenciesDto) session
+									.createQuery(
+											"from QuestionnairesFrequenciesDto QFDTO"
+													+ " where QFDTO.questionnairesId="
+													+ questionaire.getId())
+									.uniqueResult();
+				         if(questionnairesFrequency!=null) {
+				        	    if(questionnairesFrequency.getTimePeriodFromDays()!=null)
+								start.setAnchorDays(questionnairesFrequency.isxDaysSign()?-questionnairesFrequency.getTimePeriodFromDays():questionnairesFrequency.getTimePeriodFromDays());
+				        	    if(questionaire.getFrequency().equals(StudyMetaDataConstants.FREQUENCY_TYPE_MONTHLY) 
+				        	    		|| questionaire.getFrequency().equals(StudyMetaDataConstants.FREQUENCY_TYPE_WEEKLY)) {
+				        	    	//start.setDateOfMonth(questionnairesFrequency.getFrequencyDate());
+				        	    	end.setTime(questionnairesFrequency.getFrequencyTime());
+				        	    }
+				        	    /*if(questionaire.getFrequency().equals(StudyMetaDataConstants.FREQUENCY_TYPE_WEEKLY)) {
+				        	    	start.setDayOfWeek(StudyMetaDataUtil.getDayName(questionaire.getDayOfTheWeek()));
+				        	    }*/
+								start.setTime(questionnairesFrequency.getFrequencyTime());
+								
+								end.setRepeatInterval(questionaire.getRepeatQuestionnaire()==null?0:questionaire.getRepeatQuestionnaire());
+								//end.setTime(time);
+								if(questionaire.getFrequency().equals(StudyMetaDataConstants.FREQUENCY_TYPE_ONE_TIME)) {
+						        	 if(questionnairesFrequency.getIsLaunchStudy())
+						        		 start = null;
+						        	 if(questionnairesFrequency.getIsStudyLifeTime())
+						        		 end = null;
+						        	 else {
+						        		 end.setAnchorDays(questionnairesFrequency.isyDaysSign()?-questionnairesFrequency.getTimePeriodToDays():questionnairesFrequency.getTimePeriodToDays());
+						        		 end.setTime(StudyMetaDataConstants.DEFAULT_MAX_TIME);
+						        	 }
+						        		 
+						         }
+								
+				         }
+			         }
+			         activityAnchorDateBean.setStart(start);
+					 activityAnchorDateBean.setEnd(end);
+			     activityBean.setAnchorDate(activityAnchorDateBean);
+			 }
+			 
+		} catch (Exception e) {
+			LOGGER.error(
+					"ActivityMetaDataDao - getAnchordateDetailsByActivityIdForQuestionnaire() :: ERROR",
+					e);
+		}
+		LOGGER.info("INFO: ActivityMetaDataDao - getAnchordateDetailsByActivityIdForQuestionnaire() :: Ends");
+		return activityBean;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ActivityFrequencyAnchorRunsBean> getAcivetaskFrequencyAncorDetailsForManuallySchedule(
+			ActiveTaskDto activeTaskDto,
+			List<ActivityFrequencyAnchorRunsBean> anchorRunDetailsBean, Session session)
+			throws DAOException {
+		LOGGER.info("INFO: ActivityMetaDataDao - getAcivetaskFrequencyAncorDetailsForManuallySchedule() :: Starts");
+		try {
+			List<ActiveTaskCustomFrequenciesDto> manuallyScheduleFrequencyList = session
+					.createQuery(
+							"from ActiveTaskCustomFrequenciesDto QCFDTO"
+									+ " where QCFDTO.activeTaskId="
+									+ activeTaskDto.getId()).list();
+			if (manuallyScheduleFrequencyList != null
+					&& !manuallyScheduleFrequencyList.isEmpty()) {
+				for (ActiveTaskCustomFrequenciesDto customFrequencyDto : manuallyScheduleFrequencyList) {
+					ActivityFrequencyAnchorRunsBean activityFrequencyAnchorRunsBean = new ActivityFrequencyAnchorRunsBean();
+					activityFrequencyAnchorRunsBean.setStartDays(customFrequencyDto.isxDaysSign()?-customFrequencyDto.getTimePeriodFromDays():customFrequencyDto.getTimePeriodFromDays());
+					activityFrequencyAnchorRunsBean.setEndDays(customFrequencyDto.isyDaysSign()?-customFrequencyDto.getTimePeriodToDays():customFrequencyDto.getTimePeriodToDays());
+					activityFrequencyAnchorRunsBean.setTime(customFrequencyDto.getFrequencyTime());
+					anchorRunDetailsBean.add(activityFrequencyAnchorRunsBean);
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(
+					"ActivityMetaDataDao - getAcivetaskFrequencyAncorDetailsForManuallySchedule() :: ERROR",
+					e);
+		}
+		LOGGER.info("INFO: ActivityMetaDataDao - getAcivetaskFrequencyAncorDetailsForManuallySchedule() :: Ends");
+		return anchorRunDetailsBean;
 	}
 }

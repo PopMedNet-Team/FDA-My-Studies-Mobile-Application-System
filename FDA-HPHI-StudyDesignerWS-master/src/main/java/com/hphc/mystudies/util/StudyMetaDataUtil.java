@@ -1,3 +1,20 @@
+/*******************************************************************************
+ * Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ * 
+ * Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+ * Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ * PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+ * OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ ******************************************************************************/
 /*
  * Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
@@ -986,4 +1003,20 @@ public class StudyMetaDataUtil {
 		LOGGER.info("INFO: StudyMetaDataUtil - replaceSingleQuotes() - Ends");
 		return newActivityId;
 	}
+	
+	// Get the day for the WeekName
+    public static int getDayName(String dayName) {
+        int day = 0;
+        switch (dayName) {
+            case "Sunday": day = 1; break;
+            case "Monday": day = 2; break;
+            case "Tuesday": day = 3; break;
+            case "Wednesday": day = 4; break;
+            case  "Thursday": day =5; break;
+            case "Friday": day = 6; break;
+            case "Saturday": day = 7; break;
+        }
+
+        return day;
+    }
 }
