@@ -25,7 +25,7 @@ direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 <ul>
 <li>FDA_WCP_UR_AppSetup.pdf
 <li>FDA-HPHI-UserRegWS-master
-<li>Lab Key Documentation
+<li>LabKey Documentation
 <li>mobileAppStudy
 </ul>
 
