@@ -32,6 +32,7 @@
 #include <memory>
 
 namespace realm {
+class AuditInterface;
 class BindingContext;
 class Group;
 class Realm;
@@ -45,14 +46,21 @@ template <typename T> class ThreadSafeReference;
 struct VersionID;
 template<typename Table> class BasicRow;
 typedef BasicRow<Table> Row;
+template<typename> class BasicRowExpr;
+using RowExpr = BasicRowExpr<Table>;
 typedef std::shared_ptr<Realm> SharedRealm;
 typedef std::weak_ptr<Realm> WeakRealm;
 
 namespace _impl {
     class AnyHandover;
     class CollectionNotifier;
+    class PartialSyncHelper;
     class RealmCoordinator;
     class RealmFriend;
+}
+namespace sync {
+    struct PermissionsCache;
+    struct TableInfoCache;
 }
 
 // How to handle update_schema() being called on a file which has
@@ -129,6 +137,23 @@ enum class SchemaMode : uint8_t {
     Manual
 };
 
+enum class ComputedPrivileges : uint8_t {
+    None = 0,
+
+    Read = (1 << 0),
+    Update = (1 << 1),
+    Delete = (1 << 2),
+    SetPermissions = (1 << 3),
+    Query = (1 << 4),
+    Create = (1 << 5),
+    ModifySchema = (1 << 6),
+
+    AllRealm = Read | Update | SetPermissions | ModifySchema,
+    AllClass = Read | Update | Create | Query | SetPermissions,
+    AllObject = Read | Update | Delete | SetPermissions,
+    All = (1 << 7) - 1
+};
+
 class Realm : public std::enable_shared_from_this<Realm> {
 public:
     // A callback function to be called during a migration for Automatic and
@@ -163,6 +188,11 @@ public:
         BinaryData realm_data;
         // User-supplied encryption key. Must be either empty or 64 bytes.
         std::vector<char> encryption_key;
+
+        // Core and Object Store will in some cases need to create named pipes alongside the Realm file.
+        // But on some filesystems this can be a problem (e.g. external storage on Android that uses FAT32).
+        // In order to work around this, a separate path can be specified for these files.
+        std::string fifo_files_fallback_path;
 
         bool in_memory = false;
         SchemaMode schema_mode = SchemaMode::Automatic;
@@ -218,9 +248,12 @@ public:
         /// A data structure storing data used to configure the Realm for sync support.
         std::shared_ptr<SyncConfig> sync_config;
 
-        // FIXME: Realm Java manages sync at the Java level, so it needs to create Realms using the sync history
-        //        format.
+        // Open the Realm using the sync history mode even if a sync
+        // configuration is not supplied.
         bool force_sync_history = false;
+
+        // A factory function which produces an audit implementation.
+        std::function<std::shared_ptr<AuditInterface>()> audit_factory;
     };
 
     // Get a cached Realm or create a new one if no cached copies exists
@@ -248,11 +281,17 @@ public:
     Schema const& schema() const { return m_schema; }
     uint64_t schema_version() const { return m_schema_version; }
 
+    // Returns `true` if this Realm is a Partially synchronized Realm.
+    bool is_partial() const noexcept;
+
     void begin_transaction();
     void commit_transaction();
     void cancel_transaction();
     bool is_in_transaction() const noexcept;
+
     bool is_in_read_transaction() const { return !!m_group; }
+    VersionID read_transaction_version() const;
+    Group& read_group();
 
     bool is_in_migration() const noexcept { return m_in_migration; }
 
@@ -298,6 +337,12 @@ public:
     template <typename T>
     T resolve_thread_safe_reference(ThreadSafeReference<T> reference);
 
+    ComputedPrivileges get_privileges();
+    ComputedPrivileges get_privileges(StringData object_type);
+    ComputedPrivileges get_privileges(RowExpr row);
+
+    AuditInterface* audit_context() const noexcept;
+
     static SharedRealm make_shared_realm(Config config, std::shared_ptr<_impl::RealmCoordinator> coordinator = nullptr) {
         struct make_shared_enabler : public Realm {
             make_shared_enabler(Config config, std::shared_ptr<_impl::RealmCoordinator> coordinator)
@@ -310,6 +355,7 @@ public:
     // without making it public to everyone
     class Internal {
         friend class _impl::CollectionNotifier;
+        friend class _impl::PartialSyncHelper;
         friend class _impl::RealmCoordinator;
         friend class ThreadSafeReferenceBase;
         friend class GlobalNotifier;
@@ -357,6 +403,8 @@ private:
     bool m_dynamic_schema = true;
 
     std::shared_ptr<_impl::RealmCoordinator> m_coordinator;
+    std::unique_ptr<sync::TableInfoCache> m_table_info_cache;
+    std::unique_ptr<sync::PermissionsCache> m_permissions_cache;
 
     // File format versions populated when a file format upgrade takes place during realm opening
     int upgrade_initial_version = 0, upgrade_final_version = 0;
@@ -383,15 +431,17 @@ private:
 
     void add_schema_change_handler();
     void cache_new_schema();
+    void translate_schema_error();
     void notify_schema_changed();
+
+    bool init_permission_cache();
+    void invalidate_permission_cache();
 
 public:
     std::unique_ptr<BindingContext> m_binding_context;
 
-    // FIXME private
-    Group& read_group();
-
-    Replication *history() { return m_history.get(); }
+    // FIXME: This is currently needed by the adapter to get access to its changeset cooker
+    Replication* history() { return m_history.get(); }
 
     friend class _impl::RealmFriend;
 };

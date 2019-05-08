@@ -22,7 +22,7 @@ ActionSheetPicker-3.0
 
 Please welcome: **ActionSheetPicker-3.0**!
 
-`pod 'ActionSheetPicker-3.0', '~> 2.2.0'` (**iOS 5.1.1-9.x** compatible!)
+`pod 'ActionSheetPicker-3.0', '~> 2.3.0'` (**iOS 5.1.1-9.x** compatible!)
 
 ##ActionSheetPicker = UIPickerView + UIActionSheet ##
 
@@ -63,18 +63,18 @@ There are 4 distinct picker view options: `ActionSheetStringPicker`, `ActionShee
 
 #### `Swift:`
 
-```
- ActionSheetMultipleStringPicker.showPickerWithTitle("Multiple String Picker", rows: [
+```swift
+ ActionSheetMultipleStringPicker.show(withTitle: "Multiple String Picker", rows: [
             ["One", "Two", "A lot"],
             ["Many", "Many more", "Infinite"]
-        ], initialSelection: [2, 2], doneBlock: {
-            picker, values, indexes in
-            
-            print("values = \(values)")
-            print("indexes = \(indexes)")
-            print("picker = \(picker)")
-            return
-            }, cancelBlock: { ActionMultipleStringCancelBlock in return }, origin: sender)
+            ], initialSelection: [2, 2], doneBlock: {
+                picker, indexes, values in
+                
+                print("values = \(values)")
+                print("indexes = \(indexes)")
+                print("picker = \(picker)")
+                return
+        }, cancel: { ActionMultipleStringCancelBlock in return }, origin: sender)
 ```
 
 #### `Objective-C:`
@@ -134,13 +134,14 @@ To import pod you should add string:
 
 - For `Obj-c` projects:
 
-        #import "ActionSheetPicker.h"
-
+```obj-c
+   #import "ActionSheetPicker.h"
+```
 - For `Swift` projects:
 
-
-        import ActionSheetPicker_3_0
-
+```swift
+  import ActionSheetPicker_3_0
+```
 ### Carthage
 
 Carthage is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.

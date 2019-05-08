@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
@@ -47,7 +44,9 @@ class StudyListViewController: UIViewController {
     var previousStudyList: Array<Study> = []
     
     var allStudyList: Array<Study> = [] //Gatewaystudylist
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .default
+    }
     // MARK:- Viewcontroller lifecycle
     
     override func viewDidLoad() {
@@ -73,11 +72,11 @@ class StudyListViewController: UIViewController {
         }
         
         isComingFromFilterScreen = false
-        IQKeyboardManager.sharedManager().enable = true
+        // IQKeyboardManager.sharedManager().enable = true
         
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControlEvents.valueChanged)
+        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
         tableView?.addSubview(refreshControl!)
         
     }
@@ -116,7 +115,7 @@ class StudyListViewController: UIViewController {
         
         if User.currentUser.userType == .FDAUser { //For LoggedIn User
             self.tableView?.estimatedRowHeight = 145
-            self.tableView?.rowHeight = UITableViewAutomaticDimension
+            self.tableView?.rowHeight = UITableView.automaticDimension
             
             if (self.fdaSlideMenuController()?.isLeftOpen())! {
                 //Do Nothing
@@ -126,13 +125,13 @@ class StudyListViewController: UIViewController {
             }
         } else { //For ananomous User
             self.tableView?.estimatedRowHeight = 140
-            self.tableView?.rowHeight = UITableViewAutomaticDimension
+            self.tableView?.rowHeight = UITableView.automaticDimension
             //Fetch StudyList
             self.sendRequestToGetStudyList()
         }
         
-        UIApplication.shared.statusBarStyle = .default
-        
+        //UIApplication.shared.statusBarStyle = .default
+        setNeedsStatusBarAppearanceUpdate()
         //Checking if registering notification is pending
         if ud.value(forKey: kNotificationRegistrationIsPending) != nil && ud.bool(forKey: kNotificationRegistrationIsPending) == true{
             appdelegate.askForNotification()
@@ -195,7 +194,7 @@ class StudyListViewController: UIViewController {
     func addSearchButton() -> UIButton{
         
         let searchButton = UIButton.init(type: .custom)
-        searchButton.setImage(#imageLiteral(resourceName: "search_small"), for: UIControlState.normal)
+        searchButton.setImage(#imageLiteral(resourceName: "search_small"), for: UIControl.State.normal)
         searchButton.addTarget(self, action: #selector(self.searchButtonAction(_:)), for: .touchUpInside)
         searchButton.frame = CGRect.init(x: 0, y: 4, width: 30, height: 30)
         return searchButton
@@ -204,7 +203,7 @@ class StudyListViewController: UIViewController {
     func addFilterButton() -> UIButton{
         
         let filterButton = UIButton.init(type: .custom)
-        filterButton.setImage(#imageLiteral(resourceName: "filterIcon"), for: UIControlState.normal)
+        filterButton.setImage(#imageLiteral(resourceName: "filterIcon"), for: UIControl.State.normal)
         filterButton.addTarget(self, action: #selector(self.filterAction(_:)), for: .touchUpInside)
         filterButton.frame = CGRect.init(x: 40, y: 4, width: 30, height: 30)
         return filterButton
@@ -213,7 +212,7 @@ class StudyListViewController: UIViewController {
     func addNotificationButton() -> UIButton{
         let button = UIButton.init(type: .custom)
         
-        button.setImage(#imageLiteral(resourceName: "notification_grey"), for: UIControlState.normal)
+        button.setImage(#imageLiteral(resourceName: "notification_grey"), for: UIControl.State.normal)
         button.addTarget(self, action:#selector(self.buttonActionNotification(_:)), for: .touchUpInside)
         button.frame = CGRect.init(x: 80, y: 4, width: 30, height: 30)
         return button
@@ -318,7 +317,7 @@ class StudyListViewController: UIViewController {
             }
         } else {
             self.checkIfNotificationEnabled()
-            if NotificationHandler.instance.studyId.characters.count > 0 {
+            if NotificationHandler.instance.studyId.count > 0 {
                 
                 let studyId = NotificationHandler.instance.studyId
                 let study = Gateway.instance.studies?.filter({$0.studyId == studyId}).first
@@ -473,7 +472,7 @@ class StudyListViewController: UIViewController {
         self.navigateToNotifications()
     }
     
-    func refresh(sender: AnyObject) {
+    @objc func refresh(sender: AnyObject) {
         self.sendRequestToGetStudyList()
     }
     
@@ -493,10 +492,12 @@ class StudyListViewController: UIViewController {
         
         UIView.animate(withDuration: 0.2,
                        delay: 0.0,
-                       options: UIViewAnimationOptions.preferredFramesPerSecond60,
+                       options: UIView.AnimationOptions.preferredFramesPerSecond60,
                        animations: { () -> Void in
                         
-                        self.searchView?.frame = CGRect(x: 0 , y: 0 , width: self.view.frame.size.width , height: 64.0)
+                        let y:CGFloat = DeviceType.IS_IPHONE_X_OR_HIGH ? 20.0 : 0.0
+                        
+                        self.searchView?.frame = CGRect(x: 0 , y: y , width: self.view.frame.size.width , height: 64.0)
                         
                         self.searchView?.textFieldSearch?.becomeFirstResponder()
                         self.searchView?.delegate = self
@@ -505,7 +506,7 @@ class StudyListViewController: UIViewController {
                         
                         self.navigationController?.view.addSubview(self.searchView!)
                         
-                        if StudyFilterHandler.instance.searchText.characters.count > 0 {
+                        if StudyFilterHandler.instance.searchText.count > 0 {
                             self.searchView?.textFieldSearch?.text = StudyFilterHandler.instance.searchText
                         }
                         
@@ -704,7 +705,7 @@ class StudyListViewController: UIViewController {
                     if(study?.version != study?.newVersion){
                         WCPServices().getStudyUpdates(study: study!, delegate: self)
                     } else {
-                        let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+                        //let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
                         self.addProgressIndicator()
                         self.perform(#selector(loadStudyDetails), with: self, afterDelay: 1)
                     }
@@ -729,7 +730,7 @@ class StudyListViewController: UIViewController {
         }
     }
     
-    func loadStudyDetails() {
+    @objc func loadStudyDetails() {
         let study = Study.currentStudy
         DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (success) in
             
@@ -799,7 +800,7 @@ extension StudyListViewController : StudyFilterDelegates{
         
         //filter by searched Text
         var searchTextFilteredStudies: Array<Study>! = []
-        if searchText.characters.count > 0 {
+        if searchText.count > 0 {
             searchTextFilteredStudies = self.allStudyList.filter({
                 ($0.name?.containsIgnoringCase(searchText))! || ($0.category?.containsIgnoringCase(searchText))! || ($0.description?.containsIgnoringCase(searchText))! || ($0.sponserName?.containsIgnoringCase(searchText))!
                 
@@ -875,7 +876,7 @@ extension StudyListViewController : StudyFilterDelegates{
         //Assigning Filtered result to Studlist
         let allStudiesArray: Array<Study> = Array(allFilteredSet)
         
-        if searchText.characters.count == 0 && bookmarked == false && studyStatus.count == 0 &&
+        if searchText.count == 0 && bookmarked == false && studyStatus.count == 0 &&
             pariticipationsStatus.count == 0 && categories.count == 0 {
             
             self.studiesList = self.allStudyList
@@ -978,7 +979,7 @@ extension StudyListViewController : searchBarDelegate {
         
         if self.studiesList.count == 0 && self.previousStudyList.count > 0 {
             self.studiesList = self.previousStudyList
-        } else if searchView?.textFieldSearch?.text?.characters.count == 0 {
+        } else if searchView?.textFieldSearch?.text?.count == 0 {
             
             if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
                 let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
@@ -1036,7 +1037,7 @@ extension StudyListViewController : searchBarDelegate {
         
         //filter by searched Text
         var searchTextFilteredStudies: Array<Study>! = []
-        if text.characters.count > 0 {
+        if text.count > 0 {
             searchTextFilteredStudies = self.allStudyList.filter({
                 ($0.name?.containsIgnoringCase(text))! || ($0.category?.containsIgnoringCase(text))! || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
                 
@@ -1081,13 +1082,13 @@ extension StudyListViewController: NMWebServiceDelegate {
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname FINISH: \(requestName) : \(response)")
+        Logger.sharedInstance.info("requestname FINISH: \(requestName) : \(String(describing:response))")
         
         
         let appdelegate = (UIApplication.shared.delegate as? AppDelegate)!
         
         if requestName as String == WCPMethods.studyList.rawValue{
-            let responseDict = (response as? NSDictionary)!
+            //let responseDict = (response as? NSDictionary)!
             
             
             if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
@@ -1209,7 +1210,7 @@ extension StudyListViewController: ORKTaskViewControllerDelegate{
         self.perform(#selector(dismisscontroller), with: self, afterDelay: 1.5)
     }
     
-    func dismisscontroller() {
+    @objc func dismisscontroller() {
         self.dismiss(animated: true, completion: nil)
     }
     

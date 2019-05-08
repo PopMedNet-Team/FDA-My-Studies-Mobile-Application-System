@@ -35,6 +35,7 @@
 
 #import "ORKHelpers_Internal.h"
 
+#import "ORKQuestionResult_Private.h"
 #import "ORKResult.h"
 
 
@@ -45,7 +46,7 @@ ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierMale = @"HKBiological
 ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierOther = @"HKBiologicalSexOther";
 
 NSString *ORKHKBiologicalSexString(HKBiologicalSex biologicalSex) {
-    NSString *string = nil;
+    NSString *string = @"";
     switch (biologicalSex) {
         case HKBiologicalSexFemale: string = ORKBiologicalSexIdentifierFemale; break;
         case HKBiologicalSexMale:   string = ORKBiologicalSexIdentifierMale;   break;
@@ -65,7 +66,7 @@ ORKBloodTypeIdentifier const ORKBloodTypeIdentifierOPositive = @"HKBloodTypeOPos
 ORKBloodTypeIdentifier const ORKBloodTypeIdentifierONegative = @"HKBloodTypeONegative";
 
 NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
-    NSString *string = nil;
+    NSString *string = @"";
     switch (bloodType) {
         case HKBloodTypeAPositive:  string = ORKBloodTypeIdentifierAPositive;   break;
         case HKBloodTypeANegative:  string = ORKBloodTypeIdentifierANegative;   break;
@@ -212,6 +213,10 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
             _impliedAnswerFormat = boolAnswerFormat.impliedAnswerFormat;
         }
     }
+    
+    if (!_impliedAnswerFormat)
+        _impliedAnswerFormat = [ORKAnswerFormat textAnswerFormat];
+    
     return _impliedAnswerFormat;
 }
 
@@ -328,15 +333,20 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
     
     if (_quantityType) {
         if ([_quantityType.identifier isEqualToString:HKQuantityTypeIdentifierHeight]) {
-            ORKHeightAnswerFormat *format = [ORKDateAnswerFormat heightAnswerFormat];
+            ORKHeightAnswerFormat *format = [ORKHeightAnswerFormat heightAnswerFormat];
             _impliedAnswerFormat = format;
+            _unit = [HKUnit meterUnitWithMetricPrefix:(HKMetricPrefixCenti)];
+        } else if ([_quantityType.identifier isEqualToString:HKQuantityTypeIdentifierBodyMass]) {
+            ORKWeightAnswerFormat *format = [ORKWeightAnswerFormat weightAnswerFormat];
+            _impliedAnswerFormat = format;
+            _unit = [HKUnit gramUnitWithMetricPrefix:(HKMetricPrefixKilo)];
         } else {
-        ORKNumericAnswerFormat *format = nil;
+            ORKNumericAnswerFormat *format = nil;
             HKUnit *unit = [self healthKitUserUnit];
-        if (_numericAnswerStyle == ORKNumericAnswerStyleDecimal) {
-            format = [ORKNumericAnswerFormat decimalAnswerFormatWithUnit:[unit localizedUnitString]];
-        } else {
-            format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:[unit localizedUnitString]];
+            if (_numericAnswerStyle == ORKNumericAnswerStyleDecimal) {
+                format = [ORKNumericAnswerFormat decimalAnswerFormatWithUnit:[unit localizedUnitString]];
+            } else {
+                format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:[unit localizedUnitString]];
             }
             _impliedAnswerFormat = format;
         }

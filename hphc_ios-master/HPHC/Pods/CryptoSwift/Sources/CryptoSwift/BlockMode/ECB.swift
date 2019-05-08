@@ -1,5 +1,4 @@
 //
-//  BlockMode.swift
 //  CryptoSwift
 //
 //  Copyright (C) 2014-2017 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
@@ -17,22 +16,36 @@
 //  Electronic codebook (ECB)
 //
 
+public struct ECB: BlockMode {
+    public let options: BlockModeOption = .paddingRequired
+
+    public init() {
+    }
+
+    public func worker(blockSize: Int, cipherOperation: @escaping CipherOperationOnBlock) throws -> CipherModeWorker {
+        return ECBModeWorker(blockSize: blockSize, cipherOperation: cipherOperation)
+    }
+}
+
 struct ECBModeWorker: BlockModeWorker {
     typealias Element = Array<UInt8>
     let cipherOperation: CipherOperationOnBlock
+    let blockSize: Int
+    let additionalBufferSize: Int = 0
 
-    init(iv _: Array<UInt8>, cipherOperation: @escaping CipherOperationOnBlock) {
+    init(blockSize: Int, cipherOperation: @escaping CipherOperationOnBlock) {
+        self.blockSize = blockSize
         self.cipherOperation = cipherOperation
     }
 
-    mutating func encrypt(_ plaintext: ArraySlice<UInt8>) -> Array<UInt8> {
-        guard let ciphertext = cipherOperation(Array(plaintext)) else {
+    mutating func encrypt(block plaintext: ArraySlice<UInt8>) -> Array<UInt8> {
+        guard let ciphertext = cipherOperation(plaintext) else {
             return Array(plaintext)
         }
         return ciphertext
     }
 
-    mutating func decrypt(_ ciphertext: ArraySlice<UInt8>) -> Array<UInt8> {
-        return encrypt(ciphertext)
+    mutating func decrypt(block ciphertext: ArraySlice<UInt8>) -> Array<UInt8> {
+        return encrypt(block: ciphertext)
     }
 }

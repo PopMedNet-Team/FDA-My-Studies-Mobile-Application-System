@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
@@ -120,13 +117,23 @@ class UserServices: NSObject {
     
     
     // MARK: Requests
+    
+    func checkForAppUpdates(delegate: NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        let method = RegistrationMethods.versionInfo.method
+        self.sendRequestWith(method: method, params: nil, headers: nil)
+    }
+    
+    
     func loginUser(_ delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
         
         let user = User.currentUser
         let params = [kUserEmailId: user.emailId!,
-                      kUserPassword: user.password!]
+                      kUserPassword: user.password!,
+                      "appId":Utilities.getBundleIdentifier()]
         
         let method = RegistrationMethods.login.method
         
@@ -142,6 +149,7 @@ class UserServices: NSObject {
         
         let params = [kUserEmailId: user.emailId!,
                       kUserPassword: user.password!,
+                      "appId":Utilities.getBundleIdentifier()
                       ]
         
         let method = RegistrationMethods.register.method
@@ -165,7 +173,7 @@ class UserServices: NSObject {
         
         self.delegate = delegate
         
-        let user = User.currentUser
+        //let user = User.currentUser
         
         let param = [kVerifyCode: verificationCode,
                      kUserEmailId: emailId]
@@ -227,7 +235,7 @@ class UserServices: NSObject {
         
         self.delegate = delegate
         
-        let user = User.currentUser
+       // let user = User.currentUser
         let params = [kUserEmailId: email]
         let method = RegistrationMethods.forgotPassword.method
         
@@ -296,13 +304,13 @@ class UserServices: NSObject {
         let user = User.currentUser
         let headerParams = [kUserId: user.userId!]
         
-        let settings = [kSettingsRemoteNotifications: (user.settings?.remoteNotifications)! as Bool,
-                        kSettingsTouchId: (user.settings?.touchId)! as Bool,
-                        kSettingsPassCode: (user.settings?.passcode)! as Bool,
-                        kSettingsLocalNotifications: (user.settings?.localNotifications)! as Bool,
-                        kSettingsLeadTime: (user.settings?.leadTime)! as String,
-                        kSettingsLocale: (user.settings?.locale)! as String
-            ] as [String: Any]
+//        let settings = [kSettingsRemoteNotifications: (user.settings?.remoteNotifications)! as Bool,
+//                        kSettingsTouchId: (user.settings?.touchId)! as Bool,
+//                        kSettingsPassCode: (user.settings?.passcode)! as Bool,
+//                        kSettingsLocalNotifications: (user.settings?.localNotifications)! as Bool,
+//                        kSettingsLeadTime: (user.settings?.leadTime)! as String,
+//                        kSettingsLocale: (user.settings?.locale)! as String
+//            ] as [String: Any]
         
         let version = Utilities.getAppVersion()
         let info = [kAppVersion: version,
@@ -417,7 +425,7 @@ class UserServices: NSObject {
                             kUserAuthToken: user.authToken! as String]
         
         let consentVersion: String?
-        if (ConsentBuilder.currentConsent?.version?.characters.count)! > 0 {
+        if (ConsentBuilder.currentConsent?.version?.count)! > 0 {
             consentVersion = ConsentBuilder.currentConsent?.version!
         } else {
             consentVersion = "1"
@@ -436,7 +444,7 @@ class UserServices: NSObject {
                       kConsentSharing: ""] as [String : Any]
         let method = RegistrationMethods.updateEligibilityConsentStatus.method
         
-        print(" doc == \(ConsentBuilder.currentConsent?.consentResult?.consentPdfData)")
+        //print(" doc == \(ConsentBuilder.currentConsent?.consentResult?.consentPdfData)")
         self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
     
@@ -459,7 +467,7 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         //INCOMPLETE
-        let method = RegistrationMethods.updateActivityState.method
+        //let method = RegistrationMethods.updateActivityState.method
     }
     
     func getUserActivityState(studyId: String , delegate: NMWebServiceDelegate) {
@@ -662,12 +670,12 @@ class UserServices: NSObject {
         }
         
         //activities
-        if let activites = response[kActivites]  as? Array<Dictionary<String, Any>> {
-            for activity in activites {
-                // let participatedActivity = UserActivityStatus(detail: activity)
-                // user.participatedActivites.append(participatedActivity)
-            }
-        }
+//        if let activites = response[kActivites]  as? Array<Dictionary<String, Any>> {
+//            for _ in activites {
+//                // let participatedActivity = UserActivityStatus(detail: activity)
+//                // user.participatedActivites.append(participatedActivity)
+//            }
+//        }
     }
     
     func handleGetStudyStatesResponse(response: Dictionary<String, Any>){
@@ -700,7 +708,7 @@ class UserServices: NSObject {
     
     func handleGetConsentPDFResponse(response: Dictionary<String, Any>){
         
-        let user = User.currentUser
+        //let user = User.currentUser
         if Utilities.isValidValue(someObject: response[kConsent] as AnyObject?) {
             //Do nothing
         }
@@ -712,15 +720,15 @@ class UserServices: NSObject {
     
     func handleGetActivityStateResponse(response: Dictionary<String, Any>){
         
-        let user = User.currentUser
+        //let user = User.currentUser
         
         //activities
-        let activites = (response[kActivites]  as? Array<Dictionary<String, Any>>)!
-        for activity in activites {
-            
-            //let participatedActivity = UserActivityStatus(detail: activity)
-            // user.participatedActivites.append(participatedActivity)
-        }
+        _ = (response[kActivites]  as? Array<Dictionary<String, Any>>)!
+//        for activity in activites {
+//
+//            //let participatedActivity = UserActivityStatus(detail: activity)
+//            // user.participatedActivites.append(participatedActivity)
+//        }
     }
     
     func handleWithdrawFromStudyResponse(response: Dictionary<String, Any>){
@@ -766,18 +774,21 @@ class UserServices: NSObject {
         UserDefaults.standard.removePersistentDomain(forName: appDomain)
         UserDefaults.standard.synchronize()
         
-        //reset user object
-        User.resetCurrentUser()
-        
         //Delete from database
         DBHandler.deleteCurrentUser()
         
+        //reset user object
+        User.resetCurrentUser()
         
         //delete complete database
         DBHandler.deleteAll()
         
         //cancel all local notification
         LocalNotification.cancelAllLocalNotification()
+        
+        //reset Filters
+        StudyFilterHandler.instance.previousAppliedFilters = []
+        StudyFilterHandler.instance.searchText = ""
     }
     
     func handleDeActivateAccountResponse(response: Dictionary<String, Any>) {
@@ -790,18 +801,21 @@ class UserServices: NSObject {
         UserDefaults.standard.removePersistentDomain(forName: appDomain)
         UserDefaults.standard.synchronize()
         
-        //reset user object
-        User.resetCurrentUser()
-        
         //Delete from database
         DBHandler.deleteCurrentUser()
         
+        //reset user object
+        User.resetCurrentUser()
         
         //delete complete database
         DBHandler.deleteAll()
         
         //cancel all local notification
         LocalNotification.cancelAllLocalNotification()
+        
+        //reset Filters
+        StudyFilterHandler.instance.previousAppliedFilters = []
+        StudyFilterHandler.instance.searchText = ""
     }
     
     func handleUpdateTokenResponse(response: Dictionary<String, Any>){
@@ -814,7 +828,7 @@ class UserServices: NSObject {
         DBHandler().saveCurrentUser(user: user)
         //re-send request which failed due to session expired
         
-        let requestParams = self.failedRequestServices.requestParams == nil ? nil : self.failedRequestServices.requestParams
+       // let requestParams = self.failedRequestServices.requestParams == nil ? nil : self.failedRequestServices.requestParams
         
         let headerParams = self.failedRequestServices.headerParams == nil ? [:] : self.failedRequestServices.headerParams
         
@@ -927,7 +941,7 @@ extension UserServices: NMWebServiceDelegate{
                 
                 let errorInfo = ["NSLocalizedDescription": "Your Session is Expired"]
                 
-                var localError  = NSError.init(domain: error.domain, code: 403, userInfo: errorInfo)
+                let localError  = NSError.init(domain: error.domain, code: 403, userInfo: errorInfo)
                 
                 if delegate != nil {
                     delegate.failedRequest(manager, requestName: requestName, error: localError)

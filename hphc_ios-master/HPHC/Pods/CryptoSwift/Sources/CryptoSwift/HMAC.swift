@@ -1,5 +1,4 @@
 //
-//  HMAC.swift
 //  CryptoSwift
 //
 //  Copyright (C) 2014-2017 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
@@ -15,7 +14,6 @@
 //
 
 public final class HMAC: Authenticator {
-
     public enum Error: Swift.Error {
         case authenticateError
         case invalidInput
@@ -39,7 +37,7 @@ public final class HMAC: Authenticator {
             }
         }
 
-        func calculateHash(_ bytes: Array<UInt8>) -> Array<UInt8>? {
+        func calculateHash(_ bytes: Array<UInt8>) -> Array<UInt8> {
             switch self {
             case .sha1:
                 return Digest.sha1(bytes)
@@ -74,9 +72,8 @@ public final class HMAC: Authenticator {
         self.key = key
 
         if key.count > variant.blockSize() {
-            if let hash = variant.calculateHash(key) {
-                self.key = hash
-            }
+            let hash = variant.calculateHash(key)
+            self.key = hash
         }
 
         if key.count < variant.blockSize() {
@@ -96,10 +93,8 @@ public final class HMAC: Authenticator {
             ipad[idx] = key[idx] ^ ipad[idx]
         }
 
-        guard let ipadAndMessageHash = variant.calculateHash(ipad + bytes),
-            let result = variant.calculateHash(opad + ipadAndMessageHash) else {
-            throw Error.authenticateError
-        }
+        let ipadAndMessageHash = variant.calculateHash(ipad + bytes)
+        let result = variant.calculateHash(opad + ipadAndMessageHash)
 
         // return Array(result[0..<10]) // 80 bits
         return result

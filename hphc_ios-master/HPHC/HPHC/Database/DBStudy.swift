@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
@@ -29,52 +26,52 @@ import RealmSwift
  */
 class DBStudy: Object {
     
-    dynamic var studyId: String!
-    dynamic var name: String?
-    dynamic var version: String?
-    dynamic var updatedVersion: String?
-    dynamic var identifer: String?
-    dynamic var category: String?
-    dynamic var startDate: String?
-    dynamic var endEnd: String?
-    dynamic var status: String?
-    dynamic var sponserName: String?
-    dynamic var tagLine: String?
-    dynamic var brandingConfiguration: String?
-    dynamic var logoURL: String?
-    dynamic var websiteLink: String?
-    dynamic var bookmarked: Bool = false
-    dynamic var updateResources: Bool = false
-    dynamic var updateActivities: Bool = false
-    dynamic var updateConsent: Bool = false
-    dynamic var updateInfo: Bool = false
-    dynamic var enrolling: Bool = false
-    dynamic var platform: String?
-    dynamic var rejoin: Bool = false
+    @objc dynamic var studyId: String!
+    @objc dynamic var name: String?
+    @objc dynamic var version: String?
+    @objc dynamic var updatedVersion: String?
+    @objc dynamic var identifer: String?
+    @objc dynamic var category: String?
+    @objc dynamic var startDate: String?
+    @objc dynamic var endEnd: String?
+    @objc dynamic var status: String?
+    @objc dynamic var sponserName: String?
+    @objc dynamic var tagLine: String?
+    @objc dynamic var brandingConfiguration: String?
+    @objc dynamic var logoURL: String?
+    @objc dynamic var websiteLink: String?
+    @objc dynamic var bookmarked: Bool = false
+    @objc dynamic var updateResources: Bool = false
+    @objc dynamic var updateActivities: Bool = false
+    @objc dynamic var updateConsent: Bool = false
+    @objc dynamic var updateInfo: Bool = false
+    @objc dynamic var enrolling: Bool = false
+    @objc dynamic var platform: String?
+    @objc dynamic var rejoin: Bool = false
     
-    dynamic var signedConsentVersion: String?
-    dynamic var signedConsentFilePath: String?
+    @objc dynamic var signedConsentVersion: String?
+    @objc dynamic var signedConsentFilePath: String?
     
     //study state info
-    dynamic var participatedStatus: Int = 0
-    dynamic var participatedId: String?
-    dynamic var joiningDate: Date?
-    dynamic var completion: Int = 0
-    dynamic var adherence: Int = 0
+    @objc dynamic var participatedStatus: Int = 0
+    @objc dynamic var participatedId: String?
+    @objc dynamic var joiningDate: Date?
+    @objc dynamic var completion: Int = 0
+    @objc dynamic var adherence: Int = 0
     
     //anchor date values
-    dynamic var anchorDate: Date?
-    dynamic var anchorDateType: String?
-    dynamic var anchorDateActivityId: String?
-    dynamic var anchorDateActivityVersion: String?
-    dynamic var anchorDateQuestionKey: String?
-    dynamic var activitiesLocalNotificationUpdated = false
+    @objc dynamic var anchorDate: Date?
+    @objc dynamic var anchorDateType: String?
+    @objc dynamic var anchorDateActivityId: String?
+    @objc dynamic var anchorDateActivityVersion: String?
+    @objc dynamic var anchorDateQuestionKey: String?
+    @objc dynamic var activitiesLocalNotificationUpdated = false
     
     
     //withdrawalConfigration
     
-    dynamic var withdrawalConfigrationMessage: String?
-    dynamic var withdrawalConfigrationType: String?
+    @objc dynamic var withdrawalConfigrationMessage: String?
+    @objc dynamic var withdrawalConfigrationType: String?
     
     var sections = List<DBOverviewSection>()
     
@@ -86,13 +83,13 @@ class DBStudy: Object {
 
 class DBOverviewSection: Object {
     
-    dynamic  var title: String?
-    dynamic  var type: String?
-    dynamic  var imageURL: String?
-    dynamic  var text: String?
-    dynamic  var link: String?
-    dynamic var  studyId: String!
-    dynamic var  sectionId: String!
+    @objc dynamic  var title: String?
+    @objc dynamic  var type: String?
+    @objc dynamic  var imageURL: String?
+    @objc dynamic  var text: String?
+    @objc dynamic  var link: String?
+    @objc dynamic var  studyId: String!
+    @objc dynamic var  sectionId: String!
     
     override static func primaryKey() -> String? {
         return "sectionId"
@@ -101,17 +98,17 @@ class DBOverviewSection: Object {
 
 class DBStatistics : Object {
     
-    dynamic var  studyId: String!
-    dynamic var  statisticsId: String!
-    dynamic var title: String?
-    dynamic var displayName: String?
-    dynamic var unit: String?
-    dynamic var calculation: String?
-    dynamic var statType: String?
-    dynamic var activityId: String?
-    dynamic var activityVersion: String?
-    dynamic var dataSourceType: String?
-    dynamic var dataSourceKey: String?
+    @objc dynamic var  studyId: String!
+    @objc dynamic var  statisticsId: String!
+    @objc dynamic var title: String?
+    @objc dynamic var displayName: String?
+    @objc dynamic var unit: String?
+    @objc dynamic var calculation: String?
+    @objc dynamic var statType: String?
+    @objc dynamic var activityId: String?
+    @objc dynamic var activityVersion: String?
+    @objc dynamic var dataSourceType: String?
+    @objc dynamic var dataSourceKey: String?
     var statisticsData = List<DBStatisticsData>()
     
     override static func primaryKey() -> String? {
@@ -122,27 +119,27 @@ class DBStatistics : Object {
 class DBCharts :Object {
     
     //basic
-    dynamic  var chartId: String?
-    dynamic var studyId: String?
-    dynamic var title: String?
-    dynamic var displayName: String?
-    dynamic var chartType: String?
-    dynamic var scrollable: Bool = true
+    @objc dynamic  var chartId: String?
+    @objc dynamic var studyId: String?
+    @objc dynamic var title: String?
+    @objc dynamic var displayName: String?
+    @objc dynamic var chartType: String?
+    @objc dynamic var scrollable: Bool = true
     
     //datasource
-    dynamic var activityId: String?
-    dynamic var activityVersion: String?
-    dynamic var dataSourceType: String?
-    dynamic var dataSourceKey: String?
-    dynamic var dataSourceTimeRange: String?
-    dynamic var startTime: Date?
-    dynamic var endTime: Date?
+    @objc dynamic var activityId: String?
+    @objc dynamic var activityVersion: String?
+    @objc dynamic var dataSourceType: String?
+    @objc dynamic var dataSourceKey: String?
+    @objc dynamic var dataSourceTimeRange: String?
+    @objc dynamic var startTime: Date?
+    @objc dynamic var endTime: Date?
     
     
     //settings
-    dynamic var barColor: String?
-    dynamic var numberOfPoints: Int = 0
-    dynamic var chartSubType: String?
+    @objc dynamic var barColor: String?
+    @objc dynamic var numberOfPoints: Int = 0
+    @objc dynamic var chartSubType: String?
     
     var statisticsData = List<DBStatisticsData>()
     
@@ -152,28 +149,37 @@ class DBCharts :Object {
 
 }
 class DBStatisticsData: Object {
-    dynamic var startDate: Date?
-    dynamic var data: Float = 0.0
-    dynamic var fkDuration: Int = 0
+    @objc dynamic var startDate: Date?
+    @objc dynamic var data: Float = 0.0
+    @objc dynamic var fkDuration: Int = 0
 }
 
 class DBResources:Object {
     
-   dynamic  var studyId: String?
-   dynamic  var level: String?
-   dynamic  var key: String?
-   dynamic  var type: String?
-   dynamic  var audience: String?
-   dynamic  var resourceId: String?
-   dynamic  var notificationMessage: String?
-   dynamic  var startDate: Date?
-   dynamic  var endDate: Date?
-   dynamic  var anchorDateStartDays: Int = 0
-   dynamic  var anchorDateEndDays: Int = 0
-   dynamic  var title: String?
-   dynamic  var serverUrl: String?
-   dynamic  var localPath: String?
-   dynamic  var povAvailable: Bool = false
+    @objc dynamic  var studyId: String?
+    @objc dynamic  var level: String?
+    @objc dynamic  var key: String?
+    @objc dynamic  var type: String?
+    @objc dynamic  var audience: String?
+    @objc dynamic  var resourceId: String?
+    @objc dynamic  var notificationMessage: String?
+    @objc dynamic  var startDate: Date?
+    @objc dynamic  var endDate: Date?
+    @objc dynamic  var anchorDateStartDays: Int = 0
+    @objc dynamic  var anchorDateEndDays: Int = 0
+    @objc dynamic  var title: String?
+    @objc dynamic  var serverUrl: String?
+    @objc dynamic  var localPath: String?
+    @objc dynamic  var povAvailable: Bool = false
+    
+    @objc dynamic  var availabilityType: String?
+    @objc dynamic  var sourceType: String?
+    @objc dynamic  var sourceActivityId: String?
+    @objc dynamic  var sourceKey: String?
+    @objc dynamic  var sourceFormKey: String?
+    
+    @objc dynamic  var startTime: String?
+    @objc dynamic  var endTime: String?
     
     override static func primaryKey() -> String? {
         return "resourceId"
@@ -183,9 +189,9 @@ class DBResources:Object {
 
 class DBDataOfflineSync:Object{
     
-    dynamic var requestParams: Data?
-    dynamic var headerParams: Data?
-    dynamic var method: String?
-    dynamic var server: String?
-    dynamic var date: Date?
+    @objc dynamic var requestParams: Data?
+    @objc dynamic var headerParams: Data?
+    @objc dynamic var method: String?
+    @objc dynamic var server: String?
+    @objc dynamic var date: Date?
 }

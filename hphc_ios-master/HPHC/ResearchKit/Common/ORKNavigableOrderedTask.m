@@ -32,6 +32,7 @@
 #import "ORKNavigableOrderedTask.h"
 
 #import "ORKOrderedTask_Private.h"
+#import "ORKCollectionResult_Private.h"
 #import "ORKResult.h"
 #import "ORKStep_Private.h"
 #import "ORKStepNavigationRule.h"
@@ -173,8 +174,8 @@
 - (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
     ORKStep *previousStep = nil;
     __block NSInteger indexOfCurrentStepResult = -1;
-    [result.results enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(ORKResult *result, NSUInteger idx, BOOL *stop) {
-        if ([result.identifier isEqualToString:step.identifier]) {
+    [result.results enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(ORKResult *currentResult, NSUInteger idx, BOOL *stop) {
+        if ([currentResult.identifier isEqualToString:step.identifier]) {
             indexOfCurrentStepResult = idx;
             *stop = YES;
         }

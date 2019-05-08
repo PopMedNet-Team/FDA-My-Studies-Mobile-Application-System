@@ -1,0 +1,244 @@
+{"Result":
+    
+    {
+        
+        "type": "questionnaire",
+        
+        "metadata": {
+            
+            "studyId": "CAFDA12",
+            
+            "activityId": "QR4_I4",
+            
+            "name": "QR4",
+            
+            "version": "1",
+            
+            "lastModified": "2017-04-18T18:06:40.000-0400",
+            
+            "startDate": "2017-04-25T10:22:21.000-0400",
+            
+            "endDate": "2017-06-25T10:22:21.000-0400"
+            
+        },
+        
+        "configuration": {
+            
+            "frequency":"one-time"
+            
+        },
+        
+        
+        
+        "steps": [
+                  {
+                  
+                  "type": "question",
+                  
+                  "resultType": "textScale",
+                  
+                  "key": "QR4_F2_Q3",
+                  
+                  "title": "Q3",
+                  
+                  "text": "QDesc3",
+                  
+                  "skippable": true,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "",
+                  
+                  "destinations": [{
+                                   
+                                   "condition": "1",
+                                   
+                                   "destination": "QR4_Q6"
+                                   
+                                   },
+                                   {
+                                   
+                                   "condition": "2",
+                                   
+                                   "destination": "QR4_I2"
+                                   
+                                   },
+                                   {
+                                   
+                                   "condition": "",
+                                   
+                                   "destination": "QR4_Q7"
+                                   
+                                   }],
+                  
+                  "healthDataKey": "",
+                  
+                  "format": {
+                  
+                  "textChoices": [
+                                  
+                                  {
+                                  
+                                  "text": "TS1",
+                                  
+                                  "value": "1",
+                                  
+                                  "detail": "",
+                                  
+                                  "exclusive": true
+                                  
+                                  },
+                                  
+                                  {
+                                  
+                                  "text": "TS2",
+                                  
+                                  "value": "2",
+                                  
+                                  "detail": "",
+                                  
+                                  "exclusive": true
+                                  
+                                  },
+                                  {
+                                  
+                                  "text": "TS3",
+                                  
+                                  "value": "3",
+                                  
+                                  "detail": "",
+                                  
+                                  "exclusive": true
+                                  
+                                  },
+                                  {
+                                  
+                                  "text": "TS4",
+                                  
+                                  "value": "4",
+                                  
+                                  "detail": "",
+                                  
+                                  "exclusive": true
+                                  
+                                  },
+                                  {
+                                  
+                                  "text": "TS5",
+                                  
+                                  "value": "5",
+                                  
+                                  "detail": "",
+                                  
+                                  "exclusive": true
+                                  
+                                  }
+                                  
+                                  ],
+                  
+                  "default": 1,
+                  
+                  "vertical": true
+                  
+                  },
+                  
+                  "steps": [],
+                  
+                  "options": []
+                  
+                  },
+                  {
+                  
+                  "type": "question",
+                  
+                  "resultType": "textScale",
+                  
+                  "key": "QR4_F2_Q34",
+                  
+                  "title": "Q3",
+                  
+                  "text": "QDesc3",
+                  
+                  "skippable": true,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "",
+                  
+                  "destinations": [{
+                                   
+                                   "condition": "1",
+                                   
+                                   "destination": "QR4_Q6"
+                                   
+                                   },
+                                   {
+                                   
+                                   "condition": "2",
+                                   
+                                   "destination": "QR4_I2"
+                                   
+                                   },
+                                   {
+                                   
+                                   "condition": "",
+                                   
+                                   "destination": "QR4_Q7"
+                                   
+                                   }],
+                  
+                  "healthDataKey": "",
+                  
+                  "format": {
+                  
+                  "textChoices": [
+                                  
+                                  {
+                                  
+                                  "text": "TS1",
+                                  
+                                  "value": "1",
+                                  
+                                  "detail": "",
+                                  
+                                  "exclusive": true
+                                  
+                                  },
+                                  
+                                  {
+                                  
+                                  "text": "TS2",
+                                  
+                                  "value": "2",
+                                  
+                                  "detail": "",
+                                  
+                                  "exclusive": true
+                                  
+                                  }
+                                  
+                                  ],
+                  
+                  "default": 1,
+                  
+                  "vertical": true
+                  
+                  },
+                  
+                  "steps": [],
+                  
+                  "options": []
+                  
+                  }
+      
+                  ]
+        
+        
+        
+    }
+    
+}

@@ -34,7 +34,9 @@
 #import "ORKStroopContentView.h"
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
-#import "ORKResult.h"
+#import "ORKStroopResult.h"
+#import "ORKResult_Private.h"
+#import "ORKCollectionResult_Private.h"
 #import "ORKStroopStep.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKBorderedButton.h"
@@ -43,8 +45,8 @@
 @interface ORKStroopStepViewController ()
 
 @property (nonatomic, strong) ORKStroopContentView *stroopContentView;
-@property (nonatomic, copy) NSMutableDictionary *colors;
-@property (nonatomic, copy) NSMutableDictionary *differentColorLabels;
+@property (nonatomic, strong) NSMutableDictionary *colors;
+@property (nonatomic, strong) NSMutableDictionary *differentColorLabels;
 @property (nonatomic) NSUInteger questionNumber;
 
 @end

@@ -1,24 +1,10 @@
 /*
- * Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- * associated documentation files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- * of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- * following conditions:
+ * Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
  *
- * The above copyright notice and this permission notice shall be included in all copies or substantial
- * portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * Funding Source: Food and Drug Administration ("Funding Agency") effective 18 September 2014 as Contract no.
- * HHSF22320140030I/HHSF22301006T (the "Prime Contract").
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.hphc.mystudies;
 import com.hphc.mystudies.bean.ActivitiesBean;
@@ -55,6 +41,7 @@ import com.hphc.mystudies.model.ParticipantStudies;
 import com.hphc.mystudies.model.PasswordHistory;
 import com.hphc.mystudies.model.StudyConsent;
 import com.hphc.mystudies.model.UserDetails;
+import com.hphc.mystudies.model.VersionInfo;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -144,7 +131,7 @@ public class FdahpUserRegWSController extends SpringActionController
         {
             UserDetails participantDetails = new UserDetails();
             ApiSimpleResponse apiSimpleResponse = new ApiSimpleResponse();
-            apiSimpleResponse.put("reponse", "FdahpUserRegWebServices-1.20 Works!");
+            apiSimpleResponse.put("reponse", "FdahpUserRegWebServices-1.25 Works!");
             apiSimpleResponse.put(FdahpUserRegUtil.ErrorCodes.SUCCESS.getValue().toLowerCase(), true);
             return apiSimpleResponse;
         }
@@ -155,6 +142,7 @@ public class FdahpUserRegWSController extends SpringActionController
      *
      * */
     @RequiresNoPermission
+    @CSRF(CSRF.Method.NONE)
     public class RegisterAction extends ApiAction<ParticipantForm>{
 
         @Override
@@ -265,6 +253,7 @@ public class FdahpUserRegWSController extends SpringActionController
      *
      */
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class ConfirmRegistrationAction extends ApiAction{
 
         @Override
@@ -342,6 +331,7 @@ public class FdahpUserRegWSController extends SpringActionController
      *
      */
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class VerifyAction extends ApiAction<VerificationForm>{
 
         @Override
@@ -415,6 +405,7 @@ public class FdahpUserRegWSController extends SpringActionController
      *
      */
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class LoginAction extends ApiAction<LoginForm>{
 
         @Override
@@ -434,22 +425,36 @@ public class FdahpUserRegWSController extends SpringActionController
                 if(loginForm != null){
                     if((loginForm.getEmailId() != null && StringUtils.isNotEmpty(loginForm.getEmailId())) && (loginForm.getPassword() != null && StringUtils.isNotEmpty(loginForm.getPassword()))){
                         participantDetails = FdahpUserRegWSManager.get().getParticipantDetailsByEmail(loginForm.getEmailId());
-                        if(null != participantDetails){
-                            LoginAttempts loginAttempts = FdahpUserRegWSManager.get().getLoginAttempts(loginForm.getEmailId());
+                        if(null != participantDetails && loginForm.getAppId() != null){
+                            boolean valid = FdahpUserRegWSManager.get().getParticipantDetailsByEmailAndAppId(loginForm.getEmailId(), loginForm.getAppId());
+                            if(valid)
+                            {
+                              LoginAttempts loginAttempts = FdahpUserRegWSManager.get().getLoginAttempts(loginForm.getEmailId());
 
-                            if(loginAttempts != null && loginAttempts.getAttempts() == maxAttemptsCount){
-                                int count = Integer.valueOf((String)configProp.get("expiration.login.attempts.minute"));
-                                Date attemptsExpireDate = FdahpUserRegUtil.addMinutes(loginAttempts.getLastModified().toString(),count);
-                                if(attemptsExpireDate.before(FdahpUserRegUtil.getCurrentUtilDateTime()) || attemptsExpireDate.equals(FdahpUserRegUtil.getCurrentUtilDateTime())){
-                                    FdahpUserRegWSManager.get().resetLoginAttempts(loginForm.getEmailId());
-                                    response = getLoginInformation(participantDetails,loginForm.getEmailId(),loginForm.getPassword(),maxAttemptsCount);
-                                }else{
-                                    FdahpUserRegUtil.getFailureResponse(FdahpUserRegUtil.ErrorCodes.STATUS_102.getValue(),FdahpUserRegUtil.ErrorCodes.ACCOUNT_LOCKED.name(), FdahpUserRegUtil.ErrorCodes.ACCOUNT_LOCKED.getValue(), getViewContext().getResponse());
-                                    return null;
+                                if (loginAttempts != null && loginAttempts.getAttempts() == maxAttemptsCount)
+                                {
+                                    int count = Integer.valueOf((String) configProp.get("expiration.login.attempts.minute"));
+                                    Date attemptsExpireDate = FdahpUserRegUtil.addMinutes(loginAttempts.getLastModified().toString(), count);
+                                    if (attemptsExpireDate.before(FdahpUserRegUtil.getCurrentUtilDateTime()) || attemptsExpireDate.equals(FdahpUserRegUtil.getCurrentUtilDateTime()))
+                                    {
+                                        FdahpUserRegWSManager.get().resetLoginAttempts(loginForm.getEmailId());
+                                        response = getLoginInformation(participantDetails, loginForm.getEmailId(), loginForm.getPassword(), maxAttemptsCount);
+                                    }
+                                    else
+                                    {
+                                        FdahpUserRegUtil.getFailureResponse(FdahpUserRegUtil.ErrorCodes.STATUS_102.getValue(), FdahpUserRegUtil.ErrorCodes.ACCOUNT_LOCKED.name(), FdahpUserRegUtil.ErrorCodes.ACCOUNT_LOCKED.getValue(), getViewContext().getResponse());
+                                        return null;
+                                    }
+
                                 }
-
+                                else
+                                {
+                                    response = getLoginInformation(participantDetails, loginForm.getEmailId(), loginForm.getPassword(), maxAttemptsCount);
+                                }
                             }else{
-                                response = getLoginInformation(participantDetails,loginForm.getEmailId(),loginForm.getPassword(),maxAttemptsCount);
+                                FdahpUserRegWSManager.addAuditEvent(null,"FAILED SIGN IN","Wrong information entered in email "+loginForm.getEmailId()+". Which is not existed.","FdaUserAuditEvent",getViewContext().getContainer().getId());
+                                FdahpUserRegUtil.getFailureResponse(FdahpUserRegUtil.ErrorCodes.STATUS_102.getValue(),FdahpUserRegUtil.ErrorCodes.INVALID_CREDENTIALS.name(), FdahpUserRegUtil.ErrorCodes.INVALID_CREDENTIALS.getValue(), getViewContext().getResponse());
+                                return null;
                             }
                         }else{
                             FdahpUserRegWSManager.addAuditEvent(null,"FAILED SIGN IN","Wrong information entered in email "+loginForm.getEmailId()+". Which is not existed.","FdaUserAuditEvent",getViewContext().getContainer().getId());
@@ -602,6 +607,8 @@ public class FdahpUserRegWSController extends SpringActionController
             participantDetails.setRemoteNotificationFlag(form.getRemoteNotification());
         if(form.getTouchId() != null)
             participantDetails.setTouchId(form.getTouchId());
+        if(form.getAppId() != null)
+            participantDetails.setAppId(form.getAppId());
         return participantDetails;
     }
 
@@ -609,6 +616,7 @@ public class FdahpUserRegWSController extends SpringActionController
      * Forgot password of an register email
      */
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class ForgotPasswordAction extends ApiAction<LoginForm>
     {
 
@@ -705,6 +713,7 @@ public class FdahpUserRegWSController extends SpringActionController
      * Resending the confirmation email
      */
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class ResendConfirmationAction extends  ApiAction<LoginForm>{
 
         @Override
@@ -777,6 +786,7 @@ public class FdahpUserRegWSController extends SpringActionController
      * Updating the user password
      */
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class ChangePasswordAction extends ApiAction<ChangePasswordForm>{
 
         @Override
@@ -911,6 +921,7 @@ public class FdahpUserRegWSController extends SpringActionController
      * Logout from app
      */
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class LogoutAction extends  ApiAction<UserForm>{
 
         @Override
@@ -969,6 +980,7 @@ public class FdahpUserRegWSController extends SpringActionController
      */
     @Marshal(Marshaller.Jackson)
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class UserProfileAction extends ApiAction<Object>{
 
         @Override
@@ -1010,6 +1022,7 @@ public class FdahpUserRegWSController extends SpringActionController
      */
     @Marshal(Marshaller.Jackson)
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class UpdateUserProfileAction extends  ApiAction<ProfileForm>{
 
         @Override
@@ -1175,6 +1188,7 @@ public class FdahpUserRegWSController extends SpringActionController
      */
     @Marshal(Marshaller.Jackson)
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class UpdatePreferencesAction extends  ApiAction<PreferencesForm>{
 
         @Override
@@ -1301,6 +1315,7 @@ public class FdahpUserRegWSController extends SpringActionController
 
         public  String _emailId;
         public  String  _password;
+        private String _appId;
 
         public String getEmailId()
         {
@@ -1321,6 +1336,16 @@ public class FdahpUserRegWSController extends SpringActionController
         {
             _password = password;
         }
+
+        public String getAppId()
+        {
+            return _appId;
+        }
+
+        public void setAppId(String appId)
+        {
+            _appId = appId;
+        }
     }
 
     /**
@@ -1328,6 +1353,7 @@ public class FdahpUserRegWSController extends SpringActionController
      */
     @Marshal(Marshaller.Jackson)
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class UserPreferencesAction extends  ApiAction<UserForm>{
 
         @Override
@@ -1419,6 +1445,7 @@ public class FdahpUserRegWSController extends SpringActionController
      */
     @Marshal(Marshaller.Jackson)
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
    public class UpdateEligibilityConsentStatusAction extends  ApiAction<ConsentStatusForm>{
 
        @Override
@@ -1575,6 +1602,7 @@ public class FdahpUserRegWSController extends SpringActionController
      * Get activity state of an study to the user
      */
    @RequiresNoPermission
+   @CSRF(CSRF.Method.NONE)
     public class ActivityStateAction extends ApiAction<ActivityForm>
    {
 
@@ -1698,6 +1726,7 @@ public class FdahpUserRegWSController extends SpringActionController
      */
    @Marshal(Marshaller.Jackson)
    @RequiresNoPermission
+   @CSRF(CSRF.Method.NONE)
     public class UpdateActivityStateAction extends  ApiAction<PreferencesForm>{
 
        @Override
@@ -1843,6 +1872,7 @@ public class FdahpUserRegWSController extends SpringActionController
      * With draw the user from study
      */
    @RequiresNoPermission
+   @CSRF(CSRF.Method.NONE)
     public class WithdrawAction extends  ApiAction<WithDrawForm>{
 
        @Override
@@ -1910,6 +1940,7 @@ public class FdahpUserRegWSController extends SpringActionController
      * Get the consent pdf of an user
      */
    @RequiresNoPermission
+   @CSRF(CSRF.Method.NONE)
     public class ConsentPDFAction extends ApiAction<ActivityForm>{
 
        @Override
@@ -1971,6 +2002,7 @@ public class FdahpUserRegWSController extends SpringActionController
      * Delete of an user
      */
    @RequiresNoPermission
+   @CSRF(CSRF.Method.NONE)
     public class DeleteAccountAction extends ApiAction{
 
        @Override
@@ -2027,6 +2059,7 @@ public class FdahpUserRegWSController extends SpringActionController
      */
     @Marshal(Marshaller.Jackson)
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class DeactivateAction extends ApiAction<DeactivateForm>{
 
         @Override
@@ -2085,6 +2118,7 @@ public class FdahpUserRegWSController extends SpringActionController
      */
     @Marshal(Marshaller.Jackson)
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class UpdateStudyStateAction extends  ApiAction<PreferencesForm>{
 
         @Override
@@ -2216,6 +2250,7 @@ public class FdahpUserRegWSController extends SpringActionController
      */
     @Marshal(Marshaller.Jackson)
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class StudyStateAction extends  ApiAction<UserForm>{
 
         @Override
@@ -2273,6 +2308,7 @@ public class FdahpUserRegWSController extends SpringActionController
      */
     @Marshal(Marshaller.Jackson)
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class SendNotificationAction extends ApiAction<NotificationForm>{
 
         @Override
@@ -2411,6 +2447,7 @@ public class FdahpUserRegWSController extends SpringActionController
      * Generate the consent doc as pdf file
      */
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class GenerateTheFileAction extends ApiAction<StudyConsent>{
 
         @Override
@@ -2530,6 +2567,7 @@ public class FdahpUserRegWSController extends SpringActionController
      * Refresh of an auth key
      */
     @RequiresNoPermission
+	@CSRF(CSRF.Method.NONE)
     public class RefreshTokenAction extends ApiAction<RefreshTokenForm>{
 
         @Override
@@ -2637,6 +2675,65 @@ public class FdahpUserRegWSController extends SpringActionController
         }
         _log.info("FdahpUserRegWSController saveStudyConsentDocument Exit");
         return fileName;
+    }
+
+
+    /**
+     * Get version info
+     */
+    @RequiresNoPermission
+    @CSRF(CSRF.Method.NONE)
+    public class VersionInfoAction extends ApiAction<Object>
+    {
+
+        @Override
+        public ApiResponse execute(Object o, BindException errors) throws Exception
+        {
+            ApiSimpleResponse response  = new ApiSimpleResponse();
+            try{
+                _log.info("FdahpUserRegWSController VersionInfoAction starts");
+                VersionInfo versionInfo = FdahpUserRegWSManager.get().getVersionfo();
+                if(versionInfo!=null){
+                    JSONObject android = new JSONObject();
+                    JSONObject ios = new JSONObject();
+
+                    android.put("latestVersion",versionInfo.getAndroidVersion());
+                    android.put("ForceUpdate","true");
+
+                    ios.put("latestVersion",versionInfo.getIosVersion());
+                    ios.put("ForceUpdate","true");
+
+                    response.put("android", android);
+                    response.put("ios", ios);
+                    //response.put(FdahpUserRegUtil.ErrorCodes.MESSAGE.getValue(),FdahpUserRegUtil.ErrorCodes.SUCCESS.getValue().toLowerCase());
+                }
+            }catch (Exception e){
+                _log.error("VersionInfoAction Action Error",e);
+                FdahpUserRegUtil.getFailureResponse(FdahpUserRegUtil.ErrorCodes.STATUS_104.getValue(),FdahpUserRegUtil.ErrorCodes.UNKNOWN.getValue(),FdahpUserRegUtil.ErrorCodes.CONNECTION_ERROR_MSG.getValue(), getViewContext().getResponse());
+                return null;
+
+            }
+            _log.info("FdahpUserRegWSController VersionInfoAction Ends");
+            return response;
+        }
+    }
+
+    /**
+     * Check the status of the application
+     */
+    @RequiresNoPermission
+    public class VersionAction extends ApiAction<Object>
+    {
+
+        @Override
+        public ApiResponse execute(Object o, BindException errors) throws Exception
+        {
+            UserDetails participantDetails = new UserDetails();
+            ApiSimpleResponse apiSimpleResponse = new ApiSimpleResponse();
+            apiSimpleResponse.put("reponse", "FdahpUserRegWebServices-1.25 Works!");
+            apiSimpleResponse.put(FdahpUserRegUtil.ErrorCodes.SUCCESS.getValue().toLowerCase(), true);
+            return apiSimpleResponse;
+        }
     }
 
 

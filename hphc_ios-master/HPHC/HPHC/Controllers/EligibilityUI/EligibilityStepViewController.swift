@@ -1,29 +1,27 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
 import ResearchKit
 import IQKeyboardManagerSwift
+
 
 let kStudyWithStudyId = "Study with StudyId"
 let kTitleOK = "OK"
@@ -80,7 +78,7 @@ class EligibilityStepViewController: ORKStepViewController {
         
         buttonSubmit?.layer.borderColor =   kUicolorForButtonBackground
         
-        if (self.descriptionText?.characters.count)! > 0 {
+        if (self.descriptionText?.count)! > 0 {
             labelDescription?.text = self.descriptionText
         }
         
@@ -88,13 +86,54 @@ class EligibilityStepViewController: ORKStepViewController {
             step.type = "token"
         }
         
-        IQKeyboardManager.sharedManager().enable = true
+       // addCancelButton()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+   
+        let footerView = ORKNavigationContainerView()
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        footerView.neverHasContinueButton = true
+        footerView.cancelButtonItem = self.cancelButtonItem
+        footerView.skipEnabled = false
+        self.view.addSubview(footerView)
+        
+        NSLayoutConstraint.activate([
+            footerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
+            footerView.heightAnchor.constraint(equalToConstant: 100),
+            footerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            footerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0)
+            ])
     }
     
+    private func addCancelButton() {
+        
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Cancel", for: .normal)
+        button.addTarget(self, action: #selector(getter: self.cancelButtonItem?.action), for: .touchUpInside)
+
+        
+        self.view.addSubview(button)
+        
+        NSLayoutConstraint.activate([
+            button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100),
+            button.heightAnchor.constraint(equalToConstant: 40),
+            button.widthAnchor.constraint(equalToConstant: 90),
+            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+            ])
+    }
+    
+    @objc func cancelButton(){
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
     // MARK: Methods and Button Actions
     
     func showAlert(message: String) {
-        let alert = UIAlertController(title: kErrorTitle as String,message: message as String,preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: kErrorTitle as String,message: message as String,preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString(kTitleOK, comment: ""), style: .default, handler: nil))
         
         self.navigationController?.present(alert, animated: true, completion: nil)

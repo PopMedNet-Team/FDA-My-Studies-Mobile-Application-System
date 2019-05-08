@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -95,10 +92,10 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         var initialTime = 0
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
         
         
-        notificationCenter.addObserver(self, selector: #selector(appBecameActive), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appBecameActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         
          submitButton?.layer.borderColor =   kUicolorForButtonBackground
         
@@ -157,7 +154,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             })
             
             // enables the IQKeyboardManager
-            IQKeyboardManager.sharedManager().enable = true
+            // IQKeyboardManager.sharedManager().enable = true
             
             // adding guesture to view to support outside tap
             let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FetalKickCounterStepViewController.handleTap(_:)))
@@ -208,7 +205,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     /**
      Updates the timer Value
     */
-    func setCounter() {
+    @objc func setCounter() {
         
         DispatchQueue.global(qos: .background).async {
             if self.timerValue! < 0 {
@@ -263,14 +260,14 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
      handleTap method detects the tap gesture event
      @param  sender is tapguesture instance
      */
-    func handleTap(_ sender: UITapGestureRecognizer)   {
+    @objc func handleTap(_ sender: UITapGestureRecognizer)   {
         counterTextField?.resignFirstResponder()
     }
     
     /**
      stores the details of ongoing Fetal Kick task in local datatbase
     */
-    func appMovedToBackground() {
+    @objc func appMovedToBackground() {
         
         let ud = UserDefaults.standard
         if ud.object(forKey: kFetalKickStartTimeStamp) != nil{
@@ -295,7 +292,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     /**
      Resets the keys when app becomes Active
     */
-    func appBecameActive() {
+    @objc func appBecameActive() {
         
         let ud = UserDefaults.standard
         ud.set(false, forKey: "FKC")
@@ -411,7 +408,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 }
                 ud.synchronize()
                 
-                RunLoop.main.add(self.timer!, forMode: .commonModes)
+                RunLoop.main.add(self.timer!, forMode: RunLoop.Mode.common)
                 
                 // start button image and start title changed
                 startButton?.setImage(UIImage(named: "kick_btn1.png"), for: .normal)

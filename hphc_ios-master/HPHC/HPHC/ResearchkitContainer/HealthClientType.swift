@@ -42,7 +42,7 @@ extension UIViewController {
             client.healthStore = healthStore
         }
         
-        for childViewController in childViewControllers {
+        for childViewController in children {
             childViewController.injectHealthStore(healthStore)
         }
     }

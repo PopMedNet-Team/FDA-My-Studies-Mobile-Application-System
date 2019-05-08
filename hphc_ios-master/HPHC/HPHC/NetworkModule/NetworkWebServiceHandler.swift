@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -33,6 +30,20 @@ enum HTTPMethod : NSInteger {
     case httpMethodPUT
     case httpMethodPOST
     case httpMethodDELETE
+    
+    var methodTypeAsString:String {
+        switch self {
+        case .httpMethodGet:
+            return "GET"
+        case .httpMethodPOST:
+            return "POST"
+        case .httpMethodPUT:
+            return "PUT"
+        case .httpMethodDELETE:
+            return "DELETE"
+        }
+    }
+ 
 }
 
 struct DefaultHeaders {
@@ -76,7 +87,12 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
     }
     
     fileprivate func getBaseURLString(_ requestName : NSString) -> NSString {
-        return NSString.init(format: "%@%@", self .getServerURLString(),requestName)
+        
+        let serverPath = self .getServerURLString()
+//        if requestName == "studyList" {
+//            serverPath = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+//        }
+        return NSString.init(format: "%@%@", serverPath,requestName)
     }
     
     fileprivate func getCombinedWithCommonParams(_ params : NSDictionary?) -> NSDictionary? {
@@ -145,9 +161,9 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             for key in allKeys! {
                 url = (url as String) + String(format: "%@=%@&",String(describing: key), parameters?[key as! String] as! CVarArg )
             }
-            let length = url.characters.count-1
+            let length = url.count-1
             let index = url.index(url.startIndex, offsetBy: length)
-            url = url.substring(to: index) //url.substring(to: length)
+            url =  String(url[..<index])//url.substring(to: index) //url.substring(to: length)
         }
         return url as NSString
         
@@ -205,13 +221,13 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         if (httpRequestString?.length == 0) {
             requestString = baseURLString
         } else {
-            requestString = String(format:"%@?%@",baseURLString,httpRequestString!) as NSString!
+            requestString = String(format:"%@?%@",baseURLString,httpRequestString!) as NSString?
         }
         
         if #available(iOS 9, *) {
-            requestString = requestString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) as NSString!
+            requestString = requestString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) as NSString?
         } else {
-            requestString = requestString.addingPercentEscapes(using: String.Encoding.utf8.rawValue) as NSString!
+            requestString = requestString.addingPercentEscapes(using: String.Encoding.utf8.rawValue) as NSString?
         }
         
         let requestUrl = URL(string: requestString as String)!
@@ -251,7 +267,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             
             request.httpMethod=self.getRequestMethod(method) as String
             if httpHeaders != nil {
-                request.allHTTPHeaderFields = httpHeaders! as! [String : String]
+                request.allHTTPHeaderFields = httpHeaders! as? [String : String]
             }
             self.fireRequest(request, requestName: requestName)
             

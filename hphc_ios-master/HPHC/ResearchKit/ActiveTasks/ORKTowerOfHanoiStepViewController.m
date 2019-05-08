@@ -38,7 +38,8 @@
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 
-#import "ORKResult.h"
+#import "ORKCollectionResult_Private.h"
+#import "ORKTowerOfHanoiResult.h"
 #import "ORKTowerOfHanoiStep.h"
 #import "ORKTowerOfHanoiTower.h"
 
@@ -81,9 +82,7 @@ static const NSUInteger NumberOfTowers = 3;
     [self reloadData];
     NSString *title = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT",nil);
     NSString *text = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_INTRO_TEXT",nil);
-    NSString *skip = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE", nil);
     [self.activeStepView updateTitle:title text:text];
-    [self setSkipButtonTitle:skip];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -1,5 +1,4 @@
 //
-//  SHA2.swift
 //  CryptoSwift
 //
 //  Copyright (C) 2014-2017 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
@@ -159,10 +158,10 @@ public final class SHA2: DigestType {
         // break chunk into sixteen 64-bit words M[j], 0 ≤ j ≤ 15, big-endian
         // Extend the sixteen 64-bit words into eighty 64-bit words:
         let M = UnsafeMutablePointer<UInt64>.allocate(capacity: k.count)
-        M.initialize(to: 0, count: k.count)
+        M.initialize(repeating: 0, count: k.count)
         defer {
             M.deinitialize(count: self.k.count)
-            M.deallocate(capacity: self.k.count)
+            M.deallocate()
         }
         for x in 0..<k.count {
             switch x {
@@ -221,10 +220,10 @@ public final class SHA2: DigestType {
         // break chunk into sixteen 32-bit words M[j], 0 ≤ j ≤ 15, big-endian
         // Extend the sixteen 32-bit words into sixty-four 32-bit words:
         let M = UnsafeMutablePointer<UInt32>.allocate(capacity: k.count)
-        M.initialize(to: 0, count: k.count)
+        M.initialize(repeating: 0, count: k.count)
         defer {
             M.deinitialize(count: self.k.count)
-            M.deallocate(capacity: self.k.count)
+            M.deallocate()
         }
 
         for x in 0..<k.count {
@@ -281,7 +280,6 @@ public final class SHA2: DigestType {
 }
 
 extension SHA2: Updatable {
-
     public func update(withBytes bytes: ArraySlice<UInt8>, isLast: Bool = false) throws -> Array<UInt8> {
         accumulated += bytes
 
@@ -317,25 +315,25 @@ extension SHA2: Updatable {
         case .sha224, .sha256:
             var pos = 0
             for idx in 0..<accumulatedHash32.count where idx < variant.finalLength {
-                let h = accumulatedHash32[idx].bigEndian
-                result[pos] = UInt8(h & 0xff)
-                result[pos + 1] = UInt8((h >> 8) & 0xff)
-                result[pos + 2] = UInt8((h >> 16) & 0xff)
-                result[pos + 3] = UInt8((h >> 24) & 0xff)
+                let h = accumulatedHash32[idx]
+                result[pos + 0] = UInt8((h >> 24) & 0xff)
+                result[pos + 1] = UInt8((h >> 16) & 0xff)
+                result[pos + 2] = UInt8((h >> 8) & 0xff)
+                result[pos + 3] = UInt8(h & 0xff)
                 pos += 4
             }
         case .sha384, .sha512:
             var pos = 0
             for idx in 0..<accumulatedHash64.count where idx < variant.finalLength {
-                let h = accumulatedHash64[idx].bigEndian
-                result[pos] = UInt8(h & 0xff)
-                result[pos + 1] = UInt8((h >> 8) & 0xff)
-                result[pos + 2] = UInt8((h >> 16) & 0xff)
-                result[pos + 3] = UInt8((h >> 24) & 0xff)
-                result[pos + 4] = UInt8((h >> 32) & 0xff)
-                result[pos + 5] = UInt8((h >> 40) & 0xff)
-                result[pos + 6] = UInt8((h >> 48) & 0xff)
-                result[pos + 7] = UInt8((h >> 56) & 0xff)
+                let h = accumulatedHash64[idx]
+                result[pos + 0] = UInt8((h >> 56) & 0xff)
+                result[pos + 1] = UInt8((h >> 48) & 0xff)
+                result[pos + 2] = UInt8((h >> 40) & 0xff)
+                result[pos + 3] = UInt8((h >> 32) & 0xff)
+                result[pos + 4] = UInt8((h >> 24) & 0xff)
+                result[pos + 5] = UInt8((h >> 16) & 0xff)
+                result[pos + 6] = UInt8((h >> 8) & 0xff)
+                result[pos + 7] = UInt8(h & 0xff)
                 pos += 8
             }
         }

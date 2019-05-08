@@ -1,0 +1,54 @@
+{
+    "message": "SUCCESS",
+    "resources": [
+        {
+            "title": "Study Protocol",
+            "type": "text",
+            "resourcesId": "10449",
+            "content": "<p>Study protocol</p>",
+            "audience": "All",
+            "notificationText": "",
+            "availability": {}
+        },
+        {
+            "title": "Resource Anchor Date",
+            "type": "text",
+            "resourcesId": "10448",
+            "content": "<p>A new resource has been updated</p>",
+            "audience": "All",
+            "notificationText": "A new resource available",
+            "availability": {
+                "availableDate": "",
+                "expiryDate": "",
+                "startDays": 10,
+                "endDays": 20,
+                "availabilityType": "AnchorDate",
+                "sourceType":"ActivityResponse",
+                "sourceActivityId":"anct",
+                "sourceKey":"anc" ,
+                "startTime":"05:00:00",
+                "endTime":"23:00:00",
+            }
+        },
+        {
+            "title": "Resource 2",
+            "type": "text",
+            "resourcesId": "10450",
+            "content": "<p>A new resource has been updated</p>",
+            "audience": "All",
+            "notificationText": "A new resource available",
+            "availability": {
+                "availableDate": "2019-03-20",
+                "expiryDate": "2019-09-23",
+                "startDays": 0,
+                "endDays": 0,
+                "availabilityType": "AnchorDate",
+                "sourceType":"EnrollmentDate",
+                "sourceActivityId":"",
+                "sourceKey":"" ,
+                "startTime":"05:00:00",
+                "endTime":"23:00:00",
+            }
+        }
+    ]
+}

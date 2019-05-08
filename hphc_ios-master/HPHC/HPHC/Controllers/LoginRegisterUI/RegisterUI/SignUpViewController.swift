@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -52,7 +49,9 @@ class SignUpViewController: UIViewController{
     @IBOutlet var termsAndCondition: LinkTextView?
     var viewLoadFrom: SignUpLoadFrom = .menu
     var termsPageOpened = false
-
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .default
+    }
 
 // MARK:- ViewController Lifecycle
     
@@ -69,7 +68,7 @@ class SignUpViewController: UIViewController{
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         //Automatically takes care  of text field become first responder and scroll of tableview
-        IQKeyboardManager.sharedManager().enable = true
+        // IQKeyboardManager.sharedManager().enable = true
         
         //info button
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
@@ -103,8 +102,8 @@ class SignUpViewController: UIViewController{
             } else {
                 self.addBackBarButton()
             }
-            UIApplication.shared.statusBarStyle = .default
-            
+ 
+            setNeedsStatusBarAppearanceUpdate()
             self.tableView?.reloadData()
         }
     }
@@ -128,14 +127,14 @@ class SignUpViewController: UIViewController{
         let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
         var foundRange = attributedString.mutableString.range(of: "Terms")
-        attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
+        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
         
         foundRange = attributedString.mutableString.range(of: "Privacy Policy")
-        attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
+        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
         
-        termsAndCondition?.linkTextAttributes = [NSForegroundColorAttributeName: Utilities.getUIColorFromHex(0x007CBA)]
+        termsAndCondition?.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)])
         
     }
     
@@ -145,7 +144,7 @@ class SignUpViewController: UIViewController{
      Dismiss key board when clicked on Background
      
      */
-    func dismissKeyboard(){
+    @objc func dismissKeyboard(){
         self.view.endEditing(true)
     }
     
@@ -409,7 +408,7 @@ extension SignUpViewController: UITableViewDataSource {
             keyBoardType = .emailAddress
             isSecuredEntry = false
             cell.textFieldValue?.text = self.user.emailId
-        default: break
+        //default: break
         }
         //Cell Data Setup
         cell.populateCellData(data: tableViewData, securedText: isSecuredEntry,keyboardType: keyBoardType)
@@ -450,16 +449,16 @@ extension SignUpViewController: UITextFieldDelegate{
         }
         
         if  tag == .EmailId {
-            if string == " " || finalString.characters.count > 255{
+            if string == " " || finalString.count > 255{
                 return false
             } else {
                 return true
             }
         } else if tag == .Password || tag == .ConfirmPassword {
-            if finalString.characters.count > 64 {
+            if finalString.count > 64 {
                 return false
             } else {
-                if (range.location == textField.text?.characters.count && string == " ") {
+                if (range.location == textField.text?.count && string == " ") {
                     
                     textField.text = textField.text?.appending("\u{00a0}")
                     return false
@@ -500,9 +499,9 @@ extension SignUpViewController: UITextFieldDelegate{
             confirmPassword = textField.text!
             break
             
-        default:
-            print("No Matching data Found")
-            break
+//        default:
+//            print("No Matching data Found")
+//            break
         }
     }
 }
@@ -542,3 +541,9 @@ extension SignUpViewController: NMWebServiceDelegate {
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}

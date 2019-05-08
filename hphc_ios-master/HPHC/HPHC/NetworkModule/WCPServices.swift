@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
@@ -109,6 +106,14 @@ class WCPServices: NSObject {
     var delegate: NMWebServiceDelegate! = nil
     
     // MARK:Requests
+    func getStudyBasicInfo(_ delegate:NMWebServiceDelegate) {
+        
+        self.delegate = delegate
+        
+        let method = WCPMethods.study.method
+        let params:Dictionary<String, String> = ["studyId":Utilities.standaloneStudyId()]
+        self.sendRequestWith(method: method, params: params, headers: nil)
+    }
     func getStudyList(_ delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
@@ -249,6 +254,7 @@ class WCPServices: NSObject {
         self.sendRequestWith(method: method, params: headerParams, headers: nil)
         
     }
+    
     func checkForAppUpdates(delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
@@ -259,6 +265,23 @@ class WCPServices: NSObject {
     }
     
     // MARK:Parsers
+    func handleStudyBasicInfo(response: Dictionary<String, Any>){
+        print("handleStudyBasicInfo")
+        
+        let studies = response[kStudies] as! Array<Dictionary<String,Any>>
+        var listOfStudies: Array<Study> = []
+        for study in studies{
+            let studyModelObj = Study(studyDetail: study)
+            listOfStudies.append(studyModelObj)
+        }
+        Logger.sharedInstance.info("Studies Parsing Finished")
+        //assgin to Gateway
+        Gateway.instance.studies = listOfStudies
+        
+        Logger.sharedInstance.info("Studies Saving in DB")
+        //save in database
+        DBHandler().saveStudies(studies: listOfStudies)
+    }
     func handleStudyList(response: Dictionary<String, Any>){
         
         Logger.sharedInstance.info("Studies Parsing Start")
@@ -279,8 +302,8 @@ class WCPServices: NSObject {
     }
     
     func handleEligibilityConsentMetaData(response: Dictionary<String, Any>){
-        var consent = response[kConsent] as! Dictionary<String, Any>
-        var eligibility = response[kEligibility] as! Dictionary<String, Any>
+        let consent = response[kConsent] as! Dictionary<String, Any>
+        let eligibility = response[kEligibility] as! Dictionary<String, Any>
         
         if Utilities.isValidObject(someObject: consent as AnyObject?){
             ConsentBuilder.currentConsent = ConsentBuilder()
@@ -309,6 +332,22 @@ class WCPServices: NSObject {
     }
     
     func handleResourceForStudy(response: Dictionary<String, Any>){
+        
+        //Testing
+//        let filePath  = Bundle.main.path(forResource: "ResourceList", ofType: "json")
+//        let data = NSData(contentsOfFile: filePath!)
+//
+//        var resources:Array<Dictionary<String,Any>> = []
+//        do {
+//            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+//
+//            resources = res?[kResources] as! Array<Dictionary<String,Any>>
+//        }
+//        catch {
+//            print("json error: \(error.localizedDescription)")
+//        }
+        
+        //Actual
         let resources = response[kResources] as! Array<Dictionary<String,Any>>
         var listOfResources: Array<Resource>! = []
         for resource in resources{
@@ -439,6 +478,22 @@ class WCPServices: NSObject {
     func handleStudyActivityList(response: Dictionary<String, Any>){
         
         Logger.sharedInstance.info("Activities Parsing Start")
+        
+//        //Testing
+//        let filePath  = Bundle.main.path(forResource: "Activitylist", ofType: "json")
+//        let data = NSData(contentsOfFile: filePath!)
+//
+//        var activities:Array<Dictionary<String,Any>> = []
+//        do {
+//            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+//
+//            activities = res?[kActivites] as! Array<Dictionary<String, Any>>
+//        }
+//        catch {
+//            print("json error: \(error.localizedDescription)")
+//        }
+        
+        //Actual
         let activities = response[kActivites] as! Array<Dictionary<String,Any>>
         
         if Utilities.isValidObject(someObject: activities as AnyObject? ) {
@@ -502,7 +557,7 @@ class WCPServices: NSObject {
     func handleStudyUpdates(response: Dictionary<String, Any>){
         
         if Utilities.isValidObject(someObject: response as AnyObject?){
-            _ = StudyUpdates(detail: response as! Dictionary<String, Any>)
+            _ = StudyUpdates(detail: response )
         }
     }
     
@@ -532,6 +587,8 @@ extension WCPServices:NMWebServiceDelegate{
         switch methodName {
         case .gatewayInfo:
             self.handleResourceListForGateway(response: response as! Dictionary<String, Any>)
+        case .study:
+            self.handleStudyBasicInfo(response: response as! Dictionary<String, Any>)
         case .studyList:
             self.handleStudyList(response: response as! Dictionary<String, Any>)
         case .eligibilityConsent:
@@ -557,8 +614,8 @@ extension WCPServices:NMWebServiceDelegate{
         case .studyUpdates:
             self.handleStudyUpdates(response: response as! Dictionary<String, Any>)
         case .appUpdates: break
-        default:
-            print("Request was not sent proper method name")
+//        default:
+//            print("Request was not sent proper method name")
         }
         
         if delegate != nil {

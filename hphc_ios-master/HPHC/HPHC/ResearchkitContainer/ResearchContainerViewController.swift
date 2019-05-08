@@ -41,7 +41,7 @@ class ResearchContainerViewController: UIViewController, HealthClientType {
     var contentHidden = false {
         didSet {
             guard contentHidden != oldValue && isViewLoaded else { return }
-            childViewControllers.first?.view.isHidden = contentHidden
+            children.first?.view.isHidden = contentHidden
         }
     }
     

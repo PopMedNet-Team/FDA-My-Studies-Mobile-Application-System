@@ -1,5 +1,4 @@
 //
-//  SHA1.swift
 //  CryptoSwift
 //
 //  Copyright (C) 2014-2017 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
@@ -38,10 +37,10 @@ public final class SHA1: DigestType {
         // break chunk into sixteen 32-bit words M[j], 0 ≤ j ≤ 15, big-endian
         // Extend the sixteen 32-bit words into eighty 32-bit words:
         let M = UnsafeMutablePointer<UInt32>.allocate(capacity: 80)
-        M.initialize(to: 0, count: 80)
+        M.initialize(repeating: 0, count: 80)
         defer {
             M.deinitialize(count: 80)
-            M.deallocate(capacity: 80)
+            M.deallocate()
         }
 
         for x in 0..<80 {
@@ -105,7 +104,7 @@ public final class SHA1: DigestType {
 }
 
 extension SHA1: Updatable {
-
+    @discardableResult
     public func update(withBytes bytes: ArraySlice<UInt8>, isLast: Bool = false) throws -> Array<UInt8> {
         accumulated += bytes
 
@@ -134,11 +133,11 @@ extension SHA1: Updatable {
         var result = Array<UInt8>(repeating: 0, count: SHA1.digestLength)
         var pos = 0
         for idx in 0..<accumulatedHash.count {
-            let h = accumulatedHash[idx].bigEndian
-            result[pos] = UInt8(h & 0xff)
-            result[pos + 1] = UInt8((h >> 8) & 0xff)
-            result[pos + 2] = UInt8((h >> 16) & 0xff)
-            result[pos + 3] = UInt8((h >> 24) & 0xff)
+            let h = accumulatedHash[idx]
+            result[pos + 0] = UInt8((h >> 24) & 0xff)
+            result[pos + 1] = UInt8((h >> 16) & 0xff)
+            result[pos + 2] = UInt8((h >> 8) & 0xff)
+            result[pos + 3] = UInt8(h & 0xff)
             pos += 4
         }
 

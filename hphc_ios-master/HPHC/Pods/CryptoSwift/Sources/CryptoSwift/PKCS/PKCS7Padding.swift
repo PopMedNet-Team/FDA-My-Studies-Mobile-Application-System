@@ -1,5 +1,4 @@
 //
-//  PKCS7PAdding.swift
 //  CryptoSwift
 //
 //  Copyright (C) 2014-2017 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
@@ -19,7 +18,6 @@
 //
 
 struct PKCS7Padding: PaddingProtocol {
-
     enum Error: Swift.Error {
         case invalidPaddingValue
     }

@@ -1,5 +1,4 @@
 //
-//  Cipher.swift
 //  CryptoSwift
 //
 //  Copyright (C) 2014-2017 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
@@ -20,6 +19,8 @@ public enum CipherError: Error {
 }
 
 public protocol Cipher: class {
+    var keySize: Int { get }
+
     /// Encrypt given bytes at once
     ///
     /// - parameter bytes: Plaintext data

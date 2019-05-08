@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -62,7 +59,7 @@ class ContactUsViewController: UIViewController{
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
         
         //Automatically takes care  of text field become first responder and scroll of tableview
-        IQKeyboardManager.sharedManager().enable = true
+        // IQKeyboardManager.sharedManager().enable = true
         
         //load plist info
         let plistPath = Bundle.main.path(forResource: "ContactUs", ofType: ".plist", inDirectory: nil)
@@ -71,7 +68,7 @@ class ContactUsViewController: UIViewController{
         self.addBackBarButton()
         
         self.tableView?.estimatedRowHeight = 62
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        self.tableView?.rowHeight = UITableView.automaticDimension
         
         //Used for background tap dismiss keyboard
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ContactUsViewController.handleTapGesture))
@@ -93,7 +90,7 @@ class ContactUsViewController: UIViewController{
         
     }
     
-    func handleTapGesture(gesture: UIGestureRecognizer){
+    @objc func handleTapGesture(gesture: UIGestureRecognizer){
         
         let location = gesture.location(in: gesture.view)
         if location.y > 245 {
@@ -186,7 +183,7 @@ extension ContactUsViewController: UITableViewDataSource{
             cell.backgroundColor = UIColor.clear
             return cell
         }
-        return cell
+        //return cell
     }
 }
 
@@ -213,7 +210,7 @@ extension ContactUsViewController: UITextViewDelegate {
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         print("textViewDidEndEditing")
-        if textView.tag == 101 && textView.text.characters.count == 0 {
+        if textView.tag == 101 && textView.text.count == 0 {
             textView.text = kMessageTextViewPlaceHolder
             textView.textColor = UIColor.lightGray
             textView.tag = 100
@@ -253,7 +250,7 @@ extension ContactUsViewController: UITextFieldDelegate{
         }
         
         if  tag == .Email {
-            if string == " " || finalString.characters.count > 255{
+            if string == " " || finalString.count > 255{
                 return false
             }
             else{
@@ -284,9 +281,9 @@ extension ContactUsViewController: UITextFieldDelegate{
             ContactUsFeilds.subject = textField.text!
             break
             
-        default:
-            print("No Matching data Found")
-            break
+//        default:
+//            print("No Matching data Found")
+//            break
         }
     }
 }

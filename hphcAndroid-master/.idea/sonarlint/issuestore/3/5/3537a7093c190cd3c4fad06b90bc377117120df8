@@ -1,18 +1,0 @@
-
-Ksquid:S2589"7Remove this expression which always evaluates to "true"(››Çw
-gsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 65 to the 15 allowed.(¿èøÚ
-gsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(¡³àú
-lsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 49 to the 15 allowed.(±ü©¤üÿÿÿÿ
-gsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.(‚ö®¾
-Dsquid:S00108")Either remove or fill this block of code.(âÃƒŠıÿÿÿÿ
-Dsquid:S00108")Either remove or fill this block of code.(†ÈŞøÿÿÿÿÿ
-?squid:S00108")Either remove or fill this block of code.(îã¶ò
-Dsquid:S00108")Either remove or fill this block of code.(âÃƒŠıÿÿÿÿ
-Dsquid:S00108")Either remove or fill this block of code.(âÃƒŠıÿÿÿÿ
-Dsquid:S00108")Either remove or fill this block of code.(Û»®¿ùÿÿÿÿ
-Dsquid:S00108")Either remove or fill this block of code.(âÃƒŠıÿÿÿÿ
-Dsquid:S00108")Either remove or fill this block of code.(âÃƒŠıÿÿÿÿ
-Dsquid:S00108")Either remove or fill this block of code.(âÃƒŠıÿÿÿÿ
-?squid:S00108")Either remove or fill this block of code.(”ı¾
-Zsquid:S2147"ECombine this catch with the one at line 567, which has the same body.(”ı¾
-msquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(­ÀÆñ

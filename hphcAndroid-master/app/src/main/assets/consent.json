@@ -1,0 +1,166 @@
+{
+  "message": "SUCCESS",
+  "eligibility": {
+    "type": "combined",
+    "tokenTitle": "This study allows only pre-screened participants to join the study. If you are one, please enter the enrollment token provided to you for this study. WCP",
+    "test": [
+      {
+        "type": "Question",
+        "resultType": "boolean",
+        "key": "E1",
+        "title": "E1",
+        "text": "Had lunch?",
+        "skippable": false,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [],
+        "healthDataKey": "",
+        "format": {},
+        "steps": [],
+        "options": []
+      },
+      {
+        "type": "Question",
+        "resultType": "boolean",
+        "key": "E2",
+        "title": "E2",
+        "text": "Are you sleepy?",
+        "skippable": false,
+        "groupName": "",
+        "repeatable": false,
+        "repeatableText": "",
+        "destinations": [],
+        "healthDataKey": "",
+        "format": {},
+        "steps": [],
+        "options": []
+      }
+    ],
+    "correctAnswers": [
+      {
+        "answer": true,
+        "key": "E1"
+      },
+      {
+        "answer": false,
+        "key": "E2"
+      }
+    ]
+  },
+  "consent": {
+    "version": "1.1",
+    "visualScreens": [
+      {
+        "type": "overview",
+        "title": "Overview",
+        "text": "Many people are concerned by the many sites on the internet claiming that live blood\r\nanalysis is pseudoscience and nothing more than a gimmick used by quacks to sell you\r\nsomething. It is criticised for not being scientifically tested like other medical tests and the\r\nconclusion is made that therefore it can not have any real value as an investigative tool.",
+        "description": "",
+        "html": "<p>Many people are concerned by the many sites on the internet claiming that live blood<br>analysis is pseudoscience and nothing more than a gimmick used by quacks to sell you<br>something. It is criticised for not being scientifically tested like other medical tests and the<br>conclusion is made that therefore it can not have any real value as an investigative tool.Many people are concerned by the many sites on the internet claiming that live blood<br>analysis is pseudoscience and nothing more than a gimmick used by quacks to sell you<br>something. It is criticised for not being scientifically tested like other medical tests and the<br>conclusion is made that therefore it can not have any real value as an investigative tool.Many people are concerned by the many sites on the internet claiming that live blood<br>analysis is pseudoscience and nothing more than a gimmick used by quacks to sell you<br>something. It is criticised for not being scientifically tested like other medical tests and the<br>conclusion is made that therefore it can not have any real value as an investigative tool.Many people are concerned by the many sites on the internet claiming that live blood<br>analysis is pseudoscience and nothing more than a gimmick used by quacks to sell you<br>something. It is criticised for not being scientifically tested like other medical tests and the<br>conclusion is made that therefore it can not have any real value as an investigative tool.</p>",
+        "url": "",
+        "visualStep": true
+      },
+      {
+        "type": "custom",
+        "title": "Live Blood Analysis: Science or Quackery?",
+        "text": "Another finding that is quite common in blood analysis, over-acidity of the terrain, is also\r\nlargely discredited by conventional medicine. Aside from the life-threatening states of\r\nacidosis, the effect of latent tissue acidosis is not an accepted medical condition. There\r\nare also no conventional tests that will accurately determine the pH of the extracellular\r\nfluids. The pH of urine and saliva may be measured, but the acceptable ranges are so\r\nwide that there is no real value in these tests.",
+        "description": "",
+        "html": "<p>Another finding that is quite common in blood analysis, over-acidity of the terrain, is also<br>largely discredited by conventional medicine. Aside from the life-threatening states of<br>acidosis, the effect of latent tissue acidosis is not an accepted medical condition. There<br>are also no conventional tests that will accurately determine the pH of the extracellular<br>fluids. The pH of urine and saliva may be measured, but the acceptable ranges are so<br>wide that there is no real value in these tests.</p>",
+        "url": "",
+        "visualStep": true
+      }
+    ],
+    "comprehension": {
+      "passScore": 2,
+      "questions": [
+        {
+          "type": "Question",
+          "resultType": "textChoice",
+          "key": "3",
+          "title": "",
+          "text": "Which device are you using?",
+          "skippable": false,
+          "groupName": "",
+          "repeatable": false,
+          "repeatableText": "",
+          "destinations": [],
+          "healthDataKey": "",
+          "format": {
+            "textChoices": [
+              {
+                "text": "ios",
+                "value": "ios",
+                "detail": "",
+                "exclusive": false
+              },
+              {
+                "text": "android",
+                "value": "android",
+                "detail": "",
+                "exclusive": false
+              }
+            ],
+            "selectionStyle": "Multiple"
+          },
+          "steps": [],
+          "options": []
+        },
+        {
+          "type": "Question",
+          "resultType": "textChoice",
+          "key": "4",
+          "title": "",
+          "text": "Have you gone through privacy, policy?",
+          "skippable": false,
+          "groupName": "",
+          "repeatable": false,
+          "repeatableText": "",
+          "destinations": [],
+          "healthDataKey": "",
+          "format": {
+            "textChoices": [
+              {
+                "text": "Yes",
+                "value": "Yes",
+                "detail": "",
+                "exclusive": false
+              }
+            ],
+            "selectionStyle": "Single"
+          },
+          "steps": [],
+          "options": []
+        }
+      ],
+      "correctAnswers": [
+        {
+          "key": "3",
+          "answer": [
+            "ios",
+            "android"
+          ],
+          "evaluation": "all"
+        },
+        {
+          "key": "4",
+          "answer": [
+            "Yes"
+          ],
+          "evaluation": "any"
+        }
+      ]
+    },
+    "sharing": {
+      "title": "",
+      "text": "",
+      "shortDesc": "",
+      "longDesc": "",
+      "learnMore": "",
+      "allowWithoutSharing": false
+    },
+    "review": {
+      "reasonForConsent": "By agreeing to this you confirm that you read the consent and that you wish to take part in this research study.",
+      "reviewHTML": ""
+    }
+  }
+}

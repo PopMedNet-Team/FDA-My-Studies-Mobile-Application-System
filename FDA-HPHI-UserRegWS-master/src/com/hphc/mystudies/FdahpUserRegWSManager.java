@@ -1,24 +1,10 @@
 /*
- * Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- * associated documentation files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- * of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- * following conditions:
+ * Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
  *
- * The above copyright notice and this permission notice shall be included in all copies or substantial
- * portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * Funding Source: Food and Drug Administration ("Funding Agency") effective 18 September 2014 as Contract no.
- * HHSF22320140030I/HHSF22301006T (the "Prime Contract").
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package com.hphc.mystudies;
@@ -30,23 +16,16 @@ import com.hphc.mystudies.model.ParticipantStudies;
 import com.hphc.mystudies.model.PasswordHistory;
 import com.hphc.mystudies.model.StudyConsent;
 import com.hphc.mystudies.model.UserDetails;
-import com.hphc.mystudies.bean.ParticipantForm;
-import com.hphc.mystudies.bean.SettingsBean;
-import com.hphc.mystudies.model.FdahpUserRegUtil;
-import com.hphc.mystudies.model.ParticipantActivities;
-import com.hphc.mystudies.model.ParticipantStudies;
-import com.hphc.mystudies.model.PasswordHistory;
-import com.hphc.mystudies.model.StudyConsent;
-import com.hphc.mystudies.model.UserDetails;
+import com.hphc.mystudies.model.VersionInfo;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.apache.log4j.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.labkey.api.action.ApiSimpleResponse;
 
+import org.labkey.api.data.AuditConfigurable;
 import org.labkey.api.data.DbSchema;
 import org.labkey.api.data.DbScope;
 import org.labkey.api.data.SQLFragment;
@@ -66,7 +45,6 @@ import com.hphc.mystudies.model.AuthInfo;
 import com.hphc.mystudies.model.LoginAttempts;
 import com.hphc.mystudies.FdahpUserRegWSController.DeactivateForm;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -105,7 +83,7 @@ public class FdahpUserRegWSManager
         UserDetails addParticipant = null;
         DbScope.Transaction transaction = dbScope.ensureTransaction();
         try{
-            TableInfo table = FdahpUserRegWSSchema.getInstance().getParticipantDetails();
+            AuditConfigurable table = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getParticipantDetails();
             table.setAuditBehavior(AuditBehaviorType.DETAILED);
             if(null!=participant && participant.getId() == null){
                 addParticipant = Table.insert(null,table, participant);
@@ -159,7 +137,7 @@ public class FdahpUserRegWSManager
             authInfo = new TableSelector(FdahpUserRegWSSchema.getInstance().getAuthInfo(),filter,null).getObject(AuthInfo.class);
             String authKey = "0";
             authKey = RandomStringUtils.randomNumeric(9);
-            TableInfo table = FdahpUserRegWSSchema.getInstance().getAuthInfo();
+            AuditConfigurable table = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getAuthInfo();
             table.setAuditBehavior(AuditBehaviorType.DETAILED);
             String refreshToken = UUID.randomUUID().toString();
             if(null !=authInfo){
@@ -205,7 +183,7 @@ public class FdahpUserRegWSManager
         boolean isAuthenticated = false;
         try{
             AuthInfo authInfo = null;
-            TableInfo table = FdahpUserRegWSSchema.getInstance().getAuthInfo();
+            AuditConfigurable table = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getAuthInfo();
             table.setAuditBehavior(AuditBehaviorType.DETAILED);
             SimpleFilter filter = new SimpleFilter();
             filter.addCondition(FieldKey.fromParts("AuthKey"), authKey);
@@ -284,7 +262,7 @@ public class FdahpUserRegWSManager
         String message = FdahpUserRegUtil.ErrorCodes.FAILURE.getValue();
         try{
             DbSchema schema = FdahpUserRegWSSchema.getInstance().getSchema();
-            TableInfo authInfo = FdahpUserRegWSSchema.getInstance().getAuthInfo();
+            AuditConfigurable authInfo = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getAuthInfo();
             authInfo.setAuditBehavior(AuditBehaviorType.DETAILED);
             SqlExecutor executor = new SqlExecutor(schema);
             SQLFragment sqlUpdateVisitDates = new SQLFragment();
@@ -386,7 +364,7 @@ public class FdahpUserRegWSManager
         DbScope dbScope = FdahpUserRegWSSchema.getInstance().getSchema().getScope();
         DbScope.Transaction transaction = dbScope.ensureTransaction();
         try{
-            TableInfo table = FdahpUserRegWSSchema.getInstance().getParticipantStudies();
+            AuditConfigurable table = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getParticipantStudies();
             table.setAuditBehavior(AuditBehaviorType.DETAILED);
             for(ParticipantStudies participantStudies : participantStudiesList){
                 if(participantStudies.getId() != null ){
@@ -417,7 +395,7 @@ public class FdahpUserRegWSManager
         DbScope dbScope = FdahpUserRegWSSchema.getInstance().getSchema().getScope();
         DbScope.Transaction transaction = dbScope.ensureTransaction();
         try{
-            TableInfo table = FdahpUserRegWSSchema.getInstance().getParticipantActivities();
+            AuditConfigurable table = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getParticipantActivities();
             table.setAuditBehavior(AuditBehaviorType.DETAILED);
             for (ParticipantActivities participantActivities : participantActivitiesList){
                 if(participantActivities.getId() != null)
@@ -451,38 +429,38 @@ public class FdahpUserRegWSManager
             if(null!=participantStudiesList && participantStudiesList.size() >0){
 
                 for (ParticipantStudies participantStudies : participantStudiesList){
-                        StudiesBean studiesBean = new StudiesBean();
-                        if(participantStudies.getStudyId() != null)
-                            studiesBean.setStudyId(participantStudies.getStudyId());
-                        if(participantStudies.getBookmark() != null)
-                            studiesBean.setBookmarked(participantStudies.getBookmark());
-                        if(participantStudies.getStatus() != null){
-                            studiesBean.setStatus(participantStudies.getStatus());
-                        }else{
-                            studiesBean.setStatus("");
-                        }
-                        if(participantStudies.getEnrolledDate() != null){
-                            studiesBean.setEnrolledDate(FdahpUserRegUtil.getFormattedDateTimeZone(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(participantStudies.getEnrolledDate()), "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss.SSSZ"));
-                        }else{
-                            studiesBean.setEnrolledDate("");
-                        }
-                        if(participantStudies.getCompletion() != null){
-                            studiesBean.setCompletion(participantStudies.getCompletion());
-                        }else{
-                            studiesBean.setCompletion(0);
-                        }
-                        if(participantStudies.getAdherence() != null){
-                            studiesBean.setAdherence(participantStudies.getAdherence());
-                        }else{
-                            studiesBean.setAdherence(0);
-                        }
-                        if(participantStudies.getParticipantId() != null){
-                            studiesBean.setParticipantId(participantStudies.getParticipantId());
-                        }else{
-                            studiesBean.setParticipantId("");
-                        }
-                        studiesBeenList.add(studiesBean);
+                    StudiesBean studiesBean = new StudiesBean();
+                    if(participantStudies.getStudyId() != null)
+                        studiesBean.setStudyId(participantStudies.getStudyId());
+                    if(participantStudies.getBookmark() != null)
+                        studiesBean.setBookmarked(participantStudies.getBookmark());
+                    if(participantStudies.getStatus() != null){
+                        studiesBean.setStatus(participantStudies.getStatus());
+                    }else{
+                        studiesBean.setStatus("");
                     }
+                    if(participantStudies.getEnrolledDate() != null){
+                        studiesBean.setEnrolledDate(FdahpUserRegUtil.getFormattedDateTimeZone(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(participantStudies.getEnrolledDate()), "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss.SSSZ"));
+                    }else{
+                        studiesBean.setEnrolledDate("");
+                    }
+                    if(participantStudies.getCompletion() != null){
+                        studiesBean.setCompletion(participantStudies.getCompletion());
+                    }else{
+                        studiesBean.setCompletion(0);
+                    }
+                    if(participantStudies.getAdherence() != null){
+                        studiesBean.setAdherence(participantStudies.getAdherence());
+                    }else{
+                        studiesBean.setAdherence(0);
+                    }
+                    if(participantStudies.getParticipantId() != null){
+                        studiesBean.setParticipantId(participantStudies.getParticipantId());
+                    }else{
+                        studiesBean.setParticipantId("");
+                    }
+                    studiesBeenList.add(studiesBean);
+                }
             }
             response.put(FdahpUserRegUtil.ErrorCodes.STUDIES.getValue(),studiesBeenList);
             response.put(FdahpUserRegUtil.ErrorCodes.MESSAGE.getValue(),FdahpUserRegUtil.ErrorCodes.SUCCESS.getValue().toLowerCase());
@@ -543,13 +521,13 @@ public class FdahpUserRegWSManager
         DbScope.Transaction transaction = dbScope.ensureTransaction();
         try{
             DbSchema schema = FdahpUserRegWSSchema.getInstance().getSchema();
-            TableInfo table = FdahpUserRegWSSchema.getInstance().getParticipantStudies();
+            AuditConfigurable table = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getParticipantStudies();
             table.setAuditBehavior(AuditBehaviorType.DETAILED);
 
             SqlExecutor executor = new SqlExecutor(schema);
             SQLFragment sqlUpdateVisitDates = new SQLFragment();
 
-            TableInfo participantActivitiesInfo = FdahpUserRegWSSchema.getInstance().getParticipantActivities();
+            AuditConfigurable participantActivitiesInfo = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getParticipantActivities();
             participantActivitiesInfo.setAuditBehavior(AuditBehaviorType.DETAILED);
 
             if(deleteData){
@@ -613,7 +591,7 @@ public class FdahpUserRegWSManager
         DbScope dbScope = FdahpUserRegWSSchema.getInstance().getSchema().getScope();
         DbScope.Transaction transaction = dbScope.ensureTransaction();
         try{
-            TableInfo table = FdahpUserRegWSSchema.getInstance().getAuthInfo();
+            AuditConfigurable table = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getAuthInfo();
             table.setAuditBehavior(AuditBehaviorType.DETAILED);
             if(null !=authInfo){
                 authInfo.setModifiedOn(new Date());
@@ -636,7 +614,7 @@ public class FdahpUserRegWSManager
         DbScope dbScope = FdahpUserRegWSSchema.getInstance().getSchema().getScope();
         DbScope.Transaction transaction = dbScope.ensureTransaction();
         try{
-            TableInfo table = FdahpUserRegWSSchema.getInstance().getStudyConsent();
+            AuditConfigurable table = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getStudyConsent();
             table.setAuditBehavior(AuditBehaviorType.DETAILED);
 
             if(null != studyConsent){
@@ -708,25 +686,25 @@ public class FdahpUserRegWSManager
         DbScope dbScope = FdahpUserRegWSSchema.getInstance().getSchema().getScope();
         DbScope.Transaction transaction = dbScope.ensureTransaction();
         try{
-            TableInfo participantActivitiesInfo = FdahpUserRegWSSchema.getInstance().getParticipantActivities();
+            AuditConfigurable participantActivitiesInfo = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getParticipantActivities();
             participantActivitiesInfo.setAuditBehavior(AuditBehaviorType.DETAILED);
             SimpleFilter filterActivities = new SimpleFilter();
             filterActivities.addCondition(FieldKey.fromParts("ParticipantId"), userId);
             Table.delete(participantActivitiesInfo,filterActivities);
 
-            TableInfo table = FdahpUserRegWSSchema.getInstance().getParticipantStudies();
+            AuditConfigurable table = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getParticipantStudies();
             table.setAuditBehavior(AuditBehaviorType.DETAILED);
             SimpleFilter filter = new SimpleFilter();
             filter.addCondition(FieldKey.fromParts("UserId"), userId);
             Table.delete(table,filter);
 
-            TableInfo participantInfo = FdahpUserRegWSSchema.getInstance().getParticipantDetails();
+            AuditConfigurable participantInfo = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getParticipantDetails();
             participantInfo.setAuditBehavior(AuditBehaviorType.DETAILED);
             SimpleFilter participantFilter = new SimpleFilter();
             participantFilter.addCondition(FieldKey.fromParts("UserId"), userId);
             int count = Table.delete(participantInfo,participantFilter);
 
-            TableInfo authInfo = FdahpUserRegWSSchema.getInstance().getAuthInfo();
+            AuditConfigurable authInfo = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getAuthInfo();
             authInfo.setAuditBehavior(AuditBehaviorType.DETAILED);
             SimpleFilter authInfoFilter = new SimpleFilter();
             authInfoFilter.addCondition(FieldKey.fromParts("ParticipantId"), userId);
@@ -768,7 +746,7 @@ public class FdahpUserRegWSManager
                 if(deactivateForm != null && deactivateForm.getDeleteData() != null && deactivateForm.getDeleteData().size() > 0)
                 {
 
-                    TableInfo table = FdahpUserRegWSSchema.getInstance().getParticipantStudies();
+                    AuditConfigurable table = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getParticipantStudies();
                     table.setAuditBehavior(AuditBehaviorType.DETAILED);
                     sqlUpdateVisitDates.append("UPDATE ").append(table.getSelectName()).append("\n")
                             .append("SET Status = 'Withdrawn', ParticipantId = NULL")
@@ -777,19 +755,19 @@ public class FdahpUserRegWSManager
                     int execute = executor.execute(sqlUpdateVisitDates);
                 }
 
-                TableInfo participantActivitiesInfo = FdahpUserRegWSSchema.getInstance().getParticipantActivities();
+                AuditConfigurable participantActivitiesInfo = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getParticipantActivities();
                 participantActivitiesInfo.setAuditBehavior(AuditBehaviorType.DETAILED);
                 SimpleFilter filterActivities = new SimpleFilter();
                 filterActivities.addCondition(FieldKey.fromParts("ParticipantId"), userId);
                 Table.delete(participantActivitiesInfo,filterActivities);
 
-                TableInfo authInfo = FdahpUserRegWSSchema.getInstance().getAuthInfo();
+                AuditConfigurable authInfo = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getAuthInfo();
                 authInfo.setAuditBehavior(AuditBehaviorType.DETAILED);
                 SimpleFilter authInfoFilter = new SimpleFilter();
                 authInfoFilter.addCondition(FieldKey.fromParts("ParticipantId"), userId);
                 Table.delete(authInfo,authInfoFilter);
 
-                TableInfo participantInfo = FdahpUserRegWSSchema.getInstance().getParticipantDetails();
+                AuditConfigurable participantInfo = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getParticipantDetails();
                 participantInfo.setAuditBehavior(AuditBehaviorType.DETAILED);
                 SimpleFilter participantFilter = new SimpleFilter();
                 participantFilter.addCondition(FieldKey.fromParts("UserId"), userId);
@@ -840,7 +818,7 @@ public class FdahpUserRegWSManager
         try{
             passwordHistories = getPasswordHistoryList(userId);
 
-            TableInfo table = FdahpUserRegWSSchema.getInstance().getPasswordHistory();
+            AuditConfigurable  table = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getPasswordHistory();
             table.setAuditBehavior(AuditBehaviorType.DETAILED);
 
             if(passwordHistories != null && passwordHistories.size() > (Integer.parseInt(passwordHistoryCount) - 1)){
@@ -892,7 +870,7 @@ public class FdahpUserRegWSManager
                         }else  if(authInfo.getDeviceType().equalsIgnoreCase(FdahpUserRegUtil.ErrorCodes.DEVICE_IOS.getValue())){
                             iosJsonArray.put(authInfo.getDeviceToken().trim());
                         }
-                        System.out.println(authInfo.getDeviceToken());
+                        // System.out.println(authInfo.getDeviceToken());
                     }
                 }
                 deviceMap.put(FdahpUserRegUtil.ErrorCodes.DEVICE_ANDROID.getValue(),jsonArray);
@@ -966,13 +944,13 @@ public class FdahpUserRegWSManager
 
     /**
      * adding the audit log
-      * @param userId
+     * @param userId
      * @param activity
      * @param activityDetails
      * @param eventType
      * @param container
      */
-   public static void addAuditEvent(String userId,String activity,String activityDetails,String eventType,String container){
+    public static void addAuditEvent(String userId,String activity,String activityDetails,String eventType,String container){
         FdaAuditProvider.FdaAuditEvent event = new FdaAuditProvider.FdaAuditEvent(eventType,container,activityDetails);
         try{
             event.setActivity(activity);
@@ -982,76 +960,76 @@ public class FdahpUserRegWSManager
         }catch (Exception e){
             _log.error("addAuditEvent error:",e);
         }
-   }
+    }
 
     /**
      * Get the user login attempts
      * @param email
      * @return LoginAttempts
      */
-   public LoginAttempts getLoginAttempts(String email){
-       LoginAttempts loginAttempts = null;
-       try{
-           SimpleFilter filter = new SimpleFilter();
-           filter.addCondition(FieldKey.fromParts("Email"), email);
-           loginAttempts = new TableSelector(FdahpUserRegWSSchema.getInstance().getLoginAttempts(),filter,null).getObject(LoginAttempts.class);
-       }catch (Exception e ){
-           _log.error("FdahpUserRegWSManger getLoginAttempts ()",e);
-       }
-       return loginAttempts;
-   }
+    public LoginAttempts getLoginAttempts(String email){
+        LoginAttempts loginAttempts = null;
+        try{
+            SimpleFilter filter = new SimpleFilter();
+            filter.addCondition(FieldKey.fromParts("Email"), email);
+            loginAttempts = new TableSelector(FdahpUserRegWSSchema.getInstance().getLoginAttempts(),filter,null).getObject(LoginAttempts.class);
+        }catch (Exception e ){
+            _log.error("FdahpUserRegWSManger getLoginAttempts ()",e);
+        }
+        return loginAttempts;
+    }
 
     /**
      * reset the user login attempts
      * @param email
      */
-   public void resetLoginAttempts(String email){
-       try{
-           TableInfo table = FdahpUserRegWSSchema.getInstance().getLoginAttempts();
-           table.setAuditBehavior(AuditBehaviorType.DETAILED);
-           SimpleFilter filter = new SimpleFilter();
-           filter.addCondition(FieldKey.fromParts("Email"), email);
-           Table.delete(table,filter);
-       }catch (Exception e)
-       {
-           _log.error("FdahpUserRegWSManger resetLoginAttempts ()", e);
-       }
-   }
+    public void resetLoginAttempts(String email){
+        try{
+            AuditConfigurable table = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getLoginAttempts();
+            table.setAuditBehavior(AuditBehaviorType.DETAILED);
+            SimpleFilter filter = new SimpleFilter();
+            filter.addCondition(FieldKey.fromParts("Email"), email);
+            Table.delete(table,filter);
+        }catch (Exception e)
+        {
+            _log.error("FdahpUserRegWSManger resetLoginAttempts ()", e);
+        }
+    }
 
     /**
      * save or update failure login attempts of an user
      * @param email
      * @return LoginAttempts
      */
-   public LoginAttempts updateLoginFailureAttempts(String email){
-       LoginAttempts loginAttempts = null;
-       int count = 0;
-       try{
-           loginAttempts = getLoginAttempts(email);
-           TableInfo table = FdahpUserRegWSSchema.getInstance().getLoginAttempts();
-           table.setAuditBehavior(AuditBehaviorType.DETAILED);
-           if(loginAttempts != null){
-               if(loginAttempts.getAttempts() > 0){
-                   count = loginAttempts.getAttempts();
-               }
-               count++;
-               loginAttempts.setAttempts(count);
-               loginAttempts.setLastModified(FdahpUserRegUtil.getCurrentUtilDateTime());
-               loginAttempts = Table.update(null,table, loginAttempts,loginAttempts.getId());
-           }else{
-               loginAttempts = new LoginAttempts();
-               count++;
-               loginAttempts.setAttempts(count);
-               loginAttempts.setEmail(email);
-               loginAttempts.setLastModified(FdahpUserRegUtil.getCurrentUtilDateTime());
-               loginAttempts = Table.insert(null,table,loginAttempts);
-           }
-       }catch (Exception e)
-       {
-           _log.error("FdahpUserRegWSManger updateLoginFailureAttempts ()", e);
-       }
-       return loginAttempts;
-   }
+    public LoginAttempts updateLoginFailureAttempts(String email){
+        LoginAttempts loginAttempts = null;
+        int count = 0;
+        try{
+            loginAttempts = getLoginAttempts(email);
+            AuditConfigurable table = (AuditConfigurable) FdahpUserRegWSSchema.getInstance().getLoginAttempts();
+            table.setAuditBehavior(AuditBehaviorType.DETAILED);
+            if(loginAttempts != null){
+                if(loginAttempts.getAttempts() > 0){
+                    count = loginAttempts.getAttempts();
+                }
+                count++;
+                loginAttempts.setAttempts(count);
+                loginAttempts.setLastModified(FdahpUserRegUtil.getCurrentUtilDateTime());
+                loginAttempts = Table.update(null,table, loginAttempts,loginAttempts.getId());
+            }else{
+                loginAttempts = new LoginAttempts();
+                count++;
+                loginAttempts.setAttempts(count);
+                loginAttempts.setEmail(email);
+                loginAttempts.setLastModified(FdahpUserRegUtil.getCurrentUtilDateTime());
+                loginAttempts = Table.insert(null,table,loginAttempts);
+            }
+        }catch (Exception e)
+        {
+            _log.error("FdahpUserRegWSManger updateLoginFailureAttempts ()", e);
+        }
+        return loginAttempts;
+    }
 
     /**
      * Get the study consent list
@@ -1090,6 +1068,45 @@ public class FdahpUserRegWSManager
         }
 
         return authInfo;
+    }
+
+    /**
+     * Get the version info
+     * @return VersionInfo
+     */
+    public VersionInfo getVersionfo(){
+        ApiSimpleResponse response  = new ApiSimpleResponse();
+        VersionInfo versionInfo = null;
+        try{
+            SimpleFilter filter = new SimpleFilter();
+            versionInfo  = new TableSelector(FdahpUserRegWSSchema.getInstance().getVersionInfo(),filter,null).getObject(VersionInfo.class);
+        }catch (Exception e){
+            _log.error("FdahpUserRegWSManger getVersionfo ()",e);
+        }
+        return versionInfo;
+    }
+
+
+    /**
+     * Get the user by email and appid
+     * @param email
+     * @param appId
+     * @return boolean value
+     */
+    public boolean getParticipantDetailsByEmailAndAppId(String email, String appId){
+        boolean valid = false;
+        UserDetails participantDetails = null;
+        try{
+            SimpleFilter filter = new SimpleFilter();
+            filter.addCondition(FieldKey.fromParts("Email"), email);
+            filter.addCondition(FieldKey.fromParts("AppId"), appId);
+            participantDetails =  new TableSelector(FdahpUserRegWSSchema.getInstance().getParticipantDetails(),filter,null).getObject(UserDetails.class);
+            if(participantDetails!=null)
+                valid = true;
+        }catch (Exception e){
+            _log.error("FdahpUserRegWSManager getParticipantDetailsByEmail()",e);
+        }
+        return  valid;
     }
 }
 

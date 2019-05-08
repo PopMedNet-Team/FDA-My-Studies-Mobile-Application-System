@@ -1,0 +1,59 @@
+{
+  "message":"SUCCESS",
+  "activity":{
+    "type":"task",
+    "metadata":{
+      "studyId":"011600",
+      "activityId":"AT-103",
+      "name":"Fetal Kick Test",
+      "version":"1",
+      "lastModified":"2017-04-24T08:25:04.000-0400",
+      "startDate":"2017-04-24T08:31:00.000-0400",
+      "endDate":"2017-04-30T23:59:59.000-0400"
+    },
+    "steps":[
+      {
+        "type":"task",
+        "resultType":"fetalKickCounter",
+        "key":"188",
+        "title":"",
+        "text":"Duration over which to record the kick count (hh : mm)",
+        "skippable":false,
+        "groupName":"",
+        "repeatable":false,
+        "repeatableText":"",
+        "destinations":[
+        ],
+        "healthDataKey":"",
+        "format":{
+          "duration":"09.20"
+        },
+        "steps":[
+        ],
+        "options":[
+        ]
+      },
+      {
+        "type":"task",
+        "resultType":"fetalKickCounter",
+        "key":"189",
+        "title":"",
+        "text":"Number of kicks recorded",
+        "skippable":false,
+        "groupName":"",
+        "repeatable":false,
+        "repeatableText":"",
+        "destinations":[
+        ],
+        "healthDataKey":"",
+        "format":{
+          "duration":"0.0"
+        },
+        "steps":[
+        ],
+        "options":[
+        ]
+      }
+    ]
+  }
+}

@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
@@ -48,7 +45,9 @@ class ChangePasswordViewController: UIViewController {
     var confirmPassword = ""
     var temporaryPassword: String = ""
     var viewLoadFrom: ChangePasswordLoadFrom = .profile
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .default
+    }
     
 // MARK:- ViewController Lifecycle
     override func viewDidLoad() {
@@ -62,7 +61,7 @@ class ChangePasswordViewController: UIViewController {
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         //Automatically takes care  of text field become first responder and scroll of tableview
-        IQKeyboardManager.sharedManager().enable = true
+        // IQKeyboardManager.sharedManager().enable = true
         
         //Used for background tap dismiss keyboard
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ChangePasswordViewController.dismissKeyboard))
@@ -72,7 +71,7 @@ class ChangePasswordViewController: UIViewController {
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        if temporaryPassword.characters.count > 0{
+        if temporaryPassword.count > 0{
             oldPassword = temporaryPassword
             tableViewRowDetails?.removeObject(at: 0)
             self.title = NSLocalizedString(kCreatePasswordTitleText, comment: "")
@@ -86,8 +85,9 @@ class ChangePasswordViewController: UIViewController {
         
         self.addBackBarButton()
         
-        UIApplication.shared.statusBarStyle = .default
+        //UIApplication.shared.statusBarStyle = .default
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -120,7 +120,7 @@ class ChangePasswordViewController: UIViewController {
      Dismiss key board when clicked on Background
      
      */
-    func dismissKeyboard(){
+    @objc func dismissKeyboard(){
         self.view.endEditing(true)
     }
     
@@ -200,7 +200,7 @@ extension ChangePasswordViewController : UITableViewDataSource {
         
         cell.populateCellData(data: tableViewData, securedText: true)
         var tagIncremental = 100
-        if temporaryPassword.characters.count > 0{
+        if temporaryPassword.count > 0{
             
             tagIncremental = 101
         } else {
@@ -238,10 +238,10 @@ extension ChangePasswordViewController: UITextFieldDelegate{
         
         
         if tag == .newPassword || tag == .confirmPassword {
-            if finalString.characters.count > 64 {
+            if finalString.count > 64 {
                 return false
             } else {
-                if (range.location == textField.text?.characters.count && string == " ") {
+                if (range.location == textField.text?.count && string == " ") {
                     
                     textField.text = textField.text?.appending("\u{00a0}")
                     return false
@@ -250,7 +250,7 @@ extension ChangePasswordViewController: UITextFieldDelegate{
             }
         } else {
             
-            if (range.location == textField.text?.characters.count && string == " ") {
+            if (range.location == textField.text?.count && string == " ") {
                 
                 textField.text = textField.text?.appending("\u{00a0}")
                 return false
@@ -273,7 +273,7 @@ extension ChangePasswordViewController: UITextFieldDelegate{
         case .confirmPassword:
             self.confirmPassword = textField.text!
             break
-        default: break
+        //default: break
         }
     }
 }

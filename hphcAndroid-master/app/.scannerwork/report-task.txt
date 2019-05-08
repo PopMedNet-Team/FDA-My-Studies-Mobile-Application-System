@@ -1,6 +1,0 @@
-projectKey=com.harvard.fda:sonarqube-scanner
-serverUrl=http://192.168.0.50:9000
-serverVersion=6.4.0.25310
-dashboardUrl=http://192.168.0.50:9000/dashboard/index/com.harvard.fda:sonarqube-scanner
-ceTaskId=AWEoi85k63psD7phdLM_
-ceTaskUrl=http://192.168.0.50:9000/api/ce/task?id=AWEoi85k63psD7phdLM_

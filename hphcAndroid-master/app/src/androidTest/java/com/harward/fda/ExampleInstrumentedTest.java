@@ -1,23 +1,28 @@
+/*
+ * Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package com.harward.fda;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.hphc.mystudies.notificationModule.NotificationModuleSubscriber;
-import com.hphc.mystudies.storageModule.DBServiceSubscriber;
-import com.hphc.mystudies.studyAppModule.activityBuilder.model.ActivityRun;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
-
 import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -26,36 +31,11 @@ import static junit.framework.Assert.assertEquals;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
-    private Context appContext;
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
-        appContext = InstrumentationRegistry.getTargetContext();
+        Context appContext = InstrumentationRegistry.getTargetContext();
 
-//        assertEquals("com.harward.fda", appContext.getPackageName());
-    }
-
-    @Test
-    public void testNotification()
-    {
-        appContext = InstrumentationRegistry.getTargetContext();
-        try {
-            Realm.init(appContext);
-            RealmConfiguration testConfig = new RealmConfiguration.Builder().build();
-            Realm testRealm = Realm.getInstance(testConfig);
-            SimpleDateFormat simpleDateFormat  = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-            DBServiceSubscriber dbServiceSubscriber = new DBServiceSubscriber();
-            ActivityRun activityRun = new ActivityRun();
-            activityRun.setActivityId("DevFetal");
-            activityRun.setCompleted(false);
-            activityRun.setEndDate(simpleDateFormat.parse("12-01-2018 23:59:59"));
-            activityRun.setRunId(5);
-            activityRun.setStartDate(simpleDateFormat.parse("12-01-2018 13:40:00"));
-            activityRun.setStudyId("TESTSTUDY01");
-            NotificationModuleSubscriber notificationModuleSubscriber = new NotificationModuleSubscriber(dbServiceSubscriber, testRealm);
-            notificationModuleSubscriber.generateActivityLocalNotification(activityRun, appContext, "Within a day", 0);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        assertEquals("com.harward.fda", appContext.getPackageName());
     }
 }

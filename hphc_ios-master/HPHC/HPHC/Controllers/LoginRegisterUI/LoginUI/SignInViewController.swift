@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -45,7 +42,9 @@ class SignInViewController: UIViewController{
     var tableViewRowDetails: NSMutableArray?
     var user = User.currentUser
     var termsPageOpened = false
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
     
 // MARK:- ViewController Lifecycle
     
@@ -61,7 +60,7 @@ class SignInViewController: UIViewController{
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         //Automatically takes care  of text field become first responder and scroll of tableview
-        IQKeyboardManager.sharedManager().enable = true
+        // IQKeyboardManager.sharedManager().enable = true
         
         //Used for background tap dismiss keyboard
         let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
@@ -80,7 +79,7 @@ class SignInViewController: UIViewController{
         if let attributedTitle = buttonSignUp?.attributedTitle(for: .normal) {
             let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
             
-            mutableAttributedTitle.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0), range: NSRange(location: 10,length: 7))
+            mutableAttributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: #colorLiteral(red: 0, green: 0.4862745098, blue: 0.7294117647, alpha: 1) , range: NSRange(location: 10,length: 7))
             
             buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
         }
@@ -90,6 +89,7 @@ class SignInViewController: UIViewController{
         super.viewWillAppear(animated)
         
         //unhide navigationbar
+       
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         User.resetCurrentUser()
@@ -111,7 +111,8 @@ class SignInViewController: UIViewController{
         
         self.tableView?.reloadData()
         
-        UIApplication.shared.statusBarStyle = .default
+        //UIApplication.shared.statusBarStyle = .default
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -121,7 +122,7 @@ class SignInViewController: UIViewController{
     
     override func viewWillDisappear(_ animated: Bool) {
         //hide navigationbar
-        if viewLoadFrom == .gatewayOverview{
+        if viewLoadFrom == .gatewayOverview || Utilities.isStandaloneApp(){
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
     }
@@ -224,7 +225,7 @@ class SignInViewController: UIViewController{
      Dismiss key board when clicked on Background
      
      */
-    func dismissKeyboard(){
+    @objc func dismissKeyboard(){
         self.view.endEditing(true)
     }
     
@@ -292,14 +293,14 @@ class SignInViewController: UIViewController{
         let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
         var foundRange = attributedString.mutableString.range(of: "Terms")
-        attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
+        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
         
         foundRange = attributedString.mutableString.range(of: "Privacy Policy")
-        attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
+        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
         
-        termsAndCondition?.linkTextAttributes = [NSForegroundColorAttributeName: Utilities.getUIColorFromHex(0x007CBA)]
+        termsAndCondition?.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)])
         
     }
     
@@ -399,7 +400,7 @@ extension SignInViewController: UITextFieldDelegate{
                 return true
             }
         } else {
-            if (range.location == textField.text?.characters.count && string == " ") {
+            if (range.location == textField.text?.count && string == " ") {
                 
                 textField.text = textField.text?.appending("\u{00a0}")
                 return false
@@ -495,37 +496,38 @@ extension SignInViewController: NMWebServiceDelegate {
         } else {
             let delegate = (UIApplication.shared.delegate as? AppDelegate)!
             delegate.calculateTimeZoneChange()
-        if User.currentUser.verified == true {
-            
-            let ud = UserDefaults.standard
-            ud.set(true, forKey: kNotificationRegistrationIsPending)
-            ud.synchronize()
-            
-            ORKPasscodeViewController.removePasscodeFromKeychain()
-            
-            if User.currentUser.isLoginWithTempPassword {
-                self.navigateToChangePassword()
-            } else {
+            if User.currentUser.verified == true {
                 
-                if viewLoadFrom == .gatewayOverview {
-                    self.navigateToGatewayDashboard()
-                } else if viewLoadFrom == .joinStudy {
-                    
-                    let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
-                    leftController.createLeftmenuItems()
-                    self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
-                    //_ = self.navigationController?.popViewController(animated: true)
+                let ud = UserDefaults.standard
+                ud.set(true, forKey: kNotificationRegistrationIsPending)
+                ud.synchronize()
+                
+                ORKPasscodeViewController.removePasscodeFromKeychain()
+                
+                if User.currentUser.isLoginWithTempPassword {
+                    self.navigateToChangePassword()
                 } else {
                     
-                    let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
-                    leftController.createLeftmenuItems()
-                    leftController.changeViewController(.studyList)
+                    if viewLoadFrom == .gatewayOverview {
+                        self.navigateToGatewayDashboard()
+                        
+                    } else if viewLoadFrom == .joinStudy {
+                        
+                        let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
+                        leftController.createLeftmenuItems()
+                        self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
+                        
+                    } else {
+                        
+                        let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
+                        leftController.createLeftmenuItems()
+                        leftController.changeViewController(.studyList)
+                    }
                 }
+            } else {
+                
+                self.navigateToVerifyController()
             }
-        } else {
-            
-            self.navigateToVerifyController()
-        }
         }
     }
     
@@ -539,3 +541,9 @@ extension SignInViewController: NMWebServiceDelegate {
 }
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}

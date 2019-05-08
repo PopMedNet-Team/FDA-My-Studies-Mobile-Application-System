@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
@@ -70,10 +67,10 @@ class LineChartCell: GraphChartTableViewCell {
         let color = Utilities.getUIColorFromHex(0x007CBA)
         
         let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringStartDate)
-        attributedStartDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        attributedStartDate.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSMakeRange(0, 2))
         
         let attributedEndDate: NSMutableAttributedString = NSMutableAttributedString(string: stringEndDate)
-        attributedEndDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        attributedEndDate.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSMakeRange(0, 2))
         
         
         attributedStartDate.append(attributedEndDate)
@@ -89,10 +86,10 @@ class LineChartCell: GraphChartTableViewCell {
         let color = Utilities.getUIColorFromHex(0x007CBA)
         
         let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringStartDate2)
-        attributedStartDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        attributedStartDate.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSMakeRange(0, 2))
         
         let attributedEndDate: NSMutableAttributedString = NSMutableAttributedString(string: stringEndDate)
-        attributedEndDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        attributedEndDate.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSMakeRange(0, 2))
         
         
         attributedStartDate.append(attributedEndDate)
@@ -116,7 +113,7 @@ class LineChartCell: GraphChartTableViewCell {
         
         
         
-        var points: Array<ORKValueRange> = []
+        var _: Array<ORKValueRange> = []
         
        
         let activity = Study.currentStudy?.activities.filter({$0.actvityId == chart.activityId}).last
@@ -156,8 +153,8 @@ class LineChartCell: GraphChartTableViewCell {
             
         case .days_of_week:
             
-            print("start of Week \(Date().startOfWeek)")
-            print("end of Week \(Date().endOfWeek)")
+            print("start of Week \(String(describing: Date().startOfWeek))")
+            print("end of Week \(String(describing: Date().endOfWeek))")
             
             startDateOfWeek = Date().startOfWeek
             endDateOfWeek = Date().endOfWeek
@@ -259,7 +256,7 @@ class LineChartCell: GraphChartTableViewCell {
             
             
             
-        default: break
+        //default: break
             
         }
         
@@ -559,7 +556,7 @@ class LineChartCell: GraphChartTableViewCell {
         
         let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
         
-        let array = dataList.map{$0.data}
+       // let array = dataList.map{$0.data}
         var points: Array<ORKValueRange> = []
         xAxisTitles = []
         plotPoints = []
@@ -607,12 +604,12 @@ class LineChartCell: GraphChartTableViewCell {
         
         let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= startDate && $0.startDate! <= endDate})
         
-        let array = dataList.map{$0.data }
+       // let array = dataList.map{$0.data }
         var points: Array<ORKValueRange> = []
        
         plotPoints = []
         
-        for i in 1...xAxisTitles.count {
+        for _ in 1...xAxisTitles.count {
             
             
             points.append(ORKValueRange())
@@ -650,7 +647,7 @@ class LineChartCell: GraphChartTableViewCell {
         
         let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfYear() && $0.startDate! <= date.endOfYear()})
         
-        let array = dataList.map{$0.data}
+       // let array = dataList.map{$0.data}
         var points: Array<ORKValueRange> = []
        
         plotPoints = []
@@ -686,7 +683,7 @@ class LineChartCell: GraphChartTableViewCell {
         
          let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
         
-        let array = dataList.map{$0.data}
+        //let array = dataList.map{$0.data}
         var points: Array<ORKValueRange> = []
         xAxisTitles = []
         plotPoints = []
@@ -731,7 +728,7 @@ class LineChartCell: GraphChartTableViewCell {
         
         let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfDay && $0.startDate! <= date.endOfDay!})
         
-        let array = dataList.map{$0.data}
+       // let array = dataList.map{$0.data}
         var points: Array<ORKValueRange> = []
         xAxisTitles = []
         plotPoints = []

@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
@@ -52,6 +49,7 @@ enum LeftMenu: Int {
     case signup
 }
 
+
 protocol LeftMenuProtocol: class {
     func changeViewController(_ menu: LeftMenu)
 }
@@ -64,12 +62,19 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
     @IBOutlet weak var tableFooterView: UIView!
     @IBOutlet weak var buttonSignOut: UIButton?
     
-    var menus = [ ["menuTitle": "Home",
-                   "iconName": "home_menu1-1"],
+    var menus: [[String: Any]] = [ ["menuTitle": "Home",
+                   "iconName": "home_menu1-1",
+                   "menuType": LeftMenu.studyList],
                   
                   ["menuTitle": "Resources",
-                   "iconName": "resources_menu1"],
-                  ]
+                   "iconName": "resources_menu1",
+                   "menuType": LeftMenu.resources],
+    ]
+    // standalone
+    var studyTabBarController: UITabBarController!
+    var studyHomeViewController: UINavigationController!
+    
+    // Gateway & standalone
     var studyListViewController: UINavigationController!
     var notificationController: UIViewController!
     var resourcesViewController: UINavigationController!
@@ -92,6 +97,26 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
+        if Utilities.isStandaloneApp() {
+            setupStandaloneMenu()
+        } else {
+            setupGatewayMenu()
+        }
+        
+        self.labelVersion.text = "V" + "\(Utilities.getAppVersion())"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.view.isHidden = false
+    }
+    
+    
+    final private func setupGatewayMenu(){
+        
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
         self.studyListViewController = (storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as? UINavigationController)!
@@ -104,16 +129,31 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         
         self.reachoutViewController = (storyboard.instantiateViewController(withIdentifier:  String(describing: ReachoutOptionsViewController.classForCoder())) as? UINavigationController)!
         
-        self.labelVersion.text = "V" + "\(Utilities.getAppVersion())"
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    final private func setupStandaloneMenu(){
+        
+        let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
+        /*for standalone*/
+        self.studyTabBarController = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+        
+        let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
+        
+        self.studyListViewController = storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as? UINavigationController
+        
+        
+        self.studyHomeViewController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: "StudyHomeNavigationController")) as? UINavigationController //for standalone
+        
+        self.notificationController = storyboard.instantiateViewController(withIdentifier:  String(describing: NotificationViewController.classForCoder())) as? UINavigationController
+        
+        self.resourcesViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: GatewayResourcesListViewController.classForCoder())) as? UINavigationController
+        
+        self.profileviewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as? UINavigationController
+        
+        self.reachoutViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ReachoutOptionsViewController.classForCoder())) as? UINavigationController
+        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.view.isHidden = false
-    }
     
     
     /**
@@ -145,30 +185,40 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         let user = User.currentUser
         
         menus = [ ["menuTitle": "Home",
-                   "iconName": "home_menu1-1"],
-                  
-                  ["menuTitle": "Resources",
-                   "iconName": "resources_menu1"],
+                   "iconName": "home_menu1-1",
+            "menuType": LeftMenu.studyList]
         ]
+        
+        if !Utilities.isStandaloneApp() {
+            
+            menus.append(["menuTitle": "Resources",
+             "iconName": "resources_menu1",
+                "menuType": LeftMenu.resources])
+        }
         
         if user.userType == .FDAUser {
             menus.append(["menuTitle": "My Account",
-                          "iconName": "profile_menu1"])
+                          "iconName": "profile_menu1",
+                "menuType": LeftMenu.profile_reachOut])
             menus.append(["menuTitle": "Reach Out",
-                          "iconName": "reachout_menu1"])
+                          "iconName": "reachout_menu1",
+                "menuType": LeftMenu.reachOut_signIn])
            
             self.buttonSignOut?.isHidden = false
         }
         else{
             menus.append(["menuTitle": "Reach Out",
-                          "iconName": "reachout_menu1"])
+                          "iconName": "reachout_menu1",
+                "menuType": LeftMenu.profile_reachOut])
 
             menus.append(["menuTitle": "Sign In",
-                          "iconName": "signin_menu1"])
+                          "iconName": "signin_menu1",
+                "menuType": LeftMenu.reachOut_signIn])
             
             menus.append(["menuTitle": "New User?",
                           "iconName":"newuser_menu1",
-                          "subTitle": "Sign up"])
+                          "subTitle": "Sign up",
+                "menuType": LeftMenu.signup])
              self.buttonSignOut?.isHidden = true
         }
         
@@ -219,9 +269,25 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
      @param menu    Accepts the data from enum LeftMenu
      */
     func changeViewController(_ menu: LeftMenu) {
+        
+        let isStandalone = Utilities.isStandaloneApp()
+        
         switch menu {
         case .studyList:
-            self.slideMenuController()?.changeMainViewController(self.studyListViewController, close: true)
+            
+            if isStandalone {
+                if Study.currentStudy?.userParticipateState.status == .inProgress {
+                     self.slideMenuController()?.changeMainViewController(self.studyTabBarController, close: true)
+                }
+                else {
+                    self.slideMenuController()?.changeMainViewController(self.studyHomeViewController, close: true)
+                }
+                
+               
+            } else {
+                self.slideMenuController()?.changeMainViewController(self.studyListViewController, close: true)
+            }
+            
             
         case .resources:
             self.slideMenuController()?.changeMainViewController(self.resourcesViewController, close: true)
@@ -262,6 +328,8 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
      */
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
+     
+        
         DBHandler.isDataAvailableToSync { (available) in
             if(available){
                 
@@ -300,7 +368,11 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
      Send the webservice request to Signout
      */
     func sendRequestToSignOut() {
+        
+        
         UserServices().logoutUser(self as NMWebServiceDelegate)
+        
+        
     }
     
     
@@ -313,15 +385,23 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         
         let ud = UserDefaults.standard
         ud.set(false, forKey: kPasscodeIsPending)
-         ud.set(false, forKey: kShowNotification)
+        ud.set(false, forKey: kShowNotification)
         ud.synchronize()
         
         StudyDashboard.instance.dashboardResponse = []
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.updateKeyAndInitializationVector()
         
-        self.changeViewController(.studyList)
-        self.createLeftmenuItems()
+        if !Utilities.isStandaloneApp() {
+            self.changeViewController(.studyList)
+            self.createLeftmenuItems()
+        }
+        else {
+            UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        
+       
     }
 }
 
@@ -343,7 +423,8 @@ extension LeftMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        if let menu = LeftMenu(rawValue: indexPath.row) {
+        
+        if let menu = menus[indexPath.row]["menuType"] as? LeftMenu {
             self.changeViewController(menu)
         }
     }
@@ -390,7 +471,7 @@ extension LeftMenuViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        self.addProgressIndicator()
+        UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
@@ -399,12 +480,12 @@ extension LeftMenuViewController: NMWebServiceDelegate {
         if requestName as String ==  RegistrationMethods.logout.description {
             self.signout()
         }
-        self.removeProgressIndicator()
+        UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        self.removeProgressIndicator()
+        UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()
         
         if error.code == 403 { //unauthorized
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {

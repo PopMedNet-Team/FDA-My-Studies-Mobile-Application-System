@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 
@@ -444,15 +441,15 @@ class ActivityQuestionStep: ActivityStep {
                     
                     let textChoiceArray: [ORKTextChoice]?
                     
-                    var defaultValue = (formatDict?[kStepQuestionTextScaleDefault] as? Int)!
+                    let defaultValue = (formatDict?[kStepQuestionTextScaleDefault] as? Int)!
                     self.textScaleDefaultValue = "\(defaultValue)"
                     
                     textChoiceArray = self.getTextChoices(dataArray: (formatDict?[kStepQuestionTextScaleTextChoices] as? NSArray)!)
                     
-                    defaultValue = self.textScaleDefaultIndex!
+                    //defaultValue = self.textScaleDefaultIndex!
                     
                     questionStepAnswerFormat = ORKAnswerFormat.textScale(with: textChoiceArray!,
-                                                                         defaultIndex: defaultValue,
+                                                                         defaultIndex: defaultValue-1,
                                                                          vertical: (formatDict?[kStepQuestionTextScaleVertical] as? Bool)!)
                 } else {
                     Logger.sharedInstance.debug("Text Scale Question Step has null values:\(String(describing: formatDict))")
@@ -571,6 +568,8 @@ class ActivityQuestionStep: ActivityStep {
                                 unit = HKUnit.init(from: localizedQuestionStepAnswerFormatUnit)
                             }
                             questionStepAnswerFormat = ORKHealthKitQuantityTypeAnswerFormat.init(quantityType: HKQuantityType.quantityType(forIdentifier: quantityTypeId)!, unit: unit, style: ORKNumericAnswerStyle.decimal)
+                          
+                            
                         } else {
                             
                             if minValue != nil || maxValue != nil {
@@ -581,7 +580,7 @@ class ActivityQuestionStep: ActivityStep {
                         }
                     }
                 } else {
-                    Logger.sharedInstance.debug("numeric has null values:\(formatDict)")
+                    Logger.sharedInstance.debug("numeric has null values:\(String(describing: formatDict))")
                     return nil
                 }
             case .timeOfDay:
@@ -625,12 +624,11 @@ class ActivityQuestionStep: ActivityStep {
                         
                         questionStepAnswerFormat = ORKAnswerFormat.dateTime(withDefaultDate: defaultDate as Date?, minimumDate: minimumDate as Date?, maximumDate: maximumDate as Date?, calendar: NSCalendar.current)
                         
-                    default:
-                        break
+                    //default:break
                     }
                     
                 } else {
-                    Logger.sharedInstance.debug("date has null values:\(formatDict)")
+                    Logger.sharedInstance.debug("date has null values:\(String(describing: formatDict))")
                     return nil
                 }
             case .text:
@@ -643,11 +641,7 @@ class ActivityQuestionStep: ActivityStep {
                     
                     var answerFormat = ORKAnswerFormat.textAnswerFormat()
                     
-                    if Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextMaxLength] as AnyObject?) {
-                        answerFormat.maximumLength = (formatDict?[kStepQuestionTextMaxLength] as? Int)!
-                    } else {
-                        answerFormat.maximumLength = 0
-                    }
+                   
                     
                     if Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextValidationRegex] as AnyObject?) && Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextInvalidMessage] as AnyObject?) {
                         
@@ -664,11 +658,18 @@ class ActivityQuestionStep: ActivityStep {
                     } else {
                         answerFormat.invalidMessage = nil
                     }
+                    
+                    if Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextMaxLength] as AnyObject?) {
+                        answerFormat.maximumLength = (formatDict?[kStepQuestionTextMaxLength] as? Int)!
+                    } else {
+                        answerFormat.maximumLength = 0
+                    }
+                    
                     answerFormat.multipleLines = (formatDict?[kStepQuestionTextMultipleLines] as? Bool)!
                     questionStepAnswerFormat = answerFormat
                     
                 } else {
-                    Logger.sharedInstance.debug("text has null values:\(formatDict)")
+                    Logger.sharedInstance.debug("text has null values:\(String(describing: formatDict))")
                     return nil
                 }
             case .email:
@@ -747,7 +748,7 @@ class ActivityQuestionStep: ActivityStep {
             questionStep?.text = text
             return questionStep!
         } else {
-            Logger.sharedInstance.debug("FormatDict has null values:\(formatDict)")
+            Logger.sharedInstance.debug("FormatDict has null values:\(String(describing: formatDict))")
             return nil
         }
     }
@@ -821,7 +822,7 @@ class ActivityQuestionStep: ActivityStep {
      */
     func getImageChoices(dataArray: NSArray) -> [ORKImageChoice]? {
         
-        let imageChoiceArray: [ORKImageChoice]?
+        var imageChoiceArray: [ORKImageChoice]?
         imageChoiceArray = [ORKImageChoice]()
         
         if Utilities.isValidObject(someObject: dataArray) {
@@ -852,8 +853,8 @@ class ActivityQuestionStep: ActivityStep {
                         let selectedImageData  = NSData(base64Encoded: ((dict[kStepQuestionImageChoiceSelectedImage] as? String)!), options: .ignoreUnknownCharacters)
                         
                         //Create image Instance from Data
-                        let normalImage: UIImage = UIImage(data: (normalImageData as? Data)!)!
-                        let selectedImage: UIImage =  UIImage(data: (selectedImageData as? Data)!)!
+                        let normalImage: UIImage = UIImage(data: (normalImageData as Data?)!)!
+                        let selectedImage: UIImage =  UIImage(data: (selectedImageData as Data?)!)!
                         
                         //Create ORKImageChoice
                         let  choice = ORKImageChoice( normalImage: normalImage ,  selectedImage: selectedImage , text: dict[kStepQuestionImageChoiceText] as? String, value: value  as NSCoding & NSCopying & NSObjectProtocol )
@@ -864,7 +865,7 @@ class ActivityQuestionStep: ActivityStep {
                     }
                 } else {
                     return nil
-                    Logger.sharedInstance.debug("ORKImageChoice Dictionary is null :\(dataArray[i])")
+                    //Logger.sharedInstance.debug("ORKImageChoice Dictionary is null :\(dataArray[i])")
                 }
             }
         } else {

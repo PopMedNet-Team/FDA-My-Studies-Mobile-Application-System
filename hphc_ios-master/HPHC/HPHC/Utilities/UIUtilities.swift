@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -36,7 +33,7 @@ class UIUtilities: NSObject {
     class func paddingViewForTextField(textField: UITextField) ->Void {
         let paddingView =  UIView.init(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = paddingView
-        textField.leftViewMode = UITextFieldViewMode.always
+        textField.leftViewMode = UITextField.ViewMode.always
     }
     
     /* Add a border to Textfield
@@ -67,7 +64,7 @@ class UIUtilities: NSObject {
     /* Used to remove border text field */
     class func removeTheBorderToTextField(textField: UITextField)->UITextField {
         
-        textField.borderStyle =  UITextBorderStyle.none
+        textField.borderStyle =  UITextField.BorderStyle.none
         textField.layer.borderWidth = 0
         textField.layer.borderColor = UIColor.clear.cgColor
         textField.backgroundColor =  Utilities.hexStringToUIColor("556085")
@@ -94,7 +91,7 @@ class UIUtilities: NSObject {
     class func applyBlurrEffect() -> UIVisualEffectView
     {
         
-        let blurEffect = UIBlurEffect.init(style: UIBlurEffectStyle.dark)
+        let blurEffect = UIBlurEffect.init(style: UIBlurEffect.Style.dark)
         let visualEffect = UIVisualEffectView.init(effect: blurEffect)
         visualEffect.tag = 100
         visualEffect.alpha = 1
@@ -105,7 +102,7 @@ class UIUtilities: NSObject {
     class func applyBlurrEffectForFrequency() -> UIVisualEffectView
     {
         
-        let blurEffect = UIBlurEffect.init(style: UIBlurEffectStyle.dark)
+        let blurEffect = UIBlurEffect.init(style: UIBlurEffect.Style.dark)
         let visualEffect = UIVisualEffectView.init(effect: blurEffect)
         visualEffect.tag = 500
         visualEffect.alpha = 1
@@ -211,7 +208,7 @@ class UIUtilities: NSObject {
     /* Presents alert message */
     class func showAlertWithTitleAndMessage(title: NSString, message : NSString) -> Void {
         
-        let alert = UIAlertController(title: title as String,message: message as String,preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: title as String,message: message as String,preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
         var rootViewController = UIApplication.shared.keyWindow?.rootViewController
         if let navigationController = rootViewController as? UINavigationController {
@@ -235,13 +232,13 @@ class UIUtilities: NSObject {
     }
     
     class func showAlertMessageWithTwoActionsAndHandler(_ errorTitle: String,errorMessage : String,errorAlertActionTitle : String ,errorAlertActionTitle2: String?,viewControllerUsed : UIViewController, action1: @escaping AlertAction, action2: @escaping AlertAction){
-        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertController.Style.alert)
         
-        alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertActionStyle.default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertAction.Style.default, handler: { (action) in
             action1()
         }))
         if errorAlertActionTitle2 != nil {
-            alert.addAction(UIAlertAction(title: errorAlertActionTitle2, style: UIAlertActionStyle.default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: errorAlertActionTitle2, style: UIAlertAction.Style.default, handler: { (action) in
                 action2()
             }))
         }
@@ -250,19 +247,19 @@ class UIUtilities: NSObject {
     }
     
     class func showAlertMessageWithThreeActionsAndHandler(_ errorTitle : String,errorMessage : String,errorAlertActionTitle : String ,errorAlertActionTitle2 : String?,errorAlertActionTitle3 : String?,viewControllerUsed : UIViewController, action1: @escaping AlertAction, action2: @escaping AlertAction,action3: @escaping AlertAction){
-        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertController.Style.alert)
         
-        alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertActionStyle.default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertAction.Style.default, handler: { (action) in
             action1()
         }))
         if errorAlertActionTitle2 != nil {
-            alert.addAction(UIAlertAction(title: errorAlertActionTitle2, style: UIAlertActionStyle.default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: errorAlertActionTitle2, style: UIAlertAction.Style.default, handler: { (action) in
                 action2()
             }))
         }
         
         if errorAlertActionTitle3 != nil {
-            alert.addAction(UIAlertAction(title: errorAlertActionTitle3, style: UIAlertActionStyle.default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: errorAlertActionTitle3, style: UIAlertAction.Style.default, handler: { (action) in
                 action3()
             }))
         }
@@ -273,9 +270,9 @@ class UIUtilities: NSObject {
     
     class func showAlertMessageWithActionHandler(_ title: String,message: String,buttonTitle : String ,viewControllerUsed: UIViewController, action: @escaping AlertAction){
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         
-        alert.addAction(UIAlertAction(title: buttonTitle, style: UIAlertActionStyle.default, handler: { (alertAction) in
+        alert.addAction(UIAlertAction(title: buttonTitle, style: UIAlertAction.Style.default, handler: { (alertAction) in
             action()
         }))
         
@@ -284,8 +281,8 @@ class UIUtilities: NSObject {
     }
     
     class func showAlertMessage(_ errorTitle: String, errorMessage: String, errorAlertActionTitle : String ,viewControllerUsed: UIViewController?){
-        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertAction.Style.default, handler: nil))
         viewControllerUsed!.present(alert, animated:true, completion: nil)
     }
     

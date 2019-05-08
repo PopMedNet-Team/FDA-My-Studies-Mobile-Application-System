@@ -119,3 +119,12 @@ CREATE TABLE fdahpUserRegWS.PasswordHistory
     CONSTRAINT PK_PasswordHistory PRIMARY KEY (Id)
 
 );
+
+CREATE TABLE fdahpUserRegWS.VersionInfo
+(
+    Id SERIAL,
+    AndroidVersion  VARCHAR(50) NULL,
+    IosVersion VARCHAR(50) NULL,
+    CONSTRAINT PK_VersionInfo PRIMARY KEY (Id)
+
+);

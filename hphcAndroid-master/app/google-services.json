@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:354892210838:android:e55990537b0a46a9",
         "android_client_info": {
-          "package_name": "com.hphc.mystudies"
+          "package_name": "com.harvard.fda"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "354892210838-asi11ufq073pkgor4kts2cilavscguqg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.hphc.mystudies",
+            "package_name": "com.harvard.fda",
             "certificate_hash": "453c0f2003f384ff3da76542f0a0a1736bee8603"
           }
         },

@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -37,13 +34,16 @@ class StudyDashboardViewController: UIViewController{
     
     @IBOutlet var tableView: UITableView?
     @IBOutlet var labelStudyTitle: UILabel?
+    @IBOutlet var buttonHome:UIButton!
     
     var dataSourceKeysForLabkey: Array<Dictionary<String,String>> = []
     
     var tableViewRowDetails = NSMutableArray()
     var todayActivitiesArray = NSMutableArray()
     var statisticsArray = NSMutableArray()
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
+    }
     
 // MARK:- ViewController Lifecycle
     override func viewDidLoad() {
@@ -71,21 +71,32 @@ class StudyDashboardViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
+        //UIApplication.shared.statusBarStyle = .lightContent
+        
+        setNeedsStatusBarAppearanceUpdate()
+        
+        
+        //Standalone App Settings
+        if Utilities.isStandaloneApp() {
+            buttonHome.setImage(UIImage(named: "menu_icn"), for: .normal)
+            buttonHome.tag = 200
+            self.slideMenuController()?.removeLeftGestures()
+            self.slideMenuController()?.removeRightGestures()
+        }
         
         //show navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-    
+        
         self.tableView?.reloadData()
- 
-      DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
-
-        if statiticsList.count != 0 {
-          StudyDashboard.instance.statistics = statiticsList
-          self.tableView?.reloadData()
+        
+        DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
+            
+            if statiticsList.count != 0 {
+                StudyDashboard.instance.statistics = statiticsList
+                self.tableView?.reloadData()
+            }
         }
- }
-      
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -217,7 +228,13 @@ class StudyDashboardViewController: UIViewController{
      @param sender    Accepts any kind of object
      */
     @IBAction func homeButtonAction(_ sender: AnyObject){
-        self.performSegue(withIdentifier: unwindToStudyListDashboard, sender: self)
+        let button = sender as! UIButton
+        if button.tag == 200 {
+            self.slideMenuController()?.openLeft()
+        }
+        else {
+           self.performSegue(withIdentifier: unwindToStudyListDashboard, sender: self)
+        }
     }
     
     
@@ -354,7 +371,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
         } else {
                 cell = (tableView.dequeueReusableCell(withIdentifier: kStatisticsTableViewCell, for: indexPath) as? StudyDashboardStatisticsTableViewCell)!
                 (cell as? StudyDashboardStatisticsTableViewCell)!.displayData()
-                (cell as? StudyDashboardStatisticsTableViewCell)!.buttonDay?.setTitle("  DAY  ", for: UIControlState.normal)
+                (cell as? StudyDashboardStatisticsTableViewCell)!.buttonDay?.setTitle("  DAY  ", for: UIControl.State.normal)
                 (cell as? StudyDashboardStatisticsTableViewCell)!.statisticsCollectionView?.reloadData()
         }
         return cell!

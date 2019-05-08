@@ -34,7 +34,7 @@ open class Logger {
             column: column
         )
 
-       // print(Date(),result, separator: "", terminator: "")
+        print(Date(),result, separator: "", terminator: "")
         
     }
     

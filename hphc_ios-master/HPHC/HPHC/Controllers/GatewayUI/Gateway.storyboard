@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ais-Yu-8zr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ais-Yu-8zr">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -22,7 +22,7 @@
         <!--Study List View Controller-->
         <scene sceneID="7ao-vT-gVw">
             <objects>
-                <viewController id="8qc-EF-dit" customClass="StudyListViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8qc-EF-dit" customClass="StudyListViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tfZ-LQ-HGJ"/>
                         <viewControllerLayoutGuide type="bottom" id="SMP-pp-kYy"/>
@@ -41,7 +41,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="studyCell" id="tTo-9t-iz4" customClass="StudyListCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="studyCell" id="tTo-9t-iz4" customClass="StudyListCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="145"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tTo-9t-iz4" id="SYE-Sc-XoX">
@@ -247,7 +247,7 @@
                                             <outlet property="studyUserStatusIcon" destination="CjI-3r-2Rg" id="H2B-63-UXL"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="anonymousStudyCell" id="2rT-LK-aIx" customClass="StudyListCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="anonymousStudyCell" id="2rT-LK-aIx" customClass="StudyListCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="173" width="375" height="145"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2rT-LK-aIx" id="Dvp-pN-XKm">
@@ -426,7 +426,7 @@
         <!--Study Filter View Controller-->
         <scene sceneID="9Mp-g1-82Q">
             <objects>
-                <viewController id="lUx-CG-FkH" customClass="StudyFilterViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lUx-CG-FkH" customClass="StudyFilterViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7KD-yM-djx"/>
                         <viewControllerLayoutGuide type="bottom" id="Jld-Wp-LF3"/>
@@ -482,9 +482,9 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pgd-bA-uNV">
                                 <rect key="frame" x="0.0" y="40" width="375" height="553"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewLayout key="collectionViewLayout" id="l8e-d4-YTz" customClass="PinterestLayout" customModule="FDA" customModuleProvider="target"/>
+                                <collectionViewLayout key="collectionViewLayout" id="l8e-d4-YTz" customClass="PinterestLayout" customModule="HPHC" customModuleProvider="target"/>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Wfx-YU-qiq" customClass="FilterListCollectionViewCell" customModule="FDA" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Wfx-YU-qiq" customClass="FilterListCollectionViewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="91" y="0.0" width="193" height="255"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -515,7 +515,7 @@
                                                         </constraints>
                                                     </view>
                                                     <prototypes>
-                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="50" id="zHQ-rv-Y3l" customClass="FilterListTableViewCell" customModule="FDA" customModuleProvider="target">
+                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="50" id="zHQ-rv-Y3l" customClass="FilterListTableViewCell" customModule="HPHC" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="68" width="193" height="50"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="zHQ-rv-Y3l" id="OMD-a2-GGf">
@@ -660,7 +660,7 @@
         <!--Left Menu View Controller-->
         <scene sceneID="PHW-Hb-oGa">
             <objects>
-                <viewController storyboardIdentifier="LeftMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cb4-N4-R1j" customClass="LeftMenuViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeftMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cb4-N4-R1j" customClass="LeftMenuViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hZZ-nc-OY0"/>
                         <viewControllerLayoutGuide type="bottom" id="pge-5B-3X3"/>
@@ -730,7 +730,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="70" id="ViD-n5-s72" customClass="LeftMenuCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="70" id="ViD-n5-s72" customClass="LeftMenuCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="179" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ViD-n5-s72" id="DBh-0i-6ut">
@@ -778,7 +778,7 @@
                                             <outlet property="menuIcon" destination="F54-LP-vEh" id="Ahu-V6-vtf"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LeftMenuResourceCell" rowHeight="70" id="JUy-Rs-fyb" customClass="LeftMenuResourceTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LeftMenuResourceCell" rowHeight="70" id="JUy-Rs-fyb" customClass="LeftMenuResourceTableViewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="249" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JUy-Rs-fyb" id="9CS-pO-4eT">
@@ -855,7 +855,7 @@
         <!--Slide Menu View Controller-->
         <scene sceneID="fpY-pt-Vpx">
             <objects>
-                <viewController storyboardIdentifier="FDASlideMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ais-Yu-8zr" customClass="FDASlideMenuViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FDASlideMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ais-Yu-8zr" customClass="FDASlideMenuViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="v83-Cd-Ebn"/>
                         <viewControllerLayoutGuide type="bottom" id="ony-Ue-YC4"/>
@@ -938,7 +938,7 @@
         <!--Gateway Resources List View Controller-->
         <scene sceneID="GBc-op-J8W">
             <objects>
-                <viewController id="5n6-K7-AGX" customClass="GatewayResourcesListViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5n6-K7-AGX" customClass="GatewayResourcesListViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="egc-TX-UG0"/>
                         <viewControllerLayoutGuide type="bottom" id="WDC-E8-9AP"/>
@@ -951,7 +951,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="resourcesCell" rowHeight="61" id="0Ek-4u-P6t" customClass="ResourcesListCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="resourcesCell" rowHeight="61" id="0Ek-4u-P6t" customClass="ResourcesListCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Ek-4u-P6t" id="ZzJ-La-vys">
@@ -1057,7 +1057,7 @@
         <!--Notification View Controller-->
         <scene sceneID="NEH-aw-BHc">
             <objects>
-                <viewController storyboardIdentifier="NotificationViewControllerIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zmZ-Ff-dEh" customClass="NotificationViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationViewControllerIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zmZ-Ff-dEh" customClass="NotificationViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PBW-5g-3tz"/>
                         <viewControllerLayoutGuide type="bottom" id="yLT-4v-XjN"/>
@@ -1073,7 +1073,7 @@
                                 <rect key="frame" x="0.0" y="1" width="375" height="602"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationCell" rowHeight="97" id="sSF-1F-BwB" customClass="NotificationTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationCell" rowHeight="97" id="sSF-1F-BwB" customClass="NotificationTableViewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="97"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sSF-1F-BwB" id="LGL-cP-RSi">
@@ -1148,7 +1148,7 @@
         <!--Profile View Controller-->
         <scene sceneID="wy7-dv-CFM">
             <objects>
-                <viewController id="UWn-lb-vfU" customClass="ProfileViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="UWn-lb-vfU" customClass="ProfileViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Dh8-Sx-2oB"/>
                         <viewControllerLayoutGuide type="bottom" id="xLx-f5-o1W"/>
@@ -1229,7 +1229,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommonDetailsCell" rowHeight="62" id="GgO-iM-gdQ" customClass="SignUpTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommonDetailsCell" rowHeight="62" id="GgO-iM-gdQ" customClass="SignUpTableViewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="375" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GgO-iM-gdQ" id="oSF-ho-qdn">
@@ -1292,7 +1292,7 @@
                                             <outlet property="textFieldValue" destination="FHg-Y2-WtR" id="H00-XQ-Y2p"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileTableViewCell" rowHeight="62" id="3uv-2m-XeE" customClass="ProfileTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileTableViewCell" rowHeight="62" id="3uv-2m-XeE" customClass="ProfileTableViewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="63" width="375" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3uv-2m-XeE" id="wfh-L8-pIE">
@@ -1358,7 +1358,7 @@
         <!--Confirmation View Controller-->
         <scene sceneID="whI-Tq-Vfl">
             <objects>
-                <viewController id="cV9-St-ahQ" customClass="ConfirmationViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cV9-St-ahQ" customClass="ConfirmationViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lKO-kh-Nb3"/>
                         <viewControllerLayoutGuide type="bottom" id="Gw9-js-utt"/>
@@ -1468,7 +1468,7 @@ Below is a list of studies that you are a part of and information on how your re
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ConfirmationCell" rowHeight="76" id="EXv-T3-DWR" customClass="ConfirmationTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ConfirmationCell" rowHeight="76" id="EXv-T3-DWR" customClass="ConfirmationTableViewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="179" width="375" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EXv-T3-DWR" id="swK-l1-aRn">
@@ -1508,7 +1508,7 @@ Below is a list of studies that you are a part of and information on how your re
                                             <outlet property="labelTitleDescription" destination="lMv-L4-SqQ" id="5dl-Cc-rRN"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ConfirmationOptionalCell" rowHeight="78" id="OPN-7C-Ufb" customClass="ConfirmationOptionalTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ConfirmationOptionalCell" rowHeight="78" id="OPN-7C-Ufb" customClass="ConfirmationOptionalTableViewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="255" width="375" height="78"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OPN-7C-Ufb" id="2S6-Uy-1FW">
@@ -1617,7 +1617,7 @@ Below is a list of studies that you are a part of and information on how your re
         <!--Change Password View Controller-->
         <scene sceneID="nLa-qL-V7F">
             <objects>
-                <viewController storyboardIdentifier="ChangePasswordViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8HM-Dc-eDB" customClass="ChangePasswordViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChangePasswordViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8HM-Dc-eDB" customClass="ChangePasswordViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nGe-9t-XjL"/>
                         <viewControllerLayoutGuide type="bottom" id="oeM-5m-cuo"/>
@@ -1630,7 +1630,7 @@ Below is a list of studies that you are a part of and information on how your re
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="444"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailsCell" rowHeight="62" id="KQg-N7-qL1" customClass="SignInTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailsCell" rowHeight="62" id="KQg-N7-qL1" customClass="SignInTableViewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KQg-N7-qL1" id="0Tk-EB-p8c">
@@ -1733,7 +1733,7 @@ Below is a list of studies that you are a part of and information on how your re
         <!--Reachout Options View Controller-->
         <scene sceneID="GFv-MM-z7a">
             <objects>
-                <viewController id="7ri-lu-wzc" customClass="ReachoutOptionsViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7ri-lu-wzc" customClass="ReachoutOptionsViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qXM-op-ucC"/>
                         <viewControllerLayoutGuide type="bottom" id="Bjs-ez-PIF"/>
@@ -1746,7 +1746,7 @@ Below is a list of studies that you are a part of and information on how your re
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="reachoutCell" rowHeight="50" id="Xd0-FK-Nr1" customClass="ReachoutOptionCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="reachoutCell" rowHeight="50" id="Xd0-FK-Nr1" customClass="ReachoutOptionCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xd0-FK-Nr1" id="5D4-kI-3Uk">
@@ -1832,7 +1832,7 @@ Below is a list of studies that you are a part of and information on how your re
         <!--Feed Back View Controller-->
         <scene sceneID="Ocv-xE-6JN">
             <objects>
-                <viewController id="PxL-Ch-CdE" customClass="FeedBackViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PxL-Ch-CdE" customClass="FeedBackViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SFb-33-r5o"/>
                         <viewControllerLayoutGuide type="bottom" id="Ed7-wz-GwB"/>
@@ -1845,7 +1845,7 @@ Below is a list of studies that you are a part of and information on how your re
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="524"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedbackCellFirst" rowHeight="161" id="HWK-gc-wN7" customClass="FeedBackTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedbackCellFirst" rowHeight="161" id="HWK-gc-wN7" customClass="FeedBackTableViewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="161"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HWK-gc-wN7" id="guX-Tf-2ve">
@@ -1881,7 +1881,7 @@ Below is a list of studies that you are a part of and information on how your re
                                             <outlet property="labelHeadingText" destination="b0d-he-JiD" id="uID-Qb-8HZ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactUsCell" rowHeight="62" id="Nbt-3O-47S" customClass="ContactUsTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactUsCell" rowHeight="62" id="Nbt-3O-47S" customClass="ContactUsTableViewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="189" width="375" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nbt-3O-47S" id="w8l-N7-eyq">
@@ -1929,7 +1929,7 @@ Below is a list of studies that you are a part of and information on how your re
                                             <outlet property="textFieldValue" destination="ZAG-q5-tTH" id="Y5J-fq-7Bf"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="textviewCell" rowHeight="63" id="ZnJ-mt-fH4" customClass="TextviewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="textviewCell" rowHeight="63" id="ZnJ-mt-fH4" customClass="TextviewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="251" width="375" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZnJ-mt-fH4" id="fMu-jC-3yq">
@@ -2029,7 +2029,7 @@ Below is a list of studies that you are a part of and information on how your re
         <!--Contact Us View Controller-->
         <scene sceneID="3SJ-ld-C1f">
             <objects>
-                <viewController id="bsn-SP-kLV" customClass="ContactUsViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bsn-SP-kLV" customClass="ContactUsViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0oe-8n-2Si"/>
                         <viewControllerLayoutGuide type="bottom" id="Wg1-td-Usa"/>
@@ -2042,7 +2042,7 @@ Below is a list of studies that you are a part of and information on how your re
                                 <rect key="frame" x="0.0" y="1" width="375" height="524"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactUsCell" id="iS2-iX-BIO" customClass="ContactUsTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactUsCell" id="iS2-iX-BIO" customClass="ContactUsTableViewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iS2-iX-BIO" id="QiY-kt-6NB">
@@ -2090,7 +2090,7 @@ Below is a list of studies that you are a part of and information on how your re
                                             <outlet property="textFieldValue" destination="MNt-de-Zxv" id="0XR-TY-GC7"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="textviewCell" rowHeight="63" id="1mf-UQ-QXu" customClass="TextviewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="textviewCell" rowHeight="63" id="1mf-UQ-QXu" customClass="TextviewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="90" width="375" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1mf-UQ-QXu" id="eOQ-QF-AuC">

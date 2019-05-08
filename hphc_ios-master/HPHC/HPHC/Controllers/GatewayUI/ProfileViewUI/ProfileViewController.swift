@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
@@ -84,7 +81,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         super.viewDidLoad()
         
         //First responder handler for textfields
-        IQKeyboardManager.sharedManager().enable = true
+        // IQKeyboardManager.sharedManager().enable = true
         
         //Load plist info
         let plistPath = Bundle.main.path(forResource: "Profile", ofType: ".plist", inDirectory:nil)
@@ -193,7 +190,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     @IBAction func buttonActionLeadTime(_ sender: UIButton) {
         
         
-        let alertView = UIAlertController(title: kLeadTimeSelectText, message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: UIAlertControllerStyle.actionSheet);
+        let alertView = UIAlertController(title: kLeadTimeSelectText, message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: UIAlertController.Style.actionSheet);
         
         
         datePickerView = UIDatePicker.init(frame: CGRect(x: 10, y: 30, width: alertView.view.frame.size.width - 40, height: 216) )
@@ -208,7 +205,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         
         alertView.view.addSubview(datePickerView!)
         
-        let action =   UIAlertAction(title: kActionSheetDoneButtonTitle, style: UIAlertActionStyle.default, handler: {
+        let action =   UIAlertAction(title: kActionSheetDoneButtonTitle, style: UIAlertAction.Style.default, handler: {
             action in
             
             let calender:Calendar? = Calendar.current
@@ -230,7 +227,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             }
             
         })
-        let actionCancel =   UIAlertAction(title: kActionSheetCancelButtonTitle, style: UIAlertActionStyle.default, handler: {
+        let actionCancel =   UIAlertAction(title: kActionSheetCancelButtonTitle, style: UIAlertAction.Style.default, handler: {
             action in
             
         })
@@ -274,25 +271,32 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      
      */
     @IBAction func buttonActionDeleteAccount(_ sender: UIButton) {
-        
+      
         if (Gateway.instance.studies?.count)! > 0 {
             let studies = Gateway.instance.studies
-            let joinedStudies = studies?.filter({$0.userParticipateState.status == .inProgress || $0.userParticipateState.status == .completed})
-            
-            if joinedStudies?.count != 0 {
+            var joinedStudies:[Study] = []
+            if Utilities.isStandaloneApp() {
+                let standaloneStudyId = Utilities.standaloneStudyId()
+                joinedStudies = studies?.filter({($0.userParticipateState.status == .inProgress || $0.userParticipateState.status == .completed) && ($0.studyId == standaloneStudyId)}) ?? []
+            }
+            else {
+                joinedStudies = studies?.filter({$0.userParticipateState.status == .inProgress || $0.userParticipateState.status == .completed}) ?? []
+            }
+
+            if joinedStudies.count != 0 {
                 self.performSegue(withIdentifier: "confirmationSegue", sender: joinedStudies)
             }
             else {
                 UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleDeleteAccount, comment: ""), errorMessage: NSLocalizedString(kDeleteAccountConfirmationMessage, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleDeleteAccount, comment: ""),
                                                                      errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                                      action1: {
-                                                                        
+
                                                                         self.sendRequestToDeleteAccount()
-                                                                        
-                                                                        
+
+
                 },
                                                                      action2: {
-                                                                        
+
                 })
             }
         }
@@ -309,7 +313,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      Dismiss key board when clicked on Background
      
      */
-    func dismissKeyboard(){
+    @objc func dismissKeyboard(){
         self.view.endEditing(true)
     }
     
@@ -379,9 +383,21 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         
         UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kMessageAccountDeletedSuccess, comment: ""), buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
             
-            let leftController = (self.slideMenuController()?.leftViewController as? LeftMenuViewController)!
-            leftController.changeViewController(.studyList)
-            leftController.createLeftmenuItems()
+            
+            if Utilities.isStandaloneApp() {
+                
+                UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()
+                Study.currentStudy = nil
+                self.slideMenuController()?.leftViewController?.navigationController?.popToRootViewController(animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                    UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
+                }
+            }
+            else {
+                let leftController = (self.slideMenuController()?.leftViewController as? LeftMenuViewController)!
+                leftController.changeViewController(.studyList)
+                leftController.createLeftmenuItems()
+            }
             
         }
     }
@@ -422,11 +438,16 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         
         var passcodeDict: Dictionary<String,Any> =  (tableViewRowDetails?[3] as? Dictionary<String, Any>)!
         
+    
+        guard let keychainPasscodeDict = try? ORKKeychainWrapper.object(forKey: korkPasscode) as? [String : Any] else {
+            return
+        }
         
-        let keychainPasscodeDict: Dictionary<String,Any>? = ORKKeychainWrapper.object(forKey: korkPasscode, error: &error)  == nil ? nil : (ORKKeychainWrapper.object(forKey: korkPasscode, error: &error)  as?  Dictionary<String,Any>)
+//        let keychainPasscodeDict: Dictionary<String,Any>? = ORKKeychainWrapper.object(forKey: korkPasscode) == nil ? nil : (ORKKeychainWrapper.object(forKey: korkPasscode)  as?  Dictionary<String,Any>)
+        
         var istouchIdEnabled: Bool =  false
-        if keychainPasscodeDict != nil &&  (keychainPasscodeDict?.count)! > 0{
-            istouchIdEnabled = ((keychainPasscodeDict?[ktouchid])! as? Bool)!
+        if keychainPasscodeDict.count > 0 {
+            istouchIdEnabled = keychainPasscodeDict[ktouchid] as? Bool ?? false
         }
         
         print("touch;;;\(istouchIdEnabled)")
@@ -450,7 +471,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      @param Sender  has to be a UISwitch
      
      */
-    func toggleValueChanged(_ sender: UISwitch)  {
+    @objc func toggleValueChanged(_ sender: UISwitch)  {
         
         isProfileEdited = true
         
@@ -500,7 +521,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         }
     }
   
-  func cancelAllLocalNotifications(){
+  @objc func cancelAllLocalNotifications(){
     
     UIApplication.shared.cancelAllLocalNotifications()
     let application = UIApplication.shared
@@ -512,7 +533,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
   
  
  
-  func registerLocalNotification(){
+  @objc func registerLocalNotification(){
     LocalNotification.refreshAllLocalNotification()
     self.removeProgressIndicator()
   }
@@ -525,7 +546,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      @param sender  Accepts UIbutton Object
      
      */
-    func pushToChangePassword(_ sender: UIButton)  {
+    @objc func pushToChangePassword(_ sender: UIButton)  {
         self.performSegue(withIdentifier: kChangePasswordSegueIdentifier, sender: nil)
     }
     
@@ -689,7 +710,7 @@ extension ProfileViewController: UITableViewDataSource {
                 
                 cell.buttonChangePassword?.addTarget(self, action:#selector(buttonActionChangePassCode), for: .touchUpInside)
                 
-            default: break
+            //default: break
             }
             //Cell data setup
             cell.populateCellData(data: tableViewData, securedText: isSecuredEntry,keyboardType: keyBoardType)
@@ -758,7 +779,7 @@ extension ProfileViewController: UITextFieldDelegate{
         
        
         if  tag == .EmailId {
-            if string == " " || finalString.characters.count > 255{
+            if string == " " || finalString.count > 255{
                 return false
             }
             else{
@@ -821,7 +842,7 @@ extension ProfileViewController: NMWebServiceDelegate {
         else if requestName as String ==  RegistrationMethods.userProfile.description {
             self.tableViewProfile?.reloadData()
             
-            if (user.settings?.leadTime?.characters.count)! > 0 {
+            if (user.settings?.leadTime?.count)! > 0 {
                 self.buttonLeadTime?.setTitle(user.settings?.leadTime, for: .normal)
             }
             
@@ -957,7 +978,7 @@ extension ProfileViewController: ORKTaskViewControllerDelegate{
 //        })
     }
   
-  func dismissTaskViewController() {
+  @objc func dismissTaskViewController() {
     self.dismiss(animated: true, completion: {
  })
   }

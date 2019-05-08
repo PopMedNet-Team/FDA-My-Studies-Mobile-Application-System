@@ -1,14 +1,0 @@
-
-Vsquid:S1075"ARefactor your code to get this URI from a customizable parameter.(¦ÇÏê
-[squid:S1192"FDefine a constant instead of duplicating this literal "</br>" 3 times.(¬ïÂ
-Dsquid:S2093"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
-?squid:S00108")Either remove or fill this block of code.(”ı¾
-›squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÓÏ­ûùÿÿÿÿ
-–squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(˜óğ°
-gsquid:S1858"M"getSignatureContent" returns a string, there's no need to call "toString()".(˜´‰üÿÿÿÿ
-lsquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(˜ÊÀL
-=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
-T
-squid:S899";Do something with the "boolean" value returned by "delete".(²Œ­ûÿÿÿÿ
-[
-squid:S899"BDo something with the "boolean" value returned by "createNewFile".(ô©È¾ıÿÿÿÿ

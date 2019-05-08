@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+  ~ associated documentation files (the "Software"), to deal in the Software without restriction, including
+  ~ without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all copies or substantial
+  ~ portions of the Software.
+  ~
+  ~ Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.hphc.mystudies">
+          package="com.harvard.fda">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -13,9 +27,10 @@
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
-        android:name="com.hphc.mystudies.FDAApplication"
+        android:name=".FDAApplication"
         android:allowBackup="false"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
@@ -23,7 +38,17 @@
         android:largeHeap="true"
         android:resizeableActivity="false"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".studyAppModule.StandaloneStudyInfoActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppThemeNoActionBar">
+        </activity>
+        <activity
+            android:name=".studyAppModule.StandaloneActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"/>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.myfileprovider"
@@ -35,13 +60,13 @@
         </provider>
 
         <activity
-            android:name="com.hphc.mystudies.gatewayModule.GatewayActivity"
+            android:name=".gatewayModule.GatewayActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.SplashActivity"
+            android:name=".SplashActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
@@ -53,91 +78,102 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.hphc.mystudies.userModule.SignupActivity"
+            android:name=".userModule.SignupActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
-            android:name="com.hphc.mystudies.userModule.VerificationStepActivity"
+            android:name=".userModule.VerificationStepActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.userModule.SignupProcessCompleteActivity"
+            android:name=".userModule.SignupProcessCompleteActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.passcodeModule.PasscodeSetupActivity"
+            android:name=".passcodeModule.PasscodeSetupActivity"
             android:configChanges="screenLayout|orientation"
-            android:screenOrientation="portrait"
             android:theme="@style/passcodeTheme"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.userModule.SignInActivity"
+            android:name=".userModule.ChooseTouchIDSignInActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".userModule.SignInActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden|adjustNothing"/>
         <activity
-            android:name="com.hphc.mystudies.userModule.ForgotPasswordActivity"
+            android:name=".userModule.ForgotPasswordActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.StudyActivity"
+            android:name=".userModule.UseTouchIDPasscodeActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".studyAppModule.StudyActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden|adjustNothing"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.StudySignInActivity"
+            android:name=".studyAppModule.StudySignInActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.StudyInfoActivity"
+            android:name=".studyAppModule.StudyInfoActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.SurveyActivity"
+            android:name=".studyAppModule.SurveyActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.NotificationActivity"
+            android:name=".studyAppModule.NotificationActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.ChangePasswordActivity"
+            android:name=".studyAppModule.ChangePasswordActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.DeleteAccountActivity"
+            android:name=".studyAppModule.DeleteAccountActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.userModule.TermsPrivacyPolicyActivity"
+            android:name=".userModule.TermsPrivacyPolicyActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.consent.CustomConsentViewTaskActivity"
+            android:name=".studyAppModule.consent.CustomConsentViewTaskActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp"
@@ -154,19 +190,19 @@
             android:value="17d66c1b46986f6f6633cc62617443d13b9fbf1d"/>
 
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.EligibilityEnrollmentActivity"
+            android:name=".studyAppModule.EligibilityEnrollmentActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar1"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.activityBuilder.CustomSurveyViewTaskActivity"
+            android:name=".studyAppModule.activityBuilder.CustomSurveyViewTaskActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.EligibilityModule.CustomViewTaskActivity"
+            android:name=".EligibilityModule.CustomViewTaskActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp"
@@ -177,31 +213,31 @@
             android:value="17d66c1b46986f6f6633cc62617443d13b9fbf1d"/>
 
         <activity
-            android:name="com.hphc.mystudies.WebViewActivity"
+            android:name=".WebViewActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.ConsentCompletedActivity"
+            android:name=".studyAppModule.ConsentCompletedActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.ContactUsActivity"
+            android:name=".studyAppModule.ContactUsActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.FeedbackActivity"
+            android:name=".studyAppModule.FeedbackActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.EnrollmentValidatedActivity"
+            android:name=".studyAppModule.EnrollmentValidatedActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
@@ -215,61 +251,61 @@
             android:value="@integer/google_play_services_version"/>
 
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.SurveyCompleteActivity"
+            android:name=".studyAppModule.SurveyCompleteActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.ResourcesWebViewActivity"
+            android:name=".studyAppModule.ResourcesWebViewActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.PDFDisplayActivity"
+            android:name=".studyAppModule.PDFDisplayActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.userModule.NewPasscodeSetupActivity"
+            android:name=".userModule.NewPasscodeSetupActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity
-            android:name="com.hphc.mystudies.userModule.ConfirmPasscodeSetup"
+            android:name=".userModule.ConfirmPasscodeSetup"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
 
-        <service android:name="com.hphc.mystudies.MyFirebaseMessagingService">
+        <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
-        <service android:name="com.hphc.mystudies.MyFirebaseInstanceIDService">
+        <service android:name=".MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
 
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.ChartActivity"
+            android:name=".studyAppModule.ChartActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.GatewayResourcesWebViewActivity"
+            android:name=".studyAppModule.GatewayResourcesWebViewActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp"
             android:windowSoftInputMode="stateHidden"/>
 
-        <receiver android:name="com.hphc.mystudies.notificationModule.AlarmReceiver">
+        <receiver android:name=".notificationModule.AlarmReceiver">
             <intent-filter>
                 <action android:name="android.media.action.DISPLAY_NOTIFICATION"/>
 
@@ -278,12 +314,12 @@
         </receiver>
 
         <provider
-            android:name="com.hphc.mystudies.offlineModule.auth.StubContentProvider"
-            android:authorities="com.hphc.mystudies.offlineModule.auth.syncadapterexample.provider"
+            android:name=".offlineModule.auth.StubContentProvider"
+            android:authorities="com.harvard.fda.offlineModule.auth.syncadapterexample.provider"
             android:exported="false"
             android:syncable="true"/>
 
-        <service android:name="com.hphc.mystudies.offlineModule.auth.StubAuthenticatorService">
+        <service android:name=".offlineModule.auth.StubAuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator"/>
             </intent-filter>
@@ -293,7 +329,7 @@
                 android:resource="@xml/authenticator"/>
         </service>
         <service
-            android:name="com.hphc.mystudies.offlineModule.auth.SyncAdapterService"
+            android:name=".offlineModule.auth.SyncAdapterService"
             android:exported="true"
             android:process=":sync">
             <intent-filter>
@@ -304,53 +340,53 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/syncadapter"/>
         </service>
-        <service android:name="com.hphc.mystudies.utils.ActiveTaskService">
+        <service android:name=".utils.ActiveTaskService">
             <intent-filter>
                 <action android:name="com.harvard.fda.ActiveTask"/>
             </intent-filter>
         </service>
 
-        <receiver android:name="com.hphc.mystudies.utils.AlarmService"/>
+        <receiver android:name=".utils.AlarmService"/>
 
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.FilterActivity"
+            android:name=".studyAppModule.FilterActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp"
             android:windowSoftInputMode="stateHidden"/>
 
-        <receiver android:name="com.hphc.mystudies.utils.BootCompleteListener">
+        <receiver android:name=".utils.BootCompleteListener">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 
         <activity
-            android:name="com.hphc.mystudies.EligibilityModule.NotEligibleActivity"
+            android:name=".EligibilityModule.NotEligibleActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp">
         </activity>
         <activity
-            android:name="com.hphc.mystudies.EligibilityModule.EligibleActivity"
+            android:name=".EligibilityModule.EligibleActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp">
         </activity>
         <activity
-            android:name="com.hphc.mystudies.EligibilityModule.ComprehensionSuccessActivity"
+            android:name=".EligibilityModule.ComprehensionSuccessActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp">
         </activity>
         <activity
-            android:name="com.hphc.mystudies.EligibilityModule.ComprehensionFailureActivity"
+            android:name=".EligibilityModule.ComprehensionFailureActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp">
         </activity>
         <activity
-            android:name="com.hphc.mystudies.studyAppModule.consent.ConsentSharingStepCustom.LoadMoreActivity"
+            android:name=".studyAppModule.consent.ConsentSharingStepCustom.LoadMoreActivity"
             android:configChanges="screenLayout|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BackboneApp">

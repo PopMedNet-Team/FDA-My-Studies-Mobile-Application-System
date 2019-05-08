@@ -111,17 +111,27 @@ void RLMThrowResultsError(NSString *aggregateMethod) {
     }
 }
 
+- (instancetype)initWithObjectInfo:(RLMClassInfo&)info
+                           results:(realm::Results&&)results {
+    if (self = [super init]) {
+        _results = std::move(results);
+        _realm = info.realm;
+        _info = &info;
+    }
+    return self;
+}
+
 + (instancetype)resultsWithObjectInfo:(RLMClassInfo&)info
-                              results:(realm::Results)results {
-    RLMResults *ar = [[self alloc] initPrivate];
-    ar->_results = std::move(results);
-    ar->_realm = info.realm;
-    ar->_info = &info;
-    return ar;
+                              results:(realm::Results&&)results {
+    return [[self alloc] initWithObjectInfo:info results:std::move(results)];
 }
 
 + (instancetype)emptyDetachedResults {
     return [[self alloc] initPrivate];
+}
+
+- (instancetype)subresultsWithResults:(realm::Results)results {
+    return [self.class resultsWithObjectInfo:*_info results:std::move(results)];
 }
 
 static inline void RLMResultsValidateInWriteTransaction(__unsafe_unretained RLMResults *const ar) {
@@ -151,7 +161,10 @@ static inline void RLMResultsValidateInWriteTransaction(__unsafe_unretained RLMR
 
 - (NSString *)objectClassName {
     return translateRLMResultsErrors([&] {
-        return RLMStringDataToNSString(_results.get_object_type());
+        if (_info && _results.get_type() == realm::PropertyType::Object) {
+            return _info->rlmObjectSchema.className;
+        }
+        return (NSString *)nil;
     });
 }
 
@@ -256,6 +269,9 @@ static inline void RLMResultsValidateInWriteTransaction(__unsafe_unretained RLMR
 }
 
 - (id)valueForKey:(NSString *)key {
+    if (!_info) {
+        return @[];
+    }
     return translateRLMResultsErrors([&] {
         return RLMCollectionValueForKey(_results, key, _realm, *_info);
     });
@@ -343,7 +359,7 @@ static inline void RLMResultsValidateInWriteTransaction(__unsafe_unretained RLMR
             @throw RLMException(@"Querying is currently only implemented for arrays of Realm Objects");
         }
         auto query = RLMPredicateToQuery(predicate, _info->rlmObjectSchema, _realm.schema, _realm.group);
-        return [RLMResults resultsWithObjectInfo:*_info results:_results.filter(std::move(query))];
+        return [self subresultsWithResults:_results.filter(std::move(query))];
     });
 }
 
@@ -359,8 +375,28 @@ static inline void RLMResultsValidateInWriteTransaction(__unsafe_unretained RLMR
         if (_results.get_mode() == Results::Mode::Empty) {
             return self;
         }
-        return [RLMResults resultsWithObjectInfo:*_info
-                                         results:_results.sort(RLMSortDescriptorsToKeypathArray(properties))];
+        return [self subresultsWithResults:_results.sort(RLMSortDescriptorsToKeypathArray(properties))];
+    });
+}
+
+- (RLMResults *)distinctResultsUsingKeyPaths:(NSArray<NSString *> *)keyPaths {
+    for (NSString *keyPath in keyPaths) {
+        if ([keyPath rangeOfString:@"@"].location != NSNotFound) {
+            @throw RLMException(@"Cannot distinct on keypath '%@': KVC collection operators are not supported.", keyPath);
+        }
+    }
+    
+    return translateRLMResultsErrors([&] {
+        if (_results.get_mode() == Results::Mode::Empty) {
+            return self;
+        }
+        
+        std::vector<std::string> keyPathsVector;
+        for (NSString *keyPath in keyPaths) {
+            keyPathsVector.push_back(keyPath.UTF8String);
+        }
+        
+        return [self subresultsWithResults:_results.distinct(keyPathsVector)];
     });
 }
 
@@ -482,4 +518,8 @@ static inline void RLMResultsValidateInWriteTransaction(__unsafe_unretained RLMR
 @end
 
 @implementation RLMLinkingObjects
+- (NSString *)description {
+    return RLMDescriptionWithMaxDepth(@"RLMLinkingObjects", self, RLMDescriptionMaxDepth);
+}
 @end
+

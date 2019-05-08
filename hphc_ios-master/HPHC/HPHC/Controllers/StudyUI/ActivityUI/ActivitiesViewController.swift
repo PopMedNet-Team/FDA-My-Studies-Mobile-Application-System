@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -66,7 +63,7 @@ class ActivitiesViewController : UIViewController{
         selectedFilter = ActivityFilterType.all
         
         self.tableView?.estimatedRowHeight = 126
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        self.tableView?.rowHeight = UITableView.automaticDimension
         
         self.tabBarController?.delegate = self
         
@@ -85,7 +82,7 @@ class ActivitiesViewController : UIViewController{
         //create refresh control for pull to refresh
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControlEvents.valueChanged)
+        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
         tableView?.addSubview(refreshControl!)
     }
     
@@ -95,7 +92,13 @@ class ActivitiesViewController : UIViewController{
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         UIApplication.shared.statusBarStyle = .default
         
-        self.addHomeButton()
+        if Utilities.isStandaloneApp() {
+            self.setNavigationBarItem()
+        }
+        else {
+            self.addHomeButton()
+        }
+       
         
         if !taskControllerPresented {
             taskControllerPresented = false
@@ -110,6 +113,8 @@ class ActivitiesViewController : UIViewController{
             self.tableView?.isHidden = false
             self.labelNoNetworkAvailable?.isHidden = true
         }
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -152,7 +157,7 @@ class ActivitiesViewController : UIViewController{
         
         if (ud.bool(forKey: "FKC") && ud.object(forKey: kFetalKickStartTimeStamp) != nil) {
             
-            let studyId = (ud.object(forKey: kFetalkickStudyId)  as? String)!
+            //let studyId = (ud.object(forKey: kFetalkickStudyId)  as? String)!
             let activityId = (ud.object(forKey: kFetalKickActivityId)  as? String)!
             let activity  = Study.currentStudy?.activities?.filter({$0.actvityId == activityId}).last
             
@@ -169,7 +174,7 @@ class ActivitiesViewController : UIViewController{
         } else {
             //check if user navigated from notification
             
-            if NotificationHandler.instance.activityId.characters.count > 0 {
+            if NotificationHandler.instance.activityId.count > 0 {
                 
                 let activityId = NotificationHandler.instance.activityId
                 
@@ -217,7 +222,7 @@ class ActivitiesViewController : UIViewController{
                                 
                                 endAnchorDate = endAnchorDate?.endOfDay
                                 let startDateResult = (startAnchorDate?.compare(todayDate))! as ComparisonResult
-                                let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
+                                //let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
                                 self.isAnchorDateSet = false
                                 
                                 if startDateResult == .orderedDescending {
@@ -298,7 +303,7 @@ class ActivitiesViewController : UIViewController{
     }
     
     
-    func refresh(sender:AnyObject) {
+    @objc func refresh(sender:AnyObject) {
         
         Logger.sharedInstance.info("Request for study Updated...")
         WCPServices().getStudyUpdates(study: Study.currentStudy!, delegate: self)
@@ -308,20 +313,42 @@ class ActivitiesViewController : UIViewController{
     
     // MARK:-
     
+    func fetchActivityAnchorDateResponseFromLabkey() {
+        
+        AnchorDateHandler().fetchActivityAnchorDateResponseFromLabkey { (status) in
+            print("Finished 1")
+            if status {
+                //DispatchQueue.main.async {
+                    self.loadActivitiesFromDatabase()
+                //}
+                
+            }
+            
+        }
+        print("Finished 0")
+    }
+    
     /**
      Used to load the Actif=vities data from database
      */
     func loadActivitiesFromDatabase(){
         
-        DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
-            if activities.count > 0 {
-                Study.currentStudy?.activities = activities
-                
-                self.handleActivityListResponse()
-                
-            } else {
-                
-                self.sendRequestToGetActivityStates()
+        if DBHandler.isActivitiesEmpty((Study.currentStudy?.studyId)!) {
+            self.sendRequestToGetActivityStates()
+        }
+        else {
+            
+            DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
+                if activities.count > 0 {
+                    Study.currentStudy?.activities = activities
+                    
+                    self.handleActivityListResponse()
+                    self.fetchActivityAnchorDateResponseFromLabkey()
+                    
+                } else {
+                    
+                    //self.sendRequestToGetActivityStates()
+                }
             }
         }
     }
@@ -333,8 +360,8 @@ class ActivitiesViewController : UIViewController{
     func createActivity(){
         
         //Disable Custom KeyPad with toolbars
-        IQKeyboardManager.sharedManager().enable = false
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+       // IQKeyboardManager.sharedManager().enable = false
+        IQKeyboardManager.shared.enableAutoToolbar = false
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
             
@@ -354,7 +381,7 @@ class ActivitiesViewController : UIViewController{
             if Study.currentActivity?.currentRun.restortionData != nil {
                 let restoredData = Study.currentActivity?.currentRun.restortionData
                 
-                let result: ORKResult?
+                //let result: ORKResult?
                 taskViewController = ORKTaskViewController(task: task, restorationData: restoredData, delegate: self)
             } else {
                 
@@ -848,7 +875,7 @@ extension ActivitiesViewController: UITableViewDelegate{
             if activity.currentRun != nil {
                 if activity.userParticipationStatus != nil {
                     let activityRunParticipationStatus = activity.userParticipationStatus
-                    if activityRunParticipationStatus?.status == .yetToJoin || activityRunParticipationStatus?.status == .inProgress
+                    if activityRunParticipationStatus?.status == .yetToJoin || activityRunParticipationStatus?.status == .inProgress 
                         
                     {
                         Study.updateCurrentActivity(activity: activities[indexPath.row])
@@ -891,7 +918,7 @@ extension ActivitiesViewController: ActivitiesCellDelegate{
     
     func activityCell(cell: ActivitiesTableViewCell, activity: Activity) {
         
-        var frame = self.view.frame
+        let frame = self.view.frame
         //frame.size.height += 114
         
         let view = ActivitySchedules.instanceFromNib(frame: frame, activity: activity)
@@ -967,7 +994,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
     
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
+        Logger.sharedInstance.info("requestname : \(requestName) Response : \(String(describing:response))")
         
         if requestName as String == RegistrationMethods.activityState.method.methodName {
             self.sendRequesToGetActivityList()
@@ -1083,8 +1110,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
         //Enable Custom Keypad with toolbar
-        IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().enableAutoToolbar = true
+        // IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = true
         
         var taskResult: Any?
         
@@ -1145,17 +1172,22 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             self.checkForActivitiesUpdates()
         }
         
+        
+        let activityId = Study.currentActivity?.actvityId
+        let studyId = Study.currentStudy?.studyId
+        var response:[String:Any]? = nil
+        
         if  taskViewController.task?.identifier == "ConsentTask" {
             consentbuilder?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
         } else {
             
             if reason == ORKTaskViewControllerFinishReason.completed {
-                ActivityBuilder.currentActivityBuilder.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
-                print("\(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary())")
                 
+                ActivityBuilder.currentActivityBuilder.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
+                
+                response = ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary()
                 
                 Study.currentActivity?.userStatus = .completed
-                
                 
                 if ActivityBuilder.currentActivityBuilder.actvityResult?.type == ActivityType.activeTask {
                     
@@ -1174,7 +1206,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                                 
                                 let fetalKickResult:FetalKickCounterTaskResult? = orkStepResult?.results?.first as? FetalKickCounterTaskResult
                                 
-                                let study = Study.currentStudy
+                                //let study = Study.currentStudy
                                 let activity = Study.currentActivity
                                 
                                 //Create the stats for FetalKick
@@ -1243,15 +1275,27 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                     }
                 }
                 
+                
+                
                 //send response to labkey
-                LabKeyServices().processResponse(responseData:(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary())! , delegate: self)
+                LabKeyServices().processResponse(responseData:response!, delegate: self)
             }
         }
         taskViewController.dismiss(animated: true, completion: {
-            self.tableView?.reloadData()
-            if self.isAnchorDateSet {
-                self.registerNotificationForAnchorDate()
+           
+            if reason == ORKTaskViewControllerFinishReason.completed {
+                let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId!, activityId: activityId!, response: response!)
+                if lifeTimeUpdated {
+                    self.loadActivitiesFromDatabase()
+                }
+                else {
+                    self.tableView?.reloadData()
+                }
             }
+            else {
+                self.tableView?.reloadData()
+            }
+           
         })
     }
     
@@ -1286,7 +1330,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                 }
                 activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType: (ActivityBuilder.currentActivityBuilder.actvityResult?.type)!)
                 
-                let dictionary = activityStepResult?.getActivityStepResultDict()
+               // let dictionary = activityStepResult?.getActivityStepResultDict()
                 
                 
                 //check for anchor date
@@ -1454,16 +1498,16 @@ class ResponseDataFetch:NMWebServiceDelegate{
     
     var dataSourceKeysForLabkey: Array<Dictionary<String,String>> = []
     
-    private static let labkeyDateFormatter: DateFormatter = {
+     static let labkeyDateFormatter: DateFormatter = {
         //2017/06/13 18:12:13
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.init(identifier: "America/New_York")
-        formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
+        formatter.dateFormat = "YYYY-MM-dd HH:mm:ss.SSS"
         
         return formatter
     }()
     
-    private static let localDateFormatter: DateFormatter = {
+    public static let localDateFormatter: DateFormatter = {
         //2017/06/13 18:12:13
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.current
@@ -1478,7 +1522,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
     }
     
     // MARK: Helper Methods
-    func checkUpdates(){
+    func checkUpdates() {
         if StudyUpdates.studyActivitiesUpdated {
             self.sendRequestToGetDashboardInfo()
             
@@ -1507,8 +1551,10 @@ class ResponseDataFetch:NMWebServiceDelegate{
     
     func handleExecuteSQLResponse(){
         
-        self.dataSourceKeysForLabkey.removeFirst()
-        self.sendRequestToGetDashboardResponse()
+        if !self.dataSourceKeysForLabkey.isEmpty {
+            self.dataSourceKeysForLabkey.removeFirst()
+        }
+         self.sendRequestToGetDashboardResponse()
     }
     
     func getDataKeysForCurrentStudy(){
@@ -1526,7 +1572,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
         
     }
     
-    func sendRequestToGetDashboardResponse(){
+    func sendRequestToGetDashboardResponse() {
         
         if self.dataSourceKeysForLabkey.count != 0 {
             let details = self.dataSourceKeysForLabkey.first
@@ -1598,7 +1644,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
         Logger.sharedInstance.info(" START requestname : \(requestName)")
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
+        Logger.sharedInstance.info("requestname : \(requestName) Response : \(String(describing:response) )")
         
         if requestName as String == WCPMethods.studyDashboard.method.methodName {
             self.getDataKeysForCurrentStudy()

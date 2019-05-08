@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -48,6 +45,7 @@ struct DeviceType {
     static let IS_IPHONE_6          = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 667.0
     static let IS_IPHONE_6P         = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 736.0
     static let IS_IPAD              = UIDevice.current.userInterfaceIdiom == .pad && ScreenSize.SCREEN_MAX_LENGTH == 1024.0
+    static let IS_IPHONE_X_OR_HIGH  = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH >= 812
 }
 
 struct iOSVersion {
@@ -60,12 +58,37 @@ struct iOSVersion {
 
 class Utilities: NSObject {
     
+    class func isStandaloneApp() -> Bool {
+        
+        var infoDict: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            infoDict = NSDictionary(contentsOfFile: path)
+        }
+        
+        guard infoDict != nil else {return false}
+        
+        return Bool(infoDict!["IsStandaloneStudyApp"] as? String ?? "") ?? false
+        
+    }
+    
+    class func standaloneStudyId() -> String {
+        
+        var infoDict: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            infoDict = NSDictionary(contentsOfFile: path)
+        }
+        
+        guard infoDict != nil else {return ""}
+        
+        return String(infoDict!["StandaloneStudyId"] as? String ?? "")
+    }
+    
     class func getAttributedText(plainString pstr: String, boldString bstr: String, fontSize size: CGFloat,plainFontName: String,boldFontName: String) -> NSAttributedString {
         
         let title: String = pstr + " " + bstr
         let attributedString = NSMutableAttributedString(string: title)
-        let stringAttributes1 = [NSFontAttributeName:UIFont(name: plainFontName, size: size)!]
-        let stringAttributes2 = [NSFontAttributeName:UIFont(name: boldFontName, size: size)!]
+        let stringAttributes1 = [NSAttributedString.Key.font:UIFont(name: plainFontName, size: size)!]
+        let stringAttributes2 = [NSAttributedString.Key.font:UIFont(name: boldFontName, size: size)!]
         
         attributedString.addAttributes(stringAttributes1, range: (title as NSString).range(of: pstr))
         attributedString.addAttributes(stringAttributes2, range: (title as NSString).range(of: bstr))
@@ -90,10 +113,11 @@ class Utilities: NSObject {
         var cString: String =  hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
         
         if (cString.hasPrefix("#")) {
-            cString = cString.substring(from: cString.characters.index(cString.startIndex, offsetBy: 1))
+            let index = cString.index(cString.startIndex, offsetBy: 1)
+            cString =  String(cString[index...])//cString.substring(from: cString.index(cString.startIndex, offsetBy: 1))
         }
         
-        if ((cString.characters.count) != 6) {
+        if ((cString.count) != 6) {
             return UIColor.gray
         }
         
@@ -132,7 +156,7 @@ class Utilities: NSObject {
     
     class func frameForText(_ text: String, font: UIFont) -> CGSize {
         
-        let attrString = NSAttributedString.init(string: text, attributes: [NSFontAttributeName: font])
+        let attrString = NSAttributedString.init(string: text, attributes: [NSAttributedString.Key.font: font])
         let rect = attrString.boundingRect(with: CGSize(width: MAX_WIDTH,height: MAX_HEIGHT), options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil)
         let size = CGSize(width: rect.size.width, height: rect.size.height)
         return size
@@ -174,7 +198,7 @@ class Utilities: NSObject {
         
         let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         
-        if testStr.characters.count > 255 {
+        if testStr.count > 255 {
             return false
         } else {
             return emailTest.evaluate(with: testStr)
@@ -205,7 +229,7 @@ class Utilities: NSObject {
         let specialresult = texttest2.evaluate(with: text)
         print("\(specialresult)")
         
-        let textCountResult = text.characters.count > 7 && text.characters.count <= 64 ? true : false
+        let textCountResult = text.count > 7 && text.count <= 64 ? true : false
         
         if capitalresult == false || numberresult == false || specialresult == false || textCountResult ==  false || lowercaseresult == false{
             return false
@@ -280,10 +304,10 @@ class Utilities: NSObject {
         
         if (someObject is NSNull) ==  false {
             
-            if someObject as? Int != nil && (someObject as? Int)! >= 0 {
+            if someObject as? Int != nil && ((someObject as? Int)! >= 0 || (someObject as? Int)! < 0) {
                 return true
                 
-            } else if someObject as? String != nil && ((someObject as? String)?.characters.count)! > 0 && (someObject as? String) != "" {
+            } else if someObject as? String != nil && ((someObject as? String)?.count)! > 0 && (someObject as? String) != "" {
                 return true
                 
             } else if someObject as? Bool != nil && (someObject as! Bool == true || someObject as! Bool == false){
@@ -356,6 +380,27 @@ class Utilities: NSObject {
         }
     }
     
+    public static var _formatterShort: DateFormatter?
+    public static var formatterShort: DateFormatter! {
+        
+        get{
+            
+            if let f = _formatterShort {
+                return f
+            } else {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                //formatter.dateStyle = .short
+                formatter.timeZone = TimeZone.current // TimeZone.init(abbreviation:"IST")
+                _formatterShort = formatter
+                return formatter
+            }
+        }
+        set(newValue){
+            _formatterShort = newValue
+        }
+    }
+    
     /* Method to get DateFromString for default dateFormatter
      @dateString:a date String of format "yyyy-MM-dd'T'HH:mm:ssZ"
      returns date for the specified dateString in same format
@@ -389,7 +434,7 @@ class Utilities: NSObject {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         
         guard let date = dateFormatter.date(from: dateWithourTimeZone) else {
-            assert(false, "no date from string")
+            //assert(false, "no date from string")
             return nil
         }
         
@@ -399,6 +444,16 @@ class Utilities: NSObject {
         let finalDate = dateFormatter.date(from: finalString)
         return finalDate
         
+    }
+    
+    class func findDateFromString(dateString: String) -> Date? {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+       // let finalString = dateFormatter.string(from: date)
+        let finalDate = dateFormatter.date(from: dateString)
+        return finalDate
     }
     
     /* Method to get StringFromDate for default dateFormatter

@@ -1,5 +1,4 @@
 //
-//  BatchedCollection.swift
 //  CryptoSwift
 //
 //  Copyright (C) 2014-2017 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
@@ -19,7 +18,7 @@ struct BatchedCollectionIndex<Base: Collection> {
 }
 
 extension BatchedCollectionIndex: Comparable {
-    static func ==<Base>(lhs: BatchedCollectionIndex<Base>, rhs: BatchedCollectionIndex<Base>) -> Bool {
+    static func == <Base>(lhs: BatchedCollectionIndex<Base>, rhs: BatchedCollectionIndex<Base>) -> Bool {
         return lhs.range.lowerBound == rhs.range.lowerBound
     }
 
@@ -34,11 +33,10 @@ protocol BatchedCollectionType: Collection {
 
 struct BatchedCollection<Base: Collection>: Collection {
     let base: Base
-    let size: Base.IndexDistance
+    let size: Int
     typealias Index = BatchedCollectionIndex<Base>
     private func nextBreak(after idx: Base.Index) -> Base.Index {
-        return base.index(idx, offsetBy: size, limitedBy: base.endIndex)
-            ?? base.endIndex
+        return base.index(idx, offsetBy: size, limitedBy: base.endIndex) ?? base.endIndex
     }
 
     var startIndex: Index {
@@ -59,7 +57,7 @@ struct BatchedCollection<Base: Collection>: Collection {
 }
 
 extension Collection {
-    func batched(by size: IndexDistance) -> BatchedCollection<Self> {
+    func batched(by size: Int) -> BatchedCollection<Self> {
         return BatchedCollection(base: self, size: size)
     }
 }

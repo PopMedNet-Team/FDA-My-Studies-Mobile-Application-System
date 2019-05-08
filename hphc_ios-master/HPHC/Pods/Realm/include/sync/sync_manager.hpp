@@ -67,8 +67,9 @@ public:
     static SyncManager& shared();
 
     // Configure the metadata and file management subsystems. This MUST be called upon startup.
-    void configure_file_system(const std::string& base_file_path,
+    void configure(const std::string& base_file_path,
                                MetadataMode metadata_mode=MetadataMode::Encryption,
+                               const std::string& user_agent_binding_info = "",
                                util::Optional<std::vector<char>> custom_encryption_key=none,
                                bool reset_metadata_on_error=false);
 
@@ -78,12 +79,27 @@ public:
     // The metadata and file management subsystems must also have already been configured.
     bool immediately_run_file_actions(const std::string& original_name);
 
+    // Use a single connection for all sync sessions for each host/port rather
+    // than one per session.
+    // This must be called before any sync sessions are created, cannot be
+    // disabled afterwards, and currently is incompatible with using a load
+    // balancer or automatic failover.
+    void enable_session_multiplexing();
+
+    // Sets the log level for the Sync Client.
+    // The log level can only be set up until the point the Sync Client is created. This happens when the first Session
+    // is created.
     void set_log_level(util::Logger::Level) noexcept;
     void set_logger_factory(SyncLoggerFactory&) noexcept;
 
-    /// Control whether the sync client attempts to reconnect immediately. Only set this to `true` for testing purposes.
-    void set_client_should_reconnect_immediately(bool reconnect_immediately);
-    bool client_should_reconnect_immediately() const noexcept;
+    // Create a new logger of the type which will be used by the sync client
+    std::unique_ptr<util::Logger> make_logger() const;
+
+    // Sets the application level user agent string.
+    // This should have the format specified here: https://github.com/realm/realm-sync/blob/develop/src/realm/sync/client.hpp#L126
+    // The user agent can only be set up  until the  point the Sync Client is created. This happens when the first
+    // Session is created.
+    void set_user_agent(std::string user_agent);
 
     /// Ask all valid sync sessions to perform whatever tasks might be necessary to
     /// re-establish connectivity with the Realm Object Server. It is presumed that
@@ -98,6 +114,11 @@ public:
     std::shared_ptr<SyncSession> get_session(const std::string& path, const SyncConfig& config);
     std::shared_ptr<SyncSession> get_existing_session(const std::string& path) const;
     std::shared_ptr<SyncSession> get_existing_active_session(const std::string& path) const;
+
+    // Returns `true` if the SyncManager still contains any existing sessions not yet fully cleaned up.
+    // This will return true as long as there is an external reference to a session object, no matter
+    // the state of that session.
+    bool has_existing_sessions();
 
     // If the metadata manager is configured, perform an update. Returns `true` iff the code was run.
     bool perform_metadata_update(std::function<void(const SyncMetadataManager&)> update_function) const;
@@ -136,7 +157,7 @@ public:
     std::string path_for_realm(const SyncUser& user, const std::string& raw_realm_url) const;
 
     // Get the path of the recovery directory for backed-up or recovered Realms.
-    std::string recovery_directory_path() const;
+    std::string recovery_directory_path(util::Optional<std::string> const& custom_dir_name=none) const;
 
     // Get the unique identifier of this client.
     std::string client_uuid() const;
@@ -183,6 +204,12 @@ private:
     std::unordered_map<std::string, std::shared_ptr<SyncUser>> m_admin_token_users;
 
     mutable std::unique_ptr<_impl::SyncClient> m_sync_client;
+    bool m_multiplex_sessions = false;
+
+    // Optional information about the binding/application that is sent as part of the User-Agent
+    // when establishing a connection to the server.
+    std::string m_user_agent_binding_info;
+    std::string m_user_agent_application_info;
 
     // Protects m_file_manager and m_metadata_manager
     mutable std::mutex m_file_system_mutex;
@@ -196,6 +223,13 @@ private:
     // Sessions remove themselves from this map by calling `unregister_session` once they're
     // inactive and have performed any necessary cleanup work.
     std::unordered_map<std::string, std::shared_ptr<SyncSession>> m_sessions;
+
+    // Internal method returning `true` if the SyncManager still contains sessions not yet fully closed.
+    // Callers of this method should hold the `m_session_mutex` themselves.
+    bool do_has_existing_sessions();
+
+    // The unique identifier of this client.
+    util::Optional<std::string> m_client_uuid;
 };
 
 } // namespace realm

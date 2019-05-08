@@ -1,5 +1,4 @@
 //
-//  SecureBytes.swift
 //  CryptoSwift
 //
 //  Copyright (C) 2014-2017 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
@@ -14,11 +13,13 @@
 //  - This notice may not be removed or altered from any source or binary distribution.
 //
 
-#if os(Linux) || os(Android) || os(FreeBSD)
-    import Glibc
+#if canImport(Darwin)
+import Darwin
 #else
-    import Darwin
+import Glibc
 #endif
+
+typealias Key = SecureBytes
 
 ///  Keeps bytes in memory. Because this is class, bytes are not copied
 ///  and memory area is locked as long as referenced, then unlocked on deinit

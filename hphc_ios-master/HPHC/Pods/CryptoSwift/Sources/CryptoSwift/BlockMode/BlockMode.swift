@@ -1,5 +1,4 @@
 //
-//  BlockMode.swift
 //  CryptoSwift
 //
 //  Copyright (C) 2014-2017 Marcin Krzyżanowski <marcin@krzyzanowskim.com>
@@ -14,42 +13,12 @@
 //  - This notice may not be removed or altered from any source or binary distribution.
 //
 
-typealias CipherOperationOnBlock = (_ block: Array<UInt8>) -> Array<UInt8>?
+public typealias CipherOperationOnBlock = (_ block: ArraySlice<UInt8>) -> Array<UInt8>?
 
-public enum BlockMode {
-    case ECB, CBC, PCBC, CFB, OFB, CTR
-
-    func worker(_ iv: Array<UInt8>?, cipherOperation: @escaping CipherOperationOnBlock) -> BlockModeWorker {
-        switch self {
-        case .ECB:
-            return ECBModeWorker(iv: iv ?? [], cipherOperation: cipherOperation)
-        case .CBC:
-            return CBCModeWorker(iv: iv ?? [], cipherOperation: cipherOperation)
-        case .PCBC:
-            return PCBCModeWorker(iv: iv ?? [], cipherOperation: cipherOperation)
-        case .CFB:
-            return CFBModeWorker(iv: iv ?? [], cipherOperation: cipherOperation)
-        case .OFB:
-            return OFBModeWorker(iv: iv ?? [], cipherOperation: cipherOperation)
-        case .CTR:
-            return CTRModeWorker(iv: iv ?? [], cipherOperation: cipherOperation)
-        }
-    }
-
-    var options: BlockModeOptions {
-        switch self {
-        case .ECB:
-            return .paddingRequired
-        case .CBC:
-            return [.initializationVectorRequired, .paddingRequired]
-        case .CFB:
-            return .initializationVectorRequired
-        case .CTR:
-            return .initializationVectorRequired
-        case .OFB:
-            return .initializationVectorRequired
-        case .PCBC:
-            return [.initializationVectorRequired, .paddingRequired]
-        }
-    }
+public protocol BlockMode {
+    var options: BlockModeOption { get }
+    //TODO: doesn't have to be public
+    func worker(blockSize: Int, cipherOperation: @escaping CipherOperationOnBlock) throws -> CipherModeWorker
 }
+
+typealias StreamMode = BlockMode

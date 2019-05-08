@@ -1,24 +1,21 @@
 /*
  License Agreement for FDA My Studies
- Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
- Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- associated documentation files (the "Software"), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
- following conditions:
- 
- The above copyright notice and this permission notice shall be included in all copies or substantial
- portions of the Software.
- 
- Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
- THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
+Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -201,7 +198,7 @@ class Schedule{
         
         let dayOfWeek = self.getCurrentWeekDay(date: updatedStartTime)
         let calendar = Calendar.currentUTC()
-        let targetDay = 1 //server configurable
+        let targetDay = self.getCurrentWeekDay(date: activity.startDate!) //server configurable
         
         //first day
         var runStartDate = calendar.date(byAdding: .weekday, value: (targetDay - dayOfWeek), to: updatedStartTime)
@@ -270,7 +267,7 @@ class Schedule{
             numberOfDays = 1;
         }
         
-        for day in 0...numberOfDays {
+        for _ in 0...numberOfDays {
             
             let startDate = startDateShortStyle
             
@@ -325,23 +322,69 @@ class Schedule{
     //ScheduledRuns Setter
     func setScheduledRuns(){
         
-        scheduledTimings = activity.frequencyRuns!
         
         let offset = UserDefaults.standard.value(forKey: "offset") as? Int
         let activityEndTime = endTime?.addingTimeInterval(TimeInterval(offset!))
-        
         var runId = 1
+        
+        let schedulingType = activity.schedulingType
+        if schedulingType == .anchorDate {
+            scheduledTimings = activity.anchorRuns!
+        }
+        else {
+            scheduledTimings = activity.frequencyRuns!
+        }
+        
+        //scheduledTimings = activity.frequencyRuns!
+        
+       
         for timing in scheduledTimings {
             
-            //run start time creation
-            let scheduledStartTime = timing[kScheduleStartTime]
-            let runStartDate =  Utilities.getDateFromStringWithOutTimezone(dateString: scheduledStartTime! as! String)
             
-            //run end time creation
-            let scheduledEndTime = timing[kScheduleEndTime]
-            let runEndDate = Utilities.getDateFromStringWithOutTimezone(dateString: scheduledEndTime! as! String)
+            var runStartDate:Date?
+            var runEndDate:Date?
             
-            //print("start date \(runStartDate!) , end date \(runEndDate!)")
+            if schedulingType == .anchorDate {
+                let startDays = timing["startDays"] as? Int ?? 0
+                let endDays = timing["endDays"] as? Int ?? 0
+                _ = timing["time"] as? String ?? "00:00:00"
+                
+                let anchorDate = activity.anchorDate?.anchorDateValue
+                
+                let startDateInterval = TimeInterval(60*60*24*(startDays))
+                let endDateInterval = TimeInterval(60*60*24*(endDays))
+                
+                runStartDate = anchorDate?.addingTimeInterval(startDateInterval)
+                runEndDate = anchorDate?.addingTimeInterval(endDateInterval)
+                
+                //update start date
+                var startDateString =  Utilities.formatterShort?.string(from: runStartDate!)
+                let startTime =  timing["time"] as? String ?? "00:00:00"
+                startDateString = (startDateString ?? "") + " " + startTime
+                let startdate = Utilities.findDateFromString(dateString: startDateString ?? "")
+                
+                //update end date
+                var endDateString =  Utilities.formatterShort?.string(from: runEndDate!)
+                let endTime =  timing["time"] as? String ?? "23:59:59"
+                endDateString = (endDateString ?? "") + " " + endTime
+                let endDate = Utilities.findDateFromString(dateString: endDateString ?? "")
+                
+                runStartDate = startdate//getDateAfterAddingTimeComponent(time, date: runStartDate!)
+                runEndDate = endDate//getDateAfterAddingTimeComponent(time, date: runEndDate!)
+                
+            }
+            else {
+                
+                //run start time creation
+                let scheduledStartTime = timing[kScheduleStartTime]
+                 runStartDate =  Utilities.getDateFromStringWithOutTimezone(dateString: scheduledStartTime! as! String)
+                
+                //run end time creation
+                let scheduledEndTime = timing[kScheduleEndTime]
+                 runEndDate = Utilities.getDateFromStringWithOutTimezone(dateString: scheduledEndTime! as! String)
+            }
+            
+            print("start date \(runStartDate!) , end date \(runEndDate!)")
             
             let offset = UserDefaults.standard.value(forKey: "offset") as? Int
             let updatedStartTime = runStartDate?.addingTimeInterval(TimeInterval(offset!))
@@ -361,6 +404,22 @@ class Schedule{
                 }
             }
         }
+    }
+    
+    func getDateAfterAddingTimeComponent(_ time:String, date: Date) -> Date? {
+        
+        var datetime:Date! = date
+        let calendar = Calendar.currentUTC()
+        let hoursAndMins = time.components(separatedBy: ":")
+        let hour = Int((hoursAndMins[0]))
+        let minutes = Int((hoursAndMins[1]))
+        let second = Int((hoursAndMins[2]))
+        
+        datetime =  calendar.date(byAdding: .hour, value: hour!, to: datetime)
+        datetime = calendar.date(byAdding: .minute, value: minutes!, to: datetime)
+        datetime = calendar.date(byAdding: .second, value: second!, to: datetime)
+        
+        return datetime
     }
     
     // MARK:Utility Methods
@@ -434,7 +493,7 @@ class Schedule{
     
     func getNumberOfDaysBetween(startDate: Date,endDate: Date) -> Int {
         
-        var calendar = Calendar.currentUTC()
+        let calendar = Calendar.currentUTC()
         
         // Replace the hour (time) of both dates with 00:00
         let date1 = startDate.startOfDay //calendar.startOfDay(for: startDate)
