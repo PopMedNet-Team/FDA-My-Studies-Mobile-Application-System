@@ -1,5 +1,3 @@
-Update to version 2019.05 in progress
-
 # FDA MyStudies Mobile Application System
 This repository contains all the necessary code and documentation for running the FDA My Studies mobile applications (iOS and Android), web configuration 
 portal (WCP), and storage environment. The mobile apps and WCP were developed by Boston Technology Corporation. 
