@@ -1,4 +1,4 @@
- Update to version 2019.05 in progress
+Update to version 2019.05 in progress
 
 # FDA MyStudies Mobile Application System
 This repository contains all the necessary code and documentation for running the FDA My Studies mobile applications (iOS and Android), web configuration 
