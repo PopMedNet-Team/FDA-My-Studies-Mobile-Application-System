@@ -6,8 +6,6 @@ direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 
 <b>Code and documents needed for the iOS and Andriod applications include:</b>
 <ul>
-<li>FDA_Android_AppSetup.pdf
-<li>FDA_iOS_AppSetup.pdf
 <li>Android
 <li>iOS
 </ul>
@@ -21,13 +19,12 @@ direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 
 <b>Code and documents needed for the Storage environment include</b>
 <ul>
-<li>FDA_WCP_UR_AppSetup.pdf
 <li>UserReg-WS
 <li>LabKey Documentation
 <li>mobileAppStudy-ResponseServer
 </ul>
 
-<b>General Resources:</b> FDA Health Studies System_ Business Requirements and Functional Specifications Document_Final
+<b>Setup Instructions: FDAMyStudies_Release 2019.05__SetupInstructions_V1.0.pdf</b>
 
 
 # FDA MyStudies Release Notes - Version 2019.05:
