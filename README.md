@@ -1,5 +1,5 @@
 # FDA MyStudies Mobile Application System
-This repository contains all the necessary code and documentation for running the FDA My Studies mobile applications (iOS and Android), web configuration 
+This repository contains all the necessary code and documentation for running the FDA MyStudies mobile applications (iOS and Android), web configuration 
 portal (WCP), and storage environment. The mobile apps and WCP were developed by Boston Technology Corporation. 
 he storage environment is an extension of an existing platform called LabKey Server (19.1.x), offered separately by LabKey Corporation under the Apache 2.0 license. All development occured under the 
 direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
