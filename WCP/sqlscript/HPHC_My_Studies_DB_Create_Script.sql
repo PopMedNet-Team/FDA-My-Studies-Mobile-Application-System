@@ -519,7 +519,7 @@ update questionnaires qbo set qbo.active=0,qbo.modified_by=modifiedBy,qbo.modifi
 update instructions ibo,questionnaires_steps qsbo set ibo.active=0,ibo.modified_by=modifiedBy,ibo.modified_on=modifiedOn where ibo.id=qsbo.instruction_form_id and qsbo.questionnaires_id=questionnaireId and qsbo.active=1 and qsbo.step_type='Instruction' and ibo.active=1;
 
 update questions qbo,questionnaires_steps qsbo set qbo.active=0,qbo.modified_by=modifiedBy,qbo.modified_on=modifiedOn where
-qbo.id=qsbo.instruction_form_id and qsbo.questionnaires_id=questionnaireId and qsbo.active=1 and qsbo.step_type='Question' and qbo.active=1; 
+qbo.id=qsbo.instruction_form_id and qsbo.questionnaires_id=questionnaireId and qsbo.active=1 and qsbo.step_type='Question' and qbo.active=1;
 
 update questions qbo,form_mapping fmbo,questionnaires_steps qsbo  set qbo.active=0,qbo.modified_by=modifiedBy,qbo.modified_on=modifiedOn,fmbo.active=0 where qbo.id=fmbo.question_id and fmbo.form_id=qsbo.instruction_form_id and qsbo.questionnaires_id=questionnaireId and qsbo.step_type='Form' and qsbo.active=1 and qbo.active=1;
 
@@ -1733,6 +1733,11 @@ INSERT INTO `health_kit_keys_info` (`id`, `category`, `display_name`, `key_text`
 	(73, 'Nutrition', 'Dietary Water', 'HKQuantityTypeIdentifierDietaryWater', 'Volume'),
 	(74, 'Environment', 'UV Exposure', 'HKQuantityTypeIdentifierUVExposure', 'Count');
 /*!40000 ALTER TABLE `health_kit_keys_info` ENABLE KEYS */;
+
+/*!40000 ALTER TABLE `master_data` DISABLE KEYS */;
+INSERT INTO `master_data` (`id`, `type`, `terms_text`, `privacy_policy_text`) VALUES
+	(1, 'terms', '[insert your terms]', '[insert your privacy policy]');
+/*!40000 ALTER TABLE `master_data` ENABLE KEYS */;
 
 -- Dumping data for table fda_hphc.question_responsetype_master_info: ~15 rows (approximately)
 /*!40000 ALTER TABLE `question_responsetype_master_info` DISABLE KEYS */;
