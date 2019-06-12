@@ -40,7 +40,7 @@
 		<csrf />
 	</http>
 	<beans:bean id="authenticationProvider"
-		class="com.hphc.mystudies.util.LimitLoginAuthenticationProvider">
+		class="com.fdahpstudydesigner.util.LimitLoginAuthenticationProvider">
 		<beans:property name="userDetailsService" ref="loginService" />
 		<beans:property name="passwordEncoder" ref="passwordEncoder" />
 	</beans:bean>
@@ -53,5 +53,5 @@
 		</authentication-provider>
 	</authentication-manager>
 	<beans:bean id="customSuccessHandler"
-		class="com.hphc.mystudies.util.CustomSuccessHandler" />
+		class="com.fdahpstudydesigner.util.CustomSuccessHandler" />
 </beans:beans>

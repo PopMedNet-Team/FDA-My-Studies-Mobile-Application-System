@@ -1,25 +1,20 @@
-<!-- 
-  Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
-  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
-  associated documentation files (the "Software"), to deal in the Software without restriction, including
-  without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-  of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
-  following conditions:
- 
-  The above copyright notice and this permission notice shall be included in all copies or substantial
-  portions of the Software.
- 
-  Funding Source: Food and Drug Administration ("Funding Agency") effective 18 September 2014 as Contract no.
-  HHSF22320140030I/HHSF22301006T (the "Prime Contract").
- 
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
-  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  OTHER DEALINGS IN THE SOFTWARE. 
--->
+#-------------------------------------------------------------------------------
+# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all copies or substantial
+# portions of the Software.
+# 
+# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
+# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
+# 
+# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+#-------------------------------------------------------------------------------
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -96,6 +91,24 @@ table.dataTable thead th:last-child{
                         <span class="radio radio-inline">
                             <input type="radio" id="inlineRadio2" value="No" name="enrollingParticipants" <c:if test="${studyBo.enrollingParticipants eq null}">checked</c:if> <c:if test="${studyBo.enrollingParticipants eq 'No'}">checked</c:if> required>
                             <label for="inlineRadio2">No</label>
+                        </span>
+                        <div class="help-block with-errors red-txt"></div>
+                    </div>
+                </div>
+                <!-- End Section-->
+                
+                 <!-- Start Section-->
+                <div class="col-md-12 p-none">
+                     <div class="gray-xs-f mb-sm">Use Enrollment Date as Anchor Date in study activity scheduling?<span class="requiredStar"> *</span><span><span data-toggle="tooltip" data-placement="top" title="Select this option to distribute a questionnaire, active task or resource, N number of days after participant enrollment. N is configured in the schedule settings of that study activity or resource." class="filled-tooltip"></span></span></div>
+
+                     <div class="form-group">
+                      <span class="radio radio-info radio-inline p-45">
+                            <input type="radio" id="inlineRadio11" value="Yes" name="enrollmentdateAsAnchordate" <c:if test="${studyBo.enrollmentdateAsAnchordate}">checked</c:if> required>
+                            <label for="inlineRadio11">Yes</label>
+                        </span>
+                        <span class="radio radio-inline">
+                            <input type="radio" id="inlineRadio22" value="No" name="enrollmentdateAsAnchordate" ${isAnchorForEnrollmentLive?'disabled':''} <c:if test="${studyBo.enrollmentdateAsAnchordate eq false}">checked</c:if> required>
+                            <label for="inlineRadio22">No</label>
                         </span>
                         <div class="help-block with-errors red-txt"></div>
                     </div>
@@ -503,7 +516,8 @@ function platformTypeValidation(buttonText){
 }
 function submitButton(buttonText){
 	setAllowRejoinText();
-	admins() //Pradyumn
+	admins() 
+	var isAnchorForEnrollmentDraft = '${isAnchorForEnrollmentDraft}';
 	if(buttonText === 'save'){
 		$('#settingfoFormId').validator('destroy');
 		$("#inlineCheckbox1,#inlineCheckbox2").prop('disabled', false);
@@ -511,6 +525,7 @@ function submitButton(buttonText){
         $("#settingfoFormId").submit();
 	}else{
 		var retainParticipant = $('input[name=retainParticipant]:checked').val();
+		var enrollmentdateAsAnchordate = $('input[name=enrollmentdateAsAnchordate]:checked').val();
         if(retainParticipant){
         	if(retainParticipant=='All')
         		retainParticipant = 'Participant Choice';
@@ -529,13 +544,11 @@ function submitButton(buttonText){
 			    },
 			    callback: function(result) {
 			        if (result) {
-			        	$("#inlineCheckbox1,#inlineCheckbox2").prop('disabled', false);
-			        	$("#buttonText").val('completed');
-	                    $("#settingfoFormId").submit();
+	                    showWarningForAnchor(isAnchorForEnrollmentDraft, enrollmentdateAsAnchordate);
 			        }else{
 			        	$('#completedId').removeAttr('disabled');
 			        }
-			    }
+			     }
 				});
         }else{
         	$("#inlineCheckbox1,#inlineCheckbox2").prop('disabled', false);
@@ -668,4 +681,36 @@ function admins(){
 		    });
 		}
 	</c:if>
+	function showWarningForAnchor(isAnchorForEnrollmentDraft, enrollmentdateAsAnchordate){
+		if(isAnchorForEnrollmentDraft == 'true' && enrollmentdateAsAnchordate=='No'){
+        	var text = "You have chosen not to use Enrollment Date as an Anchor Date.You will need to revise the schedules of Target Activities or Resources,if any, that were set based on the Enrollment Date.Buttons: OK, Cancel.";
+        	bootbox.confirm({
+        		closeButton: false,
+        		message: text,
+        		buttons: {
+			        'cancel': {
+			            label: 'Cancel',
+			        },
+			        'confirm': {
+			            label: 'OK',
+			        },
+			    },
+			    callback: function(valid) {
+			    	if (valid) {
+			    		console.log(1);
+			    		$("#inlineCheckbox1,#inlineCheckbox2").prop('disabled', false);
+			        	$("#buttonText").val('completed');
+	                    $("#settingfoFormId").submit();
+			    	}else{
+			    		console.log(2);
+			    		$('#completedId').removeAttr('disabled');
+			    	}
+			    }
+        	});
+        }else{
+        	$("#inlineCheckbox1,#inlineCheckbox2").prop('disabled', false);
+        	$("#buttonText").val('completed');
+        	$("#settingfoFormId").submit();
+        }
+	}
 </script>

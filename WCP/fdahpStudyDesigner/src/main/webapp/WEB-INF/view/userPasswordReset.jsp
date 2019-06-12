@@ -1,26 +1,20 @@
-<!-- 
-  Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
-  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
-  associated documentation files (the "Software"), to deal in the Software without restriction, including
-  without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-  of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
-  following conditions:
- 
-  The above copyright notice and this permission notice shall be included in all copies or substantial
-  portions of the Software.
- 
-  Funding Source: Food and Drug Administration ("Funding Agency") effective 18 September 2014 as Contract no.
-  HHSF22320140030I/HHSF22301006T (the "Prime Contract").
- 
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
-  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  OTHER DEALINGS IN THE SOFTWARE. 
--->
- 
+#-------------------------------------------------------------------------------
+# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all copies or substantial
+# portions of the Software.
+# 
+# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
+# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
+# 
+# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+#-------------------------------------------------------------------------------
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page session="true"%>
@@ -78,52 +72,6 @@
 <body class="loading background__img">
     <div id="loader"><span></span></div>
     <div id="lg-container" class="lg-container">
-        
-        <!-- Login Left Section-->
-        <!-- <div class="lg-space-left">
-            <div class="lg-space-img">
-                <img src="images/logo/fda-logo-w.png"/>
-            </div>
-            <div class="lg-space-txt">
-               My Studies <br>Management Portal
-            </div>
-             <div class="lg-space-cover">
-                <img src="images/icons/web.png"/>
-            </div>
-        </div> -->
-        <!-- End Login Left Section-->
-        
-        <!-- Login Right Section-->
-        <!-- <div class="lg-space-right">
-             <input type="hidden" id="csrfDet" csrfParamName="${_csrf.parameterName}" csrfToken="${_csrf.token}" />
-             <form:form id="accessCodeForm" data-toggle="validator" role="form" action="validateAccessCode.do" method="post" autocomplete="off">
-                    <div id="errMsg" class="error_msg">${errMsg}</div>
-                    <div id="sucMsg" class="suceess_msg">${sucMsg}</div>
-                    <c:if test="${isValidToken}">
-                    <p>To complete your email verification process, kindly use the access code provided on your email.</p>
-                        <div class="mb-lg form-group">
-                             <input autofocus="autofocus" type="text" class="input-field wow_input" id="" tabindex="1" name="accessCode" maxlength="6" placeholder="Access Code" data-error="Access Code is invalid" required autocomplete="off"/>
-                            <div class="help-block with-errors red-txt"></div>
-                        </div>
-                        <div class="mb-lg form-group">
-                            <button type="submit" class="btn lg-btn">Submit</button>
-                        </div>
-                        </c:if>
-                        <c:if test="${not isValidToken}"><p class="passwordExp"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>The Activation Link is either expired or invalid.</p></c:if>
-                        <div>
-                            <a id="login" class="gray-link backToLogin" href="javascript:void(0)">Back to Sign in</a>
-                        </div>
-                        <input type="hidden" name="securityToken" value="${securityToken}" />
-                </form:form>
-            </div>
-            
-            
-            <div class="clearfix"></div>
-            
-             <div class="footer">
-                    <span>Copyright © 2017 FDA</span><span><a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/" id="" target="_blank">Terms</a></span><span><a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy" id="" target="_blank">Privacy Policy</a></span>
-              </div> -->
-
 
               <div class="logo__ll">
             <img src="images/logo/fda-logo-w.png"/>
@@ -263,7 +211,6 @@
 				if(errMsg.length > 0){
 					$("#errMsg").html(errMsg);
 				   	$("#errMsg").show("fast");
-				   	//$("#sucMsg").hide("fast");
 				   	setTimeout(hideDisplayMessage, 4000);
 				}
     		}
@@ -277,9 +224,7 @@
 				}
 			}
 			$("#password").passwordValidator({
-				// list of qualities to require
 				require: ['length', 'lower', 'upper', 'digit','spacial'],
-				// minimum length requirement
 				length: 8
 			}); 
 			
@@ -293,8 +238,6 @@
 		        history.pushState("jibberish", null, null);
 		        window.onpopstate = function () {
 		            history.pushState('newjibberish', null, null);
-		            // Handle the back (or forward) buttons here
-		            // Will NOT handle refresh, use onbeforeunload for this.
 		        };
 		    }
 		    else {
@@ -303,10 +246,6 @@
 		            if (!ignoreHashChange) {
 		                ignoreHashChange = true;
 		                window.location.hash = Math.random();
-		                // Detect and redirect change here
-		                // Works in older FF and IE9
-		                // * it does mess with your hash symbol (anchor?) pound sign
-		                // delimiter on the end of the URL
 		            }
 		            else {
 		                ignoreHashChange = false;   
@@ -319,9 +258,7 @@
     	
     	var addPasswordPopup = function() {
    		 $("#password").passwordValidator({
-   				// list of qualities to require
    				require: ['length', 'lower', 'upper', 'digit','spacial'],
-   				// minimum length requirement
    				length: 8
    			});
    		}

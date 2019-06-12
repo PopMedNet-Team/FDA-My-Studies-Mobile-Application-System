@@ -1,29 +1,24 @@
-<!-- 
-  Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
-  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
-  associated documentation files (the "Software"), to deal in the Software without restriction, including
-  without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-  of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
-  following conditions:
- 
-  The above copyright notice and this permission notice shall be included in all copies or substantial
-  portions of the Software.
- 
-  Funding Source: Food and Drug Administration ("Funding Agency") effective 18 September 2014 as Contract no.
-  HHSF22320140030I/HHSF22301006T (the "Prime Contract").
- 
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
-  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  OTHER DEALINGS IN THE SOFTWARE. 
--->
+#-------------------------------------------------------------------------------
+# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all copies or substantial
+# portions of the Software.
+# 
+# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
+# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
+# 
+# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+#-------------------------------------------------------------------------------
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@page import="com.hphc.mystudies.util.SessionObject"%>
+<%@page import="com.fdahpstudydesigner.util.SessionObject"%>
 
 <!-- create Study Section Start -->
 <div id="" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 p-none mt-md tit_con" >
@@ -80,9 +75,6 @@ $('.backOrCancelBtn').on('click',function(){
 <c:if test="${studyListId eq true}">
    $('#studyListId').show();
 </c:if>
-// 	<c:if test="${createStudyId eq true}">
-// 	$('#createStudyId').show();
-// 	</c:if>
 	var sucMsg = '${sucMsg}';
 	if(sucMsg.length > 0){
 		showSucMsg(sucMsg);
@@ -99,14 +91,11 @@ $('.backOrCancelBtn').on('click',function(){
 	
 	var actionSucMsg = '${actionSucMsg}';
 	if(actionSucMsg){
-		//bootbox.alert(actionSucMsg);
-		
 		bootbox.alert({
 		    message: actionSucMsg,
 		    className: 'green-txt',
 		    closeButton: false
-		   
-		});
+			});
 	}
 });
 function showSucMsg(message) {

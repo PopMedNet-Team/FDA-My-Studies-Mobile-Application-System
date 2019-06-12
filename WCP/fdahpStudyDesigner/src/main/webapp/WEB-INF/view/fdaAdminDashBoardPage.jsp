@@ -1,29 +1,24 @@
-<!-- 
-  Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
-  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
-  associated documentation files (the "Software"), to deal in the Software without restriction, including
-  without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-  of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
-  following conditions:
- 
-  The above copyright notice and this permission notice shall be included in all copies or substantial
-  portions of the Software.
- 
-  Funding Source: Food and Drug Administration ("Funding Agency") effective 18 September 2014 as Contract no.
-  HHSF22320140030I/HHSF22301006T (the "Prime Contract").
- 
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
-  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  OTHER DEALINGS IN THE SOFTWARE. 
--->
+#-------------------------------------------------------------------------------
+# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all copies or substantial
+# portions of the Software.
+# 
+# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
+# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
+# 
+# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+#-------------------------------------------------------------------------------
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@page import="com.hphc.mystudies.util.SessionObject"%>
+<%@page import="com.fdahpstudydesigner.util.SessionObject"%>
 <!DOCTYPE html>
 <html class="overflow-hidden">
 	<head>
@@ -79,71 +74,6 @@
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	</form>
     <div id="lg-container" class="lg-container">
-        
-        <!-- Login Left Section-->
-        <!-- <div class="lg-space-left">
-            <div class="lg-space-img">
-                <img src="/fdahpStudyDesigner/images/logo/fda-logo-w.png"/>
-            </div>
-            <div class="lg-space-txt">
-               My Studies <br>Management Portal
-            </div>
-             <div class="lg-space-cover">
-                <img src="/fdahpStudyDesigner/images/icons/web.png"/>
-            </div>
-        </div> -->
-        <!-- End Login Left Section-->
-        <!-- <div>
-          <a href="javascript:formSubmit();">Logout</a>
-        </div> -->
-        <!-- Login Right Section-->
-        <!-- <div class="lg-space-right">
-        	<div class="logout">
-               <div class="dis-line pull-right ml-md line34">
-                 <a href="/fdahpStudyDesigner/sessionOut.do" class="blue-link text-weight-normal text-uppercase"><span>sign Out</span> <span class="ml-xs"><img src="/fdahpStudyDesigner/images/icons/logout.png"/></span></a>  
-               </div>
-           	</div>
-            <div class="lg-space-container wd">
-                <div class="lg-space-center">
-	                <div class="lg-space-title">
-	                    <span>Welcome,</span><span>${sessionObject.firstName}</span>
-	                </div>
-	                <div class='lg-icons'> 
-	                   <ul class="lg-icons-list"> 
-	                    <li class="studyListId">
-	                        <a class='studies-g' href='javascript:void(0)'></a>
-	                        <div class='studyList'>Studies<br><span>&nbsp;</span></div>
-	                    </li>
-	                    <li class="linkDis hide">
-	                        <a class='repository-g' href='javascript:void(0)'></a>
-	                        <div>Repository</div>
-	                    </li> 
-	                    <li class="notificationListId">
-	                        <a class='notifications-g' href='javascript:void(0)'></a>
-	                        <div>Notifications<br><span>&nbsp;</span></div>
-	                    </li> 
-	                   <li class="userListId">
-	                        <a class='user-g' href='javascript:void(0)'></a>
-	                        <div>Users<br><span>&nbsp;</span></div>
-	                    </li> 
-	                    <li class="myAccountId">
-	                        <a class='account-g' href='javascript:void(0)'></a>
-	                        <div>My Account<br><span>&nbsp;</span></div>
-	                    </li>
-	                 </ul> 
-	                </div>
-                </div>
-               <div class="clearfix"></div>
-               <div class="footer">
-                    <span>Copyright © 2017 FDA</span><span><a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/" id="" target="_blank">Terms</a></span><span><a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy" id="" target="_blank">Privacy Policy</a></span>
-              </div>
-            </div>
-            
-             
-            
-             
-        </div> -->
-        <!-- End Login Right Section-->
         <div class="logout">
                <div class="dis-line pull-right ml-md line34">
                  <a href="/fdahpStudyDesigner/sessionOut.do" class="blue-link text-weight-normal text-uppercase"><span class="white__text">sign Out</span> <!-- <span class="ml-xs"><img src="/fdahpStudyDesigner/images/icons/logout.png"/></span> --></a>  
@@ -322,38 +252,7 @@
    	  	 }
     });
     <c:if test="${param.action eq 'landing'}">
-    /* function noBack() { 
-  	  history.pushState(null, null, 'login.do');
-  	   window.addEventListener('popstate', function(event) {
-  	     history.pushState(null, null, 'login.do');
-  	  }); 
-    } */
-//     window.onload = function () {
-//       if (typeof history.pushState === "function") {
-//           history.pushState("jibberish", null, null);
-//           window.onpopstate = function () {
-//               history.pushState('newjibberish', null, null);
-//               // Handle the back (or forward) buttons here
-//               // Will NOT handle refresh, use onbeforeunload for this.
-//           };
-//       }
-//       else {
-//           var ignoreHashChange = true;
-//           window.onhashchange = function () {
-//               if (!ignoreHashChange) {
-//                   ignoreHashChange = true;
-//                   window.location.hash = Math.random();
-//                   // Detect and redirect change here
-//                   // Works in older FF and IE9
-//                   // * it does mess with your hash symbol (anchor?) pound sign
-//                   // delimiter on the end of the URL
-//               }
-//               else {
-//                   ignoreHashChange = false;   
-//               }
-//           };
-//       }
-//   	}
+
   </c:if>
   	window.history.forward();
     function noBack() { 

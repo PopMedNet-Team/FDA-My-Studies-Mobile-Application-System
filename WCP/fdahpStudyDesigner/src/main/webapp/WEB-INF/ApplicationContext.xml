@@ -13,9 +13,9 @@
 	http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
 	<task:annotation-driven />
-	<bean id="myAppScheduleJobs" class="com.hphc.mystudies.scheduler.FDASchedulerService" />
+	<bean id="myAppScheduleJobs" class="com.fdahpstudydesigner.scheduler.FDASchedulerService" />
 
-	<context:component-scan base-package="com.hphc.mystudies" />
+	<context:component-scan base-package="com.fdahpstudydesigner" />
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename">
@@ -36,7 +36,7 @@
 	<bean id="mySessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.hphc.mystudies.bo" />
+		<property name="packagesToScan" value="com.fdahpstudydesigner.bo" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
@@ -52,6 +52,6 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="loginService" class="com.hphc.mystudies.service.LoginServiceImpl">
+	<bean id="loginService" class="com.fdahpstudydesigner.service.LoginServiceImpl">
 	</bean>
 </beans>

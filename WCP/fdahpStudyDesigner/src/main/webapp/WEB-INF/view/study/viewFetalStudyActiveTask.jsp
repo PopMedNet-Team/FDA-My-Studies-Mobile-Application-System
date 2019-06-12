@@ -1,25 +1,20 @@
-<!-- 
-  Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
-  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
-  associated documentation files (the "Software"), to deal in the Software without restriction, including
-  without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-  of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
-  following conditions:
- 
-  The above copyright notice and this permission notice shall be included in all copies or substantial
-  portions of the Software.
- 
-  Funding Source: Food and Drug Administration ("Funding Agency") effective 18 September 2014 as Contract no.
-  HHSF22320140030I/HHSF22301006T (the "Prime Contract").
- 
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
-  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  OTHER DEALINGS IN THE SOFTWARE. 
--->
+#-------------------------------------------------------------------------------
+# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all copies or substantial
+# portions of the Software.
+# 
+# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
+# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
+# 
+# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+#-------------------------------------------------------------------------------
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -563,7 +558,6 @@
   				  }
 				  $('.scheduleTaskClass').removeAttr('disabled');
   			      $('.scheduleTaskClass').removeClass('linkDis');
-  			      //alert("statFlag"+ statFlag);
   			      var shortTitle = $('#shortTitleId').val();
   			      var shortTitleCount = $('.shortTitleClass').find('.help-block').children().length;
   				  if(shortTitle){
@@ -594,7 +588,6 @@
 	  	  													if(val) {
 	  	  														$('.shortTitleIdCls,.shortTitleStatCls').prop('disabled', false);
 	  	  							                        	$("#buttonText").val('completed');
-	  	  							                            //$('#shortTitleId').val(shortTitle);
 	  	  							                        	document.activeContentFormId.submit();
 	  	  													}
 	  	  											      })
@@ -607,10 +600,8 @@
 	  	  										  var statId = $('.shortTitleStatCls').attr('id');
 	  	  						      			  if(statId && statId == 'identifierId'){
 	  	  						      				$("#identifierId").parent().addClass('has-error has-danger').find(".help-block").empty().append('<ul class="list-unstyled"><li>This is a required field.</li></ul>');
-	  	  						      				//$('#identifierId').focus();
 	  	  						      			  }else{
 	  	  											  $("#static").parent().addClass('has-error has-danger').find(".help-block").empty().append('<ul class="list-unstyled"><li>This is a required field.</li></ul>'); 
-	  	  											  //$('#static').focus();
 	  	  						      			  }
 	  	  						      			  $("#doneId").attr("disabled",false);
 	  											  $("body").removeClass('loading');
@@ -848,7 +839,6 @@
 	                         $('.shortTitleClass').parent().addClass("has-danger").addClass("has-error");
 	                         $('.shortTitleClass').parent().find(".help-block").empty();
 	                         $(thisAttr).parent().find(".help-block").append("<ul class='list-unstyled'><li>'" + shortTitle + "' has already been used in the past.</li></ul>");
-	                        // $('#shortTitleId').focus();
 	                         callback(false);
 	                     }
 	                 },
@@ -864,7 +854,6 @@
 	 	}
 	}
    function validateShortTitleStatId(event, thisAttr, callback){
-	   //alert("validate");
 	   var activeTaskAttName = 'identifierNameStat';
    	   var activeTaskAttIdVal = $(thisAttr).val();
    	   var activeTaskAttIdName = $(thisAttr).attr('id');
@@ -876,7 +865,6 @@
 	     if(activeTaskAttIdName != 'static'){
 	    	 activeTaskAttIdName = 'static';
 	    	 var dbIdentifierVal = $('#dbIdentifierId').val();
-	    	 //alert("dbIdentifierVal"+dbIdentifierVal);
 	    	 if(dbIdentifierVal!=activeTaskAttIdVal){
 	    		 $.ajax({
 		               url: "/fdahpStudyDesigner/adminStudies/validateActiveTaskShortTitleId.do?_S=${param._S}",
@@ -892,14 +880,10 @@
 		            	   var jsonobject = eval(data);
 		                   var message = jsonobject.message;
 		                   if('SUCCESS' != message){
-		                	    // $(thisAttr).validator('validate');
-		                	    // $('.statShortTitleClass').parent().removeClass("has-danger").removeClass("has-error");
-		                	    // $('.statShortTitleClass').parent().find(".help-block").empty();
 		                	     $("#identifierId").validator('validate');
 		                         $("#identifierId").parent().removeClass("has-danger").removeClass("has-error");
 		                         $("#identifierId").parent().find(".help-block").empty();
 		                	     shortTitleStatFlag = true;
-		                	     //$("#doneId").attr("disabled",false);
 		                	     callback(true);
 		                     }else{
 		                    	 $(thisAttr).val('');
@@ -910,7 +894,6 @@
 		                    	 showErrMsg("Please fill in all mandatory fields.");
 		                    	 $('.contentClass a').tab('show');
 		                    	 shortTitleStatFlag = false;
-		                    	 //$("#doneId").attr("disabled",true);
 		     					 callback(false);
 		                         
 		                     }
@@ -992,5 +975,4 @@
 			$('#logoutCsrf').val('${_csrf.token}');
 			$('#logoutCsrf').prop('name', '${_csrf.parameterName}');
 		}
-     //# sourceURL=filename1.js
 </script>                          

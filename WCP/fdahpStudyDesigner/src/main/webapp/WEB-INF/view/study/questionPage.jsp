@@ -1,25 +1,20 @@
-<!-- 
-  Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
-  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
-  associated documentation files (the "Software"), to deal in the Software without restriction, including
-  without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-  of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
-  following conditions:
- 
-  The above copyright notice and this permission notice shall be included in all copies or substantial
-  portions of the Software.
- 
-  Funding Source: Food and Drug Administration ("Funding Agency") effective 18 September 2014 as Contract no.
-  HHSF22320140030I/HHSF22301006T (the "Prime Contract").
- 
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
-  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  OTHER DEALINGS IN THE SOFTWARE. 
--->
+#-------------------------------------------------------------------------------
+# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all copies or substantial
+# portions of the Software.
+# 
+# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
+# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
+# 
+# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+#-------------------------------------------------------------------------------
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -109,6 +104,8 @@ function isNumberKey(evt)
          <input type="hidden" id="fromId" name="fromId" value="${formId}" />
          <input type="hidden" name="questionnairesId" id="questionnairesId" value="${questionnaireBo.id}">
          <input type="hidden" id="questionnaireShortId" value="${questionnaireBo.shortTitle}">
+         <input type="hidden" id="anchorDateId" name="anchorDateId" value="${questionnairesStepsBo.questionsBo.anchorDateId}" />
+         <input type="hidden" id="isShorTitleDuplicate" name="isShorTitleDuplicate" value="${questionsBo.isShorTitleDuplicate}" />
          <!---  Form-level Attributes ---> 
          <div id="qla" class="tab-pane fade active in mt-xlg">
             <div class="col-md-6 pl-none">
@@ -172,7 +169,7 @@ function isNumberKey(evt)
                   <div id="responseTypeDataType">- NA - </div>
                </div>
             </div>
-            <div class="mt-lg mb-lg" id="useAnchorDateContainerId" style="display: none">
+            <%-- <div class="mt-lg mb-lg" id="useAnchorDateContainerId" style="display: none">
                <c:choose>
                	<c:when test="${questionsBo.useAnchorDate}">
                		<span class="checkbox checkbox-inline">
@@ -189,6 +186,46 @@ function isNumberKey(evt)
 	               </span>
                	</c:otherwise>
                </c:choose>
+            </div> --%>
+            <div class="mt-lg mb-lg" id="useAnchorDateContainerId" style="display: none">
+            <c:choose>
+            	<c:when test="${questionsBo.useAnchorDate}">
+            	    <span class="tool-tip" data-toggle="tooltip" data-html="true" data-placement="top"  title="The date supplied by a participant in response to this question can be used to dictate the schedule for other questionnaires or active tasks in the study, or to determine the Period of Visibility of study resources."  >
+            		<span class="checkbox checkbox-inline">
+			               <input type="checkbox" id="useAnchorDateId" name="useAnchorDate" value="true" ${questionsBo.useAnchorDate ? 'checked':''} <c:if test="${questionnairesStepsBo.repeatable eq'Yes'}">disabled</c:if> <c:if test="${not empty questionsBo.isShorTitleDuplicate && (questionsBo.isShorTitleDuplicate gt 0)}"> disabled</c:if>>
+			               <label for="useAnchorDateId"> Use response as Anchor Date </label>
+		             </span>
+		             </span>
+		             <div class="clearfix"></div>
+	            	<div class="col-md-6 p-none useAnchorDateName mt-md" style="display: none">
+		                <div class="gray-xs-f mb-xs">Define name for Anchor date<span class="requiredStar">*</span></div>
+		                <div class="form-group">
+		                  <input type="text" class="form-control" name="anchorDateName" id="anchorTextId" value="${questionsBo.anchorDateName}" maxlength="50" <c:if test="${not empty questionsBo.isShorTitleDuplicate && (questionsBo.isShorTitleDuplicate gt 0)}"> disabled</c:if>/>
+		                  <div class="help-block with-errors red-txt"></div>
+		                </div>
+                   </div>
+            	</c:when>
+            	<c:otherwise>
+	               <span class="tool-tip" data-toggle="tooltip" data-html="true" data-placement="top"  
+	               <c:if test="${questionnaireBo.scheduleType eq 'AnchorDate'}"> title= "This option has been disabled, since this questionnaire has anchor-date based scheduling already."</c:if>
+	               <c:if test="${questionnaireBo.frequency ne 'One time' || questionnaireBo.scheduleType eq 'Regular'}"> title= "The date supplied by a participant in response to this question can be used to dictate the schedule for other questionnaires or active tasks in the study, or to determine the Period of Visibility of study resources."</c:if>
+	                >
+		               <span class="checkbox checkbox-inline">
+			               <input type="checkbox" id="useAnchorDateId" name="useAnchorDate" value="true" ${questionsBo.useAnchorDate ? 'checked':''} <c:if test="${questionnairesStepsBo.repeatable eq'Yes'}"> disabled </c:if> 
+			                     <c:if test="${questionnaireBo.frequency ne 'One time' || questionnaireBo.scheduleType ne 'Regular'}"> disabled </c:if> <c:if test="${not empty questionsBo.isShorTitleDuplicate && (questionsBo.isShorTitleDuplicate gt 0)}"> disabled</c:if>>
+			               <label for="useAnchorDateId"> Use response as Anchor Date </label>
+		               </span>
+	               </span>
+	               <div class="clearfix"></div>
+	            	<div class="col-md-6 p-none useAnchorDateName mt-md" style="display: none">
+		                <div class="gray-xs-f mb-xs">Define name for Anchor date<span class="requiredStar">*</span></div>
+		                <div class="form-group">
+		                  <input type="text" class="form-control" name="anchorDateName" id="anchorTextId" value="${fn:escapeXml(questionsBo.anchorDateName)}" maxlength="50" <c:if test="${not empty questionsBo.isShorTitleDuplicate && (questionsBo.isShorTitleDuplicate gt 0)}"> disabled</c:if>/>
+		                  <div class="help-block with-errors red-txt"></div>
+		                </div>
+                   </div>
+            	</c:otherwise>
+            </c:choose>
             </div>
             <c:if test="${fn:contains(studyBo.platform, 'I')}">
             	<div class="clearfix"></div>
@@ -415,20 +452,20 @@ function isNumberKey(evt)
             <div class="row mb-xs">
             	<div class="col-md-6 pl-none">
                   <div class="col-md-9 col-lg-9 p-none">
-                  	<div class="gray-xs-f mb-xs">Description for minimum value (1 to 20 characters)</div>
+                  	<div class="gray-xs-f mb-xs">Description for minimum value (1 to 50 characters)</div>
 	                <div class="form-group">
 	                  <input type="text" class="form-control" name="questionReponseTypeBo.minDescription" id="scaleMinDescriptionId" value="${fn:escapeXml(
-	                  questionsBo.questionReponseTypeBo.minDescription)}" maxlength="20"/>
+	                  questionsBo.questionReponseTypeBo.minDescription)}" maxlength="50"/>
 	                  <div class="help-block with-errors red-txt"></div>
 	                </div>
                   </div>
                 </div>
             	<div class="col-md-6">
                   <div class="col-md-9 col-lg-9 p-none">
-                  	<div class="gray-xs-f mb-xs">Description for maximum value (1 to 20 characters)</div>
+                  	<div class="gray-xs-f mb-xs">Description for maximum value (1 to 50 characters)</div>
 	                <div class="form-group">
 	                  <input type="text" class="form-control" name="questionReponseTypeBo.maxDescription" id="scaleMaxDescriptionId" value="${fn:escapeXml(
-	                  questionsBo.questionReponseTypeBo.maxDescription)}" maxlength="20" />
+	                  questionsBo.questionReponseTypeBo.maxDescription)}" maxlength="50" />
 	                  <div class="help-block with-errors red-txt"></div>
 	                </div>
                   </div>
@@ -561,18 +598,18 @@ function isNumberKey(evt)
             <div class="row mb-xs">
             	<div class="col-md-6 pl-none">
                   <div class="col-md-9 col-lg-9 p-none">
-                  	<div class="gray-xs-f mb-xs">Description for minimum value (1 to 20 characters)</div>
+                  	<div class="gray-xs-f mb-xs">Description for minimum value (1 to 50 characters)</div>
 	                <div class="form-group">
-	                  <input type="text" class="form-control" name="questionReponseTypeBo.minDescription" id="continuesScaleMinDescriptionId" value="${fn:escapeXml(questionsBo.questionReponseTypeBo.minDescription)}"  maxlength="20"/>
+	                  <input type="text" class="form-control" name="questionReponseTypeBo.minDescription" id="continuesScaleMinDescriptionId" value="${fn:escapeXml(questionsBo.questionReponseTypeBo.minDescription)}"  maxlength="50"/>
 	                  <div class="help-block with-errors red-txt"></div>
 	                </div>
                   </div>
                 </div>
             	<div class="col-md-6">
                   <div class="col-md-9 col-lg-9 p-none">
-                  	<div class="gray-xs-f mb-xs">Description for maximum value (1 to 20 characters)</div>
+                  	<div class="gray-xs-f mb-xs">Description for maximum value (1 to 50 characters)</div>
 	                <div class="form-group">
-	                  <input type="text" class="form-control" name="questionReponseTypeBo.maxDescription" id="continuesScaleMaxDescriptionId" value="${fn:escapeXml(questionsBo.questionReponseTypeBo.maxDescription)}"  maxlength="20" />
+	                  <input type="text" class="form-control" name="questionReponseTypeBo.maxDescription" id="continuesScaleMaxDescriptionId" value="${fn:escapeXml(questionsBo.questionReponseTypeBo.maxDescription)}"  maxlength="50" />
 	                  <div class="help-block with-errors red-txt"></div>
 	                </div>
                   </div>
@@ -1456,6 +1493,31 @@ function isNumberKey(evt)
 <script type="text/javascript">
 $(document).ready(function(){
 	
+	if($('#useAnchorDateId').is(':checked')){
+		$("#anchorTextId").attr('required',true);
+	}else{
+		$('.useAnchorDateName').hide();
+		$("#anchorTextId").attr('required',false);
+		$("#anchorTextId").parent().removeClass("has-danger").removeClass("has-error");
+	    $("#anchorTextId").parent().find(".help-block").html("");
+	}
+	
+	$('#useAnchorDateId').click(function() {	
+		if ($(this).is(':checked')){
+			$('.useAnchorDateName').show();
+			$("#anchorTextId").attr('required',true);
+		}else{
+			$('.useAnchorDateName').hide();
+			$("#anchorTextId").attr('required',false);
+			$("#anchorTextId").parent().removeClass("has-danger").removeClass("has-error");
+ 	        $("#anchorTextId").parent().find(".help-block").html("");
+		}
+	});
+	
+	$("#anchorTextId").blur(function(){
+		validateAnchorDateText('',function(val){});
+    });
+	
 	<c:if test="${actionTypeForFormStep == 'view'}">
 		$('#questionStepId input,textarea ').prop('disabled', true);
 		$('#questionStepId select').addClass('linkDis');
@@ -1470,6 +1532,7 @@ $(document).ready(function(){
     	 var isValid = true;
     	 var isImageValid = true;
 		 var resType = $("#rlaResonseType").val();
+		 var anchorDateFlag = true;
 		 if(resType == 'Text Scale' || resType == 'Image Choice' || resType == 'Value Picker' || resType == 'Text Choice'){
 			 validateForUniqueValue('',resType,function(val){if(val){}});
 		 }
@@ -1620,6 +1683,16 @@ $(document).ready(function(){
 			  }else{
 				  isValid = true;
 			  }
+		  }else if(resType == 'Date'){
+			  var skiappable = $('input[name="skippable"]:checked').val();
+			  var anchorText = $("#anchorTextId").val();
+			  var anchorDateUsed = $('#useAnchorDateId').is(':checked');
+			  if(anchorDateUsed && anchorText != '' && anchorText != null && typeof anchorText != 'undefined'){
+				    $("#anchorTextId,#useAnchorDateId").attr("disabled",false);
+				    validateAnchorDateText('',function(val){});
+				    if(skiappable == 'Yes')
+						anchorDateFlag = false;
+			  }
 		  }
    		    $("#placeholderTextId").val(placeholderText);
    		    $("#stepValueId").val(stepText);
@@ -1655,7 +1728,29 @@ $(document).ready(function(){
 				   			   			 }    
 				   			   		 });
 				   			 	}
-	   			      		 	document.questionStepId.submit();
+				   			 if(anchorDateFlag){
+				    			 document.questionStepId.submit();	
+		    				 }else{
+		    					 $("body").removeClass("loading");
+		    					 $("#doneId").attr("disabled",false);
+		    					 bootbox.confirm({
+		    							closeButton: false,
+		    							message : "This question provides an Anchor Date response element, but has been marked Skippable. Are you sure you wish to proceed?",	
+		    						    buttons: {
+		    						        'cancel': {
+		    						            label: 'Cancel',
+		    						        },
+		    						        'confirm': {
+		    						            label: 'OK',
+		    						        },
+		    						    },
+		    						    callback: function(result) {
+		    						        if (result) {
+		    						        	   document.questionStepId.submit();	
+		    						             }	
+		    						        }
+		    						    })
+		    				 }
 	   			       	 }
 	   				}else{
 		   				 $("#doneId").attr("disabled",false);
@@ -2577,7 +2672,7 @@ function getResponseType(id){
    			 	$("#useAnchorDateContainerId").show();
    			 	var anchorDate = "${questionsBo.useAnchorDate}";
 			 	if(anchorDate == "true"){
-			 		
+	   			 	$('.useAnchorDateName').show();
 			 		$("#useAnchorDateId").attr("checked",true);
 			 	}
 	   		}else{
@@ -2622,6 +2717,9 @@ function saveQuestionStepQuestionnaire(item,callback){
 	var skippableText = $('input[name="skippable"]:checked').val();
 	var anchor_date = $('input[name="questionsBo.useAnchorDate"]:checked').val();
 	var questionnaireId = $("#questionnairesId").val();
+	var anchor_date_id = $("#anchorDateId").val();
+	var anchor_text = $('#anchorTextId').val();
+	
 	
 	questionsBo.shortTitle=short_title;
 	questionsBo.question=questionText;
@@ -2641,6 +2739,8 @@ function saveQuestionStepQuestionnaire(item,callback){
 	questionsBo.id = questionid;
 	questionsBo.skippable=skippableText;
 	questionsBo.useAnchorDate=anchor_date;
+	questionsBo.anchorDateName=anchor_text;
+	questionsBo.anchorDateId=anchor_date_id;
 	questionsBo.questionnaireId=questionnaireId;
 	var questionReponseTypeBo = new  Object();
 	var minValue='';
@@ -3531,7 +3631,8 @@ function validateForUniqueValue(item,responsetype,callback){
 			var diaplay_value = $("#displayTextChoiceValue"+id).val();
 			$("#displayTextChoiceValue"+id).parent().removeClass("has-danger").removeClass("has-error");
             $("#displayTextChoiceValue"+id).parent().find(".help-block").empty();
-			if(diaplay_value != ''){
+			if(typeof diaplay_value != 'undefined' && diaplay_value != null && diaplay_value != ''){
+				console.log(valueArray.indexOf(diaplay_value.toLowerCase()));
 				if(valueArray.indexOf(diaplay_value.toLowerCase()) != -1) {
 					isValid=false;
 					$("#displayTextChoiceValue"+id).val('');
@@ -3558,5 +3659,57 @@ function removeImage(item){
 	$('.textLabel'+id2).text("Upload");
 	$(item).parent().find('img').attr("src","../images/icons/sm-thumb.jpg");
 	$(item).addClass("hide");
+}
+function validateAnchorDateText(item,callback){
+ 	var anchordateText = $("#anchorTextId").val();
+ 	var thisAttr= $("#anchorTextId");
+ 	var anchorDateId = '${questionsBo.anchorDateId}';
+ 	if(anchordateText != null && anchordateText !='' && typeof anchordateText!= 'undefined'){
+ 		var staticText ="Enrollment Date";
+ 		if(anchordateText.toUpperCase() === staticText.toUpperCase()){
+ 			$(thisAttr).val('');
+            $(thisAttr).parent().addClass("has-danger").addClass("has-error");
+            $(thisAttr).parent().find(".help-block").empty();
+            $(thisAttr).parent().find(".help-block").append("<ul class='list-unstyled'><li>'" + anchordateText + "' has already been used in the past.</li></ul>");
+            callback(false);
+ 		}else{
+ 			$(thisAttr).parent().removeClass("has-danger").removeClass("has-error");
+ 	        $(thisAttr).parent().find(".help-block").empty();
+ 	 			$.ajax({
+ 	                 url: "/fdahpStudyDesigner/adminStudies/validateAnchorDateName.do?_S=${param._S}",
+ 	                 type: "POST",
+ 	                 datatype: "json",
+ 	                 data: {
+ 	                	 anchordateText : anchordateText,
+ 	                	 anchorDateId : anchorDateId
+ 	                	 
+ 	                 },
+ 	                 beforeSend: function(xhr, settings){
+ 	                     xhr.setRequestHeader("X-CSRF-TOKEN", "${_csrf.token}");
+ 	                 },
+ 	                 success:  function getResponse(data){
+ 	                     var message = data.message;
+ 	                     console.log(message);
+ 	                     if('SUCCESS' != message){
+ 	                         $(thisAttr).validator('validate');
+ 	                         $(thisAttr).parent().removeClass("has-danger").removeClass("has-error");
+ 	                         $(thisAttr).parent().find(".help-block").empty();
+ 	                         callback(true);
+ 	                     }else{
+ 	                         $(thisAttr).val('');
+ 	                         $(thisAttr).parent().addClass("has-danger").addClass("has-error");
+ 	                         $(thisAttr).parent().find(".help-block").empty();
+ 	                         $(thisAttr).parent().find(".help-block").append("<ul class='list-unstyled'><li>'" + anchordateText + "' has already been used in the past.</li></ul>");
+ 	                         callback(false);
+ 	                     }
+ 	                 },
+ 	                 global : false
+ 	           });
+ 		}
+ 	}else{
+ 			callback(true);
+ 			$(thisAttr).parent().removeClass("has-danger").removeClass("has-error");
+ 	        $(thisAttr).parent().find(".help-block").html("");
+ 	}
 }
 </script>

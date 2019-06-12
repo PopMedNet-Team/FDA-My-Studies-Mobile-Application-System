@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>fdahpStudyDesigner</display-name>
 	<listener>
-		<listener-class>com.hphc.mystudies.util.ServletContextHolder</listener-class>
+		<listener-class>com.fdahpstudydesigner.util.ServletContextHolder</listener-class>
 	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -70,7 +70,7 @@
 	</filter-mapping>
 	<filter>
 		<filter-name>XSS</filter-name>
-		<filter-class>com.hphc.mystudies.util.CrossScriptingFilter</filter-class>
+		<filter-class>com.fdahpstudydesigner.util.CrossScriptingFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>XSS</filter-name>

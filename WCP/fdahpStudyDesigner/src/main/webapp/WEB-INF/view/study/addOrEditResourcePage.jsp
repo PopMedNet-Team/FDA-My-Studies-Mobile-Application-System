@@ -1,25 +1,20 @@
-<!-- 
-  Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
-  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
-  associated documentation files (the "Software"), to deal in the Software without restriction, including
-  without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-  of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
-  following conditions:
- 
-  The above copyright notice and this permission notice shall be included in all copies or substantial
-  portions of the Software.
- 
-  Funding Source: Food and Drug Administration ("Funding Agency") effective 18 September 2014 as Contract no.
-  HHSF22320140030I/HHSF22301006T (the "Prime Contract").
- 
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
-  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-  OTHER DEALINGS IN THE SOFTWARE. 
--->
+#-------------------------------------------------------------------------------
+# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all copies or substantial
+# portions of the Software.
+# 
+# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
+# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
+# 
+# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+#-------------------------------------------------------------------------------
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -120,8 +115,9 @@
             <div class="mt-xs">
                 <div class="gray-xs-f mb-sm">Set a Period of Visibility for this resource? <span class="requiredStar">*</span> <span data-toggle="tooltip" data-placement="top" title="If you choose Yes, the resource will be made available in the app for the selected time period. If you choose No, the Resource is available for the entire duration of the study." class="filled-tooltip"></span></div>
                  <span class="radio radio-info radio-inline p-45">
-                    <input type="radio" id="inlineRadio3" name="resourceVisibilityParam" value="0" <c:if test="${not resourceBO.resourceVisibility}">checked</c:if>>
-                    <label for="inlineRadio3">Yes</label>
+                    <input type="radio" id="inlineRadio3" name="resourceVisibilityParam" value="0"
+                     <c:if test="${not resourceBO.resourceVisibility}">checked</c:if>>
+                      <label for="inlineRadio3">Yes</label>
                 </span>
                 <span class="radio radio-inline">
                     <input type="radio" id="inlineRadio4" name="resourceVisibilityParam" value="1" <c:if test="${resourceBO.resourceVisibility  || empty resourceBO}">checked</c:if>>
@@ -134,13 +130,46 @@
                
              <div class="mt-lg resetDate">
                 <div class="gray-xs-f mb-xs">Select Time Period <span class="requiredStar">*</span></div>
-                <div>
+                <div id="selectTime">
                  <span class="radio radio-info radio-inline pr-md">
                     <input type="radio" id="inlineRadio5" class="disRadBtn1" value="1" name="resourceTypeParm">
-                    <label for="inlineRadio5">Anchor Date </label><br/>
-                    <!-- <span>&nbsp;</span> -->
+                    <label for="inlineRadio5">Anchor Date-based Period</label><br/>
                 </span>
-                
+                <%-- <c:if test="${fn:length(anchorTypeList) gt 0}">
+                	<div>
+	            	  <div class="gray-xs-f col-md-3 col-lg-3 p-none mt-sm">Select Anchor Date Type<span class="requiredStar">*</span></div>
+	                  <div class="col-md-3 col-lg-3 p-none">
+		                  <div class="form-group">
+		                     <select id="anchorDateId" class="selectpicker disRadBtn1 disBtn1" required name="anchorDateId">
+		                      <option value='' >Select</option>
+		                      <c:forEach items="${anchorTypeList}" var="anchorTypeInfo">
+		                      	<option value="${anchorTypeInfo.id}" ${resourceBO.anchorDateId eq anchorTypeInfo.id ? 'selected' : ''}>${anchorTypeInfo.name}</option>
+		                      </c:forEach>
+		                     </select>
+		                     <div class="help-block with-errors red-txt"></div>
+		                  </div>
+	                  </div>
+	                  <div class="clearfix"></div>
+	                 </div>
+                </c:if> --%>
+                	<div>
+	            	  <div class="gray-xs-f col-md-3 col-lg-3 p-none mt-sm">Select Anchor Date Type<span class="requiredStar">*</span></div>
+	                  <div class="col-md-3 col-lg-3 p-none">
+		                  <div class="form-group">
+		                     <select id="anchorDateId" class="selectpicker disBtn1" required name="anchorDateId">
+		                      <option value='' >Select</option>
+		                      <c:forEach items="${anchorTypeList}" var="anchorTypeInfo">
+		                      <option value="${anchorTypeInfo.id}" ${resourceBO.anchorDateId eq anchorTypeInfo.id ? 'selected' : ''}>${anchorTypeInfo.name}</option>
+		                      </c:forEach>
+		                     </select>
+		                     <div class="help-block with-errors red-txt"></div>
+		                  </div>
+	                  </div>
+	                  <div class="clearfix"></div>
+	                 </div>
+                <span class="mb-sm pr-md">
+                    <span class="light-txt opacity06">Anchor Date </span>                   
+                 </span>
                 <span>
 	                 <select class="signDropDown selectpicker sign-box" title="Select" name="xDaysSign" id="xSign">
 	                          <option value="0" ${not resourceBO.xDaysSign ?'selected':''}>+</option>
@@ -174,7 +203,7 @@
                  	 <span class="help-block with-errors red-txt"></span>
                  </span>
                  <span class="mb-sm pr-md">
-	                    <span class="light-txt opacity06"> days </span>                   
+	                    <span class="light-txt opacity06 disBtn1"> days </span>                   
 	                 </span>
                  </div>
              </div>
@@ -242,6 +271,7 @@
 </form:form>
 <script type="text/javascript">
 $(document).ready(function(){
+	
 	<c:if test="${isstudyProtocol eq 'isstudyProtocol' && empty resourceBO.title}">
 		$('#resourceTitle').val('Study Protocol');
 	</c:if>
@@ -260,8 +290,34 @@ $(document).ready(function(){
 	 $("#doneResourceId").on('click', function(){
 		 $('#doneResourceId').prop('disabled',true);
           if( chkDaysValid(true) && isFromValid('#resourceForm')){
-       	   	$('#buttonText').val('done');
- 		   		$('#resourceForm').submit();
+        	  if($('#inlineRadio5').is(':checked')){
+        		  var text = "You have chosen to use a period of visibility based on an Anchor Date. Please ensure that the Source Questionnaire providing the Anchor Date response is scheduled appropriately.";
+              	  bootbox.confirm({
+              		closeButton: false,
+              		message: text,
+              		buttons: {
+      			        'cancel': {
+      			            label: 'Cancel',
+      			        },
+      			        'confirm': {
+      			            label: 'OK',
+      			        },
+      			    },
+      			    callback: function(valid) {
+      			    	if (valid) {
+      			    		console.log(1);
+      			    		$('#buttonText').val('done');
+      	   		   		    $('#resourceForm').submit(); 
+      			    	}else{
+      			    		console.log(2);
+      			    		$('#doneResourceId').prop('disabled',false);
+      			    	}
+      			      }
+              	   });
+        	  }else{
+        		  $('#buttonText').val('done');
+   		   		  $('#resourceForm').submit(); 
+        	  }
  		   }else{
  			  $('#doneResourceId').prop('disabled',false);
  		   }
@@ -310,6 +366,8 @@ $(document).ready(function(){
 		   	$("#resourceTitle").parent().find(".help-block").empty();
 	   		$('#resourceForm').validator('destroy').validator();
 	   		var isValid = true;
+	   		var anchorList = "${anchorTypeList}";
+			 var length = anchorList.length;
 	   if($('#inlineRadio5').prop('checked') && ($('#xdays').val() || $('#ydays').val())) {
 		   isValid = chkDaysValid(false);
 	   }
@@ -521,21 +579,23 @@ $(document).ready(function(){
 		$('#inlineRadio5').on('click',function(){
 			if($('#inlineRadio5').prop('checked') == true){
 			$('.disBtn1').prop('disabled',false);
+			$('.disRadBtn1').prop('disabled',false);
+			$('.disBtn1').selectpicker('refresh');
 			$('.disBtn2').prop('disabled',true);
 			$('.disBtn2').val('');
 			$('.disBtn1').attr('required','required');
 			$('.disBtn2').removeAttr('required');
 			if($('#xdays').attr('oldxDaysVal') != ''){
 				$('#inlineRadio5').prop('checked',true);
-				$('#xdays').val($('#xdays').attr('oldxDaysVal'));
 				$('.disBtn1').prop('disabled',false);
 				$('.disBtn2').prop('disabled',true);
+				$('.disBtn1').selectpicker('refresh');
 			}
 			if($('#ydays').attr('oldyDaysVal') != ''){
 				$('#inlineRadio5').prop('checked',true);
-				$('#ydays').val($('#ydays').attr('oldyDaysVal'));
 				$('.disBtn1').prop('disabled',false);
 				$('.disBtn2').prop('disabled',true);
+				$('.disBtn1').selectpicker('refresh');
 			}
 			resetValidation('.resetDate');
 			}
@@ -548,6 +608,7 @@ $(document).ready(function(){
 			$('.disBtn1').val('');
 			$('.disBtn2').attr('required','required');
 			$('.disBtn1').removeAttr('required');
+			$('.disBtn1').selectpicker('refresh');
 			$('#ydays').parent().removeClass('has-error has-danger').find(".help-block").html("");
 			if($('#StartDate').attr('oldStartDateVal') != ''){
 				$('#inlineRadio6').prop('checked',true);
@@ -579,9 +640,20 @@ $(document).ready(function(){
 		
 		$('#inlineRadio3').on('click',function(){
 			if($('#inlineRadio3').prop('checked') == true){
-			$('.disBtn1').prop('disabled',false);
+				
+			var anchorTypeList = "${anchorTypeList}";
+			var length = anchorTypeList.length;
+				 if(length < 3){
+					 $('#inlineRadio5').prop('disabled',true);
+						$('.disRadBtn1').prop('disabled',true);	
+						$('.disRadBtn1').prop('checked',false);
+						$('.disRadBtn1').val('');	
+						$('.disBtn1').removeAttr('required');
+						$('.disBtn1').val('');
+						
+				 }
 			$('.disBtn2').prop('disabled',true);
-			$('#inlineRadio5,#inlineRadio6').prop('disabled',false);
+			$('#inlineRadio6').prop('disabled',false);
 			$('.disBtn2').val('');
 				if($('#xdays').attr('oldxDaysVal') != ''){
 					$('#inlineRadio5').prop('checked',true);
@@ -590,6 +662,10 @@ $(document).ready(function(){
 					$('.disBtn2').prop('disabled',true);
 					$('.disBtn1').attr('required','required');
 					$('.disBtn2').removeAttr('required');
+					$('#inlineRadio5').prop('disabled',false);	
+					$('#inlineRadio5').val('');	
+					$('.disBtn1').val('');
+					$('.disBtn1').selectpicker('refresh');
 					resetValidation($('.resetDate'));
 				}
 				if($('#ydays').attr('oldyDaysVal') != ''){
@@ -599,6 +675,10 @@ $(document).ready(function(){
 					$('.disBtn2').prop('disabled',true);
 					$('.disBtn1').attr('required','required');
 					$('.disBtn2').removeAttr('required');
+					$('.disBtn1').val('');
+					$('#inlineRadio5').prop('disabled',false);	
+					$('#inlineRadio5').val('');	
+					$('.disBtn1').selectpicker('refresh');
 					resetValidation($('.resetDate'));
 				}
 				if($('#StartDate').attr('oldStartDateVal') != ''){
@@ -608,6 +688,18 @@ $(document).ready(function(){
 					$('.disBtn2').prop('disabled',false);
 					$('.disBtn2').attr('required','required');
 					$('.disBtn1').removeAttr('required');
+					$('.disRadBtn1').prop('checked',false);
+					 if(length < 3){
+						 $('#inlineRadio5').prop('disabled',true);
+							$('.disRadBtn1').prop('disabled',true);	
+							$('.disRadBtn1').prop('checked',false);
+							$('.disRadBtn1').val('');	
+							$('.disBtn1').removeAttr('required');
+							$('.disBtn1').val('');
+							
+					 }else{
+						 $('#inlineRadio5').prop('disabled',false);
+					 }
 					resetValidation($('.resetDate'));
 				}
 				if($('#EndDate').attr('oldEndDateVal') != ''){
@@ -617,36 +709,58 @@ $(document).ready(function(){
 					$('.disBtn2').prop('disabled',false);
 					$('.disBtn2').attr('required','required');
 					$('.disBtn1').removeAttr('required');
+					$('.disBtn1').selectpicker('refresh');
+					 if(length < 3){
+						 $('#inlineRadio5').prop('disabled',true);
+							$('.disRadBtn1').prop('disabled',true);	
+							$('.disRadBtn1').prop('checked',false);
+							$('.disRadBtn1').val('');	
+							$('.disBtn1').removeAttr('required');
+							$('.disBtn1').val('');
+							
+					 }else{
+						 $('#inlineRadio5').prop('disabled',false);
+					 }
 					resetValidation($('.resetDate'));
 				}
 				if($('#xdays').attr('oldxDaysVal') == '' && $('#ydays').attr('oldyDaysVal') == '' && $('#StartDate').attr('oldStartDateVal') == '' && $('#EndDate').attr('oldEndDateVal') == ''){
-					$('#inlineRadio6').prop('checked',true);
+					 $('#inlineRadio6').prop('checked',true);
 					$('.disBtn2').prop('disabled',false);
 					$('.disBtn1').prop('disabled',true);
 					$('.disBtn2').attr('required','required');
 					$('.disBtn1').removeAttr('required');
-					resetValidation($('.resetDate'));
+				 	 if(length > 3 || $('#ydays').attr('oldyDaysVal') != '' || $('#ydays').attr('oldyDaysVal') != ''){
+				 		 $('#inlineRadio5').prop('disabled',false);
+				 		resetValidation($('.resetDate'));
+					 } 
+					
 				}
 			}
-			var a = $("#inlineRadio3").val();
+			 var a = $("#inlineRadio3").val();
 			if(a ==0){
 			   $(".light-txt").removeClass("opacity06");
 			}else{
 			  $(".light-txt").addClass("opacity06");
-			}
+			} 
 			resetValidation($('.resetDate'));
-			
-			
-			
 		});
 		
 		if($('#inlineRadio3').prop('checked') == true){
+			var anchorTypeList = "${anchorTypeList}";
+			var length = anchorTypeList.length;
+				
 		if($('#xdays').attr('oldxDaysVal') == '' && $('#ydays').attr('oldyDaysVal') == '' && $('#StartDate').attr('oldStartDateVal') == '' && $('#EndDate').attr('oldEndDateVal') == ''){
 			$('#inlineRadio6').prop('checked',true);
 			$('.disBtn2').prop('disabled',false);
 			$('.disBtn1').prop('disabled',true);
 			$('.disBtn2').attr('required','required');
 			$('.disBtn1').removeAttr('required');
+			 if(length < 3){
+				 $('#inlineRadio5').prop('checked',false);
+				 $('.disBtn1').prop('disabled',true);
+				 $('.disBtn1').prop('disabled',true);
+				 $('#inlineRadio5').prop('disabled',true);
+			 }
 		}else if($('#xdays').attr('oldxDaysVal') || $('#ydays').attr('oldyDaysVal')){
 			$('#inlineRadio5').prop('checked',true);
 			$('.disBtn1').prop('disabled',false);
@@ -659,6 +773,12 @@ $(document).ready(function(){
 			$('.disBtn1').prop('disabled',true);
 			$('.disBtn2').attr('required','required');
 			$('.disBtn1').removeAttr('required');
+			 if(length < 3){
+				 $('#inlineRadio5').prop('checked',false);
+				 $('.disBtn1').prop('disabled',true);
+				 $('.disBtn1').prop('disabled',true);
+				 $('#inlineRadio5').prop('disabled',true);
+			 }
 		}
 		var a = $("#inlineRadio3").val();
 		if(a ==0){
@@ -674,9 +794,11 @@ $(document).ready(function(){
 			$('.disRadBtn1').prop('disabled',true);	
 			$('.disRadBtn1').val('');	
 			$('.disRadBtn1').prop('checked',false);
+			$('.disBtn1').prop('disabled',true);	
 			$('.disBtn1').val('');
 			$('.disBtn1').removeAttr('required');
 			$('.disBtn2').removeAttr('required');
+			$('.disBtn1').selectpicker('refresh');
 			resetValidation($('.resetDate'));
 			}
 			
@@ -691,7 +813,7 @@ $(document).ready(function(){
 	</c:if>
 	
 	<c:if test="${actionOn eq 'view'}">
-	 	$('#resourceForm input,textarea').prop('disabled', true);
+	 	$('#resourceForm input,textarea,select').prop('disabled', true);
     	$('.viewAct').hide();
 	</c:if>
 	
@@ -703,6 +825,22 @@ $(document).ready(function(){
 		$('#pdfDownloadFormId').submit();
 		$("body").removeClass("loading");
  	});
+	 
+	 $('#anchorDateId').change(function(){ 
+			var element = $(this).find('option:selected').text(); 
+			if(element == 'Enrollment Date'){
+				$('#xSign').children('option').remove();
+				$('#xSign').append("<option value='0' selected>+</option>");
+				$('#ySign').children('option').remove();
+			    $('#ySign').append("<option value='0' selected>+</option>");
+			} else{
+				$('#xSign').children('option').remove();
+				$('#xSign').append("<option value='0' selected>+</option><option value='1' selected>-</option>");
+				$('#ySign').children('option').remove();
+			    $('#ySign').append("<option value='0' selected>+</option><option value='1' selected>-</option>");
+			}
+			$('.selectpicker').selectpicker('refresh');
+	}); 
 });
 function chkDaysValid(clickDone){
 	var x = $("#xdays").val();
