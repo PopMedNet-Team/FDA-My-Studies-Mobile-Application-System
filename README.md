@@ -31,7 +31,7 @@ direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 <ul>
  <li>New Features
  <ul><li>Ability to schedule study activities and resources based on study enrollment (or other WCP-configured date elements) as Anchor Date.</ul>
-<li>Application Security and Compabitility Updates
+<li>Application Security and Compatibility Updates
   <ul>
 <li>iPhone X, XR, XS 
 <li>iOS 11.x  and 12.x 
