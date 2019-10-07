@@ -30,7 +30,7 @@ direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 # FDA MyStudies Release Notes - Version 2019.05:
 <ul>
  <li>New Features
- <ul><li>Ability to schedule study activities and resources based on study enrollment (or other WCP-configured date elements) as Anchor Date.</ul>
+ <ul><li>Ability to schedule study activities and resources based on study enrollment date or other WCP-configured dates.</ul>
 <li>Application Security and Compatibility Updates
   <ul>
 <li>iPhone X, XR, XS 
