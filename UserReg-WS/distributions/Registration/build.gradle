@@ -1,0 +1,64 @@
+import org.labkey.gradle.task.ModuleDistribution
+import org.labkey.gradle.util.BuildUtils
+import org.labkey.gradle.util.GroupNames
+import org.labkey.gradle.plugin.Distribution
+
+apply plugin: 'org.labkey.distribution'
+
+//deployMode="dev"
+
+/**
+ This file can be used to create a distribution of the User Registration Web Server.  
+
+ In the following, we assume your labkey code enlistment is located at
+ C:\labkey
+ And the Registration module is located in:
+ C:\labkey\server\customModules\fdahpUserRegWS
+ You will need to do the following:
+ 1. Edit this file to update the "versionPrefix" property below to correspond to the 
+ version of the distribution you are creating.
+ 2. Create the directory for this build.gradle file to live in.  This directory can be, for example:
+ C:\labkey\server\customModules\fdahpUserRegWS\distributions\Registration
+ 3. Put this build.gradle file in that directory
+ C:\labkey\server\customModules\fdahpUserRegWS\distributions\Registration\build.gradlela
+ 4. Edit your settings.gradle file to include the distributions project.  That is, add the following
+ line at the end of that file:
+ include ":server:customModules:fdahpUserRegWS:distributions:Registration"
+ 5. Clean the build directory (especially important to do before creating a production distribution 
+ if you typically build in dev mode)
+
+
+ 6. Run the distribution command
+ .\gradlew :server:customModules:fdahpUserRegWS:distributions:Registration:distribution
+
+ This will create a file named Registration-1.xy-bin.tar.gz in the Registration subdirectory
+ of the dist directory:
+ C:\labkey\dist\Registration\Registration-1.xy-bin.tar.gz
+ **/
+project.task(
+        "distribution",
+        group: GroupNames.DISTRIBUTION,
+        description: "Make a LabKey modules distribution",
+        type: ModuleDistribution,
+        {ModuleDistribution dist ->
+            dist.subDirName='Registration'
+            dist.versionPrefix="Registration-1.00"
+            dist.includeTarGZArchive=true
+        }
+)
+dist.description="Distribution of User Registration Modules"
+
+BuildUtils.addModuleDistributionDependencies(project, [
+        ":server:internal",
+        ":server:api",
+        ":server:modules:announcements",
+        ":server:modules:audit",
+        ":server:modules:core",
+        ":server:modules:experiment",
+        ":server:modules:filecontent",
+        ":server:modules:pipeline",
+        ":server:modules:query",
+        ":server:modules:wiki",
+        ":server:customModules:fdahpUserRegWS"
+]
+)
