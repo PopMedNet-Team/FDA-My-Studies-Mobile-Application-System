@@ -27,9 +27,10 @@ direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 <b>Setup Instructions: FDAMyStudies_Release 2019.05__SetupInstructions_V1.0.pdf</b>
 
 
+
 # FDA MyStudies Release Notes - Version 2019.10:
 <ul>
- <li>New Features
+ <li><b>New Features</b>
     <ul>
       <li>Ability to schedule study activities and resources based on study enrollment (or other WCP-configured date elements) as Anchor Date.
       <li>Ability to support multiple mobile apps from a single instance of the Web Configuration Portal (WCP)
@@ -37,7 +38,7 @@ direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
       <li>Ability to automatically forward survey responses stored in Response Server to external systems
       <li>Ability to partition user email addresses by folder in the Registration Server 
     </ul>
-<li>Application Security and Compabitility Updates
+ <li><b>Application Security and Compabitility Updates</b>
    <ul>
      <li> Compatibility with LabKey Server 19.2.X
    </ul>
