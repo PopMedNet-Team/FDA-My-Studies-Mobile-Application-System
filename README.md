@@ -27,7 +27,6 @@ direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 <b>Setup Instructions: FDAMyStudies_Release 2019.05__SetupInstructions_V1.0.pdf</b>
 
 
-
 # FDA MyStudies Release Notes - Version 2019.10:
 <ul>
  <li><b>New Features</b>
