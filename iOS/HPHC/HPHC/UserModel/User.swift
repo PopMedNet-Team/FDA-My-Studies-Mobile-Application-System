@@ -573,7 +573,7 @@ class UserStudyStatus{
     var studyId: String! = ""
     var status: StudyStatus = .yetToJoin
     var consent: String! = ""
-    var joiningDate: Date!  //User joined Date for study
+    var joiningDate: Date!//User joined Date for study
     var completion: Int = 0
     var adherence: Int = 0
     var participantId: String?
@@ -668,6 +668,13 @@ class TermsAndPolicy {
         self.termsURL = ""
         self.policyURL = ""
     }
+    
+    
+    func initWith(terms:String, policy:String) {
+         self.termsURL = terms
+        self.policyURL = policy
+    }
+    
     //Initializer
     func initWithDict(dict: Dictionary<String,Any>) {
         if Utilities.isValidObject(someObject: dict as AnyObject) {
@@ -700,6 +707,7 @@ class UserActivityStatus{
         case inProgress
         case completed
         case abandoned
+        case expired
         
         
         var sortIndex: Int {
@@ -712,6 +720,8 @@ class UserActivityStatus{
                 return 2
             case .abandoned:
                 return 3
+            case .expired:
+                return 4
                 
                 
             }
@@ -726,6 +736,8 @@ class UserActivityStatus{
                 return "  Completed  "
             case .abandoned:
                 return "  Incomplete  "
+            case .expired:
+                return "  Expired  "
                 
             }
         }
@@ -740,7 +752,8 @@ class UserActivityStatus{
                 return "completed"
             case .abandoned:
                 return "abandoned"
-                
+            case .expired:
+                return "expired"
                 
             }
         }

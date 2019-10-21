@@ -8,6 +8,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="Iy6-1K-v1C">
@@ -289,14 +294,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="45.png" translatesAutoresizingMaskIntoConstraints="NO" id="Imf-Q3-sjD">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIj-lV-uyU">
-                                <rect key="frame" x="112.5" y="601" width="150" height="45"/>
+                                <rect key="frame" x="112.5" y="534.5" width="150" height="45"/>
                                 <color key="tintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Next">
+                                <state key="normal" title="Done">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -314,7 +315,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFf-Ee-kF6">
-                                <rect key="frame" x="89" y="514.5" width="197" height="45"/>
+                                <rect key="frame" x="89" y="448" width="197" height="45"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="View/Email Consent PDF">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -324,7 +325,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thanks for providing consent for this Study" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Pfh-Dn-IUH">
-                                <rect key="frame" x="37.5" y="236.5" width="300" height="81"/>
+                                <rect key="frame" x="37.5" y="103" width="300" height="81"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="JoO-k3-rRA"/>
                                     <constraint firstAttribute="height" constant="81" id="dho-gU-Cy8"/>
@@ -333,8 +334,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can now start participating in the Study" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQF-1F-Kvh">
-                                <rect key="frame" x="16" y="334" width="343" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can now start using the app to participate in the study." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQF-1F-Kvh">
+                                <rect key="frame" x="16" y="200.5" width="343" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="7gn-Vs-FRF"/>
                                 </constraints>
@@ -342,28 +343,37 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="DA7-Xo-zwR">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KFf-Ee-kF6" firstAttribute="centerX" secondItem="Xsz-hq-CrD" secondAttribute="centerX" id="DbS-oP-7yB"/>
-                            <constraint firstItem="KFf-Ee-kF6" firstAttribute="centerY" secondItem="Xsz-hq-CrD" secondAttribute="centerY" multiplier="1.61019" id="EnR-2I-r3e"/>
-                            <constraint firstItem="uIj-lV-uyU" firstAttribute="centerY" secondItem="Xsz-hq-CrD" secondAttribute="centerY" multiplier="1.87" id="JuN-ez-VgA"/>
+                            <constraint firstItem="KFf-Ee-kF6" firstAttribute="centerY" secondItem="Xsz-hq-CrD" secondAttribute="centerY" multiplier="1.41019" id="EnR-2I-r3e"/>
+                            <constraint firstItem="uIj-lV-uyU" firstAttribute="centerY" secondItem="Xsz-hq-CrD" secondAttribute="centerY" multiplier="1.67" id="JuN-ez-VgA"/>
                             <constraint firstItem="oQF-1F-Kvh" firstAttribute="centerX" secondItem="Xsz-hq-CrD" secondAttribute="centerX" id="VJs-8d-CWB"/>
                             <constraint firstItem="uIj-lV-uyU" firstAttribute="centerX" secondItem="Xsz-hq-CrD" secondAttribute="centerX" id="Xqc-7O-WPx"/>
                             <constraint firstItem="uIj-lV-uyU" firstAttribute="width" secondItem="Xsz-hq-CrD" secondAttribute="width" multiplier="150/375" id="YwU-th-pga"/>
                             <constraint firstItem="oQF-1F-Kvh" firstAttribute="width" secondItem="Xsz-hq-CrD" secondAttribute="width" multiplier="343/375" id="cUt-Ux-8Si"/>
+                            <constraint firstItem="DA7-Xo-zwR" firstAttribute="centerY" secondItem="Xsz-hq-CrD" secondAttribute="centerY" id="fpF-D8-RX0"/>
+                            <constraint firstItem="DA7-Xo-zwR" firstAttribute="centerX" secondItem="Xsz-hq-CrD" secondAttribute="centerX" id="j2w-UO-gsd"/>
                             <constraint firstItem="uIj-lV-uyU" firstAttribute="height" secondItem="Xsz-hq-CrD" secondAttribute="height" multiplier="45/667" id="om8-OX-m5d"/>
                             <constraint firstItem="KFf-Ee-kF6" firstAttribute="height" secondItem="Xsz-hq-CrD" secondAttribute="height" multiplier="45/667" id="pd8-k9-vgq"/>
-                            <constraint firstItem="Pfh-Dn-IUH" firstAttribute="centerY" secondItem="Xsz-hq-CrD" secondAttribute="centerY" multiplier="0.830584" id="rIH-58-Gdp"/>
+                            <constraint firstItem="Pfh-Dn-IUH" firstAttribute="centerY" secondItem="Xsz-hq-CrD" secondAttribute="centerY" multiplier="0.430584" id="rIH-58-Gdp"/>
                             <constraint firstItem="KFf-Ee-kF6" firstAttribute="width" secondItem="Xsz-hq-CrD" secondAttribute="width" multiplier="197/375" id="tMF-Ha-tSi"/>
-                            <constraint firstItem="oQF-1F-Kvh" firstAttribute="centerY" secondItem="Xsz-hq-CrD" secondAttribute="centerY" multiplier="1.09145" id="ufq-jr-Lju"/>
+                            <constraint firstItem="oQF-1F-Kvh" firstAttribute="centerY" secondItem="Xsz-hq-CrD" secondAttribute="centerY" multiplier="0.69145" id="ufq-jr-Lju"/>
                             <constraint firstItem="Pfh-Dn-IUH" firstAttribute="centerX" secondItem="Xsz-hq-CrD" secondAttribute="centerX" id="v4N-5O-I2b"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4h3-3D-Hf4"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="DA7-Xo-zwR" id="B81-YI-Bhg"/>
                         <outlet property="buttonNext" destination="uIj-lV-uyU" id="rT4-Pa-vVa"/>
                         <outlet property="buttonViewPdf" destination="KFf-Ee-kF6" id="1fs-Pc-9RI"/>
+                        <outlet property="labelTitle" destination="Pfh-Dn-IUH" id="eDk-Kr-fag"/>
+                        <outlet property="lableDescription" destination="oQF-1F-Kvh" id="Gi2-0t-PDd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZTs-ha-cz6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -512,7 +522,7 @@
                                     <barButtonItem width="59" style="plain" systemItem="flexibleSpace" id="7si-4X-Jhg">
                                         <color key="tintColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </barButtonItem>
-                                    <barButtonItem title="Next" width="48" id="1qm-qt-0go">
+                                    <barButtonItem title="Done" width="48" id="1qm-qt-0go">
                                         <color key="tintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="buttonActionNextWithSender:" destination="0WO-Bz-3yZ" id="rPt-xP-vJZ"/>
@@ -677,7 +687,6 @@
         <image name="01.png" width="750" height="1334"/>
         <image name="03.png" width="750" height="1334"/>
         <image name="200.png" width="750" height="1334"/>
-        <image name="45.png" width="750" height="1334"/>
         <image name="edit_icn1" width="18" height="17"/>
         <image name="shareIcon" width="15.5" height="22.5"/>
         <image name="smile2" width="122.5" height="119.5"/>

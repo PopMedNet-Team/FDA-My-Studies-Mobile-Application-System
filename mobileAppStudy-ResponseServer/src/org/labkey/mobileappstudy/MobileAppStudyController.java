@@ -45,7 +45,9 @@ import org.labkey.api.security.User;
 import org.labkey.api.security.permissions.AdminPermission;
 import org.labkey.api.util.PageFlowUtil;
 import org.labkey.api.view.ActionURL;
+import org.labkey.api.view.FolderManagement.FolderManagementViewPostAction;
 import org.labkey.api.view.HttpView;
+import org.labkey.api.view.JspView;
 import org.labkey.api.view.NavTree;
 import org.labkey.api.view.ViewContext;
 import org.labkey.mobileappstudy.data.EnrollmentTokenBatch;
@@ -53,6 +55,7 @@ import org.labkey.mobileappstudy.data.MobileAppStudy;
 import org.labkey.mobileappstudy.data.Participant;
 import org.labkey.mobileappstudy.data.SurveyMetadata;
 import org.labkey.mobileappstudy.data.SurveyResponse;
+import org.labkey.mobileappstudy.forwarder.ForwardingType;
 import org.labkey.mobileappstudy.query.ReadResponsesQuerySchema;
 import org.labkey.mobileappstudy.surveydesign.FileSurveyDesignProvider;
 import org.labkey.mobileappstudy.surveydesign.InvalidDesignException;
@@ -854,5 +857,121 @@ public class MobileAppStudyController extends SpringActionController
         {
             this.activityVersion = activityVersion;
         }
+    }
+
+    @RequiresPermission(AdminPermission.class)
+    public static class ForwardingSettingsAction extends FolderManagementViewPostAction<ForwardingSettingsForm>
+    {
+        @Override
+        protected HttpView getTabView(ForwardingSettingsForm form, boolean reshow, BindException errors)
+        {
+            return new JspView<>("/org/labkey/mobileappstudy/view/forwarderSettings.jsp", form, errors);
+        }
+
+        @Override
+        public void validateCommand(ForwardingSettingsForm form, Errors errors)
+        {
+            form.getForwardingType().validateConfig(form, errors);
+        }
+
+        @Override
+        public boolean handlePost(ForwardingSettingsForm form, BindException errors)
+        {
+            MobileAppStudyManager.get().setForwarderConfiguration(getContainer(), form);
+            return true;
+        }
+    }
+
+    public static class ForwardingSettingsForm
+    {
+        private ForwardingType forwardingType = ForwardingType.Disabled;
+        private String basicURL;
+        private String username;
+        private String password;
+        private String tokenRequestURL;
+        private String tokenField;
+        private String header;
+        private String oauthURL;
+
+        public ForwardingType getForwardingType ()
+        {
+            return forwardingType;
+        }
+
+        public void setForwardingType(ForwardingType forwardingType)
+        {
+            this.forwardingType = forwardingType;
+        }
+
+        public String getBasicURL()
+        {
+            return basicURL;
+        }
+
+        public void setBasicURL(String url)
+        {
+            this.basicURL = url;
+        }
+
+        public String getUsername()
+        {
+            return username;
+        }
+
+        public void setUsername(String username)
+        {
+            this.username = username;
+        }
+
+        public String getPassword()
+        {
+            return password;
+        }
+
+        public void setPassword(String password)
+        {
+            this.password = password;
+        }
+
+        public String getTokenRequestURL()
+        {
+            return tokenRequestURL;
+        }
+
+        public void setTokenRequestURL(String tokenRequestURL)
+        {
+            this.tokenRequestURL = tokenRequestURL;
+        }
+
+        public String getTokenField()
+        {
+            return tokenField;
+        }
+
+        public void setTokenField(String tokenField)
+        {
+            this.tokenField = tokenField;
+        }
+
+        public String getHeader()
+        {
+            return header;
+        }
+
+        public void setHeader(String header)
+        {
+            this.header = header;
+        }
+
+        public String getOauthURL()
+        {
+            return oauthURL;
+        }
+
+        public void setOauthURL(String oauthURL)
+        {
+            this.oauthURL = oauthURL;
+        }
+
     }
 }

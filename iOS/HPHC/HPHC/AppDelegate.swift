@@ -234,6 +234,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let _ = try! Realm()
     }
     
+    func fireNotiffication(intervel:Int) {
+        
+        let content = UNMutableNotificationContent()
+        content.body = "message"
+        
+        content.sound = UNNotificationSound.default
+        content.badge = 1
+        let date = Date().addingTimeInterval(TimeInterval(intervel))
+        var timeInterval = date.timeIntervalSinceNow
+
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+        let id = Utilities.randomString(length: 10)
+        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+        let center = UNUserNotificationCenter.current()
+        center.add(request)
+    }
+    
     // MARK: App Delegates
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -258,7 +276,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SyncUpdate.currentSyncUpdate = SyncUpdate()
         
         //Register observer for Network change
-        NotificationCenter.default.addObserver(SyncUpdate.currentSyncUpdate as Any , selector: #selector(SyncUpdate.currentSyncUpdate?.updateData), name: ReachabilityChangedNotification, object: nil)
+        NotificationCenter.default.addObserver(SyncUpdate.currentSyncUpdate as Any , selector: #selector(SyncUpdate.currentSyncUpdate?.updateData), name: Notification.Name.reachabilityChanged, object: nil)
         
         let ud1 = UserDefaults.standard
         
@@ -299,6 +317,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ud.synchronize()
             }
         }
+        
+        //self.fireNotiffication(intervel: 10)
+        //self.fireNotiffication(intervel: 15)
         
         //Check if Database needs migration
         self.checkForRealmMigration()
@@ -353,13 +374,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let isTaskViewControllerVisible = (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self)
             
-            guard let navigation = (navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController, let navigationTitle = navigation.title else {return}
+           // guard let navigation = (navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController, let navigationTitle = navigation.title else {return}
+            
+            let navigationTitle = ((navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController)?.title ?? ""
             
             if (navController as? UINavigationController) != nil &&  isTaskViewControllerVisible == false {
                 
                 if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false {
                     //Request for Passcode
-                    self.checkPasscode(viewController: navController!)
+                    //self.checkPasscode(viewController: navController!)
                 }
                 
             } else if(navController as? UINavigationController) != nil
@@ -368,8 +391,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false {
                     //Request for Passcode
-                    self.checkPasscode(viewController: navController!)
+                    //self.checkPasscode(viewController: navController!)
                 }
+            } else if(navController as? UIViewController) != nil {
+               // self.checkPasscode(viewController: navController!)
             }
         }
         
@@ -403,7 +428,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        print(deviceTokenString)
+        print("Token: \(deviceTokenString)")
         
         if  User.currentUser.userType == .FDAUser {
             
@@ -529,22 +554,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      To get the current App version from App Store and Adds the blocker screen if it is of lower version
      */
     func checkForAppUpdate() {
-        UserServices().checkForAppUpdates(delegate: self)
+        WCPServices().checkForAppUpdates(delegate: self)
     }
     
     func checkForRegisteredNotifications() {
         
         if User.currentUser.userType == .FDAUser {
-            let application = UIApplication.shared
-            var scheduledNotifications = application.scheduledLocalNotifications!
+           
+            let center = UNUserNotificationCenter.current()
+            center.getPendingNotificationRequests(completionHandler: { requests in
+                print(requests)
+                if requests.count < 50 {
+                     LocalNotification.refreshAllLocalNotification()
+                }
+            })
             
             //check if notifications are expired or already fired
-            if scheduledNotifications.count < 50 {
-                //refresh local notifcation from DB
-                LocalNotification.refreshAllLocalNotification()
-                scheduledNotifications = application.scheduledLocalNotifications!
-                
-            }
+//            if scheduledNotifications.count < 50 {
+//                //refresh local notifcation from DB
+//                LocalNotification.refreshAllLocalNotification()
+//                scheduledNotifications = application.scheduledLocalNotifications!
+//
+//            }
         }
     }
     
@@ -613,6 +644,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.addAndRemoveProgress(add: false)
         //present consent task
+        taskViewController?.modalPresentationStyle = .fullScreen
         topVC?.present(taskViewController!, animated: true, completion: nil)
     }
     
@@ -805,6 +837,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     passcodeParentControllerWhileSetup = viewController
                     isPasscodePresented = true
                     blockerScreen?.isHidden = true
+                    taskViewController.modalPresentationStyle = .fullScreen
                     viewController.present(taskViewController, animated: false, completion: nil)
                     
                 }else {
@@ -841,6 +874,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if isComprehensionFailed! {
                             self.retryView?.isHidden = true
                         }
+                        passcodeViewController.modalPresentationStyle = .fullScreen
                         topVC!.present(passcodeViewController, animated: false, completion: nil)
                     }
                 }
@@ -1096,9 +1130,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    //MARK: - Consent Handlers
+    func studyEnrollmentFinished() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentCompleted"), object: nil)
+    }
+    func studyEnrollmentFailed(error:NSError?) {
+        
+        NotificationCenter.default.post(name:NSNotification.Name(rawValue: "NotificationStudyEnrollmentFailed"), object: error)
+        //let message = error.localizedDescription
+        //UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: message as NSString)
+    }
+    
+    func studyEnrollmentStarted(taskViewController:ORKTaskViewController) {
+        
+        //Saving Consent Document
+        ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
+        ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult: taskViewController.result )
+        
+        //save consent to study
+        Study.currentStudy?.signedConsentVersion = ConsentBuilder.currentConsent?.version!
+        Study.currentStudy?.signedConsentFilePath = ConsentBuilder.currentConsent?.consentResult?.consentPath!
+        
+        // save also in DB
+        DBHandler.saveConsentInformation(study: Study.currentStudy!)
+        
+        
+        //update consent is updaeted in db
+        Study.currentStudy?.version = StudyUpdates.studyVersion
+        Study.currentStudy?.newVersion = StudyUpdates.studyVersion
+        StudyUpdates.studyConsentUpdated  = false
+        DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+        
+        if self.isComprehensionFailed! {
+            self.isComprehensionFailed = false
+        }
+        
+        ConsentBuilder.currentConsent?.consentStatus = .completed
+        //self.addAndRemoveProgress(add: true)
+        
+        if ConsentBuilder.currentConsent?.consentResult?.consentPdfData?.count == 0 {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+                self.updateEligibilityConsentStatus()
+            }
+            
+            
+        }else {
+            //Update Consent Status to server
+            UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+        }
+    }
+    
 }
 
-typealias JSONDictionary = [String: Any]
 // MARK:- Handle network responses
 extension AppDelegate {
     
@@ -1107,7 +1191,7 @@ extension AppDelegate {
         
         if let iosDict = response["ios"] as? JSONDictionary,
            let latestVersion = iosDict["latestVersion"] as? String,
-            let ForceUpdate = iosDict["ForceUpdate"] as? String {
+            let ForceUpdate = iosDict["forceUpdate"] as? String {
             
             let appVersion = Utilities.getAppVersion()
             guard let isForceUpdate = Bool(ForceUpdate) else {return}
@@ -1146,7 +1230,7 @@ extension AppDelegate : NMAuthChallengeDelegate{
     func networkCredential(_ manager : NetworkManager, challenge : URLAuthenticationChallenge) -> URLCredential {
         var urlCredential: URLCredential = URLCredential()
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-            if challenge.protectionSpace.host == "hphci-fdama-te-ur-01.labkey.com" {
+            if challenge.protectionSpace.host == "<Server Base URL>" {
                 urlCredential = URLCredential.init(trust: challenge.protectionSpace.serverTrust!)
             }
         }
@@ -1168,7 +1252,7 @@ extension AppDelegate: NMWebServiceDelegate {
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         
-        if requestName as String == RegistrationMethods.versionInfo.method.methodName {
+        if requestName as String == WCPMethods.versionInfo.method.methodName {
             
             if let response = response as? JSONDictionary {
                 handleAppUpdateResponse(response: response)
@@ -1188,6 +1272,7 @@ extension AppDelegate: NMWebServiceDelegate {
         }else if requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName {
             
             self.addAndRemoveProgress(add: false)
+            self.studyEnrollmentFinished()
             
         }else if (requestName as String == WCPMethods.studyUpdates.rawValue) {
             self.handleStudyUpdatedInformation()
@@ -1233,26 +1318,26 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
             if taskViewController.task?.identifier == kConsentTaskIdentifier {
                 
                 //Saving Consent Document
-                ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
-                ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult: taskViewController.result )
-                
-                //save consent to study
-                Study.currentStudy?.signedConsentVersion = ConsentBuilder.currentConsent?.version!
-                Study.currentStudy?.signedConsentFilePath = ConsentBuilder.currentConsent?.consentResult?.consentPath!
-                
-                // save also in DB
-                DBHandler.saveConsentInformation(study: Study.currentStudy!)
-                
-                
-                //update consent is updaeted in db
-                Study.currentStudy?.version = StudyUpdates.studyVersion
-                Study.currentStudy?.newVersion = StudyUpdates.studyVersion
-                StudyUpdates.studyConsentUpdated  = false
-                DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
-                
-                if self.isComprehensionFailed! {
-                    self.isComprehensionFailed = false
-                }
+//                ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
+//                ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult: taskViewController.result )
+//
+//                //save consent to study
+//                Study.currentStudy?.signedConsentVersion = ConsentBuilder.currentConsent?.version!
+//                Study.currentStudy?.signedConsentFilePath = ConsentBuilder.currentConsent?.consentResult?.consentPath!
+//
+//                // save also in DB
+//                DBHandler.saveConsentInformation(study: Study.currentStudy!)
+//
+//
+//                //update consent is updaeted in db
+//                Study.currentStudy?.version = StudyUpdates.studyVersion
+//                Study.currentStudy?.newVersion = StudyUpdates.studyVersion
+//                StudyUpdates.studyConsentUpdated  = false
+//                DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+//
+//                if self.isComprehensionFailed! {
+//                    self.isComprehensionFailed = false
+//                }
                 
             }else { //other surveys/Active tasks/ Passcode
                 taskResult = taskViewController.result
@@ -1302,22 +1387,23 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
         
         if taskViewController.task?.identifier == kConsentTaskIdentifier && reason == ORKTaskViewControllerFinishReason.completed {
             
-            ConsentBuilder.currentConsent?.consentStatus = .completed
-            self.addAndRemoveProgress(add: true)
+            //
             
-            if ConsentBuilder.currentConsent?.consentResult?.consentPdfData?.count == 0 {
-                
-                // Define identifier
-                let notificationName = Notification.Name(kPDFCreationNotificationId)
-                
-                // Register to receive notification
-                NotificationCenter.default.addObserver(self, selector: #selector(self.updateEligibilityConsentStatus), name: notificationName, object: nil)
-                self.perform(#selector(self.updateEligibilityConsentStatus), with: self, afterDelay: 2.0)
-                
-            }else {
-                //Update Consent Status to server
-                UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
-            }
+            
+//            ConsentBuilder.currentConsent?.consentStatus = .completed
+//            self.addAndRemoveProgress(add: true)
+//
+//            if ConsentBuilder.currentConsent?.consentResult?.consentPdfData?.count == 0 {
+//
+//                DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+//                    self.updateEligibilityConsentStatus()
+//                }
+//
+//
+//            }else {
+//                //Update Consent Status to server
+//                UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+//            }
         }
     }
     
@@ -1341,7 +1427,10 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
             
             //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
             
-            if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep || stepViewController.step?.identifier == kEligibilityVerifiedScreen {
+            if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier
+                || stepViewController.step?.identifier == kVisualStepId
+                || stepViewController.step?.identifier == kConsentSharePdfCompletionStep
+                || stepViewController.step?.identifier == kEligibilityVerifiedScreen {
                 
                 
                 if stepViewController.step?.identifier == kEligibilityVerifiedScreen {
@@ -1353,7 +1442,7 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
             else if stepViewController.step?.identifier == kConsentViewPdfCompletionStep {
                 
                 //Back button is enabled
-                stepViewController.backButtonItem?.isEnabled = true
+                stepViewController.backButtonItem = nil
                 
                 let orkStepResult: ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
                 
@@ -1440,6 +1529,14 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                         let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as? ConsentSharePdfStepViewController)!
                         ttController.step = step
                         ttController.consentDocument =  documentCopy
+                        
+                        //start enrollment process
+                       
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                self.studyEnrollmentStarted(taskViewController: taskViewController)
+                            }
+                        
+                        
                         return ttController
                     }
                 }else {

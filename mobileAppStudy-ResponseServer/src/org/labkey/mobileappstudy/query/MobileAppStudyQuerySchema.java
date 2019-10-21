@@ -17,6 +17,7 @@ package org.labkey.mobileappstudy.query;
 
 import org.jetbrains.annotations.Nullable;
 import org.labkey.api.data.Container;
+import org.labkey.api.data.ContainerFilter;
 import org.labkey.api.data.DbSchema;
 import org.labkey.api.data.DbSchemaType;
 import org.labkey.api.data.EnumTableInfo;
@@ -38,9 +39,9 @@ import static org.labkey.mobileappstudy.MobileAppStudySchema.RESPONSE_STATUS_TAB
 public class MobileAppStudyQuerySchema extends SimpleUserSchema
 {
     public static final String NAME = "mobileappstudy";
-    public static final String DESCRIPTION = "Provides data about study enrollment and survey responses";
+    private static final String DESCRIPTION = "Provides data about study enrollment and survey responses";
 
-    public MobileAppStudyQuerySchema(User user, Container container)
+    private MobileAppStudyQuerySchema(User user, Container container)
     {
         super(NAME, DESCRIPTION, user, container, DbSchema.get(NAME, DbSchemaType.Module));
     }
@@ -59,15 +60,15 @@ public class MobileAppStudyQuerySchema extends SimpleUserSchema
 
     @Nullable
     @Override
-    public TableInfo createTable(String name)
+    public TableInfo createTable(String name, ContainerFilter cf)
     {
         if (ENROLLMENT_TOKEN_BATCH_TABLE.equalsIgnoreCase(name))
         {
-            return new EnrollmentTokenBatchTable(this);
+            return new EnrollmentTokenBatchTable(this, cf);
         }
         else if (ENROLLMENT_TOKEN_TABLE.equalsIgnoreCase(name))
         {
-            return new EnrollmentTokenTable(this);
+            return new EnrollmentTokenTable(this, cf);
         }
         else if(RESPONSE_STATUS_TABLE.equalsIgnoreCase(name))
         {
@@ -79,7 +80,7 @@ public class MobileAppStudyQuerySchema extends SimpleUserSchema
                 "Possible states a SurveyResponse might be in"
             );
         }
-        else if(PARTICIPANT_STATUS_TABLE.equalsIgnoreCase(name))
+        else if (PARTICIPANT_STATUS_TABLE.equalsIgnoreCase(name))
         {
             return new EnumTableInfo<>(
                     Participant.ParticipantStatus.class,
@@ -90,6 +91,6 @@ public class MobileAppStudyQuerySchema extends SimpleUserSchema
             );
         }
         else
-            return super.createTable(name);
+            return super.createTable(name, cf);
     }
 }

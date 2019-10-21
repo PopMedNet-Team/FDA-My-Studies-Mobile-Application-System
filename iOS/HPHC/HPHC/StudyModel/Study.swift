@@ -287,7 +287,10 @@ class StudyAnchorDate{
     func setAnchorDateFromQuestion(date: String){
         
         if self.anchorDateType == "date-question" {
-            self.date = Utilities.getDateFromString(dateString: date)
+            guard let date = Utilities.getDateFromString(dateString: date) else {
+                return
+            }
+            self.date = date
             DBHandler.saveAnchorDate(date: self.date!, studyId: (Study.currentStudy?.studyId)!)
         }
     }

@@ -20,11 +20,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import XCTest
 @testable import HPHC
+import Mockingjay
+
 
 class ResourceAnchorTest: XCTestCase {
 
+    var delegate:WCPDelegate!
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        delegate = WCPDelegate()
     }
 
     override func tearDown() {
@@ -47,12 +51,89 @@ class ResourceAnchorTest: XCTestCase {
     }
     
     func testResourceIsEmpty() {
-        let empty = DBHandler.isResourcesEmpty()
-        XCTAssert(empty)
+       // let empty = DBHandler.isResourcesEmpty()
+        //XCTAssert(empty)
     }
     
     func testResourcesLifeTimeWhenAnchorDateIsNotAvailable() {
         
+    }
+    
+    func testWCP_GetStudies_Failure() {
+        
+        //let delegate = WCPDelegate()
+        
+        let expection = expectation(description: "StudyList api call")
+        delegate.asyncExpectation = expection
+        
+        _ = [ "user": "Kyle" ]
+        let url = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/studyList"
+        
+        let error = NSError.init(domain: "mocking", code: 500, userInfo: nil)
+        stub(uri(url), failure(error))
+        
+        let services = WCPServices()
+        services.delegateSource = delegate
+        services.getStudyList(delegate)
+        
+        waitForExpectations(timeout: 3.0) { (error) in
+           
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+            
+            guard let result = self.delegate.delegateAsyncResult else {
+                XCTFail("Expected delegate to be called")
+                return
+            }
+            let data = self.delegate.apiResponse
+            let error = self.delegate.apiError
+            
+            XCTAssertEqual(error?.code, 500)
+            XCTAssertNotEqual(WCPDelegate.State.none, result)
+            //XCTAssertNotEqual(WCPDelegate.State.start, result)
+            XCTAssertEqual(WCPDelegate.State.failed, result)
+            XCTAssertNil(data)
+           
+        }
+    }
+    
+    func testWCP_GetStudies_Sucess() {
+        
+        let expection = expectation(description: "StudyList api call")
+        delegate.asyncExpectation = expection
+        
+        let path = Bundle(for: type(of: self)).url(forResource: "StudyList", withExtension: "json")!
+        let data = try! Data(contentsOf: path)
+        
+        let url = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/studyList"
+        stub(http(.get,uri: url),jsonData(data))
+        
+        let services = WCPServices()
+        services.delegateSource = delegate
+        services.getStudyList(delegate)
+        
+        waitForExpectations(timeout: 2.0) { (error) in
+            
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+            
+            guard let result = self.delegate.delegateAsyncResult else {
+                XCTFail("Expected delegate to be called")
+                return
+            }
+            let data = self.delegate.apiResponse
+            let error = self.delegate.apiError
+            
+            
+            XCTAssertNotEqual(WCPDelegate.State.none, result)
+            //XCTAssertNotEqual(WCPDelegate.State.start, result)
+            XCTAssertEqual(WCPDelegate.State.finished, result)
+            XCTAssertNotNil(data)
+            XCTAssertEqual(Gateway.instance.studies?.count, 2)
+            
+        }
     }
     
 
@@ -62,5 +143,57 @@ class ResourceAnchorTest: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    let studyResponse = Data("{\n    \"message\": \"SUCCESS\",\n    \"studies\": [\n        {\n            \"studyId\": \"Study02\",\n            \"studyVersion\": \"1.3\",\n            \"title\": \"Food Nutrition\",\n            \"category\": \"Food Safety\",\n            \"sponsorName\": \" FDA\",\n            \"tagline\": \"Path to improved health\",\n            \"status\": \"Closed\",\n            \"logo\": \"https:\\hpwcp-stage.lkcompliant.net/fdaResources/studylogo/STUDY_FS_05282018040302.jpeg?v=1564127523483\",\n            \"settings\": {\n                \"enrolling\": true,\n                \"platform\": \"all\",\n                \"rejoin\": true\n            }\n        }\n   ]\n}".utf8)
+        
+    
 
+}
+
+class WCPDelegate:NMWebServiceDelegate {
+    
+    enum State:String {
+        case none
+        case start
+        case finished
+        case failed
+    }
+    
+    var delegateAsyncResult: State? = .none
+    var apiResponse:[String:Any]?
+    var apiError:NSError?
+    var asyncExpectation: XCTestExpectation?
+    
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        guard let expectation = asyncExpectation else {
+            XCTFail("Delegate was not setup correctly. Missing XCTExpectation reference")
+            return
+        }
+        
+        apiError = error
+        delegateAsyncResult = .failed
+        expectation.fulfill()
+    }
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        
+        guard asyncExpectation != nil else {
+            XCTFail("Delegate was not setup correctly. Missing XCTExpectation reference")
+            return
+        }
+        
+        delegateAsyncResult = .start
+        //expectation.fulfill()
+        
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        
+        guard let expectation = asyncExpectation else {
+            XCTFail("Delegate was not setup correctly. Missing XCTExpectation reference")
+            return
+        }
+        
+        apiResponse = response as? [String:Any]
+        delegateAsyncResult = .finished
+        expectation.fulfill()
+    }
 }

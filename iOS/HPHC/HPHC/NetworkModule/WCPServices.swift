@@ -104,8 +104,17 @@ let kStudyAnchorDateQuestionInfo = "questionInfo"
 class WCPServices: NSObject {
     let networkManager = NetworkManager.sharedInstance()
     var delegate: NMWebServiceDelegate! = nil
+    var delegateSource: NMWebServiceDelegate?
     
     // MARK:Requests
+    
+    func checkForAppUpdates(delegate: NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        let method = WCPMethods.versionInfo.method
+        self.sendRequestWith(method: method, params: nil, headers: nil)
+    }
+    
     func getStudyBasicInfo(_ delegate:NMWebServiceDelegate) {
         
         self.delegate = delegate
@@ -116,6 +125,7 @@ class WCPServices: NSObject {
     }
     func getStudyList(_ delegate: NMWebServiceDelegate){
         
+        print("StudyList Start \(Date())")
         self.delegate = delegate
         
         let method = WCPMethods.studyList.method
@@ -255,6 +265,7 @@ class WCPServices: NSObject {
         
     }
     
+    /*
     func checkForAppUpdates(delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
@@ -263,6 +274,7 @@ class WCPServices: NSObject {
                             kOSType: "ios"]
         self.sendRequestWith(method: method, params: headerParams, headers: nil)
     }
+     */
     
     // MARK:Parsers
     func handleStudyBasicInfo(response: Dictionary<String, Any>){
@@ -284,6 +296,7 @@ class WCPServices: NSObject {
     }
     func handleStudyList(response: Dictionary<String, Any>){
         
+        print("StudyList Parsing Start \(Date().timeIntervalSince1970)")
         Logger.sharedInstance.info("Studies Parsing Start")
         
         let studies = response[kStudies] as! Array<Dictionary<String,Any>>
@@ -299,6 +312,7 @@ class WCPServices: NSObject {
         Logger.sharedInstance.info("Studies Saving in DB")
         //save in database
         DBHandler().saveStudies(studies: listOfStudies)
+        print("StudyList Parsing Finished \(Date().timeIntervalSince1970)")
     }
     
     func handleEligibilityConsentMetaData(response: Dictionary<String, Any>){
@@ -369,7 +383,7 @@ class WCPServices: NSObject {
     
     func handleStudyDashboard(response: Dictionary<String, Any>){
         
-        let dashboard = response["dashboard"] as! Dictionary<String, Any>
+        guard let dashboard = response["dashboard"] as? Dictionary<String, Any> else { return }
         
         if Utilities.isValidObject(someObject: dashboard as AnyObject?){
             
@@ -521,6 +535,23 @@ class WCPServices: NSObject {
     
     func handleGetStudyActivityMetadata(response: Dictionary<String, Any>){
         
+        /*
+        let filePath  = Bundle.main.path(forResource: "Activity_Metadata_Other", ofType: "json")
+        let data = NSData(contentsOfFile: filePath!)
+        
+        var activities: [String:Any] = [:]
+        
+        do {
+            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+            
+            activities = res?[kActivity] as! [String: Any]
+        }
+        catch {
+            print("json error: \(error.localizedDescription)")
+        }
+        */
+       // Study.currentActivity?.setActivityMetaData(activityDict: activities)
+        
         Study.currentActivity?.setActivityMetaData(activityDict: response[kActivity] as! Dictionary<String, Any>)
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
@@ -557,7 +588,7 @@ class WCPServices: NSObject {
     func handleStudyUpdates(response: Dictionary<String, Any>){
         
         if Utilities.isValidObject(someObject: response as AnyObject?){
-            _ = StudyUpdates(detail: response )
+            _ = StudyUpdates(detail: response)
         }
     }
     
@@ -567,7 +598,7 @@ class WCPServices: NSObject {
                                       method: method,
                                       params: params as NSDictionary?,
                                       headers: headers as NSDictionary?,
-                                      delegate: self)
+                                      delegate: delegateSource != nil ? delegateSource! : self)
     }
     
     
@@ -580,7 +611,8 @@ extension WCPServices:NMWebServiceDelegate{
         }
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        
+       
+        print("StudyList Finished \(Date())")
         Logger.sharedInstance.info("WCP Received Data: \(requestName)")
         let methodName = WCPMethods(rawValue: requestName as String)!
         
@@ -614,8 +646,8 @@ extension WCPServices:NMWebServiceDelegate{
         case .studyUpdates:
             self.handleStudyUpdates(response: response as! Dictionary<String, Any>)
         case .appUpdates: break
-//        default:
-//            print("Request was not sent proper method name")
+            
+        default: break
         }
         
         if delegate != nil {

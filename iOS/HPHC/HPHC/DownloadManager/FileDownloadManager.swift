@@ -19,6 +19,7 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
+import Foundation
 import CryptoSwift
 
 protocol FileDownloadManagerDelegates {
@@ -30,7 +31,7 @@ protocol FileDownloadManagerDelegates {
 let kdefaultKeyForEncrytion = "passwordpasswordpasswordpassword"
 let kdefaultIVForEncryption = "drowssapdrowssap"
 
-class FileDownloadManager: NSObject {
+class FileDownloadManager: NSObject,URLSessionDelegate,URLSessionDownloadDelegate {
     
     var sessionManager: Foundation.URLSession!
     open var downloadingArray: [FileDownloadModel] = []
@@ -55,13 +56,13 @@ class FileDownloadManager: NSObject {
         
         downloadingArray.append(downloadModel)
     }
-}
 
 
 
-extension FileDownloadManager: URLSessionDelegate{
-    
-    func URLSession(_ session: Foundation.URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+
+//extension FileDownloadManager: URLSessionDelegate{
+
+    func urlSession(_ session: Foundation.URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         
         DispatchQueue.main.async(execute: { () -> Void in
             
@@ -72,7 +73,7 @@ extension FileDownloadManager: URLSessionDelegate{
             self.delegate?.download(manager: self, didUpdateProgress: progress)
         })
     }
-    func URLSession(_ session: Foundation.URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingToURL location: URL) {
+    func urlSession(_ session: Foundation.URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         
         debugPrint("didFinishDownloadingToURL location \(location)")
         

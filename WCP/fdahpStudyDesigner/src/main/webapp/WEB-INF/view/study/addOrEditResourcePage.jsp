@@ -1,20 +1,3 @@
-#-------------------------------------------------------------------------------
-# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
-# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
-# 
-# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-#-------------------------------------------------------------------------------
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -271,6 +254,8 @@
 </form:form>
 <script type="text/javascript">
 $(document).ready(function(){
+	
+	//$('[data-id="anchorDateId"]').prop('disabled', true);
 	
 	<c:if test="${isstudyProtocol eq 'isstudyProtocol' && empty resourceBO.title}">
 		$('#resourceTitle').val('Study Protocol');
@@ -585,14 +570,17 @@ $(document).ready(function(){
 			$('.disBtn2').val('');
 			$('.disBtn1').attr('required','required');
 			$('.disBtn2').removeAttr('required');
+			//$('[data-id="anchorDateId"]').prop('disabled', false);
 			if($('#xdays').attr('oldxDaysVal') != ''){
 				$('#inlineRadio5').prop('checked',true);
+				//$('#xdays').val($('#xdays').attr('oldxDaysVal'));
 				$('.disBtn1').prop('disabled',false);
 				$('.disBtn2').prop('disabled',true);
 				$('.disBtn1').selectpicker('refresh');
 			}
 			if($('#ydays').attr('oldyDaysVal') != ''){
 				$('#inlineRadio5').prop('checked',true);
+				//$('#ydays').val($('#ydays').attr('oldyDaysVal'));
 				$('.disBtn1').prop('disabled',false);
 				$('.disBtn2').prop('disabled',true);
 				$('.disBtn1').selectpicker('refresh');
@@ -609,6 +597,7 @@ $(document).ready(function(){
 			$('.disBtn2').attr('required','required');
 			$('.disBtn1').removeAttr('required');
 			$('.disBtn1').selectpicker('refresh');
+			//$('[data-id="anchorDateId"]').prop('disabled', true);
 			$('#ydays').parent().removeClass('has-error has-danger').find(".help-block").html("");
 			if($('#StartDate').attr('oldStartDateVal') != ''){
 				$('#inlineRadio6').prop('checked',true);
@@ -664,6 +653,7 @@ $(document).ready(function(){
 					$('.disBtn2').removeAttr('required');
 					$('#inlineRadio5').prop('disabled',false);	
 					$('#inlineRadio5').val('');	
+					//$('.disRadBtn1').prop('checked',true);
 					$('.disBtn1').val('');
 					$('.disBtn1').selectpicker('refresh');
 					resetValidation($('.resetDate'));
@@ -678,6 +668,7 @@ $(document).ready(function(){
 					$('.disBtn1').val('');
 					$('#inlineRadio5').prop('disabled',false);	
 					$('#inlineRadio5').val('');	
+					//$('.disRadBtn1').prop('checked',true);
 					$('.disBtn1').selectpicker('refresh');
 					resetValidation($('.resetDate'));
 				}
@@ -729,8 +720,11 @@ $(document).ready(function(){
 					$('.disBtn1').prop('disabled',true);
 					$('.disBtn2').attr('required','required');
 					$('.disBtn1').removeAttr('required');
+					
+					//added by sweta
 				 	 if(length > 3 || $('#ydays').attr('oldyDaysVal') != '' || $('#ydays').attr('oldyDaysVal') != ''){
 				 		 $('#inlineRadio5').prop('disabled',false);
+				 		 //added by sweta
 				 		resetValidation($('.resetDate'));
 					 } 
 					
@@ -799,6 +793,7 @@ $(document).ready(function(){
 			$('.disBtn1').removeAttr('required');
 			$('.disBtn2').removeAttr('required');
 			$('.disBtn1').selectpicker('refresh');
+			//$('[data-id="anchorDateId"]').prop('disabled', true);
 			resetValidation($('.resetDate'));
 			}
 			

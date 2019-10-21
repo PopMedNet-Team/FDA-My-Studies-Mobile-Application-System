@@ -1,20 +1,3 @@
-#-------------------------------------------------------------------------------
-# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
-# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
-# 
-# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-#-------------------------------------------------------------------------------
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -98,6 +81,100 @@
 <body class="loading background__img" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
     <div id="loader"><span></span></div>
     <div id="lg-container" class="lg-container">
+       <!--  <div class="lg-space-left">
+            <div class="lg-space-img">
+                <img src="images/logo/fda-logo-w.png"/>
+            </div>
+            <div class="lg-space-txt">
+               MyStudies <br>Management Portal
+            </div>
+             <div class="lg-space-cover">
+                <img src="images/icons/web.png"/>
+            </div>
+        </div> -->
+        <!-- <div class="lg-space-right">
+        
+	        <div class="cs-model-box hide askSignInCls">        
+		        <div></div>
+		        <div>
+		       		<div>Important Note</div>
+		       		<ul>
+		       			<li>You Are Accessing a U.S. Government Information System </li>
+		       			<li>Usage Of This Information System May Be Monitored, Recorded, And Subject To Audit</li>
+		       			<li>Unauthorized Use Of This Information System Is Prohibited And Subject To Criminal And Civil Penalties</li>
+		       			<li>Use Of This Information System Indicates Consent To Monitoring And Recording</li>
+		       		</ul>
+		       		
+		       		<div>
+		       			By clicking Sign In, you agree to the the above-mentioned points as well as to the US FDA MyStudies Management Portal <a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/" class="" target="_blank">Terms</a> and <a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy" class="" target="_blank">Privacy Policy</a>
+		       		</div>
+		       		
+		       		<div class="mt-lg">
+		       			<button id="loginBtnId" type="button" class="btn btn-primary blue-btn float__left" >Sign In</button>
+		       			<button id="cancelbtn" type="button" class="btn btn-default gray-btn ml-sm float__left">Cancel</button>
+		       		</div>
+		       	</div>
+	       	</div>
+           
+            <div class="login-box">
+             <c:url value='/j_spring_security_check' var="fdaLink"/>
+             <input type="hidden" id="fdaLink" value="${fdaLink}" >
+             <form:form id="loginForm" data-toggle="validator" role="form" action="#"  name="loginForm" method="post" autocomplete="off">  
+                    <div id="errMsg" class="error_msg">${errMsg}</div>
+                    <div id="sucMsg" class="suceess_msg">${sucMsg}</div>
+                    <div class="login">
+                        <div class="mb-lg form-group">
+                            <input type="text" class="input-field wow_input" id="email" name="username" data-pattern-error="Email address is invalid" 
+                            	placeholder="Email Address" required maxlength="100" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" autofocus autocomplete="off">
+                            <div class="help-block with-errors red-txt"></div>
+                        </div>
+                        <div class="mb-lg form-group">
+                            <input type="password" class="input-field wow_input" id="password" 
+                        		placeholder="Password"  required maxlength="64" data-error="This field shouldn't be empty" autocomplete="off"  readonly onfocus="$(this).removeAttr('readonly');">
+                            <div class="help-block with-errors red-txt"></div>
+                        </div>
+                        <div class="mb-lg form-group">
+                            <button type="button" class="btn lg-btn" id="siginNoteBtnId">Submit</button>
+                        </div>
+                        <div class="pb-md">
+                            <a id="forgot_pwd" class="gray-link" href="javascript:void(0)">Forgot Password?</a>
+                        </div>
+                   </div>
+                   <input type="password" name="password" id="hidePass" style="display: none;"/>
+                </form:form>
+                <form:form id="forgotForm" data-toggle="validator" role="form" action="forgotPassword.do" method="post" autocomplete="off">
+                   <div class="pwd dis-none">
+                     <div class="mb-lg">
+                         <h3 class="mt-none text-weight-bold">Forgot Password?</h3>
+                        <div class="gray-xs-f mt-md">Enter your Email address to get  a link to reset password</div>
+                        </div>
+                        <div class="mb-lg form-group">
+                            <input type="text" class="input-field wow_input" id="emailReg" name="email" maxlength="100" placeholder="Email Address" 
+                            data-pattern-error = "Email address is invalid"  required maxlength="100" 
+                               pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                            <div class="help-block with-errors red-txt"></div>
+                        </div>
+                        <div class="mb-lg">
+                            <button type="submit" class="btn lg-btn" id="log-btn">Submit</button>
+                        </div>
+                        <div>
+                            <a id="login" class="gray-link" href="javascript:void(0)">Back to Sign in</a>
+                        </div>
+                   </div>
+              </form:form>   
+            </div>
+            
+            
+            <div class="clearfix"></div>
+            
+             <div class="footer">
+                    <div><span>Copyright © 2017 FDA</span><span><a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/" class="" target="_blank">Terms</a></span><span><a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy" class="" target="_blank">Privacy Policy</a></span></div>
+              </div>
+             
+        </div> -->
+
+        <!-- new login -->
+        <!-- Logo-->
         <div class="logo__ll">
             <img src="images/logo/fda-logo-w.png"/>
         </div>
@@ -115,7 +192,7 @@
                     </ul>
                     
                     <div>
-                        By clicking Sign In, you agree to the the above-mentioned points as well as to the US FDA My Studies Management Portal <a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/" class="" target="_blank">Terms</a> and <a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy" class="" target="_blank">Privacy Policy</a>
+                        By clicking Sign In, you agree to the the above-mentioned points as well as to the US FDA MyStudies Management Portal <a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/" class="" target="_blank">Terms</a> and <a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy" class="" target="_blank">Privacy Policy</a>
                     </div>
                     
                     <div class="mt-lg">
@@ -127,7 +204,7 @@
            
             <div class="login-box">
                 <div class="lg-space-txt">
-                    FDA My Studies Management Portal
+                    FDA MyStudies Management Portal
                 </div>
                 <div class="ll__border__bottom"></div>
              <c:url value='/j_spring_security_check' var="fdaLink"/>
@@ -273,11 +350,21 @@
     		$('.privacyCls').on('click',function(){
     			$('#privacyModal').modal('show');
     		});
-
+			
+// 			$('input:last').change(function() {
+// 				if(isChanged) {
+// 					if($('#email').val()){
+// 						setTimeout(function(){$('button').removeClass('disabled');}, 200);
+// 					}
+// 					isChanged = false;
+// 				}
+// 			});
+    		
     		var errMsg = '${errMsg}';
 			if(errMsg.length > 0){
 				$("#errMsg").html(errMsg);
 			   	$("#errMsg").show("fast");
+			   	//$("#sucMsg").hide("fast");
 			   	setTimeout(hideDisplayMessage, 4000);
 			}
 			var sucMsg = '${sucMsg}';
@@ -315,11 +402,66 @@
 			
 			var wh = $(window).height();
 		    $('.cs-model-box>div:first-child').css('height',wh);
+		    
+			/* $('#emailReg').keyup(function(event){
+				event = (event || window.event);
+		    	if(event.keyCode == 13) {
+					var isEmail = false;
+					var emailAdd = $('#emailReg').val();
+					var regEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+			        isEmail = regEX.test(emailAdd);
+					if(emailAdd == ''){
+						if(isIE || isEdge){
+			        		$('#emailReg').parent().find(".help-block").html("<ul class='list-unstyled'><li>This is a required field</li></ul>");
+			        	} else {
+			        		$('#emailReg').parent().find(".help-block").html("<ul class='list-unstyled'><li>Please fill out this field</li></ul>");
+			        	}
+					} else if(!isEmail){
+						$('#emailReg').parent().find(".help-block").html("<ul class='list-unstyled'><li>Email address is invalid</li></ul>");
+					}
+		    	}
+			}); */
+			
+			/* $('form').bind("keypress", function(e) {
+			    if ($('input:text').is(":empty")) {
+			       if (e.keyCode == 13) {               
+			        e.preventDefault();
+			        return false;
+			      } 
+			    }
+			}); */
+			
     	});
     	function hideDisplayMessage(){
 			$('#sucMsg').hide();
 			$('#errMsg').hide();
 		}
+//     	window.onload = function () {
+// 		    if (typeof history.pushState === "function") {
+// 		        history.pushState("jibberish", null, null);
+// 		        window.onpopstate = function () {
+// 		            history.pushState('newjibberish', null, null);
+// 		            // Handle the back (or forward) buttons here
+// 		            // Will NOT handle refresh, use onbeforeunload for this.
+// 		        };
+// 		    }
+// 		    else {
+// 		        var ignoreHashChange = true;
+// 		        window.onhashchange = function () {
+// 		            if (!ignoreHashChange) {
+// 		                ignoreHashChange = true;
+// 		                window.location.hash = Math.random();
+// 		                // Detect and redirect change here
+// 		                // Works in older FF and IE9
+// 		                // * it does mess with your hash symbol (anchor?) pound sign
+// 		                // delimiter on the end of the URL
+// 		            }
+// 		            else {
+// 		                ignoreHashChange = false;   
+// 		            }
+// 		        };
+// 		    }
+// 		}
 	 window.history.forward();
     function noBack() { 
          window.history.forward(); 

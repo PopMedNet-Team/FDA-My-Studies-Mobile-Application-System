@@ -38,11 +38,6 @@ public class ResponseSubmissionTest extends BaseMobileAppStudyTest
     private final static String PROJECT_NAME02 = BASE_PROJECT_NAME + " " + STUDY_NAME02;
     private final static String PROJECT_NAME03 = BASE_PROJECT_NAME + " " + STUDY_NAME03;
     private final static String SURVEY_NAME = "FakeSurvey_1";
-    private final static String BASE_RESULTS = "{\n" +
-            "\t\t\"start\": \"2016-09-06T15:48:13.000+0000\",\n" +
-            "\t\t\"end\": \"2016-09-06T15:48:45.000+0000\",\n" +
-            "\t\t\"results\": []\n" +
-            "}";
 
     @Override
     protected String getProjectName()
@@ -53,27 +48,8 @@ public class ResponseSubmissionTest extends BaseMobileAppStudyTest
     @Override
     void setupProjects()
     {
-        _containerHelper.deleteProject(PROJECT_NAME01, false);
-        _containerHelper.createProject(PROJECT_NAME01, "Mobile App Study");
-        log("Set a study name.");
-        goToProjectHome(PROJECT_NAME01);
-        SetupPage setupPage = new SetupPage(this);
-        setupPage.getStudySetupWebPart().setShortName(STUDY_NAME01);
-        setupPage.validateSubmitButtonEnabled();
-        setupPage.getStudySetupWebPart().clickSubmit();
-        _listHelper.createList(PROJECT_NAME01, SURVEY_NAME, ListHelper.ListColumnType.AutoInteger, "Key" );
-        setSurveyMetadataDropDir();
-
-        //Setup a secondary study
-        _containerHelper.deleteProject(PROJECT_NAME02, false);
-        _containerHelper.createProject(PROJECT_NAME02, "Mobile App Study");
-        goToProjectHome(PROJECT_NAME02);
-        setupPage = new SetupPage(this);
-        setupPage.getStudySetupWebPart().checkResponseCollection();
-        setupPage.getStudySetupWebPart().setShortName(STUDY_NAME02);
-        setupPage.validateSubmitButtonEnabled();
-        setupPage.getStudySetupWebPart().clickSubmit();
-        _listHelper.createList(PROJECT_NAME02, SURVEY_NAME, ListHelper.ListColumnType.AutoInteger, "Key" );
+        setupProject(STUDY_NAME01, PROJECT_NAME01, SURVEY_NAME, false);
+        setupProject(STUDY_NAME02, PROJECT_NAME02, SURVEY_NAME, true);
         setSurveyMetadataDropDir();
     }
 

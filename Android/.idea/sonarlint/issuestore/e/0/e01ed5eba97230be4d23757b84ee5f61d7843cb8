@@ -1,0 +1,7 @@
+
+Œsquid:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(î¼š²üÿÿÿÿ
+ˆsquid:S1319"qThe type of the "status" object should be an interface such as "List" rather than the implementation "ArrayList".(¸Œòû
+Œsquid:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(œ¨Å¾üÿÿÿÿ
+›squid:S1319"The type of the "activitiesArrayList1" object should be an interface such as "List" rather than the implementation "ArrayList".(Ë®šÂùÿÿÿÿ
+Œsquid:S1319!"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(‹Ý¨Åùÿÿÿÿ
+Ÿsquid:S1319%"ˆThe type of the "currentRunStatusForActivities" object should be an interface such as "List" rather than the implementation "ArrayList".(è‡ø7

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "354892210838",
+    "firebase_url": "https://fdahavard.firebaseio.com",
+    "project_id": "fdahavard",
+    "storage_bucket": "fdahavard.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354892210838:android:e55990537b0a46a9",
+        "android_client_info": {
+          "package_name": "com.harvard.fda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354892210838-asi11ufq073pkgor4kts2cilavscguqg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.harvard.fda",
+            "certificate_hash": "453c0f2003f384ff3da76542f0a0a1736bee8603"
+          }
+        },
+        {
+          "client_id": "354892210838-6rka72icpvhm5eqorerifldpv3cvd326.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKSZJiYPCPqMGJQGKzIAwLn4iHOgN_v80"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354892210838-6rka72icpvhm5eqorerifldpv3cvd326.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

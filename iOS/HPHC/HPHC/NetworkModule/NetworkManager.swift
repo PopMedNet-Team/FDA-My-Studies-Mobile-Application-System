@@ -87,8 +87,8 @@ class NetworkManager {
     
     init() {
 
-        reachability =  Reachability.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)), name:ReachabilityChangedNotification, object: nil)
+        reachability =  try? Reachability.init()
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)), name:Notification.Name.reachabilityChanged, object: nil)
     
         do{
             try reachability?.startNotifier()

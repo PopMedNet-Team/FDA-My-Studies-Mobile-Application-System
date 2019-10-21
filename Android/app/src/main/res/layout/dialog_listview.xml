@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="Below is ListView in Custom dialog"/>
+-->
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@color/dark_gray"
+        android:dividerHeight="1dip"
+        android:padding="15dp"
+        android:id="@+id/listview">
+
+
+
+    </ListView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btndialog"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/tab_color"
+        android:text="Cancel"/>
+
+</LinearLayout>

@@ -1,20 +1,3 @@
-#-------------------------------------------------------------------------------
-# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
-# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
-# 
-# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-#-------------------------------------------------------------------------------
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -44,7 +27,7 @@ table.dataTable thead th:last-child{
                     <div class="dis-line form-group mb-none mr-sm">
                          <button type="button" class="btn btn-default gray-btn cancelBut" id="cancelId">Cancel</button>
                      </div>
-                     <c:if test="${empty permission}">
+                     <c:if test="${(empty permission) && (sessionObject.role ne 'Org-level Admin')}">
                      <div class="dis-line form-group mb-none mr-sm">
                          <button type="button" class="btn btn-default gray-btn" id="saveId">Save</button>
                      </div>
@@ -389,7 +372,7 @@ $(document).ready(function(){
 		$(".rejoin_radio").click(function(){
 			checkRadioRequired();
 		})
-		<c:if test="${not empty permission}">
+		<c:if test="${(not empty permission) || (sessionObject.role eq 'Org-level Admin')}">
             $('#settingfoFormId input,textarea,select').prop('disabled', true);
             $('#settingfoFormId').find('.elaborateClass').addClass('linkDis');
         </c:if>
@@ -516,7 +499,7 @@ function platformTypeValidation(buttonText){
 }
 function submitButton(buttonText){
 	setAllowRejoinText();
-	admins() 
+	admins() //Pradyumn
 	var isAnchorForEnrollmentDraft = '${isAnchorForEnrollmentDraft}';
 	if(buttonText === 'save'){
 		$('#settingfoFormId').validator('destroy');
@@ -544,7 +527,12 @@ function submitButton(buttonText){
 			    },
 			    callback: function(result) {
 			        if (result) {
+// 			        	$("#inlineCheckbox1,#inlineCheckbox2").prop('disabled', false);
+// 			        	$("#buttonText").val('completed');
+// 	                    $("#settingfoFormId").submit();
+	                    //phase2a anchor
 	                    showWarningForAnchor(isAnchorForEnrollmentDraft, enrollmentdateAsAnchordate);
+	                   //phase 2a anchor  
 			        }else{
 			        	$('#completedId').removeAttr('disabled');
 			        }

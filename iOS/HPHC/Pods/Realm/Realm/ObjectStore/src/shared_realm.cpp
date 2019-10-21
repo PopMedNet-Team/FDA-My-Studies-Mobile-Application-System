@@ -21,7 +21,6 @@
 #include "impl/collection_notifier.hpp"
 #include "impl/realm_coordinator.hpp"
 #include "impl/transact_log_handler.hpp"
-#include "util/fifo.hpp"
 
 #include "audit.hpp"
 #include "binding_context.hpp"
@@ -35,6 +34,8 @@
 
 #include <realm/history.hpp>
 #include <realm/util/scope_exit.hpp>
+#include <realm/util/fifo_helper.hpp>
+
 
 #if REALM_ENABLE_SYNC
 #include "sync/impl/sync_file.hpp"
@@ -182,8 +183,9 @@ void Realm::open_with_config(const Config& config,
             SharedGroupOptions options;
             options.durability = config.in_memory ? SharedGroupOptions::Durability::MemOnly :
                                                     SharedGroupOptions::Durability::Full;
-
-            options.temp_dir = util::normalize_dir(config.fifo_files_fallback_path);
+            if (!config.fifo_files_fallback_path.empty()) {
+                options.temp_dir = util::normalize_dir(config.fifo_files_fallback_path);
+            }
             options.encryption_key = config.encryption_key.data();
             options.allow_file_format_upgrade = !config.disable_format_upgrade &&
                                                 config.schema_mode != SchemaMode::ResetFile;
@@ -270,6 +272,26 @@ SharedRealm Realm::get_shared_realm(Config config)
     auto coordinator = RealmCoordinator::get_coordinator(config.path);
     return coordinator->get_realm(std::move(config));
 }
+
+SharedRealm Realm::get_shared_realm(ThreadSafeReference<Realm> ref, util::Optional<AbstractExecutionContextID> execution_context)
+{
+    REALM_ASSERT(ref.m_realm);
+    auto& config = ref.m_realm->config();
+    auto coordinator = RealmCoordinator::get_coordinator(config.path);
+    if (auto realm = coordinator->get_cached_realm(config, execution_context))
+        return realm;
+    coordinator->bind_to_context(*ref.m_realm, execution_context);
+    ref.m_realm->m_execution_context = execution_context;
+    return std::move(ref.m_realm);
+}
+
+#if REALM_ENABLE_SYNC
+std::shared_ptr<AsyncOpenTask> Realm::get_synchronized_realm(Config config)
+{
+    auto coordinator = RealmCoordinator::get_coordinator(config.path);
+    return coordinator->get_synchronized_realm(std::move(config));
+}
+#endif
 
 void Realm::set_schema(Schema const& reference, Schema schema)
 {
@@ -799,6 +821,9 @@ void Realm::notify()
 
     if (m_binding_context) {
         m_binding_context->before_notify();
+        if (is_closed() || is_in_transaction()) {
+            return;
+        }
     }
 
     auto cleanup = util::make_scope_exit([this]() noexcept { m_is_sending_notifications = false; });

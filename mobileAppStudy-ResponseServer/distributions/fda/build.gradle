@@ -15,18 +15,18 @@ buildscript {
     }
 }
 
-BuildUtils.addModuleDistributionDependencies(project, [":server:internal",
-                                                       ":server:api",
-                                                       ":server:modules:announcements",
-                                                       ":server:modules:audit",
-                                                       ":server:modules:core",
-                                                       ":server:modules:experiment",
-                                                       ":server:modules:filecontent",
-                                                       ":server:modules:pipeline",
-                                                       ":server:modules:query",
-                                                       ":server:modules:wiki",
+BuildUtils.addModuleDistributionDependencies(project, [BuildUtils.getApiProjectPath(project.gradle),
+                                                       BuildUtils.getInternalProjectPath(project.gradle),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "announcements"),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "audit"),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "core"),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "experiment"),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "filecontent"),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "pipeline"),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "query"),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "wiki"),
                                                        ":server:optionalModules:mobileAppStudy",
-                                                       ":server:modules:list"])
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "list")])
 
 project.task(
         "distribution",

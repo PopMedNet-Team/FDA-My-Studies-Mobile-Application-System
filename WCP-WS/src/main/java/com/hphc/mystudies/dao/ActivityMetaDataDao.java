@@ -1,21 +1,25 @@
-/*******************************************************************************
- * Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction,including without limitation the rights to use, copy,modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- * 
+/*
+ * Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ * of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
+ * following conditions:
+ *
  * The above copyright notice and this permission notice shall be included in all copies or substantial
  * portions of the Software.
- * 
- * Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
- * Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
- * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
- * OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ *
+ * Funding Source: Food and Drug Administration ("Funding Agency") effective 18 September 2014 as Contract no.
+ * HHSF22320140030I/HHSF22301006T (the "Prime Contract").
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+ * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
- ******************************************************************************/
-
+ */
 package com.hphc.mystudies.dao;
 
 import java.io.InputStream;
@@ -24,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -2208,6 +2211,65 @@ public class ActivityMetaDataDao {
 									: questionStepDetails
 											.getDestinationStepType());
 					destinationsList.add(destination);
+					
+					//other type add destination if there start
+					QuestionReponseTypeDto otherReponseSubType = (QuestionReponseTypeDto) session
+							.createQuery(
+									"from QuestionReponseTypeDto QRTDTO"
+											+ " where QRTDTO.questionsResponseTypeId="
+											+ questionsDto.getId()
+											+ " ORDER BY QRTDTO.responseTypeId DESC")
+							.setMaxResults(1).uniqueResult();
+					
+					if(otherReponseSubType!=null && otherReponseSubType.getOtherType()!=null && StringUtils.isNotEmpty(otherReponseSubType.getOtherType()) && otherReponseSubType.getOtherType().equals("on")){
+						DestinationBean otherDestination = new DestinationBean();
+						otherDestination
+									.setCondition(StringUtils
+											.isEmpty(otherReponseSubType
+													.getOtherValue()) ? ""
+											: otherReponseSubType.getOtherValue());
+
+						if (questionnaireDto.getBranching()) {
+							if (otherReponseSubType.getOtherDestinationStepId() != null
+									&& otherReponseSubType
+											.getOtherDestinationStepId()
+											.intValue() > 0) {
+								for (QuestionnairesStepsDto stepsDto : questionaireStepsList) {
+									if (otherReponseSubType.getOtherDestinationStepId().equals(
+											stepsDto.getStepId())) {
+										otherDestination.setDestination(StringUtils.isEmpty(stepsDto
+												.getStepShortTitle()) ? "" : stepsDto
+												.getStepShortTitle());
+										break;
+									}
+								}
+							} else if (otherReponseSubType
+									.getOtherDestinationStepId() != null
+									&& otherReponseSubType
+											.getOtherDestinationStepId()
+											.equals(0)) {
+								otherDestination.setDestination("");
+							} else {
+								otherDestination
+										.setDestination((questionStepDetails
+												.getDestinationStepType() == null || questionStepDetails
+												.getDestinationStepType()
+												.isEmpty()) ? ""
+												: questionStepDetails
+														.getDestinationStepType());
+							}
+						} else {
+							otherDestination
+									.setDestination((questionStepDetails
+											.getDestinationStepType() == null || questionStepDetails
+											.getDestinationStepType()
+											.isEmpty()) ? ""
+											: questionStepDetails
+													.getDestinationStepType());
+						}
+						destinationsList.add(otherDestination);
+					}
+					//other type add destination if there end
 					questionBean.setDestinations(destinationsList);
 
 					questionBean.setHealthDataKey("");
@@ -3058,6 +3120,55 @@ public class ActivityMetaDataDao {
 					textChoiceMapList.add(textChoiceMap);
 				}
 			}
+			//other type add destination if there start
+			QuestionReponseTypeDto otherReponseSubType = (QuestionReponseTypeDto) session
+					.createQuery(
+							"from QuestionReponseTypeDto QRTDTO"
+									+ " where QRTDTO.questionsResponseTypeId="
+									+ questionDto.getId()
+									+ " ORDER BY QRTDTO.responseTypeId DESC")
+					.setMaxResults(1).uniqueResult();
+			
+			if(otherReponseSubType!=null && otherReponseSubType.getOtherType()!=null && StringUtils.isNotEmpty(otherReponseSubType.getOtherType()) && otherReponseSubType.getOtherType().equals("on")){
+				LinkedHashMap<String, Object> textChoiceMap = new LinkedHashMap<>();
+				textChoiceMap.put("text", StringUtils.isEmpty(otherReponseSubType
+						.getOtherText()) ? "" : otherReponseSubType.getOtherText());
+				textChoiceMap.put("value", StringUtils.isEmpty(otherReponseSubType
+						.getOtherValue()) ? "" : otherReponseSubType.getOtherValue());
+				textChoiceMap.put("detail", StringUtils.isEmpty(otherReponseSubType
+						.getOtherDescription()) ? "" : otherReponseSubType.getOtherDescription());
+				textChoiceMap.put(
+						"exclusive",
+						(otherReponseSubType.getOtherExclusive() == null || otherReponseSubType
+								.getOtherExclusive().equalsIgnoreCase(
+										StudyMetaDataConstants.NO)) ? false
+								: true);
+				if(StringUtils.isNotEmpty(otherReponseSubType.getOtherIncludeText())&& 
+						otherReponseSubType.getOtherIncludeText().equals(StudyMetaDataConstants.YES)){
+					LinkedHashMap<String, Object> textChoiceOtherMap = new LinkedHashMap<>();
+					textChoiceOtherMap.put("placeholder", StringUtils.isEmpty(otherReponseSubType.getOtherPlaceholderText()) ? "" : 
+						otherReponseSubType.getOtherPlaceholderText());
+					textChoiceOtherMap.put("isMandatory",
+							(otherReponseSubType.getOtherParticipantFill() == null || otherReponseSubType
+									.getOtherParticipantFill().equalsIgnoreCase(
+											StudyMetaDataConstants.NO)) ? false
+									: true);
+					textChoiceOtherMap.put("textfieldReq",
+							(otherReponseSubType.getOtherIncludeText() == null || otherReponseSubType
+									.getOtherIncludeText().equalsIgnoreCase(
+											StudyMetaDataConstants.NO)) ? false
+									: true);
+					textChoiceMap.put("other", textChoiceOtherMap);
+				} /*
+					 * else { LinkedHashMap<String, Object> textChoiceOtherMap = new
+					 * LinkedHashMap<>(); textChoiceOtherMap.put("placeholder", "");
+					 * textChoiceOtherMap.put("isMandatory", "");
+					 * textChoiceOtherMap.put("textfieldReq", ""); textChoiceMap.put("other",
+					 * textChoiceOtherMap); }
+					 */
+				textChoiceMapList.add(textChoiceMap);
+			}
+			//other type add destination if there end
 			questionFormat.put("textChoices", textChoiceMapList);
 			questionFormat.put(
 					"selectionStyle",

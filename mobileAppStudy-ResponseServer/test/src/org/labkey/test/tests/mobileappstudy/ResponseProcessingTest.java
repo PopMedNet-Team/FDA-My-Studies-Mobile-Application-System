@@ -16,6 +16,7 @@
 package org.labkey.test.tests.mobileappstudy;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -47,26 +48,23 @@ import static org.junit.Assert.assertTrue;
 @Category({Git.class})
 public class ResponseProcessingTest extends BaseMobileAppStudyTest
 {
-    //Create study
-    private final static String BASE_PROJECT_NAME = "Response Processing Project";
     private final static String STUDY_NAME01 = "ResponseProcessing";  // Study names are case insensitive
-    private final static String PROJECT_NAME01 = BASE_PROJECT_NAME + " " + STUDY_NAME01;
+    private final static String PROJECT_NAME01 = "Response Processing Project " + STUDY_NAME01;
 
     //Survey Setup
     private final static String SURVEY_NAME = "InitialSurvey";
     private final static String SURVEY_VERSION = "123.9";
 
     @Override
-    protected String getProjectName()
+    protected @Nullable String getProjectName()
     {
-        return BASE_PROJECT_NAME;
+        return PROJECT_NAME01;
     }
 
     @Override
     void setupProjects()
     {
         //Setup a study
-        _containerHelper.deleteProject(PROJECT_NAME01, false);
         _containerHelper.createProject(PROJECT_NAME01, "Mobile App Study");
         goToProjectHome(PROJECT_NAME01);
         SetupPage setupPage = new SetupPage(this);

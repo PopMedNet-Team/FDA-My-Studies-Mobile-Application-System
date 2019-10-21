@@ -1,20 +1,3 @@
-#-------------------------------------------------------------------------------
-# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
-# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
-# 
-# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-#-------------------------------------------------------------------------------
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page session="true"%>
@@ -105,7 +88,113 @@
 <body class="loading background__img">
   <div id="loader"><span></span></div>
   <div id="lg-container" class="lg-container">
-     
+        
+        <!-- Login Left Section-->
+        <!-- <div class="lg-space-left">
+            <div class="lg-space-img">
+                <img src="images/logo/fda-logo-w.png"/>
+            </div>
+            <div class="lg-space-txt">
+               My Studies <br>Management Portal
+            </div>
+             <div class="lg-space-cover">
+                <img src="images/icons/web.png"/>
+            </div>
+        </div> -->
+        <!-- End Login Left Section-->
+        
+        <!-- Login Right Section-->
+        <!-- <div class="lg-space-right">
+            <div>
+             <input type="hidden" id="csrfDet" csrfParamName="${_csrf.parameterName}" csrfToken="${_csrf.token}" />
+            <div class="lg-register-center col-xs-12">
+             <form:form id="signUpForm" data-toggle="validator"  role="form" action="addPassword.do" method="post" autocomplete="off">
+                    <div id="errMsg" class="error_msg">${errMsg}</div>
+                    <div id="sucMsg" class="suceess_msg">${sucMsg}</div>
+                    <c:if test="${isValidToken}">
+                    <p class="col-xs-10  text-center boxcenter mb-xlg">To begin using the services on FDA and complete your account setup process, kindly use the access code provided on your email and set up your account password.</p>
+                    <div class="login col-md-10 boxcenter">
+                      <div class="col-xs-6">
+                        <div class="mb-lg form-group">
+                             <input type="text" class="input-field wow_input" id="" name="firstName" placeholder="First Name"  value="${fn:escapeXml(userBO.firstName)}" maxlength="50" required autocomplete="off"/>
+                            <div class="help-block with-errors red-txt"></div>
+                        </div>
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="mb-lg form-group">
+                             <input type="text" class="input-field wow_input" id="" name="lastName" placeholder="Last Name"  value="${fn:escapeXml(userBO.lastName)}" maxlength="50" required autocomplete="off"/>
+                            <div class="help-block with-errors red-txt"></div>
+                        </div>
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="mb-lg form-group">
+                             <input type="text" class="input-field wow_input validateUserEmail" name="userEmail" placeholder="Email Address"  value="${userBO.userEmail}" oldVal="${userBO.userEmail}" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" data-pattern-error="Email address is invalid" maxlength="100" required readonly="readonly" autocomplete="off"/>
+                            <div class="help-block with-errors red-txt"></div>
+                        </div>
+                        </div>
+                        <div class="col-xs-6">
+                        <div class="mb-lg form-group">
+                             <input type="text" class="input-field wow_input phoneMask" id="" name="phoneNumber" placeholder="Phone Number"  value="${userBO.phoneNumber}" data-minlength="12" maxlength="12" required autocomplete="off"/>
+                            <div class="help-block with-errors red-txt"></div>
+                        </div>
+                        </div>
+                        <div class="col-xs-12">
+                        <div class="mb-lg form-group">
+                             <input autofocus="autofocus" type="text" class="input-field wow_input" id="" name="accessCode"  maxlength="6" placeholder="Access Code" data-error="Access Code is invalid" required autocomplete="off"/>
+                            <div class="help-block with-errors red-txt"></div>
+                        </div>
+                        </div>
+                        <div class="col-xs-6">
+                        <div class="mb-lg form-group">
+                            <input type="password" class="input-field wow_input" id="password"  maxlength="64"  data-minlength="8" placeholder="Password"  required
+                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!&quot;#$%&amp;'()*+,-.:;&lt;=&gt;?@[\]^_`{|}~])[A-Za-z\d!&quot;#$%&amp;'()*+,-.:;&lt;=&gt;?@[\]^_`{|}~]{8,64}" autocomplete="off" data-error="Password is invalid" />
+                        <div class="help-block with-errors red-txt"></div>
+                        <span class="arrowLeftSugg"></span>
+                            
+                        </div>
+                        </div>
+                        <div class="col-xs-6">
+                        <div class="mb-lg form-group">
+                            <input type="password" class="input-field wow_input" id="cfnPassword" name=""  maxlength="64" data-match="#password" data-match-error="Whoops, these don't match" placeholder="Confirm password" 
+                              required  autocomplete="off"/> 
+                            <div class="help-block with-errors red-txt"></div>
+                        </div>
+                        </div>
+                        <div class="col-xs-12">
+                        <div class="mb-lg form-group">
+                             <span class="checkbox checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox" value="option1" required="required">
+                                <label for="inlineCheckbox">
+                                	I agree to the <a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/" class="" target="_blank">Terms</a> and 
+                                	<a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy" class="" target="_blank">Privacy Policy</a> associated with using this portal
+                               	</label>
+                            </span> 
+                            <div class="help-block with-errors red-txt"></div>
+                        </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="mb-lg form-group text-center col-md-4 col-lg-4 boxcenter">
+                             <button type="button" class="btn lg-btn" id="signPasswordBut">Submit</button>
+                        </div>
+                        </c:if>
+                        <c:if test="${not isValidToken}"><p class="passwordExp text-center"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>The Password Reset Link is either expired or invalid.</p></c:if>
+                        <div class="text-center">
+                            <a id="login" class="gray-link backToLogin" href="javascript:void(0)">Back to Sign in</a>
+                        </div>
+                   </div>
+                   <input type="hidden" name="securityToken" value="${securityToken}" />
+                   <input type="password" name="password" id="hidePass" style="display: none;" />
+                </form:form>
+               </div>
+            </div>
+            
+            
+            <div class="clearfix"></div>
+            
+             <div class="footer">
+                    <span>Copyright © 2017 FDA</span><span><a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/" class="" target="_blank">Terms</a></span><span><a href="https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy" class="" target="_blank">Privacy Policy</a></span>
+              </div> -->
+
     <div class="logo__ll">
       <img src="images/logo/fda-logo-w.png"/>
     </div>
@@ -113,7 +202,7 @@
       <!--container-->
       <div>
             <input type="hidden" id="csrfDet" csrfParamName="${_csrf.parameterName}" csrfToken="${_csrf.token}" />
-            <div class=" col-xs-12"><!--lg-register-center  -->
+            <div class=" col-xs-12" id="alignCenter"><!--lg-register-center  -->
              <form:form id="signUpForm" data-toggle="validator"  role="form" action="addPassword.do" method="post" autocomplete="off">
              
                     <div id="errMsg" class="error_msg">${errMsg}</div>
@@ -252,6 +341,11 @@
    <script>
     	$(document).ready(function(e) {
     		
+    		var w = $(window).height();
+    		var b = $("#alignCenter").innerHeight();
+    		var a = (w - b)/2;
+    		$("#alignCenter").css("margin-top", a);
+    		
     		$('.terms').on('click',function(){
     			$('#termsModal').modal('show');
     		});
@@ -269,6 +363,7 @@
 			if(errMsg.length > 0){
 				$("#errMsg").html(errMsg);
 			   	$("#errMsg").show("fast");
+			   	//$("#sucMsg").hide("fast");
 			   	setTimeout(hideDisplayMessage, 4000);
 			}
 			var sucMsg = '${sucMsg}';
@@ -278,6 +373,54 @@
 		    	$("#errMsg").hide("fast");
 		    	setTimeout(hideDisplayMessage, 4000);
 			}
+			/* $("#password").passwordValidator({
+				// list of qualities to require
+				require: ['length', 'lower', 'upper', 'digit','spacial'],
+				// minimum length requirement
+				length: 8
+			});  */
+			
+			
+			/* $(".validateUserEmail").change(function(){
+		        var email = $(this).val();
+		        var oldEmail = $(this).attr('oldVal');
+		        var isEmail = false;
+		        var regEX = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+		        isEmail = regEX.test(email);
+		        
+		        if(isEmail && ('' == oldEmail || ('' != oldEmail && oldEmail != email))){
+		        	var csrfDetcsrfParamName = $('#csrfDet').attr('csrfParamName');
+		            var csrfToken = $('#csrfDet').attr('csrfToken');
+		            var thisAttr= this;
+		            $(thisAttr).parent().find(".help-block").html("<ul class='list-unstyled'><li></li></ul>");
+		                if(email != ''){
+		                    $.ajax({
+		                        url: "/fdahpStudyDesigner/isEmailValid.do?"+csrfDetcsrfParamName+"="+csrfToken,
+		                        type: "POST",
+		                        datatype: "json",
+		                        data: {
+		                            email : email,
+		                        },
+		                        success:  function getResponse(data){
+		                            var message = data.message;
+		                            if('SUCCESS' != message){
+		                                $(thisAttr).validator('validate');
+		                                $(thisAttr).parent().removeClass("has-danger").removeClass("has-error");
+		                                $(thisAttr).parent().find(".help-block").html("");
+		                            }else{
+		                                $(thisAttr).val('');
+		                                $(thisAttr).parent().addClass("has-danger").addClass("has-error");
+		                                $(thisAttr).parent().find(".help-block").empty();
+		                                $(thisAttr).parent().find(".help-block").append("<ul class='list-unstyled'><li>'" + email + "' already exists.</li></ul>");
+		                            }
+		                        }
+		                  });
+		              }
+		        }else{
+		        	$("#removeText .help-block ul").remove();
+		        }
+		    }); */
+		    
 			});
     	function hideDisplayMessage(){
 			$('#sucMsg').hide();
@@ -288,6 +431,8 @@
 		        history.pushState("jibberish", null, null);
 		        window.onpopstate = function () {
 		            history.pushState('newjibberish', null, null);
+		            // Handle the back (or forward) buttons here
+		            // Will NOT handle refresh, use onbeforeunload for this.
 		        };
 		    }
 		    else {
@@ -296,6 +441,10 @@
 		            if (!ignoreHashChange) {
 		                ignoreHashChange = true;
 		                window.location.hash = Math.random();
+		                // Detect and redirect change here
+		                // Works in older FF and IE9
+		                // * it does mess with your hash symbol (anchor?) pound sign
+		                // delimiter on the end of the URL
 		            }
 		            else {
 		                ignoreHashChange = false;   
@@ -306,7 +455,9 @@
     	
     	var addPasswordPopup = function() {
       		 $("#password").passwordValidator({
+      				// list of qualities to require
       				require: ['length', 'lower', 'upper', 'digit','spacial'],
+      				// minimum length requirement
       				length: 8
       			});
       		}

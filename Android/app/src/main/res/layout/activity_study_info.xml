@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
-  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
-  ~ associated documentation files (the "Software"), to deal in the Software without restriction, including
-  ~ without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-  ~
-  ~ The above copyright notice and this permission notice shall be included in all copies or substantial
-  ~ portions of the Software.
-  ~
-  ~ Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
-  ~
-  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-  -->
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_gateway"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.harvard.fda.gatewayModule.GatewayActivity">
+    tools:context="com.harvard.gatewayModule.GatewayActivity">
 
 
     <FrameLayout
@@ -31,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <com.harvard.fda.gatewayModule.CircleIndicator
+        <com.harvard.gatewayModule.CircleIndicator
             android:id="@+id/indicator"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -95,8 +81,8 @@
         android:alpha=".6"
         android:background="@color/colorPrimaryBlack"
         android:baselineAligned="true"
-        android:visibility="invisible"
         android:orientation="horizontal"
+        android:visibility="invisible"
         android:weightSum="5">
 
         <RelativeLayout
@@ -109,6 +95,7 @@
                 android:id="@+id/mVisitWebsiteButton"
                 style="@style/TextType2"
                 android:layout_centerInParent="true"
+                android:gravity="center"
                 android:text="@string/visit_website"
                 android:textColor="@color/white" />
 
@@ -117,19 +104,20 @@
         <RelativeLayout
             android:id="@+id/center"
             android:layout_width="0dp"
-            android:gravity="center"
             android:layout_height="match_parent"
-            android:layout_weight=".2">
+            android:layout_weight=".2"
+            android:gravity="center">
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/hrLine2"
                 android:layout_width="1dp"
                 android:layout_height="40dp"
-                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:alpha=".4"
                 android:background="@android:color/white" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/mLernMoreButtonLayout"
             android:layout_width="0dp"
@@ -140,12 +128,14 @@
                 android:id="@+id/mLernMoreButton"
                 style="@style/TextType2"
                 android:layout_centerInParent="true"
+                android:gravity="center"
                 android:text="@string/view_consent"
                 android:textColor="@color/white" />
 
         </RelativeLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/bottom_bar1"
         android:layout_width="match_parent"
@@ -154,16 +144,14 @@
         android:alpha=".6"
         android:background="@color/colorPrimaryBlack"
         android:baselineAligned="true"
-        android:visibility="gone"
         android:orientation="horizontal"
-        >
+        android:visibility="gone">
 
 
         <RelativeLayout
             android:id="@+id/consentLay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/consentLayButton"
@@ -175,15 +163,16 @@
         </RelativeLayout>
 
     </LinearLayout>
+
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/joinButton"
         style="@style/TextType2"
+        android:layout_above="@+id/bottom_bar"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:layout_above="@+id/bottom_bar"
         android:background="@drawable/rectangle_blue_white"
         android:gravity="center"
-        android:visibility="invisible"
         android:text="@string/join_study"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:visibility="invisible" />
 </RelativeLayout>

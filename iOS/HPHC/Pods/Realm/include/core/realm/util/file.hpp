@@ -554,6 +554,9 @@ public:
     UniqueID get_unique_id() const;
     // Return the file descriptor for the file
     FileDesc get_descriptor() const;
+    // Return the path of the open file, or an empty string if
+    // this file has never been opened.
+    std::string get_path() const;
     // Return false if the file doesn't exist. Otherwise uid will be set.
     static bool get_unique_id(const std::string& path, UniqueID& uid);
 
@@ -583,6 +586,7 @@ private:
     int m_fd;
 #endif
     std::unique_ptr<const char[]> m_encryption_key = nullptr;
+    std::string m_path;
 
     bool lock(bool exclusive, bool non_blocking);
     void open_internal(const std::string& path, AccessMode, CreateMode, int flags, bool* success);
@@ -875,7 +879,7 @@ private:
 
 /// Used for any I/O related exception. Note the derived exception
 /// types that are used for various specific types of errors.
-class File::AccessError : public std::runtime_error {
+class File::AccessError : public ExceptionWithBacktrace<std::runtime_error> {
 public:
     AccessError(const std::string& msg, const std::string& path);
 
@@ -883,7 +887,7 @@ public:
     /// no associated file system path, or if the file system path is unknown.
     std::string get_path() const;
 
-    const char* what() const noexcept
+    const char* message() const noexcept
     {
         m_buffer = std::runtime_error::what();
         if (m_path.size() > 0)
@@ -1248,7 +1252,7 @@ inline void File::Streambuf::flush()
 }
 
 inline File::AccessError::AccessError(const std::string& msg, const std::string& path)
-    : std::runtime_error(msg)
+    : ExceptionWithBacktrace<std::runtime_error>(msg)
     , m_path(path)
 {
 }

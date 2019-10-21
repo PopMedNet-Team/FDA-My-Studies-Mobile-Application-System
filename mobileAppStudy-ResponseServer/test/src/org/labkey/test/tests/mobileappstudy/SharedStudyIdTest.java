@@ -35,6 +35,8 @@ public class SharedStudyIdTest extends BaseMobileAppStudyTest
 {
     private static final String CLIENT_1_PROJECT_NAME = "Shared Study Client 1";
     private static final String CLIENT_2_PROJECT_NAME = "Shared Study Client 2";
+    private static final String PROJECT_NAME01 = "SharedStudyIdTest DataPartner1";
+    private static final String PROJECT_NAME02 = "SharedStudyIdTest DataPartner2";
     private static final String STUDY_ID = "SharedStudy01";
     private static final String STUDY_SUBFOLDER = STUDY_ID + " Subfolder";
     private static final String CLIENT_1_TOKEN_STUDY = CLIENT_1_PROJECT_NAME + "/" + STUDY_SUBFOLDER;
@@ -46,12 +48,20 @@ public class SharedStudyIdTest extends BaseMobileAppStudyTest
     @Override
     protected @Nullable String getProjectName()
     {
-        return "SharedStudyIdTest Project";
+        return null;
+    }
+
+    @Override
+    protected void doCleanup(boolean afterTest)
+    {
+        _containerHelper.deleteProject(CLIENT_1_PROJECT_NAME, false);
+        _containerHelper.deleteProject(CLIENT_2_PROJECT_NAME, false);
+        _containerHelper.deleteProject(PROJECT_NAME01, false);
+        _containerHelper.deleteProject(PROJECT_NAME02, false);
     }
 
     void setUpProject(String project, String subfolder, String studyId, boolean addTokens)
     {
-
         if (!_containerHelper.getCreatedProjects().contains(project))
             _containerHelper.createProject(project, null);
         _containerHelper.createSubfolder(project, subfolder, "Mobile App Study");
@@ -86,13 +96,8 @@ public class SharedStudyIdTest extends BaseMobileAppStudyTest
     @Test
     public void testStudyNameShared()
     {
-        final String PROJECT_NAME01 = getProjectName() + " DataPartner1";
-        final String PROJECT_NAME02 = getProjectName() + " DataPartner2";
         final String STUDY_FOLDER_NAME = "StudyFolder";
         final String SHORT_NAME = "Shared";
-
-        _containerHelper.deleteProject(PROJECT_NAME01, false);
-        _containerHelper.deleteProject(PROJECT_NAME02, false);
 
         _containerHelper.createProject(PROJECT_NAME01, "Collaboration");
         _containerHelper.createSubfolder(PROJECT_NAME01, STUDY_FOLDER_NAME,"Mobile App Study");

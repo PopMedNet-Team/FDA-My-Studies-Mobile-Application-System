@@ -1,20 +1,3 @@
-#-------------------------------------------------------------------------------
-# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
-# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
-# 
-# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-#-------------------------------------------------------------------------------
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -1309,6 +1292,12 @@ function isNumberKey(evt)
 				</c:otherwise>
 			</c:choose> 
          </div>
+         <div class="clearfix"></div>
+			<div class="checkbox checkbox-inline gray-xs-f mb-xs">
+	               <input type="checkbox" name="questionReponseTypeBo.otherType" id="textchoiceOtherId" disabled>
+	               <label for="textchoiceOtherId"> Include 'Other' as an option ? </label> 
+	               <span class="ml-xs sprites_v3 filled-tooltip" data-toggle="tooltip" title="Fields related to an explicit 'Other' option are not supported for text-choice Question Steps that are within a Form Step."></span>
+		     </div>
          </div>
          <div id="ImageChoice" style="display: none;">
          	<div class="mt-lg"><div class="gray-choice-f mb-xs">Image Choices<span class="ml-xs sprites_v3 filled-tooltip" data-toggle="tooltip" title="Fill in the different image choices you wish to provide. Upload images for display and selected states and enter display text and value to be captured for each choice. Also, if you have branching enabled for your questionnaire, you can define destination steps for each choice."></span></div></div>
@@ -2996,7 +2985,7 @@ function saveQuestionStepQuestionnaire(item,callback){
 	
 	questionsBo.questionReponseTypeBo=questionReponseTypeBo;
 	if(fromId != null && fromId!= '' && typeof fromId !='undefined' && 
-			questionText != null && questionText!= '' && typeof questionText !='undefined' &&
+			questionText != null && questionText!= '' && typeof questionText !='undefined' ||
 			short_title != null && short_title!= '' && typeof short_title !='undefined'){
 		formData.append("questionInfo", JSON.stringify(questionsBo)); 
 		
@@ -3273,7 +3262,7 @@ function addTextChoice(){
 					    "</div> "; 
 						  newTextChoice += 	  
 					    "<div class='col-md-12 p-none display__flex__center'><div class='col-md-10 pl-none'>"+
-					    "   <div class='gray-xs-f mb-xs'>Mark as exclusive ? <span class='requiredStar'>*</span> </div>"+
+					    "   <div class='gray-xs-f mb-xs'>Description(1 to 150 characters) <span class='requiredStar'>*</span> </div>"+
 					    "   <div class='form-group'>					     "+
 					    "      <textarea class='form-control' name='questionResponseSubTypeList["+choiceCount+"].description' id='displayTextChoiceDescription"+choiceCount+"' maxlength='150'></textarea>"+
 					    "   </div>"+

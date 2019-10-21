@@ -58,10 +58,12 @@ class NotificationViewController: UIViewController {
     func handleNotificationListResponse() {
         if (Gateway.instance.notification?.count)! > 0{
             self.loadNotificationFromDatabase()
-            self.tableView?.isHidden = false
+           // self.tableView?.isHidden = false
             
         }else {
-            self.tableView?.isHidden = true
+          // self.tableView?.isHidden = true
+            self.tableView?.isHidden = false
+            self.tableView?.reloadData()
         }
     }
     
@@ -70,7 +72,7 @@ class NotificationViewController: UIViewController {
         DBHandler.loadNotificationListFromDatabase(completionHandler: {(notificationList) in
             
             if notificationList.count > 0 {
-                self.tableView?.isHidden = false
+               // self.tableView?.isHidden = false
                 
                 for notification in notificationList {
                     
@@ -109,9 +111,12 @@ class NotificationViewController: UIViewController {
                 
               })
               self.notificationArray = sorted
-                self.tableView?.reloadData()
+              self.tableView?.isHidden = false
+              self.tableView?.reloadData()
                 
             }else {
+                self.tableView?.isHidden = false
+                self.tableView?.reloadData()
             }
         })
     }

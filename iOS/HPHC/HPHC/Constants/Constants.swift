@@ -49,7 +49,7 @@ let kTitleCancel = "Cancel"
 let kTitleDeleteAccount = "Delete Account"
 let kRegistrationInfoMessage = "Registration (or sign up) for the app  is requested only to provide you with a seamless experience of using the app. Your registration information does not become part of the data collected for any study(ies) housed in the app. Each study has its own consent process and your data for the study will not be collected without you providing your informed consent prior to joining the study."
 
-let kDeleteAccountConfirmationMessage = "Are you sure you wish to permanently delete your FDA My Studies account? You will need to register again if you wish to join a study."
+let kDeleteAccountConfirmationMessage = "Are you sure you wish to permanently delete your #APPNAME# account? You will need to register again if you wish to join a study."
 let kMessageAccountDeletedSuccess = "Account has been deleted"
 let kMessageAppNotificationOffRemainder = "Stay up-to-date! Turn ON notifications and reminders in app and phone settings to get notified about study activity in a timely manner."
 
@@ -202,3 +202,20 @@ let kStagingUserEmailId = "aqibm@boston-technology.com"
 let kIsStagingUser = "StagingUser"
 
 
+
+
+struct BrandingConstant {
+    
+    
+    static let JoinStudyButtonTitle = "JoinStudyButtonTitle"
+    static let ViewConsentButtonTitle = "ViewConsentButtonTitle"
+    static let VisitWebsiteButtonTitle = "VisitWebsiteButtonTitle"
+    static let ConsentPDF = "ConsentPDF"
+    static let LeaveStudy = "LeaveStudy"
+    static let LeaveStudyConfirmationText = "LeaveStudyConfirmationText"
+    static let WebsiteLink = "WebsiteLink"
+    static let WebsiteButtonTitle = "WebsiteButtonTitle"
+    static let TermsAndConditionURL = "TermsAndConditionURL"
+    static let PrivacyPolicyURL = "PrivacyPolicyURL"
+    static let ValidatedTitle = "ValidatedTitle" 
+}

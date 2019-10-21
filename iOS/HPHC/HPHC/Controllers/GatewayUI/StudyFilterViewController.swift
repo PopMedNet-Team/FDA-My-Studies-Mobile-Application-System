@@ -1,21 +1,21 @@
 /*
  License Agreement for FDA My Studies
-Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
-hereby granted, free of charge, to any person obtaining a copy of this software and associated
-documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
-limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
-Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial
-portions of the Software.
-Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
-Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
-THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+ Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+ hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+ limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+ Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+ conditions:
+ The above copyright notice and this permission notice shall be included in all copies or substantial
+ portions of the Software.
+ Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+ Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+ THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+ OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -23,7 +23,7 @@ import UIKit
 
 
 //Used to do filter based on Apply and Cancel actions
-protocol StudyFilterDelegates {
+protocol StudyFilterDelegates: class {
     
     func appliedFilter(studyStatus: Array<String>, pariticipationsStatus: Array<String>, categories: Array<String> , searchText: String,bookmarked: Bool)
     
@@ -32,6 +32,7 @@ protocol StudyFilterDelegates {
 }
 
 enum FilterType: Int {
+    
     case studyStatus = 0
     case bookMark
     case participantStatus
@@ -41,19 +42,24 @@ enum FilterType: Int {
 
 
 class StudyFilterViewController: UIViewController {
-
-    @IBOutlet weak var collectionView: UICollectionView?
     
+    // MARK:- Outlets
+    
+    @IBOutlet weak var collectionView: UICollectionView?
     @IBOutlet weak var cancelButton: UIButton?
     @IBOutlet weak var applyButton: UIButton?
     
-    var delegate: StudyFilterDelegates?
-    var studyStatus: Array<String> = []
-    var pariticipationsStatus: Array<String> = []
-    var categories: Array<String> = []
-    var searchText: String = ""
-    var bookmark = true
-    var previousCollectionData: Array<Array<String>> = []
+    // MARK:- Properties
+    
+    weak var delegate: StudyFilterDelegates?
+    
+    private lazy var studyStatus: [String] = []
+    private lazy var pariticipationsStatus: [String] = []
+    private lazy var categories: [String] = []
+    private lazy var searchText: String = ""
+    private lazy var bookmark = true
+    
+    lazy var previousCollectionData: [[String]] = []
     
     // MARK:- Viewcontroller lifecycle
     override func viewDidLoad() {
@@ -70,23 +76,11 @@ class StudyFilterViewController: UIViewController {
             let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
             appDelegate.setDefaultFilters(previousCollectionData: self.previousCollectionData)
         }
-
-         self.collectionView?.reloadData()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
+        self.collectionView?.reloadData()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
-    
-    
+  
     // MARK:- Button Actions
     
     /**
@@ -101,7 +95,7 @@ class StudyFilterViewController: UIViewController {
         
         var i: Int = 0
         var isbookmarked = false
-       
+        
         for filterOptions in StudyFilterHandler.instance.filterOptions {
             
             let filterType = FilterType.init(rawValue: i)
@@ -124,7 +118,7 @@ class StudyFilterViewController: UIViewController {
                     
                 case .category:
                     categories.append(value.title)
-                //default: break
+                    //default: break
                 }
             }
             i = i + 1
@@ -134,12 +128,12 @@ class StudyFilterViewController: UIViewController {
         previousCollectionData.append(studyStatus)
         
         if User.currentUser.userType == .FDAUser {
-        if isbookmarked {
-            previousCollectionData.append((bookmark == true ? ["Bookmarked"]: []))
-        } else {
-            previousCollectionData.append([])
-            bookmark = false
-        }
+            if isbookmarked {
+                previousCollectionData.append((bookmark == true ? ["Bookmarked"]: []))
+            } else {
+                previousCollectionData.append([])
+                bookmark = false
+            }
         } else {
             previousCollectionData.append(categories)
             bookmark = false
@@ -166,32 +160,33 @@ class StudyFilterViewController: UIViewController {
 
 //// MARK:- Collection Data source & Delegate
 extension StudyFilterViewController: UICollectionViewDataSource {//,UICollectionViewDelegate {
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return StudyFilterHandler.instance.filterOptions.count //filterData!.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as?
             FilterListCollectionViewCell)!
-
+        
         let filterOption = StudyFilterHandler.instance.filterOptions[indexPath.row]
         cell.displayCollectionData(data: filterOption)
-
+        
         return cell
     }
-   
+    
 }
 
 
-extension StudyFilterViewController:PinterestLayoutDelegate {
+extension StudyFilterViewController: PinterestLayoutDelegate {
+    
     // 1. Returns the photo height
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath , withWidth width: CGFloat) -> CGFloat {
         
         let filterOptions = StudyFilterHandler.instance.filterOptions[indexPath.row]
         var headerHeight = 0
         if filterOptions.title.count > 0 {
-            headerHeight = 40
+            headerHeight = 60
         }
         let height: CGFloat = CGFloat((filterOptions.filterValues.count * 50) + headerHeight)
         return height
@@ -201,6 +196,7 @@ extension StudyFilterViewController:PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
         return 0
     }
+    
 }
 
 class StudyFilterHandler {
@@ -210,24 +206,24 @@ class StudyFilterHandler {
     static var instance = StudyFilterHandler()
 }
 
-class FilterOptions{
+class FilterOptions {
     var title: String!
     var filterValues: Array<FilterValues> = []
 }
+
 class FilterValues {
-    
     var title: String!
     var isSelected = false
 }
 
-extension AppDelegate{
+extension AppDelegate {
     
     /**
      setter method to set the default filter options if none are selected
-    */
+     */
     func setDefaultFilters(previousCollectionData: Array<Array<String>>) {
         
-    var filterData: NSMutableArray?
+        var filterData: NSMutableArray?
         var resource = "AnanomousFilterData"
         
         if User.currentUser.userType == .FDAUser {
@@ -286,14 +282,14 @@ extension AppDelegate{
         }
         StudyFilterHandler.instance.filterOptions = filterOptionsList
         
-        }
+    }
     
     /**
      returns the array of strings for default filters
      studyStatus: array of default study status
      pariticipationsStatus: array of participation status
      categories: array of categories
-    */
+     */
     
     func getDefaultFilterStrings()->(studyStatus: Array<String>,pariticipationsStatus: Array<String>,categories: Array<String>,searchText: String,bookmark: Bool){
         
@@ -301,45 +297,39 @@ extension AppDelegate{
         var pariticipationsStatus: Array<String> = []
         var categories: Array<String> = []
         var bookmark = true
-        
-        
-        var i: Int = 0
-        var isbookmarked = false
-        
+
         //Parsing the filter options
-        for filterOptions in StudyFilterHandler.instance.filterOptions {
+        for (index,filterOptions) in StudyFilterHandler.instance.filterOptions.enumerated() {
             
-            let filterType = FilterType.init(rawValue: i)
+            let filterType = FilterType.init(rawValue: index)
             let filterValues = (filterOptions.filterValues.filter({$0.isSelected == true}))
             for value in filterValues {
                 switch (filterType!) {
                     
                 case .studyStatus:
                     studyStatus.append(value.title)
+                    
                 case .participantStatus:
                     pariticipationsStatus.append(value.title)
-                case .bookMark:
                     
+                case .bookMark:
                     if User.currentUser.userType == .FDAUser {
                         bookmark = (value.isSelected)
-                        isbookmarked = true
                     } else {
                         categories.append(value.title)
                     }
                     
                 case .category:
                     categories.append(value.title)
-                //default: break
+                    //default: break
                 }
             }
-            i = i + 1
         }
-    
+        
         if User.currentUser.userType == .FDAUser {
-                bookmark = false
+            bookmark = false
         } else {
             bookmark = false
-            
         }
         
         return(studyStatus: studyStatus,pariticipationsStatus : pariticipationsStatus,categories: categories,searchText: "",bookmark: bookmark)

@@ -1,21 +1,21 @@
 /*
  License Agreement for FDA My Studies
-Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
-hereby granted, free of charge, to any person obtaining a copy of this software and associated
-documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
-limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
-Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial
-portions of the Software.
-Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
-Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
-THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+ Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+ hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+ limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+ Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+ conditions:
+ The above copyright notice and this permission notice shall be included in all copies or substantial
+ portions of the Software.
+ Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+ Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+ THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+ OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -45,7 +45,7 @@ class StudyDashboardViewController: UIViewController{
         return .lightContent
     }
     
-// MARK:- ViewController Lifecycle
+    // MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,7 +64,7 @@ class StudyDashboardViewController: UIViewController{
         //check if consent is udpated
         if StudyUpdates.studyConsentUpdated {
             let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
-             appDelegate.checkConsentStatus(controller: self)
+            appDelegate.checkConsentStatus(controller: self)
         }
         
     }
@@ -101,11 +101,11 @@ class StudyDashboardViewController: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-               
+        
     }
     
     
-// MARK:- Helper Methods
+    // MARK:- Helper Methods
     
     /**
      Used to Create Eligibility Consent Task
@@ -126,6 +126,7 @@ class StudyDashboardViewController: UIViewController{
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
         UIApplication.shared.statusBarStyle = .default
+        taskViewController?.modalPresentationStyle = .fullScreen
         present(taskViewController!, animated: true, completion: nil)
     }
     
@@ -138,9 +139,9 @@ class StudyDashboardViewController: UIViewController{
                 self.sendRequestToGetDashboardResponse()
             }
         }
-
+        
     }
-  
+    
     
     /**
      Used to send Request To Get Dashboard Info
@@ -148,7 +149,7 @@ class StudyDashboardViewController: UIViewController{
     func sendRequestToGetDashboardInfo(){
         WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
     }
-  
+    
     func sendRequestToGetDashboardResponse(){
         
         if self.dataSourceKeysForLabkey.count != 0 {
@@ -160,18 +161,18 @@ class StudyDashboardViewController: UIViewController{
             
             if activity?.type == ActivityType.activeTask {
                 
-              if activity?.taskSubType == "fetalKickCounter" {
-                keys = "\"count\",duration"
-                tableName = activityId!+activityId!
-                
-              } else if activity?.taskSubType == "towerOfHanoi" {
-                keys = "numberOfMoves"
-                tableName = activityId!+activityId!
-                
-              } else if activity?.taskSubType == "spatialSpanMemory" {
-                keys = "NumberofGames,Score,NumberofFailures"
-                tableName = activityId!+activityId!
-              }
+                if activity?.taskSubType == "fetalKickCounter" {
+                    keys = "\"count\",duration"
+                    tableName = activityId!+activityId!
+                    
+                } else if activity?.taskSubType == "towerOfHanoi" {
+                    keys = "numberOfMoves"
+                    tableName = activityId!+activityId!
+                    
+                } else if activity?.taskSubType == "spatialSpanMemory" {
+                    keys = "NumberofGames,Score,NumberofFailures"
+                    tableName = activityId!+activityId!
+                }
             }
             let participantId = Study.currentStudy?.userParticipateState.participantId
             //Get stats from Server
@@ -188,10 +189,10 @@ class StudyDashboardViewController: UIViewController{
                 let activity = Study.currentStudy?.activities.filter({$0.actvityId == activityId}).first
                 var key = response.key
                 if activity?.type == ActivityType.activeTask {
-                  
-                  if activity?.taskSubType == "fetalKickCounter" || activity?.taskSubType == "towerOfHanoi"{
-                    key = activityId!
-                  }
+                    
+                    if activity?.taskSubType == "fetalKickCounter" || activity?.taskSubType == "towerOfHanoi"{
+                        key = activityId!
+                    }
                     
                 }
                 
@@ -201,9 +202,9 @@ class StudyDashboardViewController: UIViewController{
                     let responseValue = (value["value"] as? Float)!
                     let count = (value["count"] as? Float)!
                     let date = StudyDashboardViewController.labkeyDateFormatter.date(from: (value["date"] as? String)!)
-                     let localDateAsString = StudyDashboardViewController.localDateFormatter.string(from: date!)
+                    let localDateAsString = StudyDashboardViewController.localDateFormatter.string(from: date!)
                     
-                     let localDate = StudyDashboardViewController.localDateFormatter.date(from: localDateAsString)
+                    let localDate = StudyDashboardViewController.localDateFormatter.date(from: localDateAsString)
                     DBHandler.saveStatisticsDataFor(activityId: activityId!, key: key!, data: responseValue, fkDuration: Int(count),date: localDate!)
                 }
                 
@@ -221,7 +222,7 @@ class StudyDashboardViewController: UIViewController{
         self.sendRequestToGetDashboardResponse()
     }
     
-// MARK:- Button Actions
+    // MARK:- Button Actions
     
     /**
      Home button clicked
@@ -233,7 +234,7 @@ class StudyDashboardViewController: UIViewController{
             self.slideMenuController()?.openLeft()
         }
         else {
-           self.performSegue(withIdentifier: unwindToStudyListDashboard, sender: self)
+            self.performSegue(withIdentifier: unwindToStudyListDashboard, sender: self)
         }
     }
     
@@ -271,7 +272,7 @@ class StudyDashboardViewController: UIViewController{
         
         (self.tabBarController as? StudyDashboardTabbarViewController)!.shareScreenshotByEmail(image: image,subject: kEmailSubjectDashboard, fileName: kEmailSubjectDashboard)
         
-       
+        
     }
     
     
@@ -280,7 +281,7 @@ class StudyDashboardViewController: UIViewController{
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.init(identifier: "America/New_York")
         formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
-       
+        
         return formatter
     }()
     
@@ -359,7 +360,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
             case TableViewCells.welcomeCell.rawValue:
                 cell = (tableView.dequeueReusableCell(withIdentifier: kWelcomeTableViewCell, for: indexPath) as? StudyDashboardWelcomeTableViewCell)!
                 (cell as? StudyDashboardWelcomeTableViewCell)!.displayFirstCelldata(data: tableViewData)
-               
+                
             case TableViewCells.percentageCell.rawValue:
                 cell = (tableView.dequeueReusableCell(withIdentifier: kPercentageTableViewCell, for: indexPath) as? StudyDashboardStudyPercentageTableViewCell)!
                 (cell as? StudyDashboardStudyPercentageTableViewCell)!.displayThirdCellData(data: tableViewData)
@@ -369,10 +370,10 @@ extension StudyDashboardViewController : UITableViewDataSource {
             }
             
         } else {
-                cell = (tableView.dequeueReusableCell(withIdentifier: kStatisticsTableViewCell, for: indexPath) as? StudyDashboardStatisticsTableViewCell)!
-                (cell as? StudyDashboardStatisticsTableViewCell)!.displayData()
-                (cell as? StudyDashboardStatisticsTableViewCell)!.buttonDay?.setTitle("  DAY  ", for: UIControl.State.normal)
-                (cell as? StudyDashboardStatisticsTableViewCell)!.statisticsCollectionView?.reloadData()
+            cell = (tableView.dequeueReusableCell(withIdentifier: kStatisticsTableViewCell, for: indexPath) as? StudyDashboardStatisticsTableViewCell)!
+            (cell as? StudyDashboardStatisticsTableViewCell)!.displayData()
+            (cell as? StudyDashboardStatisticsTableViewCell)!.buttonDay?.setTitle("  DAY  ", for: UIControl.State.normal)
+            (cell as? StudyDashboardStatisticsTableViewCell)!.statisticsCollectionView?.reloadData()
         }
         return cell!
     }
@@ -401,7 +402,7 @@ extension StudyDashboardViewController:NMWebServiceDelegate {
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-       
+        
         if requestName as String == WCPMethods.eligibilityConsent.method.methodName {
             self.removeProgressIndicator()
             self.createEligibilityConsentTask()
@@ -449,7 +450,7 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
             taskResult = taskViewController.result
             
             ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
-             ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult: taskViewController.result )
+            ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult: taskViewController.result )
             
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
@@ -517,8 +518,8 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
         }
     }
     
-
-// MARK:- StepViewController Delegate
+    
+    // MARK:- StepViewController Delegate
     
     public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
     }

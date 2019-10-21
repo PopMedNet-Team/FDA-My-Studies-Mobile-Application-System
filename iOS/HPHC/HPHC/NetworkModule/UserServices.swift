@@ -118,12 +118,13 @@ class UserServices: NSObject {
     
     // MARK: Requests
     
+    /*
     func checkForAppUpdates(delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
         let method = RegistrationMethods.versionInfo.method
         self.sendRequestWith(method: method, params: nil, headers: nil)
-    }
+    }*/
     
     
     func loginUser(_ delegate: NMWebServiceDelegate){
@@ -282,9 +283,10 @@ class UserServices: NSObject {
             ] as [String: Any]
         
         let version = Utilities.getAppVersion()
+        let token = Utilities.getBundleIdentifier()
         let info = [kAppVersion: version,
                     kOSType: "ios",
-                    kDeviceToken: ""
+                    kDeviceToken: token
         ]
         
         let params = [
@@ -419,7 +421,7 @@ class UserServices: NSObject {
         
         self.delegate = delegate
         
-        //INCOMPLETE
+       
         let user = User.currentUser
         let headerParams = [kUserId: user.userId! as String,
                             kUserAuthToken: user.authToken! as String]
@@ -831,7 +833,7 @@ class UserServices: NSObject {
        // let requestParams = self.failedRequestServices.requestParams == nil ? nil : self.failedRequestServices.requestParams
         
         let headerParams = self.failedRequestServices.headerParams == nil ? [:] : self.failedRequestServices.headerParams
-        
+//
         self.sendRequestWith(method: self.failedRequestServices.method, params: (self.requestParams == nil ?  nil : self.requestParams) , headers: headerParams)
         
     }
@@ -949,7 +951,10 @@ extension UserServices: NMWebServiceDelegate{
                 
             } else {
                 //Update Refresh Token
-                self.updateToken()
+               
+                    self.updateToken()
+                
+                
             }
             
         } else {

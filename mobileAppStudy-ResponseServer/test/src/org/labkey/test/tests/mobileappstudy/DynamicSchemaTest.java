@@ -16,7 +16,6 @@
 package org.labkey.test.tests.mobileappstudy;
 
 import org.jetbrains.annotations.Nullable;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.labkey.test.TestFileUtils;
@@ -150,7 +149,7 @@ public class DynamicSchemaTest extends BaseMobileAppStudyTest
         assertEquals("Unexpected new row count in NewSurveyGroupedListSubGroupedList after adding single response with a single question added to group. Response text 4",1,getNewRowCount(newSurveyGroupedSubGroupedMap,getTableData("NewSurveyGroupedListSubGroupedList")));
         assertEquals("Unexpected number of new columns in NewSurveyGroupedListSubGroupedList after adding single response with a single question added to group. Response text 4",0, getAddedColumns(newSurveyGroupedSubGroupedMap,getTableData("NewSurveyGroupedListSubGroupedList")).size());
         assertEquals("Unexpected new row count in NewSurveyTextChoiceField after adding single response with a single question added to group. Response text 4",2,getNewRowCount(newSurveyTextChoiceField,getTableData("NewSurveyTextChoiceField")));
-        assertEquals("Unexpected number of new columns in NewSurveyTextChoiceField after adding single response with a single question added to group. Response text 4",0, getAddedColumns(newSurveyTextChoiceField,getTableData("NewSurveyTextChoiceField")).size());;
+        assertEquals("Unexpected number of new columns in NewSurveyTextChoiceField after adding single response with a single question added to group. Response text 4",0, getAddedColumns(newSurveyTextChoiceField,getTableData("NewSurveyTextChoiceField")).size());
         assertEquals("Unexpected new row count in NewSurveyGroupedListTextChoiceField after adding single response with a single question added to group. Response text 4",2,getNewRowCount(newSurveyGroupedTextChoiceField,getTableData("NewSurveyGroupedListTextChoiceField")));
         assertEquals("Unexpected number of new columns in NewSurveyGroupedListTextChoiceField after adding single response with a single question added to group. Response text 4",0, getAddedColumns(newSurveyGroupedTextChoiceField,getTableData("NewSurveyGroupedListTextChoiceField")).size());
     }
@@ -430,7 +429,7 @@ public class DynamicSchemaTest extends BaseMobileAppStudyTest
     }
 
     @Test
-    public void testFetalKickCountActiveTask()
+    public void testFetalKickCountActiveTask() throws Exception
     {
         List<Map<String, Object>> beforeTableData;
         if (!mobileAppTableExists("FKC-74counter", LIST_SCHEMA))
@@ -451,7 +450,7 @@ public class DynamicSchemaTest extends BaseMobileAppStudyTest
     }
 
     @Test
-    public void testTowersOfHanoiActiveTask()
+    public void testTowersOfHanoiActiveTask() throws Exception
     {
         String tableName = "TOH-75towers";
         List<Map<String, Object>> beforeTableData;
@@ -473,7 +472,7 @@ public class DynamicSchemaTest extends BaseMobileAppStudyTest
     }
 
     @Test
-    public void testSpatialSpanMemoryActiveTask()
+    public void testSpatialSpanMemoryActiveTask() throws Exception
     {
         String tableName = "SSM-76spatialSpan";
         List<Map<String, Object>> beforeTableData;
@@ -495,7 +494,7 @@ public class DynamicSchemaTest extends BaseMobileAppStudyTest
         assertTrue("Expected field 'numberOfFailures' not found", afterTableData.get(0).containsKey("numberOfFailures"));
     }
 
-    private List<Map<String, Object>> getInitialTableData(String tableName)
+    private List<Map<String, Object>> getInitialTableData(String tableName) throws Exception
     {
         return mobileAppTableExists(tableName, LIST_SCHEMA) ?
                 getTableData(tableName):
@@ -505,7 +504,7 @@ public class DynamicSchemaTest extends BaseMobileAppStudyTest
     static final String OTHER_TEXT_TITLE = "_Other_Text";
 
     @Test
-    public void testOtherOption_columnPresent()
+    public void testOtherOption_columnPresent() throws Exception
     {
         String baseTableName = "OtherOption";
 
@@ -536,7 +535,7 @@ public class DynamicSchemaTest extends BaseMobileAppStudyTest
         // Verify no other block parses and gets expected responses and columns
         List<Map<String, Object>> afterTable = getTableData(noOtherOptionTableName);
         assertEquals("Unexpected number of rows in  for no `other` option.", 2, afterTable.size());
-        assertEquals("Unexpected number of columns for no `other` option.", 17, afterTable.get(0).keySet().size());
+        assertEquals("Unexpected number of columns for no `other` option.", 16, afterTable.get(0).keySet().size());
 
         // Verify other block parses and gets expected responses and columns
         afterTable = getTableData(optionRequiredTableName);
@@ -562,7 +561,7 @@ public class DynamicSchemaTest extends BaseMobileAppStudyTest
     }
 
     @Test
-    public void testOtherOption_update()
+    public void testOtherOption_update() throws Exception
     {
         String baseTableName = "OtherOptionUpdate";
 
@@ -604,7 +603,7 @@ public class DynamicSchemaTest extends BaseMobileAppStudyTest
     }
 
     @Test
-    public void testOtherOption_emptyValues()
+    public void testOtherOption_emptyValues() throws Exception
     {
         String baseTableName = "OtherOptionBlanks";
 

@@ -21,6 +21,7 @@
 #ifndef REALM_UTIL_TIMESTAMP_FORMATTER_HPP
 #define REALM_UTIL_TIMESTAMP_FORMATTER_HPP
 
+#include <ctime>
 #include <chrono>
 #include <utility>
 #include <string>
@@ -39,7 +40,7 @@ public:
     using char_type = char;
     using string_view_type = util::BasicStringView<char_type>;
 
-    enum class Precision { seconds, milliseconds, microseconds };
+    enum class Precision { seconds, milliseconds, microseconds, nanoseconds };
 
     /// Default configuration for corresponds to local time in ISO 8601 date and
     /// time format.
@@ -51,15 +52,19 @@ public:
         Precision precision = Precision::seconds;
 
         /// The format of the timestamp as understood by std::put_time(), except
-        /// that the first occurnace of `%S` (also taking into account the `%S`
+        /// that the first occurrence of `%S` (also taking into account the `%S`
         /// that is an implicit part of `%T`) is expanded to `SS.fff` if \ref
         /// precision is Precision::milliseconds, or to `SS.ffffff` if \ref
-        /// precision is Precision::microseconds, where `SS` is what `%S`
-        /// expands to conventionally.
+        /// precision is Precision::microseconds, or to `SS.fffffffff` if \ref
+        /// precision is Precision::nanoseconds, where `SS` is what `%S` expands
+        /// to conventionally.
         const char* format = "%FT%T%z";
     };
 
     TimestampFormatter(Config = {});
+
+    // FIXME: Use std::timespec in C++17.
+    string_view_type format(std::time_t time, long nanoseconds);
 
     template<class B> string_view_type format(std::chrono::time_point<B>);
 
@@ -74,8 +79,6 @@ private:
     memory_output_stream_type m_out;
 
     static format_segments_type make_format_segments(const Config&);
-
-    string_view_type do_format(std::time_t time, long microseconds);
 };
 
 
@@ -95,10 +98,10 @@ inline auto TimestampFormatter::format(std::chrono::time_point<B> time) -> strin
         --time_2;
         time_3 = clock_type::from_time_t(time_2);
     }
-    long microseconds =
-        int(std::chrono::duration_cast<std::chrono::microseconds>(time - time_3).count());
-    REALM_ASSERT(microseconds >= 0 && microseconds < 1000000);
-    return do_format(time_2, microseconds); // Throws
+    long nanoseconds =
+        int(std::chrono::duration_cast<std::chrono::nanoseconds>(time - time_3).count());
+    REALM_ASSERT(nanoseconds >= 0 && nanoseconds < 1000000000);
+    return format(time_2, nanoseconds); // Throws
 }
 
 } // namespace util

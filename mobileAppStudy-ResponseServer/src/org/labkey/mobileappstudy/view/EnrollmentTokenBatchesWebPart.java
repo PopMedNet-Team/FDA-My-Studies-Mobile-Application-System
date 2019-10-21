@@ -44,7 +44,6 @@ public class EnrollmentTokenBatchesWebPart extends QueryView
         setShowDeleteButton(false);
         setShowReports(false);
         setShowUpdateColumn(false);
-
     }
 
     private QuerySettings createQuerySettings(ViewContext viewContext)
@@ -58,7 +57,6 @@ public class EnrollmentTokenBatchesWebPart extends QueryView
         super.populateButtonBar(view, bar);
         ActionButton generateBtn = new ActionButton("New Batch");
         generateBtn.setScript("Ext4.create('LABKEY.MobileAppStudy.EnrollmentTokenBatchFormPanel', {gridButton: this}).show();");
-        addButton(bar, generateBtn);
+        bar.add(generateBtn);
     }
-
 }

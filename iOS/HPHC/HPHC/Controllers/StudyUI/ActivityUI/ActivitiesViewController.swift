@@ -49,6 +49,8 @@ class ActivitiesViewController : UIViewController{
     var allActivityList: Array<Dictionary<String,Any>>! = []
     var selectedFilter: ActivityFilterType? //Holds the applied FilterTypes
     
+    private var managedResult: [String: Any] = [:]
+    
     let labkeyResponseFetch = ResponseDataFetch()
     
     // MARK:- Viewcontroller Lifecycle
@@ -120,6 +122,8 @@ class ActivitiesViewController : UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        let message =  "The study " + (Study.currentStudy?.name!)! + " is 100 percent complete. Thank you for your participation."
+       // UIUtilities.showAlertWithMessage(alertMessage: message)
         
     }
     
@@ -139,12 +143,18 @@ class ActivitiesViewController : UIViewController{
         if StudyUpdates.studyActivitiesUpdated {
             
             self.sendRequestToGetActivityStates()
+            
+            //udpate status to false so notification can be registered again
+            Study.currentStudy?.activitiesLocalNotificationUpdated = false
+            DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: false)
+            
         } else {
             
             if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
                 self.refreshControl?.endRefreshing()
             }
-            self.loadActivitiesFromDatabase()
+            //self.loadActivitiesFromDatabase()
+            self.fetchActivityAnchorDateResponseFromLabkey()
         }
     }
     
@@ -254,7 +264,7 @@ class ActivitiesViewController : UIViewController{
                                                 let message = resource.notificationMessage
                                                 let userInfo = ["studyId": (Study.currentStudy?.studyId)!,
                                                                 "type": "resource"];
-                                                LocalNotification.scheduleNotificationOn(date: notificationDate!, message: message!, userInfo: userInfo)
+                                                LocalNotification.scheduleNotificationOn(date: notificationDate!, message: message!, userInfo: userInfo, id: notification.id)
                                             }
                                     })
                                 }
@@ -317,12 +327,12 @@ class ActivitiesViewController : UIViewController{
         
         AnchorDateHandler().fetchActivityAnchorDateResponseFromLabkey { (status) in
             print("Finished 1")
-            if status {
+            //if status {
                 //DispatchQueue.main.async {
                     self.loadActivitiesFromDatabase()
                 //}
                 
-            }
+            //}
             
         }
         print("Finished 0")
@@ -343,7 +353,7 @@ class ActivitiesViewController : UIViewController{
                     Study.currentStudy?.activities = activities
                     
                     self.handleActivityListResponse()
-                    self.fetchActivityAnchorDateResponseFromLabkey()
+                    
                     
                 } else {
                     
@@ -360,7 +370,7 @@ class ActivitiesViewController : UIViewController{
     func createActivity(){
         
         //Disable Custom KeyPad with toolbars
-       // IQKeyboardManager.sharedManager().enable = false
+//        IQKeyboardManager.sharedManager().enable = false
         IQKeyboardManager.shared.enableAutoToolbar = false
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
@@ -399,6 +409,7 @@ class ActivitiesViewController : UIViewController{
             taskViewController?.delegate = self
             UIApplication.shared.statusBarStyle = .default
             taskControllerPresented = true
+            taskViewController?.modalPresentationStyle = .fullScreen
             present(taskViewController!, animated: true, completion: nil)
             
         } else {
@@ -482,7 +493,6 @@ class ActivitiesViewController : UIViewController{
             } else {
                 
                 isInActiveActivitiesAreAvailable = true
-                
                 DBHandler.deleteDBLocalNotification(activityId: activity.actvityId!,studyId: activity.studyId!)
             }
         }
@@ -518,17 +528,21 @@ class ActivitiesViewController : UIViewController{
             self.updateSectionArray(activityType: filterType)
         }
         
-        self.tableView?.reloadData()
+        DispatchQueue.main.async {
+            
+            self.tableView?.reloadData()
+            self.tableView?.isHidden = false
+            self.labelNoNetworkAvailable?.isHidden = true
+            self.updateCompletionAdherence()
+        }
         
-        self.tableView?.isHidden = false
-        self.labelNoNetworkAvailable?.isHidden = true
         
-        self.updateCompletionAdherence()
+        
         
         if (User.currentUser.settings?.localNotifications)! {
-            
+            print("localNotifications enabled")
             if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
-                
+                print("Registerig Notification")
                 //Register LocalNotifications
                 LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished,notificationlist) in
                     print("Notification set sucessfully")
@@ -622,7 +636,7 @@ class ActivitiesViewController : UIViewController{
             
             if !(ud.bool(forKey: halfCompletionKey)) {
                 let message =  "The study " + (Study.currentStudy?.name!)! + " is now 50 percent complete. We look forward to your continued participation as the study progresses."
-                UIUtilities.showAlertWithMessage(alertMessage: message)
+                //UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: halfCompletionKey)
                 
             }
@@ -875,7 +889,7 @@ extension ActivitiesViewController: UITableViewDelegate{
             if activity.currentRun != nil {
                 if activity.userParticipationStatus != nil {
                     let activityRunParticipationStatus = activity.userParticipationStatus
-                    if activityRunParticipationStatus?.status == .yetToJoin || activityRunParticipationStatus?.status == .inProgress 
+                    if activityRunParticipationStatus?.status == .yetToJoin || activityRunParticipationStatus?.status == .inProgress
                         
                     {
                         Study.updateCurrentActivity(activity: activities[indexPath.row])
@@ -1003,7 +1017,8 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             //get DashboardInfo
             self.sendRequestToGetDashboardInfo()
             
-            self.loadActivitiesFromDatabase()
+            self.fetchActivityAnchorDateResponseFromLabkey()
+           // self.loadActivitiesFromDatabase()
             
             if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
                 self.refreshControl?.endRefreshing()
@@ -1012,6 +1027,8 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             StudyUpdates.studyActivitiesUpdated = false
             //Update StudymetaData for Study
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+            
+            
             
         } else if requestName as String == WCPMethods.activity.method.methodName {
             self.removeProgressIndicator()
@@ -1094,7 +1111,10 @@ extension ActivitiesViewController: NMWebServiceDelegate {
                 
             }
             else {
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                if error.code != 300 {
+                    UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                }
+                
             }
         }
     }
@@ -1107,11 +1127,44 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         return true
     }
     
+    /// This method will update the result for other choices for each step
+    fileprivate func updateResultForChoiceQuestions(_ taskViewController: ORKTaskViewController) {
+        if let results = taskViewController.result.results as? [ORKStepResult]{
+            
+            for result in results {
+                if let choiceResult = result.results?.first as? ORKChoiceQuestionResult, let answers = choiceResult.answer as? [Any] {
+                    var selectedChoices: [Any] = []
+                    
+                    var otherChoiceDict = answers.filter({$0 as? JSONDictionary != nil}).first as? JSONDictionary
+                    let otherValueKey = "otherValue"
+                    if let otherValue = otherChoiceDict?[otherValueKey] as? String {
+                        otherChoiceDict?.removeValue(forKey: otherValueKey)
+                        answers.forEach { (value) in
+                            if let value = value as? String {
+                                if value != otherValue {
+                                    selectedChoices.append(value)
+                                }
+                            } else {
+                                selectedChoices.append(otherChoiceDict!)
+                            }
+                        }
+                        choiceResult.answer = selectedChoices
+                    }
+                    
+                }
+            }
+        }
+    }
+    
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
         //Enable Custom Keypad with toolbar
         // IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
+        
+        self.managedResult.removeAll()
+        
+        updateResultForChoiceQuestions(taskViewController)
         
         var taskResult: Any?
         
@@ -1120,21 +1173,21 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         case ORKTaskViewControllerFinishReason.completed:
             print("completed")
             taskResult = taskViewController.result
-            let ud = UserDefaults.standard
-            if ud.bool(forKey: "FKC") {
-                
-                let runid = (ud.object(forKey: "FetalKickCounterRunid") as? Int)!
-                
-                if Study.currentActivity?.currentRun.runId != runid {
-                    //runid is changed
-                    self.updateRunStatusForRunId(runId: runid)
-                } else {
-                    self.updateRunStatusToComplete()
-                }
-            } else {
-                
-                self.updateRunStatusToComplete()
-            }
+//            let ud = UserDefaults.standard
+//            if ud.bool(forKey: "FKC") {
+//
+//                let runid = (ud.object(forKey: "FetalKickCounterRunid") as? Int)!
+//
+//                if Study.currentActivity?.currentRun.runId != runid {
+//                    //runid is changed
+//                    self.updateRunStatusForRunId(runId: runid)
+//                } else {
+//                    self.updateRunStatusToComplete()
+//                }
+//            } else {
+//
+//                self.updateRunStatusToComplete()
+//            }
             
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
@@ -1170,6 +1223,9 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             }
             
             self.checkForActivitiesUpdates()
+            
+        @unknown default:
+            break
         }
         
         
@@ -1284,6 +1340,24 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         taskViewController.dismiss(animated: true, completion: {
            
             if reason == ORKTaskViewControllerFinishReason.completed {
+                
+                
+                let ud = UserDefaults.standard
+                if ud.bool(forKey: "FKC") {
+                    
+                    let runid = (ud.object(forKey: "FetalKickCounterRunid") as? Int)!
+                    
+                    if Study.currentActivity?.currentRun.runId != runid {
+                        //runid is changed
+                        self.updateRunStatusForRunId(runId: runid)
+                    } else {
+                        self.updateRunStatusToComplete()
+                    }
+                } else {
+                    
+                    self.updateRunStatusToComplete()
+                }
+
                 let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId!, activityId: activityId!, response: response!)
                 if lifeTimeUpdated {
                     self.loadActivitiesFromDatabase()
@@ -1392,6 +1466,29 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
         
+        
+        if let result = taskViewController.result.stepResult(forStepIdentifier: step.identifier) {
+            self.managedResult[step.identifier] = result
+        }
+        
+        if let step = step as? QuestionStep, step.answerFormat?.isKind(of: ORKTextChoiceAnswerFormat.self) ?? false {
+            
+            var textChoiceQuestionController :TextChoiceQuestionController
+            
+            var result = taskViewController.result.result(forIdentifier: step.identifier)
+            result = ( result == nil ) ? self.managedResult[step.identifier] as? ORKStepResult : result
+            
+            if let result = result  {
+                textChoiceQuestionController = TextChoiceQuestionController(step: step, result: result)
+            } else {
+                textChoiceQuestionController = TextChoiceQuestionController(step: step)
+            }
+            
+            
+            return textChoiceQuestionController
+        }
+        
+        
         let storyboard = UIStoryboard.init(name: "FetalKickCounter", bundle: nil)
         
         if step is FetalKickCounterStep {
@@ -1407,7 +1504,21 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         } else {
             return nil
         }
+        
     }
+    
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, didChange result: ORKTaskResult) {
+        
+        // Saving the TextChoiceQuestionController result to publish it later.
+        if taskViewController.currentStepViewController?.isKind(of: TextChoiceQuestionController.self) ?? false {
+            if let result = result.stepResult(forStepIdentifier: taskViewController.currentStepViewController?.step?.identifier ?? "") {
+                self.managedResult[result.identifier] = result
+            }
+        }
+    }
+    
+    
 }
 
 extension ActivitiesViewController:UITabBarControllerDelegate{

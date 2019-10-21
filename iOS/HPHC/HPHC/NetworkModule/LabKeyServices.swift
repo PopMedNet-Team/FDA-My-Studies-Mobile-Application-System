@@ -83,7 +83,7 @@ class LabKeyServices: NSObject {
                       kActivityResponseData: responseData
             ] as [String : Any]
         
-        print("processresponse \(params)")
+        print("processresponse \(params.preetyJSON())")
         self.sendRequestWith(method:method, params: params, headers: nil)
         
     }
@@ -120,7 +120,7 @@ class LabKeyServices: NSObject {
                           kActivityResponseData: responseData
                 ] as [String: Any]
             
-            print("processresponse \(params)")
+            print("processresponse : \(params.preetyJSON())")
             self.sendRequestWith(method: method, params: params, headers: nil)
         }
     }
@@ -292,7 +292,7 @@ extension LabKeyServices: NMWebServiceDelegate{
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        
+      
         switch requestName {
         case ResponseMethods.validateEnrollmentToken.description as String: break
             

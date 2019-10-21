@@ -1,0 +1,73 @@
+
+Q"squid:SwitchLastCaseIsDefaultCheckè""Add a default case to this switch.(ºÖ
+nsquid:S3008d"WRename this field "GO_TO_SIGNIN" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜ÁùØ
+ksquid:S3008h"ORename this field "FROM" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Øåıûÿÿÿÿ
+Lsquid:S1066"/Merge this if statement with the enclosing one.(ïÚ³’üÿÿÿÿ
+Lsquid:S1066ª"/Merge this if statement with the enclosing one.(±„‘‰ıÿÿÿÿ
+Csquid:S1068B",Remove this unused "mToolbar" private field.(êˆ‹©
+Bsquid:S1068g",Remove this unused "mClicked" private field.(Ÿ¯6
+vsquid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(­¯ÚÄıÿÿÿÿ
+nsquid:S1450B"WRemove the "mToolbar" field and declare it as a local variable in the relevant methods.(êˆ‹©
+ssquid:S1450C"WRemove the "mBackBtn" field and declare it as a local variable in the relevant methods.(Çº´ùûÿÿÿÿ
+msquid:S1450g"WRemove the "mClicked" field and declare it as a local variable in the relevant methods.(Ÿ¯6
+Isquid:S1444d"2Make this "public static GO_TO_SIGNIN" field final(˜ÁùØ
+Fsquid:S1444h"*Make this "public static FROM" field final(Øåıûÿÿÿÿ
+p
+squid:S135¤"YReduce the total number of break and continue statements in this loop to use at most one.(å…¸ê
+hsquid:CommentedOutCodeLine…"<This block of commented-out lines of code should be removed.(¹ÀÇùÿÿÿÿ
+hsquid:CommentedOutCodeLineÂ"<This block of commented-out lines of code should be removed.(å³¸ôıÿÿÿÿ
+hsquid:CommentedOutCodeLineÄ"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ
+hsquid:CommentedOutCodeLineœ"<This block of commented-out lines of code should be removed.(—§–¥ùÿÿÿÿ
+csquid:CommentedOutCodeLine´"<This block of commented-out lines of code should be removed.(öó«¡
+hsquid:CommentedOutCodeLineê"<This block of commented-out lines of code should be removed.(¯Ç¿Œıÿÿÿÿ
+csquid:CommentedOutCodeLineº"<This block of commented-out lines of code should be removed.(ÀıŸÙ
+csquid:CommentedOutCodeLineê"<This block of commented-out lines of code should be removed.(€›¨š
+hsquid:CommentedOutCodeLine†"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ
+csquid:CommentedOutCodeLineù"<This block of commented-out lines of code should be removed.(±Ëó
+csquid:CommentedOutCodeLine—"<This block of commented-out lines of code should be removed.(»©Œî
+hsquid:CommentedOutCodeLine "<This block of commented-out lines of code should be removed.(±í”»üÿÿÿÿ
+Ysquid:S1126å"AReplace this if-then-else statement by a single return statement.(ùŞÊ¦
+†"squid:ClassVariableVisibilityCheckd"XMake GO_TO_SIGNIN a static final constant or non-public and provide accessors if needed.(˜ÁùØ
+ƒ"squid:ClassVariableVisibilityCheckh"PMake FROM a static final constant or non-public and provide accessors if needed.(Øåıûÿÿÿÿ
+Qsquid:S1905Ù"4Remove this unnecessary cast to "AppCompatTextView".(Š ´úÿÿÿÿ
+Bsquid:S1905Û"*Remove this unnecessary cast to "Toolbar".(Å×î
+Lsquid:S1905İ"4Remove this unnecessary cast to "AppCompatTextView".(”Êëó
+Qsquid:S1905Ş"4Remove this unnecessary cast to "AppCompatTextView".(‘ÓÔıÿÿÿÿ
+Qsquid:S1905ß"4Remove this unnecessary cast to "AppCompatTextView".(½°íŞüÿÿÿÿ
+Lsquid:S1905ã"/Remove this unnecessary cast to "DrawerLayout".(ß…åÜÿÿÿÿÿ
+Qsquid:S1905å"4Remove this unnecessary cast to "AppCompatTextView".(˜ïÉşÿÿÿÿ
+Lsquid:S1905ç"4Remove this unnecessary cast to "AppCompatTextView".(ñå—
+Lsquid:S1905é"4Remove this unnecessary cast to "AppCompatTextView".(ªª¬¯
+Rsquid:S1905ë"5Remove this unnecessary cast to "AppCompatImageView".(ÃÃÂ°üÿÿÿÿ
+Lsquid:S1905ì"4Remove this unnecessary cast to "AppCompatTextView".(”ÂÈ 
+Rsquid:S1905î"5Remove this unnecessary cast to "AppCompatImageView".(ŞÌ›Œûÿÿÿÿ
+Rsquid:S1905ï"5Remove this unnecessary cast to "AppCompatImageView".(½Å»şÿÿÿÿ
+Msquid:S1905ğ"5Remove this unnecessary cast to "AppCompatImageView".( ÑÏ÷
+Qsquid:S1905ñ"4Remove this unnecessary cast to "AppCompatTextView".(ö¾€ùÿÿÿÿ
+Lsquid:S1905ò"4Remove this unnecessary cast to "AppCompatTextView".(ğ¨««
+Qsquid:S1905ô"4Remove this unnecessary cast to "AppCompatTextView".(‡üàÂşÿÿÿÿ
+Lsquid:S1905ù"4Remove this unnecessary cast to "AppCompatTextView".(ãÕüá
+Qsquid:S1905û"4Remove this unnecessary cast to "AppCompatEditText".(Ò¶İ„şÿÿÿÿ
+Jsquid:S1481Ï"-Remove this unused "audience" local variable.(ÃÈ‹ëüÿÿÿÿ
+ksquid:S3776É"SRefactor this method to reduce its Cognitive Complexity from 140 to the 15 allowed.(æÛÖÎ
+osquid:S3776ç"RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(Ğ¸™áúÿÿÿÿ
+^squid:S2142¾"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
+=squid:S1170`"!Make this final field static too.(ëÅÅ‹úÿÿÿÿ
+™squid:S1186®"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(±¾ê
+squid:S1186±"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ŸÓ¨¹üÿÿÿÿ
+squid:S1186ğ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‰ëßøÿÿÿÿ
+™squid:S1186ú"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ûŸ¥ï
+™squid:S1186ÿ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(à¶š¾
+{squid:S00116`"^Rename this field "LOGOUT_REPSONSECODE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ëÅÅ‹úÿÿÿÿ
+@squid:S1148ª"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148µ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148ğ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148±"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148‰"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148¥"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148œ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148¶"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148€"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148ß"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148â"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148‰"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ

@@ -74,5 +74,6 @@
 		<mapping class="com.hphc.mystudies.dto.QuestionConditionBranchDto" />
 		<mapping class="com.hphc.mystudies.dto.EnrollmentTokenDto" />
 		<mapping class="com.hphc.mystudies.dto.AnchorDateTypeDto" />
+		<mapping class="com.hphc.mystudies.dto.AppVersionInfo" />
 	</session-factory>
 </hibernate-configuration>

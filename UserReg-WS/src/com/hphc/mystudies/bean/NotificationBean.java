@@ -25,6 +25,7 @@ public class NotificationBean
     private String _deviceType;
 
     private JSONArray _deviceToken;
+    private String _appId;
 
     public String getStudyId()
     {
@@ -115,4 +116,15 @@ public class NotificationBean
     {
         _deviceType = deviceType;
     }
+
+    public String getAppId()
+    {
+        return _appId;
+    }
+
+    public void setAppId(String appId)
+    {
+        _appId = appId;
+    }
+
 }

@@ -17,7 +17,6 @@ import org.labkey.api.data.dialect.SqlDialect;
 public class FdahpUserRegWSSchema
 {
     private static final FdahpUserRegWSSchema _instance = new FdahpUserRegWSSchema();
-   // public static final String NAME = "healthstudiesgateway";
     public static final String NAME = "fdahpUserRegWS";
     public static FdahpUserRegWSSchema getInstance()
     {
@@ -64,9 +63,12 @@ public class FdahpUserRegWSSchema
     }
 
     public TableInfo getLoginAttempts(){return getSchema().getTable("LoginAttempts");}
-	
-	public TableInfo getVersionInfo(){     return getSchema().getTable("VersionInfo"); }
 
+    public TableInfo getUserAppDetails(){
+        return getSchema().getTable("UserAppDetails");
+    }
 
-    public TableInfo getVersionInfo(){return getSchema().getTable("VersionInfo");}
+    public TableInfo getAppPropertiesDetails(){
+        return getSchema().getTable("AppPropertiesDetails");
+    }
 }

@@ -32,6 +32,7 @@
 #include <memory>
 
 namespace realm {
+class AsyncOpenTask;
 class AuditInterface;
 class BindingContext;
 class Group;
@@ -260,6 +261,20 @@ public:
     // Caching is done by path - mismatches for in_memory, schema mode or
     // encryption key will raise an exception.
     static SharedRealm get_shared_realm(Config config);
+
+    // Get a Realm for the given execution context (or current thread if `none`)
+    // from the thread safe reference. May return a cached Realm or create a new one.
+    static SharedRealm get_shared_realm(ThreadSafeReference<Realm>, util::Optional<AbstractExecutionContextID> = util::none);
+
+#if REALM_ENABLE_SYNC
+    // Open a synchronized Realm and make sure it is fully up to date before
+    // returning it.
+    //
+    // It is possible to both cancel the download and listen to download progress
+    // using the `AsyncOpenTask` returned. Note that the download doesn't actually
+    // start until you call `AsyncOpenTask::start(callback)`
+    static std::shared_ptr<AsyncOpenTask> get_synchronized_realm(Config config);
+#endif
 
     // Updates a Realm to a given schema, using the Realm's pre-set schema mode.
     void update_schema(Schema schema, uint64_t version=0,

@@ -1,20 +1,4 @@
-#-------------------------------------------------------------------------------
-# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
-# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
-# 
-# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-#-------------------------------------------------------------------------------
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -138,6 +122,7 @@
 	var permission = "${permission}";
 	var chkDone = ${chkDone};
 	var eligibilityMechanism = '${eligibility.eligibilityMechanism}';
+//  	var lastEligibilityOpt = ${not empty lastEligibilityOpt && lastEligibilityOpt ne '1'};
 	console.log("viewPermission:"+viewPermission);
 	var reorder = true;
 	var table1;
@@ -279,6 +264,8 @@
 					$('#doneBut').prop('disabled', true);
 			}
 		})
+// 		if(lastEligibilityOpt)
+// 			$('#eligibilityOptDivId input[type=radio]').trigger('change');
 	});
 	
 	function addOrEditOrViewQA(actionTypeForQuestionPage, eligibilityTestId) {
@@ -300,6 +287,13 @@
 		input.setAttribute('name', 'eligibilityId');
 		input.setAttribute('value',"${eligibility.id}");
 		form.append(input);
+		
+// 		input = document.createElement("input");
+// 		input.setAttribute('type',"hidden");
+// 		input.setAttribute('name', 'lastEligibilityOpt');
+// 		input.setAttribute('value', $('.eligibilityOptCls:checked').val());
+// 		form.append(input);
+		
 		form.submit();
 	}
 	function deleteEligibiltyTestQusAns(eligibilityTestId, thisAttr) {
@@ -363,6 +357,12 @@
 				 var actions ='<span class="sprites_icon preview-g mr-lg viewIcon" data-toggle="tooltip" data-placement="top" title="View" etId="'+obj.id+'"></span> '+
 				 '<span class="'+(obj.status ? "edit-inc" : "edit-inc-draft") + ' mr-md mr-lg  editIcon" data-toggle="tooltip" data-placement="top" title="Edit"  etId="'+obj.id+'"></span>'+
                  '<span class="sprites_icon copy delete deleteIcon" data-toggle="tooltip" data-placement="top" title="Delete" onclick="deleteEligibiltyTestQusAns('+obj.id+', this);"></span>';
+//                  var actions = '<span class="sprites_icon preview-g mr-lg viewIcon" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"></span>'+
+//                  '<span class="edit-inc mr-lg  editIcon" data-toggle="tooltip" data-placement="top" title="" etid="15" data-original-title="Edit"></span>'+
+//                  '<span class="sprites_icon copy delete  deleteIcon" data-toggle="tooltip" data-placement="top" title="" onclick="deleteEligibiltyTestQusAns('+15+', this);" data-original-title="Delete"></span>';
+                 
+                 
+                 // 				 var actions = "<span class='sprites_icon preview-g mr-lg' onclick='viewConsentInfo("+obj.id+");'></span><span class='sprites_icon edit-g mr-lg' onclick='editConsentInfo("+obj.id+");'></span><span class='sprites_icon copy delete' onclick='deleteConsentInfo("+obj.id+");'></span>";
 				 datarow.push(actions);
 				 $('#consent_list').DataTable().row.add(datarow);
 			 });

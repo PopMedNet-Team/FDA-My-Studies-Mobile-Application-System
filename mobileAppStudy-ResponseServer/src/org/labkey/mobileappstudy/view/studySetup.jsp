@@ -19,6 +19,10 @@
 <%@ page import="org.labkey.api.view.JspView" %>
 <%@ page import="org.labkey.api.view.template.ClientDependencies" %>
 <%@ page import="org.labkey.mobileappstudy.data.MobileAppStudy" %>
+<%@ page import="org.labkey.mobileappstudy.MobileAppStudyManager" %>
+<%@ page import="org.labkey.mobileappstudy.forwarder.ForwarderProperties" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="org.apache.commons.lang3.StringUtils" %>
 <%@ page extends="org.labkey.api.jsp.JspBase" %>
 <%@ taglib prefix="labkey" uri="http://www.labkey.org/taglib" %>
 
@@ -39,6 +43,15 @@
     Boolean isEditable = bean.getEditable();
     Boolean canChangeCollection = bean.getCanChangeCollection();
     boolean collectionEnabled = bean.getCollectionEnabled();
+
+    Map<String, String> forwardingProperties = MobileAppStudyManager.get().getForwardingProperties(getContainer());
+    boolean forwardingEnabled = Boolean.valueOf(forwardingProperties.get(ForwarderProperties.ENABLED_PROPERTY_NAME));
+    String forwardingURL = forwardingProperties.get(ForwarderProperties.URL_PROPERTY_NAME);
+    String forwardingUser = forwardingProperties.get(ForwarderProperties.USER_PROPERTY_NAME);
+    String forwardingPassword = StringUtils.isNotBlank(forwardingProperties.get(ForwarderProperties.USER_PROPERTY_NAME)) ?
+            ForwarderProperties.PASSWORD_PLACEHOLDER :
+            "";
+
 %>
 <style type="text/css">
     .labkey-warning  { color: red; }
@@ -56,7 +69,11 @@
                     shortName           : <%= qh(shortName) %>,
                     isEditable          : <%= isEditable %>,
                     canChangeCollection : <%= canChangeCollection %>,
-                    collectionEnabled   : <%= collectionEnabled %>
+                    collectionEnabled   : <%= collectionEnabled %>,
+                    forwardingEnabled   : <%= forwardingEnabled %>,
+                    forwardingUrl       : <%= q(forwardingURL) %>,
+                    forwardingUsername  : <%= q(forwardingUser) %>,
+                    forwardingPassword  : <%= q(forwardingPassword) %>
                 }
         );
     });

@@ -111,11 +111,14 @@ class ActivitiesTableViewCell: UITableViewCell {
         
         if availablityStatus == .past{
             
-            if activity.incompletedRuns != 0 || activity.totalRuns == 0 {
+            if activity.incompletedRuns != 0 {
                 self.labelStatus?.backgroundColor =  UIColor.red
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.abandoned.description
                 
-            } else {
+            } else  if activity.totalRuns == 0 {
+                self.labelStatus?.backgroundColor =  UIColor.gray
+                self.labelStatus?.text = UserActivityStatus.ActivityStatus.expired.description
+            }else {
                 self.labelStatus?.backgroundColor =  kGreenColor
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.completed.description
             }
@@ -170,6 +173,8 @@ class ActivitiesTableViewCell: UITableViewCell {
                 self.labelStatus?.backgroundColor =  UIColor.red
             case .completed:
                 self.labelStatus?.backgroundColor = kGreenColor
+            case .expired:
+                self.labelStatus?.backgroundColor = UIColor.gray
             }
         } else {
             

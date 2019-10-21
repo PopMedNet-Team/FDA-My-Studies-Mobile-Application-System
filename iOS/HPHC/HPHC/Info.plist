@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ApplicationID</key>
+	<string>FMSA001</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -19,7 +21,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.3</string>
 	<key>CFBundleVersion</key>
-	<string>56</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -41,9 +43,9 @@
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<false/>
 		<key>NSAllowsArbitraryLoadsInWebContent</key>
-		<true/>
+		<false/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your camera</string>
@@ -61,8 +63,12 @@
 	<string>$(PRODUCT_NAME) would like to use Motion data</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use Speech Recognition for the task to give more accurate result.</string>
+	<key>OrganizationID</key>
+	<string>OrgName</string>
+	<key>ProductTitleName</key>
+	<string>FDA MyStudies</string>
 	<key>StandaloneStudyId</key>
-	<string>StandaloneStudyId</string>
+	<string>appstudy2</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Verdana Italic.ttf</string>
@@ -84,7 +90,11 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>WebsiteLink</key>
+	<string>www.fda.gov</string>
 </dict>
 </plist>

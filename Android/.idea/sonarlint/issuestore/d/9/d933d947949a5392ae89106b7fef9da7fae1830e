@@ -1,0 +1,165 @@
+
+Lsquid:EmptyStatementUsageCheck³	"Remove this empty statement.(Åñ­õşÿÿÿÿ
+Wsquid:S1161¡
+":Add the "@Override" annotation above this method signature(èÑâúÿÿÿÿ
+9squid:S1643Õ	"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+9squid:S1643à"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+Gsquid:S2093Ñ	"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+osquid:S3776¤"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(¿Ø…–ıÿÿÿÿ
+Gsquid:S2093Ô"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+csquid:CommentedOutCodeLine¡	"<This block of commented-out lines of code should be removed.(í®‡Œ
+osquid:S3776„"RRefactor this method to reduce its Cognitive Complexity from 76 to the 15 allowed.(‘æíşÿÿÿÿÿ
+@squid:S1148¦	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+9squid:S1643À"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+Rsquid:S1141Ù"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+jsquid:CallToDeprecatedMethodŸ"<Remove this use of "HttpConnectionParams"; it is deprecated.(¹¶ãñøÿÿÿÿ
+9squid:S1643ş"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+Rsquid:S1141®"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+9squid:S1643Å"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+@squid:S1148à"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148¿"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+9squid:S1643È"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+Csquid:S1905º"&Remove this unnecessary cast to "Set".(ÃïÆ³ÿÿÿÿÿ
+bsquid:CommentedOutCodeLineA"<This block of commented-out lines of code should be removed.(øğÔ½
+Gsquid:S2093ä	"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+9squid:S1643	"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+9squid:S1643ö"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+bsquid:CommentedOutCodeLine”"<This block of commented-out lines of code should be removed.(üÑƒx
+9squid:S1643"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+Rsquid:S1141Î"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+Rsquid:S1141¸"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+9squid:S1643ö"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+csquid:CommentedOutCodeLineú"<This block of commented-out lines of code should be removed.(í®‡Œ
+9squid:S1643è	"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+Csquid:S1905¬"&Remove this unnecessary cast to "Set".(ÃïÆ³ÿÿÿÿÿ
+Csquid:S1905¦"&Remove this unnecessary cast to "Set".(ÃïÆ³ÿÿÿÿÿ
+jsquid:S3776–"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(®Á™Ù
+jsquid:CallToDeprecatedMethod "<Remove this use of "HttpConnectionParams"; it is deprecated.(ØÈ½³úÿÿÿÿ
+Vsquid:S1118.":Add a private constructor to hide the implicit public one.(Â¹¨·ıÿÿÿÿ
+?squid:S1148o"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Rsquid:S1141î"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+@squid:S1148Ÿ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148õ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Rsquid:S1141ö"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+@squid:S1148‡
+"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+9squid:S1643Ö	"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+@squid:S1148º"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+9squid:S1643è"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+9squid:S1643÷"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+hsquid:S37769"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(ûŞÜ!
+@squid:S1148„"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+9squid:S1643‡	"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+9squid:S1643¡"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+9squid:S1643õ"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+csquid:CommentedOutCodeLineÃ"<This block of commented-out lines of code should be removed.(ˆÛÛá
+Rsquid:S1141Ü"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+@squid:S1148«	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+9squid:S1643á"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+Lsquid:EmptyStatementUsageCheckë"Remove this empty statement.(Åñ­õşÿÿÿÿ
+Csquid:S1905â"&Remove this unnecessary cast to "Set".(ÃïÆ³ÿÿÿÿÿ
+Rsquid:S1141Ë"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+jsquid:CallToDeprecatedMethod±	"<Remove this use of "HttpConnectionParams"; it is deprecated.(ØÈ½³úÿÿÿÿ
+`squid:CallToDeprecatedMethod"2Remove this use of "HttpParams"; it is deprecated.(«âşÿÿÿÿ
+9squid:S1643Ó"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+@squid:S1148¼"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+osquid:S00117¯	"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«âşÿÿÿÿ
+@squid:S1148“"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148ñ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148…
+"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148ò"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148÷"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+osquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«âşÿÿÿÿ
+@squid:S1148ò"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+9squid:S1643ï"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+9squid:S1643 "Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+Rsquid:S1141Ü"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+osquid:S00117¬"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(íÊ›ûüÿÿÿÿ
+jsquid:S2095İ"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(¸¦ĞÙÿÿÿÿÿ
+ksquid:MaximumInheritanceDepth’
+"<This class has 6 parents which is greater than 5 authorized.(İˆâÕøÿÿÿÿ
+9squid:S1643"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+Lsquid:EmptyStatementUsageCheck¢"Remove this empty statement.(Åñ­õşÿÿÿÿ
+9squid:S1643¿"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+esquid:CallToDeprecatedMethodç"7Remove this use of "BasicHttpParams"; it is deprecated.(«âşÿÿÿÿ
+@squid:S1148ò"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+`squid:CallToDeprecatedMethod¯	"2Remove this use of "HttpParams"; it is deprecated.(«âşÿÿÿÿ
+9squid:S1643é"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+jsquid:CallToDeprecatedMethodé"<Remove this use of "HttpConnectionParams"; it is deprecated.(ØÈ½³úÿÿÿÿ
+csquid:CommentedOutCodeLine‡"<This block of commented-out lines of code should be removed.(Ö¶²Ü
+Gsquid:S2093œ"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+9squid:S1643ˆ	"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+@squid:S1148ã"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+bsquid:CommentedOutCodeLineH"<This block of commented-out lines of code should be removed.(„…·²
+gsquid:CommentedOutCodeLineO"<This block of commented-out lines of code should be removed.(øØÕ¢ÿÿÿÿÿ
+Šsquid:S13199"tThe type of the "mHeadersData" object should be an interface such as "Map" rather than the implementation "HashMap".(ûŞÜ!
+@squid:S1148İ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+hsquid:CommentedOutCodeLineÙ	"<This block of commented-out lines of code should be removed.(¶¸×éıÿÿÿÿ
+9squid:S1643ÿ"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+Csquid:S1905È"&Remove this unnecessary cast to "Set".(ÃïÆ³ÿÿÿÿÿ
+osquid:S00117ç"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«âşÿÿÿÿ
+@squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+9squid:S1643é	"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+@squid:S1148ÿ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Csquid:S1905ï"&Remove this unnecessary cast to "Set".(ÃïÆ³ÿÿÿÿÿ
+Csquid:S1905È"&Remove this unnecessary cast to "Set".(ÃïÆ³ÿÿÿÿÿ
+9squid:S1643÷"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+Rsquid:S1141ç"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+osquid:S3776²"RRefactor this method to reduce its Cognitive Complexity from 77 to the 15 allowed.(£—Åƒşÿÿÿÿ
+9squid:S1643	"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+Csquid:S1905š"&Remove this unnecessary cast to "Set".(ÃïÆ³ÿÿÿÿÿ
+osquid:S3776§"RRefactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.(¦ˆäúøÿÿÿÿ
+@squid:S1148š"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+csquid:CommentedOutCodeLineì"<This block of commented-out lines of code should be removed.(í®‡Œ
+asquid:CallToDeprecatedMethod²	"9Remove this use of "DefaultHttpClient"; it is deprecated.(­¿ìe
+hsquid:CommentedOutCodeLine•"<This block of commented-out lines of code should be removed.(…£¬íüÿÿÿÿ
+@squid:S1148‚
+"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+hsquid:CommentedOutCodeLine¤"<This block of commented-out lines of code should be removed.(¶¸×éıÿÿÿÿ
+{squid:S1149:"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(Ôô¡Óüÿÿÿÿ
+asquid:CallToDeprecatedMethodê"9Remove this use of "DefaultHttpClient"; it is deprecated.(­¿ìe
+osquid:S3776²"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(¬è–şüÿÿÿÿ
+@squid:S1148ë"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+hsquid:CommentedOutCodeLineÉ"<This block of commented-out lines of code should be removed.(¶¸×éıÿÿÿÿ
+hsquid:CommentedOutCodeLineì	"<This block of commented-out lines of code should be removed.(¶¸×éıÿÿÿÿ
+9squid:S1643€"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+Rsquid:S1141À"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+osquid:S3776Ê"RRefactor this method to reduce its Cognitive Complexity from 76 to the 15 allowed.(ï”Ô ùÿÿÿÿ
+Gsquid:S2093‰"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+jsquid:CallToDeprecatedMethod°	"<Remove this use of "HttpConnectionParams"; it is deprecated.(¹¶ãñøÿÿÿÿ
+@squid:S1148™"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148½"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+9squid:S1643ø"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+9squid:S1643Æ"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+9squid:S1643Ç"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+esquid:CallToDeprecatedMethod¯	"7Remove this use of "BasicHttpParams"; it is deprecated.(«âşÿÿÿÿ
+@squid:S1148„	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+9squid:S1643Û"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+Qsquid:S1141k"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+hsquid:CommentedOutCodeLine‘"<This block of commented-out lines of code should be removed.(¶¸×éıÿÿÿÿ
+`squid:CallToDeprecatedMethodç"2Remove this use of "HttpParams"; it is deprecated.(«âşÿÿÿÿ
+Rsquid:S1141€	"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+@squid:S1148Ş"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+9squid:S1643Ò"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+9squid:S1643Ú"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+Csquid:S1905·	"&Remove this unnecessary cast to "Set".(ÃïÆ³ÿÿÿÿÿ
+csquid:CommentedOutCodeLineÙ"<This block of commented-out lines of code should be removed.(í®‡Œ
+@squid:S1148Ï"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+esquid:CallToDeprecatedMethod"7Remove this use of "BasicHttpParams"; it is deprecated.(«âşÿÿÿÿ
+9squid:S1643ğ"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+@squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+9squid:S1643Ù"Use a StringBuilder instead.(«§Òıÿÿÿÿ
+@squid:S1148•"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Gsquid:S2093Á"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+9squid:S1643Ø"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+Qsquid:S1141b"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+Rsquid:S1141î"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+asquid:CallToDeprecatedMethod¡"9Remove this use of "DefaultHttpClient"; it is deprecated.(­¿ìe
+9squid:S1643"Use a StringBuilder instead.(ª–ƒıøÿÿÿÿ
+csquid:CommentedOutCodeLine‰"<This block of commented-out lines of code should be removed.(í®‡Œ
+@squid:S1148ö"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+jsquid:CallToDeprecatedMethodè"<Remove this use of "HttpConnectionParams"; it is deprecated.(¹¶ãñøÿÿÿÿ
+Bsquid:S1905X"&Remove this unnecessary cast to "Set".(ÃïÆ³ÿÿÿÿÿ
+hsquid:CommentedOutCodeLineÜ"<This block of commented-out lines of code should be removed.(¶¸×éıÿÿÿÿ
+@squid:S1148š"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ

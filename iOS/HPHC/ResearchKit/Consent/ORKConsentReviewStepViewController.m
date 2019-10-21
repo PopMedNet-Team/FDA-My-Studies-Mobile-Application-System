@@ -146,7 +146,7 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
         ORKConsentReviewController *consentReviewController = _pageViewController.viewControllers[0];
         [self.taskViewController setRegisteredScrollView:consentReviewController.webView.scrollView];
     } else {
-        NSAssert(NO, @"The first view controller in a consent review step should be of type ORKConsentReviewController");
+        //NSAssert(NO, @"The first view controller in a consent review step should be of type ORKConsentReviewController");
     }
 }
 

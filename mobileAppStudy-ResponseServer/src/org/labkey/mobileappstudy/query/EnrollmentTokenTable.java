@@ -15,7 +15,9 @@
  */
 package org.labkey.mobileappstudy.query;
 
+import org.labkey.api.data.BaseColumnInfo;
 import org.labkey.api.data.ColumnInfo;
+import org.labkey.api.data.ContainerFilter;
 import org.labkey.api.data.DataColumn;
 import org.labkey.api.data.RenderContext;
 import org.labkey.api.query.DetailsURL;
@@ -31,16 +33,16 @@ import java.util.Collections;
 /**
  * Created by susanh on 10/11/16.
  */
-public class EnrollmentTokenTable extends SimpleUserSchema.SimpleTable<MobileAppStudyQuerySchema>
+class EnrollmentTokenTable extends SimpleUserSchema.SimpleTable<MobileAppStudyQuerySchema>
 {
-    public EnrollmentTokenTable(MobileAppStudyQuerySchema schema)
+    EnrollmentTokenTable(MobileAppStudyQuerySchema schema, ContainerFilter cf)
     {
-        super(schema, schema.getDbSchema().getTable(MobileAppStudySchema.ENROLLMENT_TOKEN_TABLE));
+        super(schema, schema.getDbSchema().getTable(MobileAppStudySchema.ENROLLMENT_TOKEN_TABLE), cf);
 
         // wrap all the existing columns
         wrapAllColumns();
 
-        ColumnInfo idColumn = getColumn("BatchId");
+        BaseColumnInfo idColumn = getMutableColumn("BatchId");
 
         ActionURL base = new ActionURL(MobileAppStudyController.TokenBatchAction.class, getContainer());
         DetailsURL detailsURL = new DetailsURL(base, Collections.singletonMap("query.RowId~eq", "batchId"));
@@ -48,9 +50,9 @@ public class EnrollmentTokenTable extends SimpleUserSchema.SimpleTable<MobileApp
         idColumn.setURL(detailsURL);
 
         // don't link out to the schema browser details (where the data can be edited).
-        getColumn("Token").setURL(null);
+        getMutableColumn("Token").setURL(null);
 
-        ColumnInfo tokenColumn = getColumn("Token");
+        BaseColumnInfo tokenColumn = getMutableColumn("Token");
         tokenColumn.setDisplayColumnFactory(colInfo -> new DataColumn(colInfo)
         {
             @Override
@@ -64,7 +66,6 @@ public class EnrollmentTokenTable extends SimpleUserSchema.SimpleTable<MobileApp
             }
         });
 
-        getColumn("ParticipantId").setURL(null);
-
+        getMutableColumn("ParticipantId").setURL(null);
     }
 }

@@ -54,7 +54,7 @@ enum ActivityStepType:String{
 /**
  ActivityStep model class resembles ORKStep and stores all the properties of ORKStep. It contains additional properties for particular Step Type.
 */
-class ActivityStep{
+class ActivityStep {
     
     var activityId: String? //Stores the uniqueId of activity
     var type: ActivityStepType? // specifies different activitystep types like instruction, question
@@ -63,7 +63,7 @@ class ActivityStep{
     var key: String? // Identifier
     var title: String? //Title for ORKStep
     var text: String? // Text for ORKStep
-    var  skippable: Bool?
+    var skippable: Bool?
     var groupName: String?
     var repeatable: Bool? // used for RepeatableFormStep
     var repeatableText: String? // used for RepeatableFormStep to add more form steps

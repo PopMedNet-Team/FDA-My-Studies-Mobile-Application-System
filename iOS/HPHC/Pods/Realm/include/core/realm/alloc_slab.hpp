@@ -165,6 +165,12 @@ public:
     /// transaction.
     int get_committed_file_format_version() const noexcept;
 
+    bool is_file_on_streaming_form() const
+    {
+        const Header& header = *reinterpret_cast<const Header*>(m_data);
+        return is_file_on_streaming_form(header);
+    }
+
     /// Attach this allocator to an empty buffer.
     ///
     /// It is an error to call this function on an attached
@@ -298,10 +304,13 @@ public:
     /// Returns the total amount of memory currently allocated in slab area
     size_t get_allocated_size() const noexcept;
 
+    /// Returns total amount of slab for all slab allocators
+    static size_t get_total_slab_size() noexcept;
+
     /// Hooks used to keep the encryption layer informed of the start and stop
     /// of transactions.
-    void note_reader_start(void* reader_id);
-    void note_reader_end(void* reader_id);
+    void note_reader_start(const void* reader_id);
+    void note_reader_end(const void* reader_id) noexcept;
 
     void verify() const override;
 #ifdef REALM_DEBUG
@@ -373,6 +382,14 @@ private:
         size_t size;
 
         Slab(ref_type r, size_t s);
+        Slab(Slab&& slab)
+            : ref_end(slab.ref_end)
+            , addr(std::move(slab.addr))
+            , size(slab.size)
+        {
+            slab.size = 0;
+        }
+        ~Slab();
     };
 
     struct Chunk { // describes a freed in-file block
@@ -578,6 +595,9 @@ private:
     /// Read the top_ref from the given buffer and set m_file_on_streaming_form
     /// if the buffer contains a file in streaming form
     static ref_type get_top_ref(const char* data, size_t len);
+
+    // Gets the path of the attached file, or other relevant debugging info.
+    std::string get_file_path_for_assertions() const;
 
     class ChunkRefEq;
     class ChunkRefEndEq;

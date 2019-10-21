@@ -54,3 +54,18 @@ extension String {
         }
     }
 }
+
+extension String {
+    func rectSize(forFont font : UIFont) -> CGSize {
+        return self.size(withAttributes: [NSAttributedString.Key.font : font])
+    }
+    
+    func estimatedLabelHeight(labelWidth: CGFloat, font: UIFont) -> CGFloat {
+        
+        let size = CGSize(width: labelWidth, height: 1000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        let attributes = [NSAttributedString.Key.font: font]
+        let rectangleHeight = self.boundingRect(with: size, options: options, attributes: attributes, context: nil).height
+        return rectangleHeight
+    }
+}

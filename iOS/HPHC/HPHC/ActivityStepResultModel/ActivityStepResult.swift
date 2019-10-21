@@ -262,6 +262,7 @@ class ActivityStepResult {
                     var j: Int! = 0
                     var isAddMore: Bool? =  false
                     
+
                     if (stepResult.results?.count)! > (self.step as? ActivityFormStep)!.itemsArray.count {
                         isAddMore = true
                     }
@@ -573,10 +574,18 @@ class ActivityStepResult {
                         
                     } else {
                         // for text choice
+                        var resultValue: [Any] = []
+                        let selectedValue = stepTypeResult.choiceAnswers?.first
                         
-                        let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
-                        let resultArray: Array<String>? = ["\(resultValue == nil ? "" : resultValue!)"]
-                        self.value = resultArray
+                        if let stringValue = selectedValue as? String {
+                            resultValue.append(stringValue)
+                        } else if let otherDict = selectedValue as? [String:Any] {
+                            resultValue.append(otherDict)
+                        } else {
+                            resultValue.append(selectedValue as Any)
+                        }
+                
+                        self.value = resultValue
                     }
                     
                 } else {
@@ -598,15 +607,33 @@ class ActivityStepResult {
         case ORKQuestionType.multipleChoice.rawValue: //textchoice + imageChoice
             
             let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
+            
+            if let answers = stepTypeResult.choiceAnswers {
+                
+                var resultArray: [Any] = []
+        
+                for value in answers {
+                    
+                    if let stringValue = value as? String {
+                        resultArray.append(stringValue)
+                    } else if let otherDict = value as? [String:Any] {
+                        resultArray.append(otherDict)
+                    } else {
+                        resultArray.append(value)
+                    }
+                    
+                }
+                self.value = resultArray
+                
+            } else {
+                self.value = []
+            }
+            
+            /*
             if Utilities.isValidObject(someObject: stepTypeResult.choiceAnswers as AnyObject?) {
                 if (stepTypeResult.choiceAnswers?.count)! > 1 {
                     
-                    var resultArray: Array<String>? = []
-                    
-                    for value in stepTypeResult.choiceAnswers! {
-                        resultArray?.append("\(value == nil ? "" : value)")
-                    }
-                    self.value = resultArray
+             
                     
                 } else {
                     
@@ -618,6 +645,7 @@ class ActivityStepResult {
             } else {
                 self.value = []
             }
+             */
             
         case ORKQuestionType.boolean.rawValue:
             

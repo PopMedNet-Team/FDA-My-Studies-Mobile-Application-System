@@ -30,13 +30,13 @@ class HomeViewController: UIViewController{
     @IBOutlet var buttonSignin: UIButton!
     @IBOutlet var buttonRegister: UIButton!
     @IBOutlet var buttonGetStarted: UIButton?
-    
+    var websiteName:String!
     
 // MARK:- ViewController Lifecycle
     
     override func loadView() {
         super.loadView()
-        self.loadTestData()
+        self.loadGatewayUI()
     }
     
     override func viewDidLoad() {
@@ -47,6 +47,12 @@ class HomeViewController: UIViewController{
         //Added to change next screen
         pageControlView?.addTarget(self, action: #selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
         
+       
+        let infoDict = Utilities.getBrandingDetails()
+        websiteName = infoDict?[BrandingConstant.WebsiteLink] as! String
+        let title = infoDict?[BrandingConstant.WebsiteButtonTitle] as? String
+        
+        buttonLink.setTitle(title != nil ? title : websiteName, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +60,13 @@ class HomeViewController: UIViewController{
         
         //hide navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        // Ask for network configuration in Debug mode
+        #if DEBUG
+            //HPHCSettings().setupDefaultURLs()
+            //HPHCSettings().showSettings(self){}
+        #endif
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,19 +82,16 @@ class HomeViewController: UIViewController{
        This method is used to load Initial data setup
     
      */
-    func loadTestData(){
-        //        let filePath  = Bundle.main.path(forResource: "GatewayOverview", ofType: "json")
-        //        let data = NSData(contentsOfFile: filePath!)
-        
+    
+    
+    func loadGatewayUI(){
+       
         //load plist info
         let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil)
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         
         do {
-            //let response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
-            
-            
-            //let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
+           
             var listOfOverviews: Array<OverviewSection> = []
             for overview in arrayContent!{
                 let overviewObj = OverviewSection(detail: overview as! Dictionary<String, Any>)
@@ -96,7 +106,7 @@ class HomeViewController: UIViewController{
             //assgin to Gateway
             Gateway.instance.overview = overview
             
-        } catch {
+        } catch let error{
             print("json error: \(error.localizedDescription)")
         }
     }
@@ -174,7 +184,7 @@ class HomeViewController: UIViewController{
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier: "WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
-        webView.requestLink = "http://www.fda.gov"
+        webView.requestLink = "https://" + websiteName
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
     

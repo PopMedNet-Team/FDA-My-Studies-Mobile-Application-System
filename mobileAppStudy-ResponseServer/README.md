@@ -9,9 +9,9 @@ This custom module provides the Response Server functionality and services, incl
 - Limited querying of data by the mobile app
 - Providing web analytics, querying, reporting, and visualizations through manual and programmatic methods
 
-This module must be deployed within the LabKey Server platform (version 19.1.x). To build a standalone distribution of the Response Server (i.e., a standard LabKey Server distribution plus the mobileAppStudy module), follow these steps:
+This module must be deployed within the LabKey Server platform (version 19.2.x). To build a standalone distribution of the Response Server (i.e., a standard LabKey Server distribution plus the mobileAppStudy module), follow these steps:
 
-1. Checkout the LabKey Server 19.1.x public Subversion (SVN) repository: [Enlist in the Version Control Project](https://www.labkey.org/Documentation/Archive/19.1/wiki-page.view?name=svn)
+1. Checkout the LabKey Server 19.2.x public Subversion (SVN) and GitHub repositories: [Enlist in the Version Control Project](https://www.labkey.org/Documentation/Archive/19.2/wiki-page.view?name=svn)
 1. Navigate to the root of your SVN working copy (the level right above the "server" directory).
 1. In your settings.gradle file, find the commented out line with this text:
 

@@ -1,20 +1,3 @@
-#-------------------------------------------------------------------------------
-# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
-# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
-# 
-# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-#-------------------------------------------------------------------------------
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -32,6 +15,10 @@
 
 .tooltip {
   width: 175px;
+}
+.display__flex__{
+	display:flex;
+	align-items:center;
 }
 </style>
 <script type="text/javascript">
@@ -1308,7 +1295,7 @@ function isNumberKey(evt)
 					         </div>
 					      </div>
 						  </c:if>
-               <div class="col-md-12 p-none display__flex__center">
+               <div class="col-md-12 p-none display__flex__">
 					      <div class="col-md-10 pl-none">
 					         <div class="gray-xs-f mb-xs">Description(1 to 150 characters) </div>
 					         <div class="form-group">					     
@@ -1327,7 +1314,7 @@ function isNumberKey(evt)
 				<c:otherwise>
 					
 					<!-- Section Start  -->
-				   <div class="mt-xlg text-choice" id="0">
+				   <div class="mt-xlg text-choice otherOptionChecked" id="0">
 				      <div class="col-md-3 pl-none">
 				         <div class="gray-xs-f mb-xs">Display Text (1 to 100 characters)<span class="requiredStar">*</span> </div>
 				         <div class="form-group mb-none">
@@ -1367,7 +1354,7 @@ function isNumberKey(evt)
 				         </div>
 				      </div>
 					  </c:if>
-             <div class="col-md-12 p-none display__flex__center">
+             <div class="col-md-12 p-none display__flex__">
 				      <div class="col-md-10 pl-none">
 				         <div class="gray-xs-f mb-xs">Description(1 to 150 characters) </div>
 				         <div class="form-group">					     
@@ -1422,7 +1409,7 @@ function isNumberKey(evt)
 					         </div>
 					      </div>
 						  </c:if>
-              <div class="col-md-12 p-none display__flex__center">
+              <div class="col-md-12 p-none display__flex__">
 					      <div class="col-md-10 pl-none">
 					         <div class="gray-xs-f mb-xs">Description(1 to 150 characters) </div>
 					         <div class="form-group">					     
@@ -1439,6 +1426,105 @@ function isNumberKey(evt)
 				</c:otherwise>
 			</c:choose>
          </div>
+         <div>
+            <div class="clearfix"></div>
+			<div class="checkbox checkbox-inline">
+	               <input type="checkbox" name="questionReponseTypeBo.otherType" id="textchoiceOtherId" ${not empty questionnairesStepsBo.questionReponseTypeBo.otherType ? 'checked':''}>
+	               <label for="textchoiceOtherId"> Include 'Other' as an option ? </label>
+		     </div>
+		     <div class="textchoiceOtherCls" style="display: none;">
+		    <!-- Section Start  -->
+				   <div class="mt-xlg">
+				      <div class="col-md-3 pl-none">
+				         <div class="gray-xs-f mb-xs">Display Text (1 to 100 characters)<span class="requiredStar">*</span> </div>
+				         <div class="form-group mb-none">
+				            <input type="text" class="form-control TextChoiceRequired" name="questionReponseTypeBo.otherText" id="" value="${questionnairesStepsBo.questionReponseTypeBo.otherText}" maxlength="100">
+				            <div class="help-block with-errors red-txt"></div>
+				         </div>
+				      </div>
+				      <div class="col-md-3 pl-none">
+				         <div class="gray-xs-f mb-xs">Value (1 to 50 characters)<span class="requiredStar">*</span> </div>
+				         <div class="form-group mb-none">
+				            <input type="text" class="form-control TextChoiceRequired" name="questionReponseTypeBo.otherValue" id="" value="${questionnairesStepsBo.questionReponseTypeBo.otherValue}" maxlength="50">
+				            <div class="help-block with-errors red-txt"></div>
+				         </div>
+				      </div>
+				      <div class="col-md-2 pl-none">
+				         <div class="gray-xs-f mb-xs">Mark as exclusive ? <span class="requiredStar">*</span> </div>
+				         <div class="form-group">
+				            <select name="questionReponseTypeBo.otherExclusive" id="" title="select" data-error="Please choose one option" class="selectpicker textChoiceExclusive <c:if test="${questionnairesStepsBo.questionReponseTypeBo.selectionStyle eq 'Multiple'}">TextChoiceRequired</c:if>" <c:if test="${empty questionnairesStepsBo.questionReponseTypeBo.selectionStyle || questionnairesStepsBo.questionReponseTypeBo.selectionStyle eq 'Single'}">disabled</c:if> onchange="setOtherExclusiveData(this);">
+								 <option value="Yes" ${questionnairesStepsBo.questionReponseTypeBo.otherExclusive eq 'Yes' ? 'selected' :''}>Yes</option>
+								 <option value="No" ${questionnairesStepsBo.questionReponseTypeBo.otherExclusive eq 'No' ? 'selected' :''}>No</option>
+							 </select>
+				            <div class="help-block with-errors red-txt"></div>
+				         </div>
+				      </div>
+					  <c:if test="${questionnaireBo.branching}">
+				      <div class="col-md-2 pl-none">
+				         <div class="gray-xs-f mb-xs">Destination Step  </div>
+				         <div class="form-group">
+				             <select name="questionReponseTypeBo.otherDestinationStepId" id="otherDestinationTextChoiceStepId"  class="selectpicker destionationYes" <c:if test="${not empty questionnairesStepsBo.questionReponseTypeBo.otherExclusive && questionnairesStepsBo.questionReponseTypeBo.otherExclusive eq 'No'}">disabled</c:if>>
+								<option value=""  selected>Select</option>
+									<c:forEach items="${destinationStepList}" var="destinationStep">
+									<option value="${destinationStep.stepId}" ${questionnairesStepsBo.questionReponseTypeBo.otherDestinationStepId eq destinationStep.stepId ? 'selected' :''}>Step ${destinationStep.sequenceNo} : ${destinationStep.stepShortTitle}</option>
+									</c:forEach>
+								<option value="0" ${questionnairesStepsBo.questionReponseTypeBo.otherDestinationStepId eq 0 ? 'selected' :''}>Completion Step</option>
+							</select>
+				            <div class="help-block with-errors red-txt"></div>
+				         </div>
+				      </div>
+					  </c:if>
+             <div class="col-md-12 p-none display__flex__center">
+				      <div class="col-md-10 pl-none">
+				         <div class="gray-xs-f mb-xs">Description(1 to 150 characters) </div>
+				         <div class="form-group">					     
+				            <textarea class="form-control" name="questionReponseTypeBo.otherDescription" id=""  maxlength="150">${questionnairesStepsBo.questionReponseTypeBo.otherDescription}</textarea>
+				         </div>
+				      </div>
+            </div>
+			</div>
+		    <!-- Section End  -->	
+		    <div class="clearfix"></div>
+			<div class="mt-lg">
+              <div>
+                <span class="gray-xs-f mb-xs pr-md">Include text field to specify 'Other' ?</span>
+                  <span class="radio radio-info radio-inline pr-md">
+                  <input type="radio" class="otherIncludeTextCls" id="otherYes" value="Yes" name="questionReponseTypeBo.otherIncludeText" ${questionnairesStepsBo.questionReponseTypeBo.otherIncludeText=='Yes' ?'checked':''}>
+                  <label for="otherYes">Yes</label>
+                  </span>
+                  <span class="radio radio-inline">
+                  <input type="radio" class="otherIncludeTextCls" id="otherNo" value="No" name="questionReponseTypeBo.otherIncludeText" ${empty questionnairesStepsBo.questionReponseTypeBo.otherIncludeText  || questionnairesStepsBo.questionReponseTypeBo.otherIncludeText=='No' ?'checked':''}>
+                  <label for="otherNo">No</label>
+                  </span>
+               </div>
+           </div>
+           <div class="OtherOptionCls" style="display:none;">
+			<div class="clearfix"></div>
+           	<div class="col-md-6 p-none mt-md">
+                <div class="gray-xs-f mb-xs pr-md">Place holder text for the text field</div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="questionReponseTypeBo.otherPlaceholderText" id="" value="${questionnairesStepsBo.questionReponseTypeBo.otherPlaceholderText}" maxlength="50"/>
+                </div>
+            </div>
+			<div class="clearfix"></div>
+			<div class="mt-lg">
+              <div>
+                <span class="gray-xs-f mb-xs pr-md">Is this field mandatory for the participant to fill in ?</span>
+                  <span class="radio radio-info radio-inline pr-md">
+                  <input type="radio" class="" id="pYes" value="Yes" name="questionReponseTypeBo.otherParticipantFill" ${questionnairesStepsBo.questionReponseTypeBo.otherParticipantFill=='Yes' ?'checked':''}>
+                  <label for="pYes">Yes</label>
+                  </span>
+                  <span class="radio radio-inline">
+                  <input type="radio" class="" id="pNo" value="No" name="questionReponseTypeBo.otherParticipantFill" ${empty questionnairesStepsBo.questionReponseTypeBo.otherParticipantFill  || questionnairesStepsBo.questionReponseTypeBo.otherParticipantFill=='No' ?'checked':''}>
+                  <label for="pNo">No</label>
+                  </span>
+               </div>
+           </div>
+           </div>
+           </div>
+		 </div>    
+		     
+		     
          </div>
          
        <div id="ImageChoice" style="display: none;">
@@ -1941,6 +2027,39 @@ $(document).ready(function(){
 		validateAnchorDateText('',function(val){});
     });
 	
+	
+	$('#textchoiceOtherId').click(function() {
+		   var displayText=$("#displayTextChoiceText0").val().trim();
+		   var displayValue=$("#displayTextChoiceValue0").val().trim();
+		   var exclusive=$("#exclusiveId0").val().trim();
+		   var choiceDescription=$("#displayTextChoiceDescription0").val().trim();
+		if ($(this).is(':checked')){
+			if(displayText.length <= 0 && displayValue.length <= 0 && exclusive.length <= 0 &&  choiceDescription.length <= 0){
+				$('.otherOptionChecked').hide();
+				$('.otherOptionChecked').find('input:text,select').removeAttr('required');
+			}
+			$('.textchoiceOtherCls').show();
+			$('.textchoiceOtherCls').find('input:text,select').attr('required',true);
+			$('.OtherOptionCls').find('input:text,select').removeAttr('required');
+		}else{
+			$('.otherOptionChecked').show();
+			$('.otherOptionChecked').find('input:text,select').attr('required',true);
+			$('.textchoiceOtherCls').hide();
+			$('.textchoiceOtherCls').find('input:text,select').removeAttr('required');
+		}
+	});
+	
+	$('.otherIncludeTextCls').click(function() {
+		var otherText = $('.otherIncludeTextCls:checked').val();
+		if(otherText == 'Yes'){
+			$('.OtherOptionCls').show();
+			$('.OtherOptionCls').find('input:text,select').attr('required',true);
+		}else{
+			$('.OtherOptionCls').hide();
+			$('.OtherOptionCls').find('input:text,select').removeAttr('required');
+		}
+	});
+	
 	<c:if test="${actionTypeForQuestionPage == 'view'}">
 		$('#questionStepId input,textarea ').prop('disabled', true);
 		$('#questionStepId select').addClass('linkDis');
@@ -1993,6 +2112,25 @@ $(document).ready(function(){
     	 }else if(resType == "Numeric"){
     		 $("#numericMinValueId").trigger('blur');
     		 $("#numericMaxValueId").trigger('blur');
+    	 }else if(resType == "Text Choice"){
+    		 if($('#textchoiceOtherId').is(':checked')){
+	    			$('.textchoiceOtherCls').show();
+	    			$('.textchoiceOtherCls').find('input:text,select').attr('required',true);
+	    			$('.OtherOptionCls').find('input:text,select').removeAttr('required');
+	    		}else{
+	    			$('.textchoiceOtherCls').find('input:text,select').removeAttr('required');
+	    			$('.OtherOptionCls').find('input:text,select').removeAttr('required');
+	    			$('.textchoiceOtherCls').hide();
+	    		}
+	    	 
+	    	 var otherText = $('.otherIncludeTextCls:checked').val();
+	    		if(otherText == 'Yes'){
+	    			$('.OtherOptionCls').show();
+	    			$('.OtherOptionCls').find('input:text,select').attr('required',true);
+	    		}else{
+	    			$('.OtherOptionCls').hide();
+	    			$('.OtherOptionCls').find('input:text,select').removeAttr('required');
+	    		}
     	 }
     	 if(isFromValid("#questionStepId")){
     		  $("body").addClass("loading");
@@ -4000,7 +4138,7 @@ function addTextChoice(){
 	      " </div>"+
 	      "</div>";
 		  </c:if>
-	      newTextChoice +="<div class='col-md-12 p-none display__flex__center'><div class='col-md-10 pl-none'>"+
+	      newTextChoice +="<div class='col-md-12 p-none display__flex__'><div class='col-md-10 pl-none'>"+
 	         "<div class='gray-xs-f mb-xs'>Description(1 to 150 characters) </div>"+
 	         "<div class='form-group'>"+			     
 	         "   <textarea type='text' class='form-control' name='questionResponseSubTypeList["+choiceCount+"].description' id='displayTextChoiceDescription"+choiceCount+"'  maxlength='150'></textarea>"+
@@ -5012,4 +5150,40 @@ function validateAnchorDateText(item,callback){
  	        $(thisAttr).parent().find(".help-block").html("");
  	}
 }
+
+function setOtherExclusiveData(item){
+	var value = $(item).val();
+	if(value == "Yes"){
+		$("#otherDestinationTextChoiceStepId").attr("disabled",false);
+		$('.selectpicker').selectpicker('refresh');
+	}else{
+		$("#otherDestinationTextChoiceStepId").val('');
+		$("#otherDestinationTextChoiceStepId").attr("disabled",true);
+		$('.selectpicker').selectpicker('refresh');
+	}
+	
+}
+
+$('[data-toggle="tooltip"]').tooltip({ container: 'body' });
+
+
+$(window).on('load', function() {
+    if($('#textchoiceOtherId').is(':checked')){
+		$('.textchoiceOtherCls').show();
+		$('.textchoiceOtherCls').find('input:text,select').attr('required',true);
+		$('.OtherOptionCls').find('input:text,select').removeAttr('required');
+	}else{
+		$('.textchoiceOtherCls').find('input:text,select').removeAttr('required');
+		$('.textchoiceOtherCls').hide();
+	}
+    
+    var otherText = $('.otherIncludeTextCls:checked').val();
+	if(otherText == 'Yes'){
+		$('.OtherOptionCls').show();
+		$('.OtherOptionCls').find('input:text,select').attr('required',true);
+	}else{
+		$('.OtherOptionCls').hide();
+		$('.OtherOptionCls').find('input:text,select').removeAttr('required');
+	}
+})
 </script>

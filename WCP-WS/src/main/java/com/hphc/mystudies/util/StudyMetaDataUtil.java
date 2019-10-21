@@ -1,24 +1,31 @@
-/*******************************************************************************
- * Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction,including without limitation the rights to use, copy,modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- * 
+/*
+ * Copyright © 2017-2018 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ * of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
+ * following conditions:
+ *
  * The above copyright notice and this permission notice shall be included in all copies or substantial
  * portions of the Software.
- * 
- * Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
- * Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
- * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
- * OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ *
+ * Funding Source: Food and Drug Administration ("Funding Agency") effective 18 September 2014 as Contract no.
+ * HHSF22320140030I/HHSF22301006T (the "Prime Contract").
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+ * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
- ******************************************************************************/
-
+ */
 package com.hphc.mystudies.util;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,16 +57,13 @@ import com.sun.jersey.core.util.Base64;
  */
 public class StudyMetaDataUtil {
 
-	private static final Logger LOGGER = Logger
-			.getLogger(StudyMetaDataUtil.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(StudyMetaDataUtil.class.getName());
 
 	@SuppressWarnings("rawtypes")
-	protected static final HashMap configMap = StudyMetaDataUtil
-			.getAppProperties();
+	protected static final HashMap configMap = StudyMetaDataUtil.getAppProperties();
 
 	@SuppressWarnings("rawtypes")
-	protected static final HashMap authConfigMap = StudyMetaDataUtil
-			.getAuthorizationProperties();
+	protected static final HashMap authConfigMap = StudyMetaDataUtil.getAuthorizationProperties();
 
 	@SuppressWarnings("unchecked")
 	private static final HashMap<String, String> authPropMap = StudyMetaDataUtil.authConfigMap;
@@ -86,8 +90,7 @@ public class StudyMetaDataUtil {
 			}
 			ServletContext context = ServletContextHolder.getServletContext();
 			Properties prop = new Properties();
-			prop.load(new FileInputStream(context
-					.getInitParameter("property_file_location_path")));
+			prop.load(new FileInputStream(context.getInitParameter("property_file_location_path")));
 			objectKeys = prop.keys();
 			while (objectKeys.hasMoreElements()) {
 				String key = (String) objectKeys.nextElement();
@@ -105,16 +108,12 @@ public class StudyMetaDataUtil {
 	 * Set failure response for the provided status, title and detail
 	 * 
 	 * @author BTC
-	 * @param status
-	 *            the response status
-	 * @param title
-	 *            the response title
-	 * @param detail
-	 *            the response details
+	 * @param status the response status
+	 * @param title  the response title
+	 * @param detail the response details
 	 * @return {@link FailureResponse}
 	 */
-	public static FailureResponse getFailureResponse(String status,
-			String title, String detail) {
+	public static FailureResponse getFailureResponse(String status, String title, String detail) {
 		LOGGER.info("INFO: StudyMetaDataUtil - getFailureResponse() :: Starts");
 		FailureResponse failureResponse = new FailureResponse();
 		try {
@@ -130,21 +129,15 @@ public class StudyMetaDataUtil {
 	}
 
 	/**
-	 * Update response details for the provided status, title, detail and
-	 * response
+	 * Update response details for the provided status, title, detail and response
 	 * 
 	 * @author BTC
-	 * @param status
-	 *            the response status
-	 * @param title
-	 *            the response title
-	 * @param detail
-	 *            the response details
-	 * @param response
-	 *            {@link HttpServletResponse}
+	 * @param status   the response status
+	 * @param title    the response title
+	 * @param detail   the response details
+	 * @param response {@link HttpServletResponse}
 	 */
-	public static void getFailureResponse(String status, String title,
-			String detail, HttpServletResponse response) {
+	public static void getFailureResponse(String status, String title, String detail, HttpServletResponse response) {
 		LOGGER.info("INFO: StudyMetaDataUtil - getFailureResponse() :: Starts");
 		try {
 			response.setHeader("status", status);
@@ -160,10 +153,8 @@ public class StudyMetaDataUtil {
 	 * Get number of days for the provided month and year
 	 * 
 	 * @author BTC
-	 * @param month
-	 *            the month value
-	 * @param year
-	 *            the year value
+	 * @param month the month value
+	 * @param year  the year value
 	 * @return {@link Integer}
 	 */
 	public static int noOfDaysForMonthYear(int month, int year) {
@@ -175,8 +166,7 @@ public class StudyMetaDataUtil {
 			calendar.set(Calendar.MONTH, month - 1);
 			numDays = calendar.getActualMaximum(Calendar.DATE);
 		} catch (Exception e) {
-			LOGGER.error("ERROR: StudyMetaDataUtil - noOfDaysForMonthYear() "
-					+ e);
+			LOGGER.error("ERROR: StudyMetaDataUtil - noOfDaysForMonthYear() " + e);
 		}
 		LOGGER.info("INFO: StudyMetaDataUtil - noOfDaysForMonthYear() :: Ends");
 		return numDays;
@@ -186,25 +176,20 @@ public class StudyMetaDataUtil {
 	 * Get number of days between the provided start and end date's
 	 * 
 	 * @author BTC
-	 * @param startDate
-	 *            the start date
-	 * @param endDate
-	 *            the end date
+	 * @param startDate the start date
+	 * @param endDate   the end date
 	 * @return {@link Integer}
 	 */
 	public static int noOfDaysBetweenTwoDates(String startDate, String endDate) {
 		LOGGER.info("INFO: StudyMetaDataUtil - noOfDaysBetweenTwoDates() :: Starts");
 		int daysdiff = 0;
 		try {
-			long diff = StudyMetaDataConstants.SDF_DATE.parse(endDate)
-					.getTime()
-					- StudyMetaDataConstants.SDF_DATE.parse(startDate)
-							.getTime();
+			long diff = StudyMetaDataConstants.SDF_DATE.parse(endDate).getTime()
+					- StudyMetaDataConstants.SDF_DATE.parse(startDate).getTime();
 			long diffDays = diff / (24 * 60 * 60 * 1000) + 1;
 			daysdiff = (int) diffDays;
 		} catch (Exception e) {
-			LOGGER.error("ERROR: StudyMetaDataUtil - noOfDaysBetweenTwoDates() "
-					+ e);
+			LOGGER.error("ERROR: StudyMetaDataUtil - noOfDaysBetweenTwoDates() " + e);
 		}
 		LOGGER.info("INFO: StudyMetaDataUtil - noOfDaysBetweenTwoDates() :: Ends");
 		return daysdiff;
@@ -242,8 +227,7 @@ public class StudyMetaDataUtil {
 		String getToday = "";
 		try {
 			Date today = new Date();
-			SimpleDateFormat formatter = new SimpleDateFormat(
-					StudyMetaDataConstants.SDF_DATE_TIME_PATTERN);
+			SimpleDateFormat formatter = new SimpleDateFormat(StudyMetaDataConstants.SDF_DATE_TIME_PATTERN);
 			formatter.setTimeZone(TimeZone.getTimeZone("America/New_York"));
 			getToday = formatter.format(today.getTime());
 		} catch (Exception e) {
@@ -257,31 +241,24 @@ public class StudyMetaDataUtil {
 	 * Get formatted date for the provided date, input and output format
 	 * 
 	 * @author BTC
-	 * @param inputDate
-	 *            the input date
-	 * @param inputFormat
-	 *            the input format
-	 * @param outputFormat
-	 *            the output format
+	 * @param inputDate    the input date
+	 * @param inputFormat  the input format
+	 * @param outputFormat the output format
 	 * @return the formatted date
 	 */
-	public static String getFormattedDate1(String inputDate,
-			String inputFormat, String outputFormat) {
+	public static String getFormattedDate1(String inputDate, String inputFormat, String outputFormat) {
 		LOGGER.info("StudyMetaDataUtil: getFormattedDate1() - Starts ");
 		String finalDate = "";
 		java.sql.Date formattedDate = null;
-		if (inputDate != null && !"".equals(inputDate)
-				&& !"null".equalsIgnoreCase(inputDate)) {
+		if (inputDate != null && !"".equals(inputDate) && !"null".equalsIgnoreCase(inputDate)) {
 			try {
 				SimpleDateFormat formatter = new SimpleDateFormat(inputFormat);
-				formattedDate = new java.sql.Date(formatter.parse(inputDate)
-						.getTime());
+				formattedDate = new java.sql.Date(formatter.parse(inputDate).getTime());
 
 				formatter = new SimpleDateFormat(outputFormat);
 				finalDate = formatter.format(formattedDate);
 			} catch (Exception e) {
-				LOGGER.error("StudyMetaDataUtil: getFormattedDate1() - ERROR",
-						e);
+				LOGGER.error("StudyMetaDataUtil: getFormattedDate1() - ERROR", e);
 			}
 		}
 		LOGGER.info("StudyMetaDataUtil: getFormattedDate1() - Ends ");
@@ -292,10 +269,8 @@ public class StudyMetaDataUtil {
 	 * Get time difference in days hours minutes between two dates
 	 * 
 	 * @author BTC
-	 * @param dateOne
-	 *            the date1
-	 * @param dateTwo
-	 *            the date2
+	 * @param dateOne the date1
+	 * @param dateTwo the date2
 	 * @return {@link String}
 	 */
 	public static String getTimeDiffInDaysHoursMins(Date dateOne, Date dateTwo) {
@@ -303,19 +278,13 @@ public class StudyMetaDataUtil {
 		String diff = "";
 		try {
 			long timeDiff = Math.abs(dateOne.getTime() - dateTwo.getTime());
-			diff = String.format(
-					"%d Day(s) %d hour(s) %d min(s)",
-					TimeUnit.MILLISECONDS.toDays(timeDiff),
+			diff = String.format("%d Day(s) %d hour(s) %d min(s)", TimeUnit.MILLISECONDS.toDays(timeDiff),
 					TimeUnit.MILLISECONDS.toHours(timeDiff)
-							- TimeUnit.DAYS.toHours(TimeUnit.MILLISECONDS
-									.toDays(timeDiff)),
+							- TimeUnit.DAYS.toHours(TimeUnit.MILLISECONDS.toDays(timeDiff)),
 					TimeUnit.MILLISECONDS.toMinutes(timeDiff)
-							- TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS
-									.toHours(timeDiff)));
+							- TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(timeDiff)));
 		} catch (Exception e) {
-			LOGGER.error(
-					"StudyMetaDataUtil - getTimeDiffInDaysHoursMins() - ERROR ",
-					e);
+			LOGGER.error("StudyMetaDataUtil - getTimeDiffInDaysHoursMins() - ERROR ", e);
 		}
 		LOGGER.info("StudyMetaDataUtil: getTimeDiffInDaysHoursMins() - Ends ");
 		return diff;
@@ -329,20 +298,16 @@ public class StudyMetaDataUtil {
 	 * @param dateTwo2
 	 * @return {@link String}
 	 */
-	public static String getTimeDiffInDaysHoursMins(String dateOne1,
-			String dateTwo2) {
+	public static String getTimeDiffInDaysHoursMins(String dateOne1, String dateTwo2) {
 		LOGGER.info("StudyMetaDataUtil: getTimeDiffInDaysHoursMins() - Starts ");
 		String diff = "";
 		try {
 			Date dateOne = StudyMetaDataConstants.SDF_DATE_TIME.parse(dateOne1);
 			Date dateTwo = StudyMetaDataConstants.SDF_DATE_TIME.parse(dateTwo2);
 			long timeDiff = Math.abs(dateOne.getTime() - dateTwo.getTime());
-			diff = String.format("%d",
-					TimeUnit.MILLISECONDS.toMinutes(timeDiff));
+			diff = String.format("%d", TimeUnit.MILLISECONDS.toMinutes(timeDiff));
 		} catch (ParseException e) {
-			LOGGER.error(
-					"StudyMetaDataUtil - getTimeDiffInDaysHoursMins() - ERROR ",
-					e);
+			LOGGER.error("StudyMetaDataUtil - getTimeDiffInDaysHoursMins() - ERROR ", e);
 		}
 		LOGGER.info("StudyMetaDataUtil: getTimeDiffInDaysHoursMins() - Ends ");
 		return diff;
@@ -364,9 +329,7 @@ public class StudyMetaDataUtil {
 			byte[] bytesEncoded = Base64.encode(plainText.getBytes());
 			return new String(bytesEncoded);
 		} catch (Exception e) {
-			LOGGER.error(
-					"StudyMetaDataUtil - getEncodedStringByBase64() - ERROR ",
-					e);
+			LOGGER.error("StudyMetaDataUtil - getEncodedStringByBase64() - ERROR ", e);
 
 		}
 		LOGGER.info("StudyMetaDataUtil: getEncodedStringByBase64() - Ends ");
@@ -389,9 +352,7 @@ public class StudyMetaDataUtil {
 			byte[] valueDecoded = Base64.decode(encodedText);
 			return new String(valueDecoded);
 		} catch (Exception e) {
-			LOGGER.error(
-					"StudyMetaDataUtil - getDecodedStringByBase64() - ERROR ",
-					e);
+			LOGGER.error("StudyMetaDataUtil - getDecodedStringByBase64() - ERROR ", e);
 		}
 		LOGGER.info("StudyMetaDataUtil: getDecodedStringByBase64() - Ends ");
 		return "";
@@ -412,8 +373,7 @@ public class StudyMetaDataUtil {
 		if (StringUtils.isNotEmpty(input)) {
 			encryptValue = input + StudyMetaDataConstants.PASS_SALT;
 			try {
-				MessageDigest messageDigest = MessageDigest
-						.getInstance("SHA-512");
+				MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
 				messageDigest.update(encryptValue.getBytes("UTF-8"));
 				byte[] digestBytes = messageDigest.digest();
 				String hex = null;
@@ -440,17 +400,14 @@ public class StudyMetaDataUtil {
 	 * @param outputFormat
 	 * @return {@link String}
 	 */
-	public static String getFormattedDate(String inputDate, String inputFormat,
-			String outputFormat) {
+	public static String getFormattedDate(String inputDate, String inputFormat, String outputFormat) {
 		LOGGER.info("StudyMetaDataUtil: getFormattedDate() - Starts ");
 		String finalDate = "";
 		java.sql.Date formattedDate = null;
-		if (inputDate != null && !"".equals(inputDate)
-				&& !"null".equalsIgnoreCase(inputDate)) {
+		if (inputDate != null && !"".equals(inputDate) && !"null".equalsIgnoreCase(inputDate)) {
 			try {
 				SimpleDateFormat formatter = new SimpleDateFormat(inputFormat);
-				formattedDate = new java.sql.Date(formatter.parse(inputDate)
-						.getTime());
+				formattedDate = new java.sql.Date(formatter.parse(inputDate).getTime());
 
 				formatter = new SimpleDateFormat(outputFormat);
 				finalDate = formatter.format(formattedDate);
@@ -474,8 +431,7 @@ public class StudyMetaDataUtil {
 		LOGGER.info("StudyMetaDataUtil: addMinutes() - Starts ");
 		String newdateStr = "";
 		try {
-			SimpleDateFormat date = new SimpleDateFormat(
-					StudyMetaDataConstants.SDF_DATE_TIME_PATTERN);
+			SimpleDateFormat date = new SimpleDateFormat(StudyMetaDataConstants.SDF_DATE_TIME_PATTERN);
 			Date dt = date.parse(dtStr);
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(dt);
@@ -630,8 +586,7 @@ public class StudyMetaDataUtil {
 	public static String getCurrentDateTimeInUTC() {
 		LOGGER.info("StudyMetaDataUtil: getCurrentDateTimeInUTC() - Starts ");
 		String dateNow = null;
-		final SimpleDateFormat sdf = new SimpleDateFormat(
-				StudyMetaDataConstants.SDF_DATE_TIME_PATTERN);
+		final SimpleDateFormat sdf = new SimpleDateFormat(StudyMetaDataConstants.SDF_DATE_TIME_PATTERN);
 		String timeZone = "UTC";
 		try {
 			String strDate = new Date() + "";
@@ -641,8 +596,7 @@ public class StudyMetaDataUtil {
 			sdf.setTimeZone(TimeZone.getTimeZone(timeZone));
 			dateNow = sdf.format(new Date());
 		} catch (Exception e) {
-			LOGGER.error("StudyMetaDataUtil: getCurrentDateTimeInUTC(): ERROR "
-					+ e);
+			LOGGER.error("StudyMetaDataUtil: getCurrentDateTimeInUTC(): ERROR " + e);
 		}
 		LOGGER.info("StudyMetaDataUtil: getCurrentDateTimeInUTC() - Ends ");
 		return dateNow;
@@ -652,8 +606,7 @@ public class StudyMetaDataUtil {
 	 * Get the platform type for the provided credentials and type
 	 * 
 	 * @author BTC
-	 * @param authCredentials
-	 *            the Basic Authorization
+	 * @param authCredentials the Basic Authorization
 	 * @param type
 	 * @return {@link String}
 	 */
@@ -662,25 +615,20 @@ public class StudyMetaDataUtil {
 		String bundleIdAndAppToken = null;
 		String platform = "";
 		try {
-			if (StringUtils.isNotEmpty(authCredentials)
-					&& authCredentials.contains("Basic")) {
-				final String encodedUserPassword = authCredentials
-						.replaceFirst("Basic" + " ", "");
+			if (StringUtils.isNotEmpty(authCredentials) && authCredentials.contains("Basic")) {
+				final String encodedUserPassword = authCredentials.replaceFirst("Basic" + " ", "");
 				byte[] decodedBytes = Base64.decode(encodedUserPassword);
 				bundleIdAndAppToken = new String(decodedBytes, "UTF-8");
 
 				if (bundleIdAndAppToken.contains(":")) {
-					final StringTokenizer tokenizer = new StringTokenizer(
-							bundleIdAndAppToken, ":");
+					final StringTokenizer tokenizer = new StringTokenizer(bundleIdAndAppToken, ":");
 					final String bundleId = tokenizer.nextToken();
 					final String appToken = tokenizer.nextToken();
 
-					if (authPropMap.containsKey(bundleId)
-							&& authPropMap.containsKey(appToken)) {
+					if (authPropMap.containsKey(bundleId) && authPropMap.containsKey(appToken)) {
 						String appBundleId = "";
 						String appTokenId = "";
-						for (Map.Entry<String, String> map : authPropMap
-								.entrySet()) {
+						for (Map.Entry<String, String> map : authPropMap.entrySet()) {
 							if (map.getKey().equals(appToken)) {
 								appTokenId = map.getValue();
 							}
@@ -690,15 +638,11 @@ public class StudyMetaDataUtil {
 							}
 						}
 
-						if (StringUtils.isNotEmpty(appBundleId)
-								&& StringUtils.isNotEmpty(appTokenId)) {
-							final StringTokenizer authTokenizer = new StringTokenizer(
-									appTokenId, ".");
-							final String platformType = authTokenizer
-									.nextToken();
+						if (StringUtils.isNotEmpty(appBundleId) && StringUtils.isNotEmpty(appTokenId)) {
+							final StringTokenizer authTokenizer = new StringTokenizer(appTokenId, ".");
+							final String platformType = authTokenizer.nextToken();
 
-							if (platformType
-									.equals(StudyMetaDataConstants.STUDY_PLATFORM_ANDROID)) {
+							if (platformType.equals(StudyMetaDataConstants.STUDY_PLATFORM_ANDROID)) {
 								switch (type) {
 								case StudyMetaDataConstants.STUDY_AUTH_TYPE_PLATFORM:
 									platform = StudyMetaDataConstants.STUDY_PLATFORM_TYPE_ANDROID;
@@ -767,8 +711,7 @@ public class StudyMetaDataUtil {
 		String actualDay = "";
 		try {
 			if (StringUtils.isNotEmpty(input)) {
-				SimpleDateFormat newDateFormat = new SimpleDateFormat(
-						"yyyy-MM-dd");
+				SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				Date MyDate = newDateFormat.parse(input);
 				newDateFormat.applyPattern(StudyMetaDataConstants.SDF_DAY);
 				actualDay = newDateFormat.format(MyDate);
@@ -864,8 +807,7 @@ public class StudyMetaDataUtil {
 	 * @param outputFormat
 	 * @return {@link String}
 	 */
-	public static String getFormattedDateTimeZone(String input,
-			String inputFormat, String outputFormat) {
+	public static String getFormattedDateTimeZone(String input, String inputFormat, String outputFormat) {
 		LOGGER.info("StudyMetaDataUtil: getFormattedDateTimeZone() - Starts ");
 		String output = "";
 		try {
@@ -876,9 +818,7 @@ public class StudyMetaDataUtil {
 				output = outputSDF.format(inputDate);
 			}
 		} catch (Exception e) {
-			LOGGER.error(
-					"AuthenticationService - getFormattedDateTimeZone() :: ERROR",
-					e);
+			LOGGER.error("AuthenticationService - getFormattedDateTimeZone() :: ERROR", e);
 		}
 		LOGGER.info("StudyMetaDataUtil: getFormattedDateTimeZone() - Ends ");
 		return output;
@@ -896,8 +836,7 @@ public class StudyMetaDataUtil {
 		LOGGER.info("StudyMetaDataUtil: addSeconds() - Starts ");
 		String newdateStr = "";
 		try {
-			SimpleDateFormat date = new SimpleDateFormat(
-					StudyMetaDataConstants.SDF_DATE_TIME_PATTERN);
+			SimpleDateFormat date = new SimpleDateFormat(StudyMetaDataConstants.SDF_DATE_TIME_PATTERN);
 			Date dt = date.parse(dtStr);
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(dt);
@@ -927,12 +866,10 @@ public class StudyMetaDataUtil {
 	}
 
 	/**
-	 * Get the platform bundle identifier for the provided authorization
-	 * credentials
+	 * Get the platform bundle identifier for the provided authorization credentials
 	 * 
 	 * @author BTC
-	 * @param authCredentials
-	 *            the Basic Authorization
+	 * @param authCredentials the Basic Authorization
 	 * @return {@link String}
 	 */
 	public static String getBundleIdFromAuthorization(String authCredentials) {
@@ -940,27 +877,21 @@ public class StudyMetaDataUtil {
 		String bundleIdAndAppToken = null;
 		String appBundleId = "";
 		try {
-			if (StringUtils.isNotEmpty(authCredentials)
-					&& authCredentials.contains("Basic")) {
-				final String encodedUserPassword = authCredentials
-						.replaceFirst("Basic" + " ", "");
+			if (StringUtils.isNotEmpty(authCredentials) && authCredentials.contains("Basic")) {
+				final String encodedUserPassword = authCredentials.replaceFirst("Basic" + " ", "");
 				byte[] decodedBytes = Base64.decode(encodedUserPassword);
 				bundleIdAndAppToken = new String(decodedBytes, "UTF-8");
 				if (bundleIdAndAppToken.contains(":")) {
-					final StringTokenizer tokenizer = new StringTokenizer(
-							bundleIdAndAppToken, ":");
+					final StringTokenizer tokenizer = new StringTokenizer(bundleIdAndAppToken, ":");
 					final String bundleId = tokenizer.nextToken();
 					final String appToken = tokenizer.nextToken();
-					if (authPropMap.containsKey(bundleId)
-							&& authPropMap.containsKey(appToken)) {
+					if (authPropMap.containsKey(bundleId) && authPropMap.containsKey(appToken)) {
 						appBundleId = bundleId;
 					}
 				}
 			}
 		} catch (Exception e) {
-			LOGGER.error(
-					"StudyMetaDataUtil - getBundleIdFromAuthorization() :: ERROR",
-					e);
+			LOGGER.error("StudyMetaDataUtil - getBundleIdFromAuthorization() :: ERROR", e);
 		}
 		LOGGER.info("INFO: StudyMetaDataUtil - getBundleIdFromAuthorization() - Ends");
 		return appBundleId;
@@ -982,20 +913,118 @@ public class StudyMetaDataUtil {
 		LOGGER.info("INFO: StudyMetaDataUtil - replaceSingleQuotes() - Ends");
 		return newActivityId;
 	}
-	
-	// Get the day for the WeekName
-    public static int getDayName(String dayName) {
-        int day = 0;
-        switch (dayName) {
-            case "Sunday": day = 1; break;
-            case "Monday": day = 2; break;
-            case "Tuesday": day = 3; break;
-            case "Wednesday": day = 4; break;
-            case  "Thursday": day =5; break;
-            case "Friday": day = 6; break;
-            case "Saturday": day = 7; break;
-        }
 
-        return day;
-    }
+	// Get the day for the WeekName
+	public static int getDayName(String dayName) {
+		int day = 0;
+		switch (dayName) {
+		case "Sunday":
+			day = 1;
+			break;
+		case "Monday":
+			day = 2;
+			break;
+		case "Tuesday":
+			day = 3;
+			break;
+		case "Wednesday":
+			day = 4;
+			break;
+		case "Thursday":
+			day = 5;
+			break;
+		case "Friday":
+			day = 6;
+			break;
+		case "Saturday":
+			day = 7;
+			break;
+		}
+
+		return day;
+	}
+
+	public static String saveResponsesActivityDocument(String jsonData, String activityId, String studyId,
+			String activityRunId, String participantId, String version) {
+		LOGGER.info("INFO: StudyMetaDataUtil - saveResponsesActivityDocument() :: starts");
+		File serverFile;
+		String consentFileName = null;
+		try {
+			if (StringUtils.isNotEmpty(jsonData)) {
+				// byte[] bytes = Base64.decode(content.replaceAll("\n", ""));
+				byte[] bytes = jsonData.getBytes();
+				String currentPath = System.getProperty((String) getAppProperties().get("fda.current.path"));
+				// String currentPath =
+				// getAppProperties().get("fda.docs.responses.path").toString();
+				String rootPath = currentPath.replace('\\', '/') + getAppProperties().get("fda.docs.responses.path");
+				// String rootPath = currentPath.replace('\\', '/');
+				File directory = new File(rootPath + File.separator);
+				if (!directory.exists()) {
+					directory.mkdirs();
+				}
+				consentFileName = getStandardFileNameForResponses(activityId, studyId, activityRunId, participantId,
+						version);
+				LOGGER.warn("WARN: StudyMetaDataUtil - saveResponsesActivityDocument() :: CONSENT FILE NAME ==> "
+						+ consentFileName);
+				serverFile = new File("/var/www/html/dataResponses/data" + File.separator + consentFileName);
+
+				serverFile.setReadable(true);
+				serverFile.setExecutable(true);
+				serverFile.setWritable(true);
+
+				serverFile.getAbsolutePath();
+
+				saveFileInPath(serverFile, bytes);
+			}
+		} catch (Exception e) {
+			LOGGER.error("ERROR: StudyMetaDataUtil - saveResponsesActivityDocument()", e);
+		}
+		LOGGER.info("INFO: StudyMetaDataUtil - saveResponsesActivityDocument() :: ends");
+		return consentFileName;
+	}
+
+	/**
+	 * Save the file in path
+	 * 
+	 * @author Malay
+	 * @param serverFile the connsent document file
+	 * @param bytes      the byte array of file
+	 */
+	public static void saveFileInPath(File serverFile, byte[] bytes) {
+		LOGGER.info("INFO: StudyMetaDataUtil - saveFileInPath() :: starts");
+		try (FileOutputStream fileOutputStream = new FileOutputStream(serverFile);
+				BufferedOutputStream stream = new BufferedOutputStream(fileOutputStream);) {
+			stream.write(bytes);
+			LOGGER.warn("WARN: StudyMetaDataUtil - saveFileInPath() :: CONSENT FILE PATH ==> "
+					+ serverFile.getAbsolutePath());
+		} catch (Exception e) {
+			LOGGER.error("ERROR: StudyMetaDataUtil - saveFileInPath()", e);
+		}
+		LOGGER.info("INFO: StudyMetaDataUtil - saveFileInPath() :: ends");
+	}
+
+	/**
+	 * Get the standard file name for the provided user and enrollment identifier
+	 * 
+	 * @author Malay
+	 * @param userId       the user identifier
+	 * @param enrollmentId the enrollment identifier
+	 * @return the standard file name
+	 */
+	public static String getStandardFileNameForResponses(String activityId, String studyId, String activityRunId,
+			String participantId, String version) {
+		LOGGER.info("INFO: StudyMetaDataUtil - getStandardFileNameForResponses() :: starts");
+		String fileName = null;
+		try {
+			fileName = new StringBuilder().append("FDAHPHCI_")
+					.append(new SimpleDateFormat("MMddyyyyHHmmss").format(new Date())).append("_").append(studyId)
+					.append("_").append(activityId).append("_").append(activityRunId).append("_").append(participantId)
+					.append("_").append(version).append(".json").toString();
+		} catch (Exception e) {
+			LOGGER.error("ERROR: StudyMetaDataUtil - getStandardFileNameForResponses()", e);
+		}
+		LOGGER.info("INFO: StudyMetaDataUtil - getStandardFileNameForResponses() :: ends");
+		return fileName;
+	}
+
 }

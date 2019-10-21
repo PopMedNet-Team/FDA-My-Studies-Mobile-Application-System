@@ -81,7 +81,14 @@ class SignUpViewController: UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        WCPServices().getTermsPolicy(delegate: self)
+        //WCPServices().getTermsPolicy(delegate: self)
+        let brandingDetail = Utilities.getBrandingDetails()
+        TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
+        guard let policyURL = brandingDetail?[BrandingConstant.PrivacyPolicyURL] as? String,let terms = brandingDetail?[BrandingConstant.TermsAndConditionURL] as? String else {
+            return
+        }
+        TermsAndPolicy.currentTermsAndPolicy?.initWith(terms: terms, policy: policyURL)
+        self.agreeToTermsAndConditions()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -337,7 +344,7 @@ extension SignUpViewController: UITextViewDelegate{
         
         var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
         var title: String = kNavigationTitleTerms
-        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL ) {
+        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL  && characterRange.length == String("Privacy Policy").count ) {
             //kPrivacyPolicyLink
             print("terms")
             link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink

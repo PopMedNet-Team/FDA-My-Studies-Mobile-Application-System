@@ -1,0 +1,8 @@
+
+nsquid:S1450"WRemove the "mContext" field and declare it as a local variable in the relevant methods.(ºñÙ’
+Vsquid:S1118":Add a private constructor to hide the implicit public one.(©ªŸÓøÿÿÿÿ
+]squid:S2184"FCast one of the operands of this multiplication operation to a "long".(¨º¶í
+Csquid:S1068",Remove this unused "mContext" private field.(ºñÙ’
+ƒ"squid:ClassVariableVisibilityCheck"VMake newAccount a static final constant or non-public and provide accessors if needed.(Èéª3
+Fsquid:S1444"0Make this "public static newAccount" field final(Èéª3
+?squid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ

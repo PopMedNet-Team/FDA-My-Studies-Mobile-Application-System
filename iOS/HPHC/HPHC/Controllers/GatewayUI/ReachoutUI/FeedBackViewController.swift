@@ -58,6 +58,8 @@ class FeedBackViewController: UIViewController{
         self.tableView?.rowHeight = UITableView.automaticDimension
         
         self.addBackBarButton()
+        
+        _ = FeedbackDetail.init()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +69,7 @@ class FeedBackViewController: UIViewController{
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        _ = FeedbackDetail.init()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

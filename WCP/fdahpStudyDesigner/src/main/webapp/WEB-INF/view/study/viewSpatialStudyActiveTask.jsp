@@ -1,20 +1,3 @@
-#-------------------------------------------------------------------------------
-# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
-# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
-# 
-# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-#-------------------------------------------------------------------------------
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -1440,6 +1423,10 @@ $(document).ready(function(){
                 $("#playspeedId").parent().find(".help-block").append("<ul class='list-unstyled'><li>Play Speed should be <= 20 seconds</li></ul>");
     		}
         }else{
+        	//$("#playspeedId").val('');
+   		    //$("#playspeedId").parent().addClass("has-danger").addClass("has-error");
+            //$("#playspeedId").parent().find(".help-block").empty();
+            //$("#playspeedId").parent().find(".help-block").append("<ul class='list-unstyled'><li>Play Speed should be >= 0.5 seconds  </li></ul>");
         }
     });
     $("#maximumtestId").blur(function(){	
@@ -1496,6 +1483,7 @@ $(document).ready(function(){
     	validateShortTitleStatId('', this, function(val){});
     })
      $('#identifierId3').blur(function(){
+    	 //alert("1");
     	validateShortTitleStatId('', this, function(val){});
     })
     $('#identifierId1, #identifierId2, #identifierId3').on('keyup',function(){
@@ -1518,15 +1506,19 @@ $(document).ready(function(){
    });
    $('#Score_spatial_stat_id').on('click',function(){
 	        	   if($(this).is(":checked")){
+	        		    //alert("checked ...");
 	        			$('.addLineStaticBlock_Score_spatial').css("display","");
 	        			$('.addLineStaticBlock_Score_spatial').find('.requireClass').attr('required', true);
 	        			$('#Score_spatial_stat_id').val(true);
 	        			$('.addLineStaticBlock_Score_spatial').find('.shortTitleStatCls').attr('exist','Y');
+	        			//alert("attr value::"+ $('.addLineStaticBlock_Score_spatial').find('.shortTitleStatCls').attr('exist'));
 	        			$('.selectpicker').selectpicker('refresh');
 	        	   }else{
+	        		// alert("Not checked ...");  
 	        	   	 $('.addLineStaticBlock_Score_spatial').css("display","none");
 	        	   	 $('.addLineStaticBlock_Score_spatial').find('.requireClass').attr('required', false);
 	        	   	 $('.addLineStaticBlock_Score_spatial').find('.shortTitleStatCls').attr('exist','N');
+	        	   	// alert("attr value::"+ $('.addLineStaticBlock_Score_spatial').find('.shortTitleStatCls').attr('exist'));
 	        	   	 $('#Score_spatial_stat_id').val(false);
 	        	   }
     });
@@ -1638,6 +1630,7 @@ $(document).ready(function(){
 			    		  statShortId3 = "identifierId3";
 			    		  dbShortVal3 = $('#dbidentifierId3').val();
 			    		  dbShortId3 =  $('#dbidentifierId3').attr("title");
+			    		  //alert("dbShortId3"+dbShortId3);
 			    		  statShortVal3 = $('#identifierId3').val(); 
 			    	  } 
 			      }else{
@@ -1650,6 +1643,7 @@ $(document).ready(function(){
 			    		  statShortVal2 = $('#static2').val();
 			    	  }
 			    	  if(failureStat){
+			    		  //alert("1");
 			    		  statShortId3 = "static3";
 			    		  statShortVal3 = $('#static3').val(); 
 			    	  }
@@ -1695,6 +1689,7 @@ $(document).ready(function(){
 				 					}
 				 			      }) 
 			    		  }else{
+			    			  //alert("Not");
 			    			  $("#doneId").attr("disabled",false);
 							  $("body").removeClass('loading');
 							  showErrMsg("Please fill in all mandatory fields.");
@@ -1783,6 +1778,7 @@ $(document).ready(function(){
   			    		  statShortId3 = "identifierId3";
   			    		  dbShortVal3 = $('#dbidentifierId3').val();
   			    		  dbShortId3 =  $('#dbidentifierId3').attr("title");
+  			    		  //alert("dbShortId3"+dbShortId3);
   			    		  statShortVal3 = $('#identifierId3').val(); 
   			    	  } 
   			      }else{
@@ -1795,6 +1791,7 @@ $(document).ready(function(){
   			    		  statShortVal2 = $('#static2').val();
   			    	  }
   			    	  if(failureStat){
+  			    		  //alert("1");
   			    		  statShortId3 = "static3";
   			    		  statShortVal3 = $('#static3').val(); 
   			    	  }
@@ -1840,6 +1837,7 @@ $(document).ready(function(){
   				 					}
   				 			      }) 
   			    		  }else{
+  			    			 // alert("Not");
   			    			  $("#saveId").attr("disabled",false);
   							  $("body").removeClass('loading');
   							  showErrMsg("Please fill in all mandatory fields.");
@@ -1942,6 +1940,7 @@ function validateShortTitleId(item,callback){
 	                         $('.shortTitleClass').parent().addClass("has-danger").addClass("has-error");
 	                         $('.shortTitleClass').parent().find(".help-block").empty();
 	                         $(thisAttr).parent().find(".help-block").append("<ul class='list-unstyled'><li>'" + shortTitle + "' has already been used in the past.</li></ul>");
+	                        // $('#shortTitleId').focus();
 	                         callback(false);
 	                     }
 	                 },
@@ -1967,6 +1966,8 @@ function validateShortTitleStatId(event, thisAttr, callback){
 	   var statIds = "";
 	   if(dbId)
 		   statIds = dbId;
+	   //validation with other statistics if short  title is there .
+	   //if not valid then display duplicate data 
 	   if(activeTaskAttIdVal){
 		   var count = 0;
 		   $(".shortTitleStatCls").each(function() {
@@ -1986,6 +1987,7 @@ function validateShortTitleStatId(event, thisAttr, callback){
 			   }
 		   });
 		   if(count>0){
+			  // alert("count");
 			   $(thisAttr).val('');
 			   $(thisAttr).parent().find('.statShortTitleClass').addClass("has-danger").addClass("has-error");
 			   $(thisAttr).parent().find('.statShortTitleClass').parent().find(".help-block").empty();
@@ -1995,8 +1997,10 @@ function validateShortTitleStatId(event, thisAttr, callback){
           	   shortTitleStatFlag = false;
 			   callback(false);
 		   }else{
+			  // alert("count0");
 			   var staticShortTitleId = activeTaskAttIdName;
 			   if(activeTaskAttIdName == 'static1' || activeTaskAttIdName == 'static2' || activeTaskAttIdName == 'static3'){
+				  // alert("static data");
 				   activeTaskAttIdName = 'static'; 
 			    	 $.ajax({
 			               url: "/fdahpStudyDesigner/adminStudies/validateActiveTaskShortTitleId.do?_S=${param._S}",
@@ -2035,6 +2039,7 @@ function validateShortTitleStatId(event, thisAttr, callback){
 			               global : false
 			           });
 			   }else{
+			    	//alert("not static");
 			    	 var dbIdentifierVal = '';
 			    	 if(activeTaskAttIdName == 'identifierId1'){
 			    		 dbIdentifierVal = $('#dbidentifierId1').val();
@@ -2044,11 +2049,13 @@ function validateShortTitleStatId(event, thisAttr, callback){
 			    		 dbIdentifierVal = $('#dbidentifierId3').val();
 			    	 }
 			    	if(dbIdentifierVal!=activeTaskAttIdVal){
+			    		// alert("statIds:::"+statIds);
 				    	 if(statIds){
 				    		 activeTaskAttIdName = statIds; 
 				    	 }else{
 				    		 activeTaskAttIdName = 'static'; 
 				    	 }
+			    		 //alert("ajax");
 			    		  $.ajax({
 				               url: "/fdahpStudyDesigner/adminStudies/validateActiveTaskShortTitleId.do?_S=${param._S}",
 				               type: "POST",
@@ -2098,9 +2105,10 @@ function validateShortTitleStatId(event, thisAttr, callback){
 }
 function validateStatisticsIds(jsonDatas, callback){
 	var flag = true;
-	var arrayLength = jsonDatas.length; 
+	var arrayLength = jsonDatas.length; //cache the array length
 	var shortSatId = '';
 	var shortSatIdVal = '';
+	//alert("inside stat");
 	 if (arrayLength > 1) { 
 		for(var i=0;i<arrayLength ; i++){
 			   var existId = jsonDatas[i].id; 
@@ -2122,6 +2130,7 @@ function validateStatisticsIds(jsonDatas, callback){
 			   }
 	   }
 	 }
+	 //alert(flag);
 	 if(!flag){ 
 		   if(shortSatId){
           	 if(shortSatIdVal === ""){
@@ -2138,6 +2147,12 @@ function validateStatisticsIds(jsonDatas, callback){
 		   }
 		   callback(false); 
 	 }else{
+		//alert("else..");
+// 		 for(var i=0;i<arrayLength ; i++){
+// 			 var activeStatisticsBean =  new Object();
+			 
+// 		 }
+		 //do ajax call and check the db validation
 		 var data = JSON.stringify(jsonDatas);
 		 $.ajax({
 			      url: "/fdahpStudyDesigner/adminStudies/validateActiveTaskStatShortTitleIds.do?_S=${param._S}",
@@ -2178,9 +2193,10 @@ function validateStatisticsIds(jsonDatas, callback){
 }
 function saveValidateStatisticsIds(jsonDatas, callback){
 	var flag = true;
-	var arrayLength = jsonDatas.length; 
+	var arrayLength = jsonDatas.length; //cache the array length
 	var shortSatId = '';
 	var shortSatIdVal = '';
+	//alert("inside stat");
 	 if (arrayLength > 1) { 
 		for(var i=0;i<arrayLength ; i++){
 			   var existId = jsonDatas[i].id; 
@@ -2228,6 +2244,7 @@ function saveValidateStatisticsIds(jsonDatas, callback){
 		    	   jsonArray.push(statObj);
 		       }
 		 } 
+		 //do ajax call and check the db validation
 		 var jsonArrayLength = jsonArray.length;
 		 if(jsonArrayLength >0){
 			 var data = JSON.stringify(jsonArray);
@@ -2367,4 +2384,5 @@ function isNumberFloat(e) {
     else
         return false;
 }
+//# sourceURL=filename3.js
 </script>

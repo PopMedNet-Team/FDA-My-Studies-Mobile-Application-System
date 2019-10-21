@@ -86,7 +86,8 @@ class EligibilityStepViewController: ORKStepViewController {
             step.type = "token"
         }
         
-       // addCancelButton()
+       //Delete this
+        //tokenTextField.text = "YGELWVCCX"
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -107,23 +108,23 @@ class EligibilityStepViewController: ORKStepViewController {
             ])
     }
     
-    private func addCancelButton() {
-        
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Cancel", for: .normal)
-        button.addTarget(self, action: #selector(getter: self.cancelButtonItem?.action), for: .touchUpInside)
-
-        
-        self.view.addSubview(button)
-        
-        NSLayoutConstraint.activate([
-            button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100),
-            button.heightAnchor.constraint(equalToConstant: 40),
-            button.widthAnchor.constraint(equalToConstant: 90),
-            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-            ])
-    }
+//    private func addCancelButton() {
+//        
+//        let button = UIButton(type: .system)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.setTitle("Cancel", for: .normal)
+//        button.addTarget(self, action: #selector(getter: self.cancelButtonItem?.action), for: .touchUpInside)
+//
+//        
+//        self.view.addSubview(button)
+//        
+//        NSLayoutConstraint.activate([
+//            button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100),
+//            button.heightAnchor.constraint(equalToConstant: 40),
+//            button.widthAnchor.constraint(equalToConstant: 90),
+//            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+//            ])
+//    }
     
     @objc func cancelButton(){
         
@@ -193,6 +194,7 @@ extension EligibilityStepViewController: NMWebServiceDelegate {
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
+        Logger.sharedInstance.info("requestname : \(response)")
         
         self.removeProgressIndicator()
         

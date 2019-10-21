@@ -16,115 +16,106 @@
 
 -- Create schema, tables, indexes, and constraints used for FdahpUserRegWS module here
 -- All SQL VIEW definitions should be created in fdahpuserregws-create.sql and dropped in fdahpuserregws-drop.sql
-CREATE SCHEMA fdahpUserRegWS;
+create schema fdahpUserRegWS;
 
-CREATE TABLE fdahpUserRegWS.AuthInfo
+create table fdahpUserRegWS.AuthInfo
 (
-    _ts TIMESTAMP NOT NULL,
-    AuthId SERIAL ,
-    ParticipantId  VARCHAR(50) NULL,
-    DeviceToken  VARCHAR(1000) NULL,
-    DeviceType  VARCHAR(50) NULL,
-    CreatedOn TIMESTAMP NULL,
-    ModifiedOn TIMESTAMP NULL,
-    AuthKey  VARCHAR(50) NULL,
-    IosAppVersion  VARCHAR(50) NULL,
-    AndroidAppVersion  VARCHAR(50) NULL,
+    _ts timestamp not null,
+    AuthId serial ,
+    ParticipantId  varchar(50) null,
+    DeviceToken  varchar(1000) null,
+    DeviceType  varchar(50) null,
+    CreatedOn timestamp null,
+    ModifiedOn timestamp null,
+    AuthKey  varchar(50) null,
+    IosAppVersion  varchar(50) null,
+    AndroidAppVersion  varchar(50) null,
 
-    CONSTRAINT PK_AuthInfo PRIMARY KEY (AuthId)
+    constraint PK_AuthInfo primary key (AuthId)
 
 );
 
-CREATE TABLE fdahpUserRegWS.ParticipantActivities
+create table fdahpUserRegWS.ParticipantActivities
 (
-    _ts TIMESTAMP NOT NULL,
-    Id SERIAL,
-    ParticipantId VARCHAR(50) NULL,
-    StudyId VARCHAR(50) NULL,
-    ActivityId VARCHAR(50) NULL,
-    ActivityCompleteId Integer NULL,
-    ActivityType  VARCHAR(1000) NULL,
-    Bookmark  BOOLEAN  NULL,
-    Status  VARCHAR(50) NULL,
-    ActivityVersion  VARCHAR(50) NULL,
-    ActivityState  VARCHAR(50) NULL,
-    ActivityRunId VARCHAR(50) NULL,
+    _ts timestamp not null,
+    Id serial,
+    ParticipantId varchar(50) null,
+    StudyId varchar(50) null,
+    ActivityId varchar(50) null,
+    ActivityCompleteId integer null,
+    ActivityType  varchar(1000) null,
+    Bookmark  boolean  null,
+    Status  varchar(50) null,
+    ActivityVersion  varchar(50) null,
+    ActivityState  varchar(50) null,
+    ActivityRunId varchar(50) null,
 
-    CONSTRAINT PK_ParticipantActivities PRIMARY KEY (Id)
+    constraint PK_ParticipantActivities primary key (Id)
 
 );
 
-CREATE TABLE fdahpUserRegWS.UserDetails
+create table fdahpUserRegWS.UserDetails
 (
-    _ts TIMESTAMP NOT NULL,
-    Id SERIAL ,
-    FirstName  VARCHAR(100) NULL,
-    LastName  VARCHAR(100) NULL,
-    Email  VARCHAR(100) NULL,
-    UsePasscode  BOOLEAN NULL,
-    TouchId BOOLEAN NULL,
-    LocalNotificationFlag BOOLEAN NULL,
-    RemoteNotificationFlag BOOLEAN NULL,
-    Status INT NULL,
-    Password VARCHAR(100) NULL,
-    EntityId ENTITYID NOT NULL,
-    ReminderLeadTime VARCHAR(50) NULL,
-    SecurityToken VARCHAR(100) NULL,
-    UserId VARCHAR(50) NULL,
-    TempPassword BOOLEAN NULL,
-    Locale VARCHAR(100) NULL,
-    ResetPassword VARCHAR(100) NULL,
-    VerificationDate TIMESTAMP WITHOUT TIME ZONE,
-    TempPasswordDate TIMESTAMP WITHOUT TIME ZONE,
- CONSTRAINT PK_UserDetails PRIMARY KEY (Id)
+    _ts timestamp not null,
+    Id serial ,
+    FirstName  varchar(100) null,
+    LastName  varchar(100) null,
+    Email  varchar(100) null,
+    UsePasscode  boolean null,
+    TouchId boolean null,
+    LocalNotificationFlag boolean null,
+    RemoteNotificationFlag boolean null,
+    Status int null,
+    Password varchar(100) null,
+    EntityId ENTITYID not null,
+    ReminderLeadTime varchar(50) null,
+    SecurityToken varchar(100) null,
+    UserId varchar(50) null,
+    TempPassword boolean null,
+    Locale varchar(100) null,
+    ResetPassword varchar(100) null,
+    VerificationDate timestamp without time zone,
+    TempPasswordDate timestamp without time zone,
+ constraint PK_UserDetails primary key (Id)
 
 );
-CREATE TABLE fdahpUserRegWS.ParticipantStudies
+create table fdahpUserRegWS.ParticipantStudies
 (
-    _ts TIMESTAMP NOT NULL,
-    Id SERIAL,
-    StudyId VARCHAR(50) NULL,
-    ConsentStatus  BOOLEAN  NULL,
-    Status  VARCHAR(50) NULL,
-    Bookmark  BOOLEAN  NULL,
-    Eligbibility  BOOLEAN  NULL,
-    ParticipantId  VARCHAR(50) NULL,
-    UserId VARCHAR(50) NULL,
-    EnrolledDate VARCHAR(50) NULL,
-    Sharing TEXT NULL,
-    CONSTRAINT PK_ParticipantStudies PRIMARY KEY (Id)
-
-);
-
-CREATE TABLE fdahpUserRegWS.StudyConsent
-(
-    _ts TIMESTAMP NOT NULL,
-    Id SERIAL,
-    UserId VARCHAR(50) NULL,
-    StudyId VARCHAR(50) NULL,
-    Version  VARCHAR(50) NULL,
-    Status  VARCHAR(50) NULL,
-    Pdf  TEXT NULL,
-    CONSTRAINT PK_StudyConsent PRIMARY KEY (Id)
+    _ts timestamp not null,
+    Id serial,
+    StudyId varchar(50) null,
+    ConsentStatus  boolean  null,
+    Status  varchar(50) null,
+    Bookmark  boolean  null,
+    Eligbibility  boolean  null,
+    ParticipantId  varchar(50) null,
+    UserId varchar(50) null,
+    EnrolledDate varchar(50) null,
+    Sharing text null,
+    constraint PK_ParticipantStudies primary key (Id)
 
 );
 
-CREATE TABLE fdahpUserRegWS.PasswordHistory
+create table fdahpUserRegWS.StudyConsent
 (
-    _ts TIMESTAMP NOT NULL,
-    Id SERIAL,
-    UserId  VARCHAR(50) NULL,
-    Password VARCHAR(50) NULL,
-    Created TIMESTAMP WITHOUT TIME ZONE,
-    CONSTRAINT PK_PasswordHistory PRIMARY KEY (Id)
+    _ts timestamp not null,
+    Id serial,
+    UserId varchar(50) null,
+    StudyId varchar(50) null,
+    Version  varchar(50) null,
+    Status  varchar(50) null,
+    Pdf  text null,
+    constraint PK_StudyConsent primary key (Id)
 
 );
 
-CREATE TABLE fdahpUserRegWS.VersionInfo
+create table fdahpUserRegWS.PasswordHistory
 (
-    Id SERIAL,
-    AndroidVersion  VARCHAR(50) NULL,
-    IosVersion VARCHAR(50) NULL,
-    CONSTRAINT PK_VersionInfo PRIMARY KEY (Id)
+    _ts timestamp not null,
+    Id serial,
+    UserId  varchar(50) null,
+    Password varchar(50) null,
+    Created timestamp without time zone,
+    constraint PK_PasswordHistory primary key (Id)
 
 );

@@ -38,23 +38,72 @@ class DBHandler: NSObject {
     /* Used to save user details like userid, authkey, first name , last name etc*/
     func saveCurrentUser(user: User){
         
-        let dbUser = DBUser()
-        dbUser.userType = (user.userType?.rawValue)!
-        dbUser.emailId = user.emailId!
-        dbUser.authToken = user.authToken
-        dbUser.userId = user.userId
-        //dbUser.firstName = user.firstName
-        //dbUser.lastName = user.lastName
-        dbUser.verified = user.verified
-      
-        dbUser.refreshToken = user.refreshToken
-        
         let realm = DBHandler.getRealmObject()!
-        print("DBPath : varealm.configuration.fileURL)")
-        try? realm.write({
-            realm.add(dbUser, update: true)
+        let dbUsers = realm.objects(DBUser.self)
+        var dbUser = dbUsers.last
+        
+        if dbUser == nil {
             
-        })
+            dbUser = DBUser()
+            dbUser?.userType = (user.userType?.rawValue)!
+            dbUser?.emailId = user.emailId!
+            dbUser?.authToken = user.authToken
+            dbUser?.userId = user.userId
+            //dbUser.firstName = user.firstName
+            //dbUser.lastName = user.lastName
+            dbUser?.verified = user.verified
+            
+            dbUser?.refreshToken = user.refreshToken
+            
+            try? realm.write({
+                realm.add(dbUser!, update: true)
+                
+            })
+        }
+        else {
+            let user = User.currentUser
+            do {
+                try realm.write({
+                    
+                    dbUser?.userType = (user.userType?.rawValue)!
+                    dbUser?.emailId = user.emailId!
+                    dbUser?.authToken = user.authToken
+                    
+                    //dbUser.firstName = user.firstName
+                    //dbUser.lastName = user.lastName
+                    dbUser?.verified = user.verified
+                    
+                    dbUser?.refreshToken = user.refreshToken
+                    
+                })
+            } catch let error {
+                print(error)
+            }
+            
+//            try? realm.write({
+//
+//                dbUser?.userType = (user.userType?.rawValue)!
+//                dbUser?.emailId = user.emailId!
+//                dbUser?.authToken = user.authToken
+//                dbUser?.userId = user.userId
+//                //dbUser.firstName = user.firstName
+//                //dbUser.lastName = user.lastName
+//                dbUser?.verified = user.verified
+//
+//                dbUser?.refreshToken = user.refreshToken
+//
+//            })
+           
+        }
+        
+        
+        
+       
+//        print("DBPath : varealm.configuration.fileURL)")
+//        try? realm.write({
+//            realm.add(dbUser!, update: true)
+//
+//        })
     }
     
     /* Used to initialize the current logged in user*/
@@ -93,7 +142,7 @@ class DBHandler: NSObject {
         
         try? realm.write({
             
-             let user = User.currentUser
+            let user = User.currentUser
             dbUser?.passcodeEnabled = (user.settings?.passcode)!
             dbUser?.localNotificationEnabled = (user.settings?.localNotifications)!
             dbUser?.remoteNotificationEnabled = (user.settings?.remoteNotifications)!
@@ -297,7 +346,7 @@ class DBHandler: NSObject {
             study.withdrawalConfigration = withdrawalInfo
             studies.append(study)
         }
-        
+       
         completionHandler(studies)
     }
 
@@ -534,16 +583,17 @@ class DBHandler: NSObject {
         let dbActivityArray = realm.objects(DBActivity.self).filter({$0.studyId == study?.studyId})
         
         var dbActivities: Array<DBActivity> = []
+        var activityUpdated = false
         for activity in activityies {
           
             var dbActivity: DBActivity?
             if dbActivityArray.count != 0 {
                 dbActivity = dbActivityArray.filter({$0.actvityId == activity.actvityId!}).last
                 
-                if dbActivity == nil {
-                    
+                if dbActivity == nil { //newly added activity
                     dbActivity = DBHandler.getDBActivity(activity: activity)
                     dbActivities.append(dbActivity!)
+                    activityUpdated  = true
                 }
                 else {
                     
@@ -558,6 +608,7 @@ class DBHandler: NSObject {
                         let updatedActivity = DBHandler.getDBActivity(activity: activity)
                         dbActivities.append(updatedActivity)
                         DBHandler.deleteMetaDataForActivity(activityId: activity.actvityId!, studyId: activity.studyId!)
+                        activityUpdated = true
                         
                     }else {
                          try? realm.write({
@@ -573,8 +624,20 @@ class DBHandler: NSObject {
             }else {
                 dbActivity = DBHandler.getDBActivity(activity: activity)
                 dbActivities.append(dbActivity!)
+                activityUpdated = true
             }
         }
+        
+        //keys for alerts
+        if activityUpdated {
+            let ud = UserDefaults.standard
+            let halfCompletionKey = "50pcShown"  + (Study.currentStudy?.studyId)!
+            let fullCompletionKey = "100pcShown"  + (Study.currentStudy?.studyId)!
+            ud.set(false, forKey: halfCompletionKey)
+            ud.set(false, forKey: fullCompletionKey)
+        }
+        
+  
         
         if dbActivities.count > 0 {
             try? realm.write({
@@ -979,7 +1042,7 @@ class DBHandler: NSObject {
         userStatus.totalRuns = activity.totalRuns
         
         let incompleteRuns = activity.currentRunId - activity.compeltedRuns
-        activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
+        activity.incompletedRuns = ((incompleteRuns < 0) || activity.totalRuns == 0) ? 0 :incompleteRuns
         
         if activity.currentRun == nil {
             userStatus.status = UserActivityStatus.ActivityStatus.abandoned
@@ -2015,7 +2078,7 @@ class DBHandler: NSObject {
         
         let realm = DBHandler.getRealmObject()!
         let todayDate = Date()
-        let dbNotifications = realm.objects(DBLocalNotification.self).filter({$0.startDate! <= todayDate && $0.endDate! >= todayDate})
+        let dbNotifications = realm.objects(DBLocalNotification.self).sorted(byKeyPath: "startDate", ascending: false).filter({$0.startDate! <= todayDate && $0.endDate! >= todayDate})
         
         var notificationList: Array<AppLocalNotification> = []
         for dbnotification in dbNotifications {
@@ -2036,6 +2099,7 @@ class DBHandler: NSObject {
             notification.endDate = dbnotification.endDate
             notificationList.append(notification)
         }
+        
         completionHandler(notificationList)
     }
   
@@ -2051,13 +2115,13 @@ class DBHandler: NSObject {
     
     var notificationList: Array<AppLocalNotification> = []
     
-    var i = 0
-    for dbnotification in dbNotifications {
-      
+
+    for (i,dbnotification) in dbNotifications.enumerated() {
+        
       if i == 50{
         break
       }
-      
+      //1test001dfsgNotification01PFJ3M
       let notification = AppLocalNotification()
       
       notification.id = dbnotification.id
@@ -2075,7 +2139,6 @@ class DBHandler: NSObject {
       notification.endDate = dbnotification.endDate
       notificationList.append(notification)
       
-      i += 1
     }
     completionHandler(notificationList)
   }

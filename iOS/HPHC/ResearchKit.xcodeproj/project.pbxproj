@@ -2081,8 +2081,8 @@
 				BCB96C121B19C0EC002A0B96 /* ORKStepTests.m */,
 				BCAD50E71B0201EE0034806A /* ORKTaskTests.m */,
 				86CC8EB01AC09383001CCD89 /* ORKTextChoiceCellGroupTests.m */,
-				2EBFE11C1AE1B32D00CB8254 /* ORKUIViewAccessibilityTests.m */,
 				2EBFE11F1AE1B74100CB8254 /* ORKVoiceEngineTests.m */,
+				2EBFE11C1AE1B32D00CB8254 /* ORKUIViewAccessibilityTests.m */,
 			);
 			path = ResearchKitTests;
 			sourceTree = "<group>";
@@ -3481,10 +3481,9 @@
 			};
 			buildConfigurationList = 3FFF18381829DB1D00167070 /* Build configuration list for PBXProject "ResearchKit" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				tr,

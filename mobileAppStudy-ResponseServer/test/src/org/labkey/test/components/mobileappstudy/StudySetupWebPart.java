@@ -75,11 +75,7 @@ public class StudySetupWebPart extends BodyWebPart<StudySetupWebPart.ElementCach
 
     public StudySetupWebPart setShortName(String shortName)
     {
-        elementCache().shortNameField.set(shortName);
-        elementCache().shortNameField.blur();
-        getWrapper().waitForFormElementToEqual(elementCache().shortNameField.getComponentElement(), shortName);
-        WebDriverWrapper.sleep(500);
-        return this;
+        return setField(elementCache().shortNameField, shortName);
     }
 
     public boolean isShortNameVisible()
@@ -125,6 +121,15 @@ public class StudySetupWebPart extends BodyWebPart<StudySetupWebPart.ElementCach
         warning.clickOk();
     }
 
+    private StudySetupWebPart setField(Input field, String value)
+    {
+        field.set(value);
+        field.blur();
+        getWrapper().waitForFormElementToEqual(field.getComponentElement(), value);
+        WebDriverWrapper.sleep(500);
+        return this;
+    }
+
     @Override
     protected ElementCache newElementCache()
     {
@@ -137,6 +142,11 @@ public class StudySetupWebPart extends BodyWebPart<StudySetupWebPart.ElementCach
         final WebElement shortNamePrompt = Locator.tagWithClass("div", "studysetup-prompt").findWhenNeeded(this);
         final Input shortNameField = Input(Locator.input("studyId"), getDriver()).findWhenNeeded(this);
         final Checkbox collectionCheckbox = Checkbox.Ext4Checkbox().locatedBy(Locator.id("collectionEnabled-inputEl")).findWhenNeeded(this);
+        final Checkbox forwardingCheckbox = Checkbox.Ext4Checkbox().locatedBy(Locator.id("forwardingEnabled-inputEl")).findWhenNeeded(this);
+        final Input urlField = Input(Locator.input("url"), getDriver()).findWhenNeeded(this);
+        final Input userField = Input(Locator.input("username"), getDriver()).findWhenNeeded(this);
+        final Input passwordField = Input(Locator.input("password"), getDriver()).findWhenNeeded(this);
+
         final WebElement successMessage = Locator.tagWithText("label", "Configuration Saved").findWhenNeeded(this);
     }
 

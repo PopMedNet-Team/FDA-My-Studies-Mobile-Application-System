@@ -111,7 +111,7 @@ class ViewController: UIViewController {
         
         
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
-        
+        taskViewController?.modalPresentationStyle = .fullScreen
         present(taskViewController!, animated: true, completion: nil)
 
         
@@ -163,7 +163,7 @@ class ViewController: UIViewController {
                     taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                     
                      UIApplication.shared.statusBarStyle = .default
-                    
+                     taskViewController?.modalPresentationStyle = .fullScreen
                     present(taskViewController!, animated: true, completion: nil)
                 }
             }

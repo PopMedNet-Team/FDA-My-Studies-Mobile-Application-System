@@ -1,0 +1,47 @@
+
+V"squid:SwitchLastCaseIsDefaultCheckë""Add a default case to this switch.(–Š”›üÿÿÿÿ
+V"squid:SwitchLastCaseIsDefaultCheck¸""Add a default case to this switch.(–Š”›üÿÿÿÿ
+V"squid:SwitchLastCaseIsDefaultCheck¡""Add a default case to this switch.(§Í‡­ùÿÿÿÿ
+fsquid:S1871À"IThis case's code block is the same as the block for the case on line 418.(¦›ŞÖşÿÿÿÿ
+asquid:S1871Å"IThis case's code block is the same as the block for the case on line 418.(—ø¡Ä
+asquid:S1871¬"IThis case's code block is the same as the block for the case on line 418.(µÅÊÔ
+fsquid:S1871¶"IThis case's code block is the same as the block for the case on line 418.(ÔÊÖøÿÿÿÿ
+fsquid:S1871»"IThis case's code block is the same as the block for the case on line 418.(È„¸çúÿÿÿÿ
+bsquid:CommentedOutCodeLine‚"<This block of commented-out lines of code should be removed.(ïú©i
+csquid:CommentedOutCodeLine«"<This block of commented-out lines of code should be removed.(‘•
+hsquid:CommentedOutCodeLineÌ"<This block of commented-out lines of code should be removed.(Â¨øİùÿÿÿÿ
+‹squid:S1319>"oThe type of the "headers" object should be an interface such as "Map" rather than the implementation "HashMap".(£š½–úÿÿÿÿ
+‹squid:S1319>"oThe type of the "hashMap" object should be an interface such as "Map" rather than the implementation "HashMap".(£š½–úÿÿÿÿ
+†squid:S1319V"oThe type of the "headers" object should be an interface such as "Map" rather than the implementation "HashMap".(ÉĞºÊ
+‹squid:S1319n"oThe type of the "headers" object should be an interface such as "Map" rather than the implementation "HashMap".(Ÿ©Îöûÿÿÿÿ
+‹squid:S1319{"oThe type of the "headers" object should be an interface such as "Map" rather than the implementation "HashMap".(¨Éõ†ÿÿÿÿÿ
+Œsquid:S1319•"oThe type of the "headers" object should be an interface such as "Map" rather than the implementation "HashMap".(Í€í¬ûÿÿÿÿ
+squid:S1319•"qThe type of the "mFormData" object should be an interface such as "Map" rather than the implementation "HashMap".(Í€í¬ûÿÿÿÿ
+Šsquid:S1319•"mThe type of the "files" object should be an interface such as "Map" rather than the implementation "HashMap".(Í€í¬ûÿÿÿÿ
+‡squid:S1319­"oThe type of the "headers" object should be an interface such as "Map" rather than the implementation "HashMap".(Ûò€é
+Œsquid:S1319Å"oThe type of the "headers" object should be an interface such as "Map" rather than the implementation "HashMap".(–ÙùÉüÿÿÿÿ
+Œsquid:S1319Å"oThe type of the "hashMap" object should be an interface such as "Map" rather than the implementation "HashMap".(–ÙùÉüÿÿÿÿ
+Rsquid:S1141ä"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+Rsquid:S1141‚"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+gsquid:S2674•"JCheck the return value of the "read" call to see how many bytes were read.(ë¥áïøÿÿÿÿ
+Bsquid:S1481„"*Remove this unused "parse" local variable.(çóğï
+jsquid:S3776å"RRefactor this method to reduce its Cognitive Complexity from 85 to the 15 allowed.(èğú¼
+jsquid:S3776Ö"RRefactor this method to reduce its Cognitive Complexity from 57 to the 15 allowed.(Çïİ‡
+Ysquid:S00107>"<Method has 8 parameters, which is greater than 7 authorized.(£š½–úÿÿÿÿ
+Tsquid:S00107V"<Method has 8 parameters, which is greater than 7 authorized.(ÉĞºÊ
+Ysquid:S00107n"<Method has 8 parameters, which is greater than 7 authorized.(Ÿ©Îöûÿÿÿÿ
+Ysquid:S00107{"<Method has 8 parameters, which is greater than 7 authorized.(¨Éõ†ÿÿÿÿÿ
+Zsquid:S00107•"<Method has 9 parameters, which is greater than 7 authorized.(Í€í¬ûÿÿÿÿ
+Zsquid:S00107Å"<Method has 8 parameters, which is greater than 7 authorized.(–ÙùÉüÿÿÿÿ
+˜squid:S1186Œ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Á…‘
+nsquid:S00117>"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£š½–úÿÿÿÿ
+isquid:S00117V"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÉĞºÊ
+nsquid:S00117n"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ÿ©Îöûÿÿÿÿ
+nsquid:S00117{"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨Éõ†ÿÿÿÿÿ
+osquid:S00117•"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Í€í¬ûÿÿÿÿ
+jsquid:S00117­"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ûò€é
+osquid:S00117Å"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–ÙùÉüÿÿÿÿ
+@squid:S1148ÿ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+;squid:S1148™"#Use a logger to log this exception.(Ç’Çê
+@squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148¼"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ

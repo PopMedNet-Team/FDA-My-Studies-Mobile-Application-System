@@ -146,22 +146,19 @@ public class SurveyStep
             @Override
             public List<SurveyStep> getDataValues()
             {
-                Map<String, Object> intFormat = new HashMap<>();
-                intFormat.put("style", "Integer");
-
                 List<SurveyStep> dataValues = new ArrayList<>();
 
                 SurveyStep duration = new SurveyStep();
                 duration.setKey("duration");
                 duration.setResultType(Numeric.resultTypeString);
                 duration.setType("taskData");
-                duration.setFormat(intFormat);
+                duration.setFormat(SurveyStepFormat.getIntegerFormat());
                 dataValues.add(duration);
 
                 SurveyStep count = new SurveyStep();
                 count.setKey("count");
                 count.setResultType(Numeric.resultTypeString);
-                count.setFormat(intFormat);
+                count.setFormat(SurveyStepFormat.getIntegerFormat());
                 count.setType("taskData");
                 dataValues.add(count);
                 return dataValues;
@@ -171,30 +168,27 @@ public class SurveyStep
             @Override
             public List<SurveyStep> getDataValues()
             {
-                Map<String, Object> intFormat = new HashMap<>();
-                intFormat.put("style", "Integer");
-
                 List<SurveyStep> dataValues = new ArrayList<>();
 
                 SurveyStep score = new SurveyStep();
                 score.setKey("score");
                 score.setType("taskData");
                 score.setResultType(Numeric.resultTypeString);
-                score.setFormat(intFormat);
+                score.setFormat(SurveyStepFormat.getIntegerFormat());
                 dataValues.add(score);
 
                 SurveyStep numGames = new SurveyStep();
                 numGames.setKey("numberOfGames");
                 numGames.setType("taskData");
                 numGames.setResultType(Numeric.resultTypeString);
-                numGames.setFormat(intFormat);
+                numGames.setFormat(SurveyStepFormat.getIntegerFormat());
                 dataValues.add(numGames);
 
                 SurveyStep numFailures = new SurveyStep();
                 numFailures.setKey("numberOfFailures");
                 numFailures.setType("taskData");
                 numFailures.setResultType(Numeric.resultTypeString);
-                numFailures.setFormat(intFormat);
+                numFailures.setFormat(SurveyStepFormat.getIntegerFormat());
                 dataValues.add(numFailures);
 
                 return dataValues;
@@ -204,9 +198,6 @@ public class SurveyStep
             @Override
             public List<SurveyStep> getDataValues()
             {
-                Map<String, Object> intFormat = new HashMap<>();
-                intFormat.put("style", "Integer");
-
                 List<SurveyStep> dataValues = new ArrayList<>();
 
                 SurveyStep solved = new SurveyStep();
@@ -218,7 +209,7 @@ public class SurveyStep
                 SurveyStep numMoves = new SurveyStep();
                 numMoves.setKey("numberOfMoves");
                 numMoves.setResultType(Numeric.resultTypeString);
-                numMoves.setFormat(intFormat);
+                numMoves.setFormat(SurveyStepFormat.getIntegerFormat());
                 numMoves.setType("taskData");
                 dataValues.add(numMoves);
 
@@ -323,9 +314,6 @@ public class SurveyStep
          }
     }
 
-    private final static String MAXLENGTH_KEY = "maxLength";
-    private final static String STYLE_KEY = "style";
-
     private String type;
     private String resultType;
     private String key;
@@ -333,7 +321,7 @@ public class SurveyStep
     private String title;
     private List<SurveyStep> steps = null;
 
-    private Map<String, Object> format;
+    private SurveyStepFormat format;
 
     //Currently ignored since we need to make the field
     private boolean skippable = true;
@@ -386,7 +374,7 @@ public class SurveyStep
         this.steps = steps;
     }
 
-    public void setFormat(Map<String, Object> format)
+    public void setFormat(SurveyStepFormat format)
     {
         this.format = format;
     }
@@ -427,7 +415,7 @@ public class SurveyStep
         this.type = type;
     }
 
-    public Map<String, Object> getFormat()
+    public SurveyStepFormat getFormat()
     {
         return format;
     }
@@ -452,10 +440,10 @@ public class SurveyStep
     @Nullable
     public Integer getMaxLength()
     {
-        if (getFormat() == null || getFormat().get(MAXLENGTH_KEY) == null)
+        if (getFormat() == null || getFormat().getMaxLength() == null)
             return null;
 
-        String val = String.valueOf(getFormat().get(MAXLENGTH_KEY));
+        String val = String.valueOf(getFormat().getMaxLength());
         if (StringUtils.isBlank(val))
             return null;
 
@@ -476,7 +464,7 @@ public class SurveyStep
         if (getFormat() == null)
             return null;
 
-        String val = String.valueOf(getFormat().get(STYLE_KEY));
+        String val = String.valueOf(getFormat().getStyle());
         if (StringUtils.isBlank(val))
             return null;
 
@@ -489,14 +477,12 @@ public class SurveyStep
         return StepResultType.getStepResultType(getResultType()).getPropertyType(this);
     }
 
-    private List<TextChoice> _textChoices = null;
     public List<TextChoice> getTextChoices()
     {
-        return _textChoices;
-    }
-    public void setTextChoices(List<TextChoice> textChoices)
-    {
-        _textChoices = textChoices;
+        if (getFormat() == null)
+            return null;
+
+        return getFormat().getTextChoices();
     }
 
     public boolean hasOtherOption()

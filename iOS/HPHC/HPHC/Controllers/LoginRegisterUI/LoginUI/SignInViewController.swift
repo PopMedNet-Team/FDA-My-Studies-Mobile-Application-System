@@ -74,7 +74,7 @@ class SignInViewController: UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        WCPServices().getTermsPolicy(delegate: self)
+        //WCPServices().getTermsPolicy(delegate: self)
         
         if let attributedTitle = buttonSignUp?.attributedTitle(for: .normal) {
             let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
@@ -83,6 +83,17 @@ class SignInViewController: UIViewController{
             
             buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
         }
+        
+        let brandingDetail = Utilities.getBrandingDetails()
+        TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
+        guard let policyURL = brandingDetail?[BrandingConstant.PrivacyPolicyURL] as? String,let terms = brandingDetail?[BrandingConstant.TermsAndConditionURL] as? String else {
+           return
+        }
+        TermsAndPolicy.currentTermsAndPolicy?.initWith(terms: terms, policy: policyURL)
+        self.agreeToTermsAndConditions()
+        
+       
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,21 +150,21 @@ class SignInViewController: UIViewController{
      
      */
     @IBAction func signInButtonAction(_ sender: Any) {
-        
+    
         self.view.endEditing(true)
         if (user.emailId?.isEmpty)! && (user.password?.isEmpty)! {
             self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
         } else if user.emailId == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
-            
+
         } else if !(Utilities.isValidEmail(testStr: user.emailId!)) {
             self.showAlertMessages(textMessage: kMessageValidEmail)
-            
+
         } else if user.password == "" {
             self.showAlertMessages(textMessage: kMessagePasswordBlank)
-            
+
         } else {
-            
+
             let ud = UserDefaults.standard
             if user.emailId == kStagingUserEmailId {
                 ud.set(true, forKey: kIsStagingUser)
@@ -161,7 +172,7 @@ class SignInViewController: UIViewController{
                 ud.set(false, forKey: kIsStagingUser)
             }
             ud.synchronize()
-            
+
             UserServices().loginUser(self)
         }
     }
@@ -444,9 +455,11 @@ extension SignInViewController: UITextViewDelegate{
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         
+        print(characterRange.description)
+        
         var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
         var title: String = kNavigationTitleTerms
-        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL ) {
+        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL && characterRange.length == String("Privacy Policy").count) {
             //kPrivacyPolicyLink
             print("terms")
             link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink

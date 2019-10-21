@@ -19,6 +19,7 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
+import UserNotifications
 
 /**
  LocalNotification manages registration and refreshing notification for the activities and studies
@@ -185,10 +186,10 @@ class LocalNotification: NSObject {
         
         //create App local notification object
         
-        let randomString = Utilities.randomString(length: 5)
+        //let randomString = Utilities.randomString(length: 5)
         
         let notification = AppLocalNotification()
-        notification.id =  String(run.runId) + run.activityId + run.studyId + randomString
+        notification.id =  String(run.runId) + run.activityId + run.studyId
         notification.message = message
         notification.activityId = run.activityId
         notification.title = ""
@@ -205,18 +206,24 @@ class LocalNotification: NSObject {
     /**
      scheduleNotificationOn registers local notification
      */
-    class func scheduleNotificationOn(date: Date,message: String,userInfo: Dictionary<String,Any>){
-        
+    class func scheduleNotificationOn(date: Date,message: String,userInfo: Dictionary<String,Any> , id:String?){
+
         if date > Date() {
             print("NotificationMessage\(message) ** date \(date.description(with: Locale.current))" )
-            let notification = UILocalNotification()
-            notification.fireDate = date
-            notification.alertBody = message
-            notification.alertAction = "Ok"
-            notification.soundName = UILocalNotificationDefaultSoundName
-            notification.userInfo = userInfo
+            let content = UNMutableNotificationContent()
+            content.body = message
+            content.userInfo = userInfo
+            content.sound = UNNotificationSound.default
+            content.badge = 1
             
-            UIApplication.shared.scheduleLocalNotification(notification)
+            let timeInterval = date.timeIntervalSinceNow
+            print("Time \(timeInterval)")
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+            let id = id ?? Utilities.randomString(length: 10)
+            let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+            let center = UNUserNotificationCenter.current()
+            center.add(request)
+
         }
         
     }
@@ -226,16 +233,22 @@ class LocalNotification: NSObject {
      */
     class func removeLocalNotificationfor(studyId: String,activityid: String) {
         
-        let allNotificaiton = UIApplication.shared.scheduledLocalNotifications
         
-        for notification in allNotificaiton! {
-            let userInfo = notification.userInfo
-            if userInfo?[kStudyId] != nil && userInfo?[kActivityId] != nil {
-                if (userInfo![kStudyId] as! String == studyId && userInfo![kActivityId] as! String == activityid) {
-                    UIApplication.shared.cancelLocalNotification(notification)
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getPendingNotificationRequests { (allNotificaiton) in
+            
+            var nIdentifers:[String] = []
+            for notification in allNotificaiton {
+                let userInfo = notification.content.userInfo
+                if userInfo[kStudyId] != nil && userInfo[kActivityId] != nil {
+                    if (userInfo[kStudyId] as! String == studyId && userInfo[kActivityId] as! String == activityid) {
+                        nIdentifers.append(notification.identifier)
+                    }
                 }
             }
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: nIdentifers)
         }
+        
     }
     
     /**
@@ -243,16 +256,21 @@ class LocalNotification: NSObject {
      */
     class func removeLocalNotificationfor(studyId: String) {
         
-        let allNotificaiton = UIApplication.shared.scheduledLocalNotifications
-        
-        for notification in allNotificaiton! {
-            let userInfo = notification.userInfo
-            if userInfo?[kStudyId] != nil {
-                if (userInfo![kStudyId] as! String == studyId) {
-                    UIApplication.shared.cancelLocalNotification(notification)
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getPendingNotificationRequests { (allNotificaiton) in
+            
+            var nIdentifers:[String] = []
+            for notification in allNotificaiton {
+                let userInfo = notification.content.userInfo
+                if userInfo[kStudyId] != nil {
+                    if (userInfo[kStudyId] as! String == studyId) {
+                        nIdentifers.append(notification.identifier)
+                    }
                 }
             }
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: nIdentifers)
         }
+        
     }
     
     /**
@@ -260,7 +278,8 @@ class LocalNotification: NSObject {
      */
     class func cancelAllLocalNotification() {
         
-        UIApplication.shared.cancelAllLocalNotifications()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        //UIApplication.shared.cancelAllLocalNotifications()
     }
     
     
@@ -268,9 +287,19 @@ class LocalNotification: NSObject {
         
         let userInfo = ["registerApp": "mystudies",
                         ]
-        let date = Date().addingTimeInterval(60*60*24*14)
+        //let date = Date().addingTimeInterval(60*60*24*14)
+        let date = Date().addingTimeInterval(60)
         
-        let message = "It’s been a while since you visited the FDA My Studies app. Please consider continuing your participation in any studies in which you’re enrolled."
+        
+        var infoDict: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            infoDict = NSDictionary(contentsOfFile: path)
+        }
+        let navTitle = infoDict!["ProductTitleName"] as! String
+        
+        let message = "It’s been a while since you visited the \(navTitle) app. Please consider continuing your participation in any studies in which you’re enrolled."
+        
+    
         
         let notification = UILocalNotification()
         notification.fireDate = date
@@ -310,6 +339,7 @@ class LocalNotification: NSObject {
                 //Cancel All Local Notifications
                 LocalNotification.cancelAllLocalNotification()
                 
+                LocalNotification.scheduledNotificaiton()
                 for notification in localNotifications {
                     
                     //Generate User Info
@@ -317,10 +347,20 @@ class LocalNotification: NSObject {
                                     kActivityId: notification.activityId!]
                     
                     //Reschedule top 50 Local Notifications
-                    LocalNotification.scheduleNotificationOn(date: notification.startDate!, message: notification.message!, userInfo: userInfo)
+                    LocalNotification.scheduleNotificationOn(date: notification.startDate!, message: notification.message!, userInfo: userInfo,id: notification.id)
+                    
                 }
+                LocalNotification.scheduledNotificaiton()
             }
         }
+    }
+    
+    class func scheduledNotificaiton() {
+        let center = UNUserNotificationCenter.current()
+        center.getPendingNotificationRequests(completionHandler: { requests in
+            print(requests)
+            
+        })
     }
     
     private static let timeFormatter: DateFormatter = {

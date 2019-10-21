@@ -36,7 +36,7 @@ let kEligibilityCompletionTitle = "You are Eligible!"
 let kEligibilityStep = "steps"
 
 let kEligibilityValidateScreen = "ValidatedScreen"
-let kEligibilityValidationDescriptionText = "Your ID has been validated. You are eligible to join the Study.Please click Continue to proceed to the Consent section."
+let kEligibilityValidationDescriptionText = "Your token has been validated. You are eligible to join the study. Please tap Get Started to proceed to the consent section."
 let kEligibilityValidationTitle = "Validated!"
 
 let kEligibilityTestInstructionStep = "EligibilityTestInstructionStep"
@@ -121,7 +121,15 @@ class EligibilityBuilder{
                 let eligibilityValidationStep = customInstructionStep(identifier: kEligibilityValidateScreen)
                 eligibilityValidationStep.text = kEligibilityValidationDescriptionText
                 
-                eligibilityValidationStep.title = kEligibilityValidationTitle
+                //Branding
+                let brandingDetail = Utilities.getBrandingDetails()
+                if let validationTitle =  brandingDetail?[BrandingConstant.ValidatedTitle] as? String{
+                    eligibilityValidationStep.title = validationTitle
+                }
+                else {
+                     eligibilityValidationStep.title = kEligibilityValidationTitle
+                }
+               
                 eligibilityValidationStep.image =  #imageLiteral(resourceName: "successBlueBig")
                 stepsArray?.append(eligibilityValidationStep)
                 

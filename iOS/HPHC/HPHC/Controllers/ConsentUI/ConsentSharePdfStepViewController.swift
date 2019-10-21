@@ -46,8 +46,10 @@ class ConsentCompletionStep: ORKStep {
 class ConsentSharePdfStepViewController: ORKStepViewController {
     
     @IBOutlet weak var buttonViewPdf: UIButton? // button to Push to PdfViewer
-    
     @IBOutlet weak var buttonNext: UIButton? // button to take to next step
+    @IBOutlet weak var activityIndicator:UIActivityIndicatorView!
+    @IBOutlet weak var labelTitle:UILabel!
+    @IBOutlet weak var lableDescription:UILabel!
     var consentDocument: ORKConsentDocument?
     
     var taskResult: ConsentCompletionTaskResult = ConsentCompletionTaskResult(identifier: kConsentCompletionResultIdentifier)
@@ -123,6 +125,40 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
         buttonViewPdf?.layer.borderColor =   kUicolorForButtonBackground
         
         buttonNext?.layer.borderColor =   kUicolorForButtonBackground
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(enrollmentCompleted), name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentCompleted"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(enrollmentFailed), name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentFailed"), object: nil)
+        
+        //if Study.currentStudy?.userParticipateState.status == UserStudyStatus.StudyStatus.yetToJoin {
+            activityIndicator.startAnimating()
+            //hide views until enrollment completed
+            buttonNext?.isHidden = true
+            buttonViewPdf?.isHidden = true
+            labelTitle.isHidden = true
+            lableDescription.isHidden = true
+//        }
+//        else {
+//            activityIndicator.isHidden = true
+//        }
+        
+       
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentCompleted"), object: nil)
+    }
+    
+    @objc func enrollmentCompleted() {
+        activityIndicator.stopAnimating()
+        buttonNext?.isHidden = false
+        buttonViewPdf?.isHidden = false
+        labelTitle.isHidden = false
+        lableDescription.isHidden = false
+    }
+    @objc func enrollmentFailed(notification:NSNotification) {
+        let error = notification.object as? Error
+        self.taskViewController?.delegate?.taskViewController(self.taskViewController!, didFinishWith: .failed, error: error)
     }
     
     override func didReceiveMemoryWarning() {

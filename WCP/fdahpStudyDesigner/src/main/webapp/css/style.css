@@ -2486,3 +2486,18 @@ a:focus{
     border-radius: 5px;
     border: 1px solid #ddd;
 }
+
+.red-border{
+	border: 1px solid red !important;
+}
+
+.not-allowed,.disabled{
+	cursor: not-allowed !important;
+	pointer-events: none !important;
+	opacity: 0.5 !important;
+}
+
+#alignCenter{
+	position: absolute;
+	top: 0px;
+}

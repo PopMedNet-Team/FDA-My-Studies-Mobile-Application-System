@@ -1,20 +1,3 @@
-#-------------------------------------------------------------------------------
-# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
-# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
-# 
-# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-#-------------------------------------------------------------------------------
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -367,6 +350,7 @@ $(document).ready(function(){
 	}
 	
 	//auto select if consent Id is empty
+	//var consentId = "${consentBo.id}";
 	
 	var consentId = "${consentBo.consentDocType}";
 	console.log(consentId);
@@ -379,10 +363,12 @@ $(document).ready(function(){
 		}
 	}
 	
+	//active li
     $(".menuNav li").removeClass('active');
     $(".fifthConsentReview").addClass('active');
 	$("#createStudyId").show();
 	consentDocumentDivType();
+	//check the consent type
 	$("#consentDocTypeDivId").on('change', function(){
 		consentDocumentDivType();
     });
@@ -408,7 +394,24 @@ $(document).ready(function(){
 			$("#rootContainer").hide();
 		}
 	});
-	
+	/* var isChek = "${consentBo.consentDocType}";
+	if(isChek != null && isChek !='' && typeof isChek !=undefined){
+		if(isChek == 'New'){
+			$("#newDivId").show();
+			$("#autoCreateDivId").hide();
+			$("#autoCreateDivId01").hide();
+			$("#inlineRadio2").prop("checked", true);
+			$("#typeOfCensent").val("New");
+			createNewConsentDocument();
+		}else{
+			$("#autoCreateDivId").show();
+			$("#autoCreateDivId01").show();
+	        $("#newDivId").hide();
+	        $("#inlineRadio1").prop("checked", true);
+	        $("#typeOfCensent").val("Auto");
+	        autoCreateConsentDocument();
+		}
+	} */
 	//go back to consentList page
 	$("#saveId,#doneId").on('click', function(){
 		var id = this.id;
@@ -501,12 +504,14 @@ $(document).ready(function(){
 			$('.requiredClass').attr('required',false);
 			newLearnMoreConsentDocument();
 			$("#rootContainer").hide();
+			//tinymce.get('learnMoreTextId').setContent('');
 		}else{
 			$('.requiredClass').attr('required',true);
 			$('#learnMoreTextId').attr('required',true);
 			newLearnMoreConsentDocument();
 		} 
 	}
+	//consent doc type div
 	function consentDocumentDivType(){
 		//fancyToolbar();
 		
@@ -535,7 +540,11 @@ $(document).ready(function(){
     	}
 	}
 	
-    
+	// Fancy Scroll Bar
+    /* function fancyToolbar(){
+    	$(".left-content").niceScroll({cursorcolor:"#95a2ab",cursorborder:"1px solid #95a2ab"});
+        $(".right-content-body").niceScroll({cursorcolor:"#d5dee3",cursorborder:"1px solid #d5dee3"});
+	} */
     //check the consentinfo list
     function autoCreateConsentDocument(){
     	var consentDocumentDivContent = "";
@@ -555,7 +564,10 @@ $(document).ready(function(){
         }
         $("#autoConsentDocumentDivId").append(consentDocumentDivContent);
         $("#newDocumentDivId").val('');
+        //apply custom scroll bar to the auto consent document type
+       // $("#autoCreateDivId").niceScroll({cursorcolor:"#d5dee3",cursorborder:"1px solid #d5dee3"});
     }
+    //createNewConsentDocument
     function createNewConsentDocument(){
     	tinymce.init({
              selector: "#newDocumentDivId",
@@ -614,7 +626,24 @@ $(document).ready(function(){
     }
     //save review and E-consent data
     function saveConsentReviewAndEConsentInfo(item){
-	  
+	   //	if(item == "doneId"){
+			//$("#consentValidatorDiv").validator('validate');
+	   	 	//var customErrorLength = $("#consentValidatorDiv").find(".has-danger").length;
+	   	 
+		   	/* if(customErrorLength == 1){
+		   		resetValidation($("#consentValidatorDiv"));
+		   	} */
+	   		/* if(isFromValid("#consentReviewFormId")){
+		   		customErrorLength = 0;
+			}else{
+		   		customErrorLength = 1;
+		   	} */
+	   /* 	}else{
+	   		customErrorLength = 0;
+	   	} */
+	   	
+		//console.log("customErrorLength:"+customErrorLength);
+   	 	//if(customErrorLength == 0){
 	   		var consentInfo = new Object();
 	    	var consentId = $("#consentId").val();
 	    	var studyId = $("#studyId").val();
@@ -636,7 +665,8 @@ $(document).ready(function(){
 	    	var allow_Permission = $('input[name="allowWithoutPermission"]:checked').val();	
 	    	var aggrement_of_theconsent = $("#aggrementOfTheConsentId").val();	
 	    		
-		    	if(consentDocType == "New"){
+	    		
+	    	if(consentDocType == "New"){
 	    		consentDocumentContent = tinymce.get('newDocumentDivId').getContent({ format: 'raw' });
 	    		consentDocumentContent = replaceSpecialCharacters(consentDocumentContent);
 	    	}
@@ -709,10 +739,27 @@ $(document).ready(function(){
 		          },
 		          global : false
 		   });
+	   	 /* }else{
+	   		console.log("else....");
+	   		var slaCount = $('#menu1').find('.has-error.has-danger').length;
+			var qlaCount = $('#menu2').find('.has-error.has-danger').length;
+			var rlaCount = $('#menu3').find('.has-error.has-danger').length;
+			console.log("slaCount:"+slaCount);
+			console.log("qlaCount:"+qlaCount);
+			console.log("rlaCount:"+rlaCount);
+			if(parseInt(slaCount) >= 1){
+				 $('.shareData a').tab('show');
+			}else if(parseInt(qlaCount) >= 1){
+				 $('.consentReview a').tab('show');
+			}else if(parseInt(rlaCount) >= 1){
+				 $('.econsentForm a').tab('show');
+			}
+	   	 } */
     }
 });
 
 function goToBackPage(item){
+	//window.history.back();
 	<c:if test="${permission ne 'view'}">
 	$(item).prop('disabled', true);
 	bootbox.confirm({

@@ -17,6 +17,14 @@ Ext4.define('LABKEY.MobileAppStudy.StudySetupPanel', {
 
     collectionEnabled: null,
 
+    forwardingEnabled: null,
+
+    forwardingUrl: null,
+
+    forwardingUsername: null,
+
+    forwardingPassword: null,
+
     trackResetOnLoad: true,
 
     initComponent: function()

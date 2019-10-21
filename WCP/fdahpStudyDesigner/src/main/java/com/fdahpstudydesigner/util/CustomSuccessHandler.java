@@ -1,20 +1,3 @@
-/*******************************************************************************
- * Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all copies or substantial
- * portions of the Software.
- * 
- * Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
- * Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- * 
- * THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
- * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
- * OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- ******************************************************************************/
 package com.fdahpstudydesigner.util;
 
 import java.io.IOException;
@@ -98,7 +81,6 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 		String activity;
 		String activityDetail;
 		MasterDataBO masterDataBO;
-
 		userdetails = loginDAO.getValidUserByEmail(authentication.getName());
 		if (userdetails.isForceLogout()) {
 			userdetails.setForceLogout(false);
@@ -115,6 +97,11 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 		sesObj.setPasswordExpairdedDateTime(userdetails
 				.getPasswordExpairdedDateTime());
 		sesObj.setCreatedDate(userdetails.getCreatedOn());
+		sesObj.setRole(userdetails.getRoleName());
+
+//		masterDataBO = dashBoardAndProfileService.getMasterData("terms");
+//		sesObj.setTermsText(masterDataBO.getTermsText());
+//		sesObj.setPrivacyPolicyText(masterDataBO.getPrivacyPolicyText());
 
 		if (response.isCommitted()) {
 			System.out.println("Can't redirect");
@@ -146,6 +133,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 			targetUrl = uri[1];
 		}
 		logger.info("targetUrl:" + targetUrl);
+		// redirectStrategy.sendRedirect(request, response, targetUrl);
 		JSONObject jsonobject = new JSONObject();
 		PrintWriter out = null;
 		String message = FdahpStudyDesignerConstants.SUCCESS;

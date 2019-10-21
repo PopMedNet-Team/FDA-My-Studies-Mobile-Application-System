@@ -73,7 +73,7 @@ let kORKTextChoiceText = "text"
 let kORKTextChoiceValue = "value"
 let kORKTextChoiceDetailText = "detail"
 let kORKTextChoiceExclusive = "exclusive"
-
+let kORKOTherChoice = "other"
 
 //StepQuestionImageChoice Type Api Constants
 
@@ -139,6 +139,7 @@ let kStepQuestionHeightPlaceholder = "placeholder"
 
 let kStepQuestionLocationUseCurrentLocation = "useCurrentLocation"
 
+typealias JSONDictionary = [String: Any]
 
 enum DateRange: String {
     case untilCurrent = "untilCurrent"
@@ -444,7 +445,8 @@ class ActivityQuestionStep: ActivityStep {
                     let defaultValue = (formatDict?[kStepQuestionTextScaleDefault] as? Int)!
                     self.textScaleDefaultValue = "\(defaultValue)"
                     
-                    textChoiceArray = self.getTextChoices(dataArray: (formatDict?[kStepQuestionTextScaleTextChoices] as? NSArray)!)
+                    let textChoiceDict = formatDict?[kStepQuestionTextScaleTextChoices] as? [Any] ?? []
+                    textChoiceArray = self.getTextChoices(dataArray: textChoiceDict).0
                     
                     //defaultValue = self.textScaleDefaultIndex!
                     
@@ -461,7 +463,8 @@ class ActivityQuestionStep: ActivityStep {
                     
                     let textChoiceArray: [ORKTextChoice]?
                     
-                    textChoiceArray = self.getTextChoices(dataArray: (formatDict?[kStepQuestionTextScaleTextChoices] as? NSArray)!)
+                    let textChoiceDict = formatDict?[kStepQuestionTextScaleTextChoices] as? [Any] ?? []
+                    textChoiceArray = self.getTextChoices(dataArray: textChoiceDict).0
                     
                     questionStepAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: textChoiceArray!)
                 } else {
@@ -489,9 +492,14 @@ class ActivityQuestionStep: ActivityStep {
                 if  Utilities.isValidObject(someObject: formatDict?[kStepQuestionTextChoiceTextChoices] as AnyObject?)
                     && Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextChoiceSelectionStyle] as AnyObject?) {
                     
-                    let textChoiceArray: [ORKTextChoice]?
+                    let textChoiceDict = formatDict?[kStepQuestionTextChoiceTextChoices] as? [Any] ?? []
                     
-                    textChoiceArray = self.getTextChoices(dataArray: (formatDict?[kStepQuestionTextChoiceTextChoices] as? NSArray)! )
+                    let choiceResult = self.getTextChoices(dataArray: textChoiceDict)
+                    var otherChoice: OtherChoice? = choiceResult.1
+                    
+                    otherChoice = (otherChoice == nil) ? OtherChoice() : otherChoice
+                    
+                    let textChoiceArray: [ORKTextChoice]? = choiceResult.0
                     
                     if ((formatDict?[kStepQuestionTextChoiceSelectionStyle] as? String)!) == kStepQuestionTextChoiceSelectionStyleSingle {
                         // single choice
@@ -503,6 +511,21 @@ class ActivityQuestionStep: ActivityStep {
                         Logger.sharedInstance.debug("kStepQuestionTextChoiceSelectionStyle has null value:\(String(describing: formatDict))")
                         return nil
                     }
+                   
+
+                    questionStep = QuestionStep(identifier: key!, title: "", question: title!, answer: questionStepAnswerFormat!,otherChoice: otherChoice!)
+                    
+                    // By default a step is skippable
+                    if (skippable == false) {
+                        questionStep?.isOptional = false
+                    }
+                    //setting the placeholder Value if exist any
+                    if  Utilities.isValidValue(someObject: placeholderText as AnyObject?) {
+                        questionStep?.placeholder = placeholderText
+                    }
+                    questionStep?.text = text
+                    return questionStep
+                    
                 } else {
                     Logger.sharedInstance.debug("textChoice Question Step has null values:\(String(describing: formatDict))")
                     return nil
@@ -568,7 +591,7 @@ class ActivityQuestionStep: ActivityStep {
                                 unit = HKUnit.init(from: localizedQuestionStepAnswerFormatUnit)
                             }
                             questionStepAnswerFormat = ORKHealthKitQuantityTypeAnswerFormat.init(quantityType: HKQuantityType.quantityType(forIdentifier: quantityTypeId)!, unit: unit, style: ORKNumericAnswerStyle.decimal)
-                          
+                            
                             
                         } else {
                             
@@ -641,7 +664,7 @@ class ActivityQuestionStep: ActivityStep {
                     
                     var answerFormat = ORKAnswerFormat.textAnswerFormat()
                     
-                   
+                    
                     
                     if Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextValidationRegex] as AnyObject?) && Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextInvalidMessage] as AnyObject?) {
                         
@@ -758,62 +781,61 @@ class ActivityQuestionStep: ActivityStep {
      @param dataArray: is either array of Dictionary or array of String
      returns array of ORKTextChoice
      */
-    func getTextChoices(dataArray: NSArray) -> [ORKTextChoice] {
+    func getTextChoices(dataArray: [Any]) -> ([ORKTextChoice]?,OtherChoice?) {
         
-        var textChoiceArray: [ORKTextChoice]? = []
+        var textChoiceArray: [ORKTextChoice] = []
+        var otherChoice: OtherChoice?
         
-        if Utilities.isValidObject(someObject: dataArray ) {
+        if let dictArr = dataArray as? [JSONDictionary] {
             
-            for i  in 0 ..< dataArray.count {
+            for dict in dictArr {
                 
-                if (Utilities.isValidObject(someObject: dataArray[i] as AnyObject?) && (((dataArray[i] as? NSDictionary) != nil))) {
-                    // For array of dictionary used in TextScale
-                    let dict: NSDictionary = (dataArray[i] as? NSDictionary)!
+                let text = dict[kORKTextChoiceText] as? String ?? ""
+                let value = dict[kORKTextChoiceValue] as? String ?? ""
+                let detail = dict[kORKTextChoiceDetailText] as? String ?? ""
+                let isExclusive = dict[kORKTextChoiceExclusive] as? Bool ?? false
+                
+                if let otherDict = dict[kORKOTherChoice] as? JSONDictionary {
                     
-                    if Utilities.isValidObject(someObject: dict) {
-                        
-                        if  Utilities.isValidValue(someObject: dict[kORKTextChoiceText] as AnyObject?) &&  Utilities.isValidValue(someObject: dict[kORKTextChoiceValue] as AnyObject?) &&  Utilities.isValidValue(someObject: dict[kORKTextChoiceExclusive] as AnyObject?) {
-                            
-                            let detailText: String?
-                            
-                            if Utilities.isValidValue(someObject: (dict[kORKTextChoiceDetailText] as? String as AnyObject?)) {
-                                detailText = dict[kORKTextChoiceDetailText] as? String
-                            } else {
-                                detailText = " "
-                            }
-                            
-                            if self.textScaleDefaultValue?.isEmpty == false && self.textScaleDefaultValue != "" {
-                                if ((dict[kORKTextChoiceValue] as? String)!)  == self.textScaleDefaultValue {
-                                    self.textScaleDefaultIndex = i
-                                }
-                            }
-                            
-                            let  choice = ORKTextChoice(text: (dict[kORKTextChoiceText] as? String)!, detailText: detailText, value: (dict[kORKTextChoiceValue] as? NSCoding & NSCopying & NSObjectProtocol)! , exclusive: (dict[kORKTextChoiceExclusive] as? Bool)!)
-                            textChoiceArray?.append(choice)
-                        }
-                        
-                    }
-                } else if dataArray[i] as? String != nil && Utilities.isValidValue(someObject: dataArray[i] as AnyObject?) {
-                    // For array of string used for Value Picker & TextChoice
-                    let key: String = (dataArray[i] as? String)!
+                    let placeholder = otherDict["placeholder"] as? String ?? "enter here"
+                    let isMandatory = otherDict["isMandatory"] as? Bool ?? false
+                    let textFieldReq = otherDict["textfieldReq"] as? Bool ?? false
+        
+                    otherChoice = OtherChoice(isShowOtherCell: true, isShowOtherField: textFieldReq, otherTitle: text, placeholder: placeholder, isMandatory: isMandatory,isExclusive: isExclusive,detailText: detail, value: value)
                     
-                    if Utilities.isValidValue(someObject: key as AnyObject?) {
-                        
-                        let choice = ORKTextChoice(text: key, value: i as NSCoding & NSCopying & NSObjectProtocol )
-                        
-                        if self.textScaleDefaultValue?.isEmpty == false && self.textScaleDefaultValue != "" {
-                            if key == self.textScaleDefaultValue {
-                                self.textScaleDefaultIndex = i
-                            }
-                        }
-                        textChoiceArray?.append(choice)
-                    }
-                } else {
-                    Logger.sharedInstance.debug("dataArray has Invalid data: null ")
+                    continue // No need to add other text choice
                 }
+                
+                let choice = ORKTextChoice(text: text , detailText: detail, value: value as NSCoding & NSCopying & NSObjectProtocol, exclusive: isExclusive)
+                
+                textChoiceArray.append(choice)
+                
             }
+            
+        } else if let titleArr = dataArray as? [String] {
+            
+            for (i,title) in titleArr.enumerated() {
+                
+                let choice = ORKTextChoice(text: title, value: i as NSCoding & NSCopying & NSObjectProtocol)
+                
+                if self.textScaleDefaultValue?.isEmpty == false && self.textScaleDefaultValue != "" {
+                    if title == self.textScaleDefaultValue {
+                        self.textScaleDefaultIndex = i
+                    }
+                }
+                textChoiceArray.append(choice)
+            }
+            
+        } else {
+            Logger.sharedInstance.debug("dataArray has Invalid data: null for Text Choice ")
         }
-        return textChoiceArray!
+        
+        if textChoiceArray.isEmpty {
+            return (nil,nil)
+        } else {
+            return (textChoiceArray,otherChoice)
+        }
+        
     }
     
     /* Method  creates ORKImageChoice Array

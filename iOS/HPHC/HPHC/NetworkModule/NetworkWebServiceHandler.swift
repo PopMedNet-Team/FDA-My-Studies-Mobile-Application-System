@@ -89,9 +89,6 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
     fileprivate func getBaseURLString(_ requestName : NSString) -> NSString {
         
         let serverPath = self .getServerURLString()
-//        if requestName == "studyList" {
-//            serverPath = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-//        }
         return NSString.init(format: "%@%@", serverPath,requestName)
     }
     
@@ -247,12 +244,12 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         }
         let httpHeaders : NSDictionary?
       
-      if requestName as String == RegistrationMethods.refreshToken.method.methodName{
-         httpHeaders = defaultheaders
-        
-      } else {
+//      if requestName as String == RegistrationMethods.refreshToken.method.methodName{
+//         httpHeaders = defaultheaders
+//
+//      } else {
          httpHeaders = self.getCombinedHeaders(headers, defaultHeaders: defaultheaders)
-      }
+      //}
       
         let baseURLString : NSString = self.getBaseURLString(requestName)
         let requestUrl = URL(string: baseURLString as String)
@@ -298,7 +295,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         } else {
             if ((delegate?.failedRequest) != nil) {
         
-                let error1 = NSError(domain: NSURLErrorDomain, code:NoNetworkErrorCode,userInfo:[NSLocalizedDescriptionKey:"You seem to be offline. Please connect to a network to proceed with this action."])
+                let error1 = NSError(domain: NSURLErrorDomain, code:NoNetworkErrorCode,userInfo:[NSLocalizedDescriptionKey:"You seems to be offline. Please connect to a network to proceed with this action."])
                 delegate?.failedRequest(networkManager!, requestName: requestName!,error: error1)
             }
         }
@@ -339,16 +336,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                         delegate?.finishedRequest(networkManager!, requestName: requestName!,response: responseDict!)
                         
                     } else {
-                        var dictionary = NSDictionary()
-                        print("response Dictionary Nil")
                         
-                        if let httpResponse = response as? HTTPURLResponse {
-                            if let contentType = httpResponse.allHeaderFields["Status Message"] as? String {
-                                // use contentType here
-                                dictionary = ["Status Message": contentType]
-                                
-                            }
-                        }
                         error1 = NSError(domain: NSURLErrorDomain, code: 300,userInfo:[NSLocalizedDescriptionKey:"Could not connect to server. Please try again later."])
                         
                         if ((delegate?.failedRequest) != nil) {

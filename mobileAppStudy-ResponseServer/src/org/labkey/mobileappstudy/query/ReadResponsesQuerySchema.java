@@ -18,8 +18,11 @@ package org.labkey.mobileappstudy.query;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.labkey.api.collections.Sets;
+import org.labkey.api.data.BaseColumnInfo;
 import org.labkey.api.data.ColumnInfo;
 import org.labkey.api.data.Container;
+import org.labkey.api.data.ContainerFilter;
+import org.labkey.api.data.ForeignKey;
 import org.labkey.api.data.TableInfo;
 import org.labkey.api.exp.list.ListService;
 import org.labkey.api.module.Module;
@@ -91,31 +94,27 @@ public class ReadResponsesQuerySchema extends UserSchema
         return null != _participant || super.canReadSchema();
     }
 
-    @Nullable
     @Override
-    public TableInfo createTable(String name)
+    public @Nullable TableInfo createTable(String name, ContainerFilter cf)
     {
-        TableInfo listTable = _listSchema.createTable(name);
-        return listTable == null ? null : new ResponseTable(listTable, _participant, this);
+        TableInfo listTable = _listSchema.createTable(name, cf);
+        return listTable == null ? null : new ResponseTable(listTable, _participant, this, cf);
     }
 
     private static class ResponseTable extends FilteredTable<ReadResponsesQuerySchema>
     {
-        private final TableInfo _listTable;
-
-        public ResponseTable(@NotNull TableInfo table, @Nullable Participant participant, @NotNull ReadResponsesQuerySchema userSchema)
+        ResponseTable(@NotNull TableInfo table, @Nullable Participant participant, @NotNull ReadResponsesQuerySchema userSchema, ContainerFilter cf)
         {
-            super(table, userSchema);
+            super(table, userSchema, cf);
 
-            _listTable = table;
-            _listTable.getColumns().forEach(this::addWrapColumn);  // Future: Limit to NotPHI columns only
+            table.getColumns().forEach(this::addWrapColumn);  // Future: Limit to NotPHI columns only
 
-            setDefaultVisibleColumns(_listTable.getDefaultVisibleColumns());
+            setDefaultVisibleColumns(table.getDefaultVisibleColumns());
 
             if (null != participant)
             {
                 // TODO: Seems wrong... we should get the column from this, not _listTable... but if we do that, the assertCorrectParentTable() assert fails
-                ColumnInfo pid = _listTable.getColumn("ParticipantId");
+                ColumnInfo pid = table.getColumn("ParticipantId");
 
                 if (null != pid)  // Maybe throw instead?
                     addCondition(pid, participant.getRowId());
@@ -125,13 +124,13 @@ public class ReadResponsesQuerySchema extends UserSchema
         private static final Set<String> NAUGHTY_COLUMNS = Sets.newCaseInsensitiveHashSet("CreatedBy", "ModifiedBy", "Container");
 
         @Override
-        public ColumnInfo addWrapColumn(ColumnInfo column)
+        public BaseColumnInfo addWrapColumn(ColumnInfo column)
         {
-            ColumnInfo wrapped = super.addWrapColumn(column);
+            BaseColumnInfo wrapped = super.addWrapColumn(column);
 
             // Nuke standard columns that have foreign keys to other schemas... otherwise, selectRows and executeSql would blow up when these columns are selected
             if (NAUGHTY_COLUMNS.contains(wrapped.getColumnName()))
-                wrapped.setFk(null);
+                wrapped.setFk((ForeignKey)null);
 
             return wrapped;
         }

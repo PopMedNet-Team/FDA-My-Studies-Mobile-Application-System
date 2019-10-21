@@ -101,6 +101,32 @@ bool permissions_schema_exist(const Group&);
 bool user_exist(const Group&, StringData user_id);
 //@}
 
+
+/// Perform a query as user \a user_id, returning only the results that the
+/// user has access to read. If the user is an admin, there is no need to call
+/// this function, since admins can always read everything.
+///
+/// If the target table of the query does not have object-level permissions,
+/// the query results will be returned without any additional filtering.
+///
+/// If the target table of the query has object-level permissions, but the
+/// permissions schema of this Realm is invalid, an exception of type
+/// `InvalidPermissionsSchema` is thrown.
+///
+/// LIMIT and DISTINCT will be applied *after* permission filters.
+///
+/// The resulting TableView can be used like any other query result.
+///
+/// Note: Class-level and Realm-level permissions are not taken into account in
+/// the resulting TableView, since there is no way to represent this in the
+/// query engine.
+ConstTableView query_with_permissions(Query query, StringData user_id,
+                                      const DescriptorOrdering* ordering = nullptr);
+
+struct InvalidPermissionsSchema : util::runtime_error {
+    using util::runtime_error::runtime_error;
+};
+
 //@{
 /// Convenience function to modify permission data.
 ///

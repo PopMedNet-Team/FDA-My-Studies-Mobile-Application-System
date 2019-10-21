@@ -9,6 +9,7 @@
 	<description>Studies Gateway Web Application</description>
 	<url>http://maven.apache.org</url>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<app.dir.name>fdahpStudyDesigner</app.dir.name>
 		<org.springframework.version>3.2.8.RELEASE</org.springframework.version>
 		<spring.security.version>3.2.3.RELEASE</spring.security.version>
@@ -23,13 +24,14 @@
 				<configuration>
 					<url>http://localhost:8080/manager/html</url>
 					<server>TomcatServer</server>
+					<port>8081</port>
 					<path>/fdahpStudyDesigner</path>
 					<username>admin</username>
 					<password>password</password>
 					<!-- <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory> -->
 				</configuration>
 			</plugin>
-			<plugin>
+			<!-- <plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 				<configuration>
@@ -41,7 +43,7 @@
 						</resource>
 					</webResources>
 				</configuration>
-			</plugin>
+			</plugin> -->
 			<!-- Maven compiler plugin -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>

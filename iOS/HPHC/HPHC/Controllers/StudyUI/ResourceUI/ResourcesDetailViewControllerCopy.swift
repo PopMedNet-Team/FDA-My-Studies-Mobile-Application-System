@@ -27,7 +27,7 @@ import SafariServices
 class ResourcesDetailViewControllerCopy: UIViewController {
     
     @IBOutlet var webViewContainer: UIView?
-     var webView: WKWebView?
+    var webView: WKWebView?
     
     @IBOutlet var progressBar: UIProgressView?
     @IBOutlet var bottomToolBar: UIToolbar?
@@ -39,6 +39,7 @@ class ResourcesDetailViewControllerCopy: UIViewController {
     var htmlString: String?
     var resource: Resource?
     var isEmailComposerPresented: Bool?
+    var fdm:FileDownloadManager = FileDownloadManager()
     
     override func viewDidLoad() {
         
@@ -159,7 +160,8 @@ class ResourcesDetailViewControllerCopy: UIViewController {
         _ = webView?.load(urlRequest)
        // webView?.loadRequest(urlRequest)
     }
-    func loadWebViewWithData(data:Data){
+    
+    func loadWebViewWithData(data: Data) {
         
          webView?.allowsBackForwardNavigationGestures = true
         
@@ -174,7 +176,7 @@ class ResourcesDetailViewControllerCopy: UIViewController {
         if !FileManager.default.fileExists(atPath: resourcesDownloadPath) {
             try! FileManager.default.createDirectory(atPath: resourcesDownloadPath, withIntermediateDirectories: true, attributes: nil)
         }
-        //debug//print("custom download path: \(resourcesDownloadPath)")
+        //debugprint("custom download path: \(resourcesDownloadPath)")
         
        
         
@@ -186,9 +188,11 @@ class ResourcesDetailViewControllerCopy: UIViewController {
         
         fileName = AKUtility.getUniqueFileNameWithPath((resourcesDownloadPath as NSString).appendingPathComponent(fileName as String) as NSString)
         
-        let fdm = FileDownloadManager()
+        fdm = FileDownloadManager()
         fdm.delegate = self
-        guard let encodedURL = fileURL.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}
+        //let encodedURL = fileURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        //fdm.downloadFile(fileName as String, fileURL: fileURL.addingPercentEscapes(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))!, destinationPath: resourcesDownloadPath)
+        guard let encodedURL = fileURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {return}
         fdm.downloadFile(fileName as String, fileURL: encodedURL, destinationPath: resourcesDownloadPath)
     }
     
@@ -258,15 +262,15 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate,WKNavigationDelegate{
     
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation) {
-        ////print("webView:\(webView) didStartProvisionalNavigation:\(navigation)")
+        print("webView:\(webView) didStartProvisionalNavigation:\(navigation)")
     }
     
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation) {
-        ////print("webView:\(webView) didCommitNavigation:\(navigation)")
+        print("webView:\(webView) didCommitNavigation:\(navigation)")
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: (@escaping (WKNavigationActionPolicy) -> Void)) {
-        ////print("webView:\(webView) decidePolicyForNavigationAction:\(navigationAction) decisionHandler:\(decisionHandler)")
+        print("webView:\(webView) decidePolicyForNavigationAction:\(navigationAction) decisionHandler:\(decisionHandler)")
         
         switch navigationAction.navigationType {
         case .linkActivated:
@@ -281,13 +285,13 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate,WKNavigationDelegate{
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: (@escaping (WKNavigationResponsePolicy) -> Void)) {
-        ////print("webView:\(webView) decidePolicyForNavigationResponse:\(navigationResponse) decisionHandler:\(decisionHandler)")
+        print("webView:\(webView) decidePolicyForNavigationResponse:\(navigationResponse) decisionHandler:\(decisionHandler)")
         
         decisionHandler(.allow)
     }
     
     func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        //////print("webView:\(webView) didReceiveAuthenticationChallenge:\(challenge) completionHandler:\(completionHandler)")
+        print("webView:\(webView) didReceiveAuthenticationChallenge:\(challenge) completionHandler:\(completionHandler)")
         
         switch (challenge.protectionSpace.authenticationMethod) {
         case NSURLAuthenticationMethodHTTPBasic:
@@ -321,19 +325,19 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate,WKNavigationDelegate{
     }
     
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation) {
-        //print("webView:\(webView) didReceiveServerRedirectForProvisionalNavigation:\(navigation)")
+        print("webView:\(webView) didReceiveServerRedirectForProvisionalNavigation:\(navigation)")
     }
  
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
-        //print("webView:\(webView) didFinishNavigation:\(navigation)")
+        print("webView:\(webView) didFinishNavigation:\(navigation)")
         
         self.activityIndicator.stopAnimating()
         
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation, withError error: Error) {
-        //print("webView:\(webView) didFailNavigation:\(navigation) withError:\(error)")
+        print("webView:\(webView) didFailNavigation:\(navigation) withError:\(error)")
         
         let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
@@ -341,13 +345,13 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate,WKNavigationDelegate{
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation, withError error: Error) {
-        //print("webView:\(webView) didFailProvisionalNavigation:\(navigation) withError:\(error)")
+        print("webView:\(webView) didFailProvisionalNavigation:\(navigation) withError:\(error)")
     }
     
     // MARK: WKUIDelegate methods
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: (@escaping () -> Void)) {
-        //print("webView:\(webView) runJavaScriptAlertPanelWithMessage:\(message) initiatedByFrame:\(frame) completionHandler:\(completionHandler)")
+        print("webView:\(webView) runJavaScriptAlertPanelWithMessage:\(message) initiatedByFrame:\(frame) completionHandler:\(completionHandler)")
         
         let alertController = UIAlertController(title: frame.request.url?.host, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
@@ -357,7 +361,7 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate,WKNavigationDelegate{
     }
     
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: (@escaping (Bool) -> Void)) {
-        //print("webView:\(webView) runJavaScriptConfirmPanelWithMessage:\(message) initiatedByFrame:\(frame) completionHandler:\(completionHandler)")
+        print("webView:\(webView) runJavaScriptConfirmPanelWithMessage:\(message) initiatedByFrame:\(frame) completionHandler:\(completionHandler)")
         
         let alertController = UIAlertController(title: frame.request.url?.host, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
@@ -370,7 +374,7 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate,WKNavigationDelegate{
     }
     
     func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
-        //print("webView:\(webView) runJavaScriptTextInputPanelWithPrompt:\(prompt) defaultText:\(defaultText) initiatedByFrame:\(frame) completionHandler:\(completionHandler)")
+        print("webView:\(webView) runJavaScriptTextInputPanelWithPrompt:\(prompt) defaultText:\(defaultText) initiatedByFrame:\(frame) completionHandler:\(completionHandler)")
         
         let alertController = UIAlertController(title: frame.request.url?.host, message: prompt, preferredStyle: .alert)
         weak var alertTextField: UITextField!
@@ -477,14 +481,17 @@ extension ResourcesDetailViewControllerCopy:FileDownloadManagerDelegates{
             
             let mimeType = "application/" + "\((self.resource?.file?.mimeType?.rawValue)!)"
             
-            self.webView?.load(data!, mimeType: mimeType, characterEncodingName: mimeType, baseURL: URL.init(fileURLWithPath: "") )
+            DispatchQueue.main.async {
+                self.webView?.load(data!, mimeType: mimeType, characterEncodingName: mimeType, baseURL: URL.init(fileURLWithPath: "") )
+            }
+           
             
             //self.webView?.load(data!, mimeType: mimeType, textEncodingName: mimeType, baseURL:URL.init(fileURLWithPath: "") )
         }
         
     }
     func download(manager: FileDownloadManager, didFailedWithError error: Error) {
-        
+        print(error)
     }
     
     

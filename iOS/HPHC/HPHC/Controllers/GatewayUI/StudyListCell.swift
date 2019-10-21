@@ -131,7 +131,9 @@ class StudyListCell: UITableViewCell {
         if study.logoURL != nil {
             
             let url = URL.init(string: study.logoURL!)
-            studyLogoImage?.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder"))
+            studyLogoImage?.sd_setImage(with: url, completed: { (image, error, cache, url) in
+                
+            })  //.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder"))
         }
     }
     

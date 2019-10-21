@@ -1,0 +1,18 @@
+
+ksquid:S3008"ORename this field "FROM" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­×Ææùÿÿÿÿ
+Nsquid:S1444"2Make this "public static COMMING_FROM" field final(ÿ—ìÔøÿÿÿÿ
+Nsquid:S1905g"2Remove this unnecessary cast to "CircleIndicator".(ÌÖŸ¨ÿÿÿÿÿ
+gsquid:CallToDeprecatedMethodk"?Remove this use of "setOnPageChangeListener"; it is deprecated.(£¹Ùí
+squid:S1186l"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(™Î«şÿÿÿÿ
+Psquid:S1905:"4Remove this unnecessary cast to "AppCompatTextView".(–Ö¯…ùÿÿÿÿ
+squid:S1186o"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ø´´øÿÿÿÿ
+rsquid:S3008"[Rename this field "TYPEFACE_REGULAR" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½©êÍ
+@squid:S1185€"(Remove this method to simply inherit it.(ÍÙ÷¢
+ssquid:S3008"WRename this field "COMMING_FROM" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿ—ìÔøÿÿÿÿ
+‹"squid:ClassVariableVisibilityCheck"XMake COMMING_FROM a static final constant or non-public and provide accessors if needed.(ÿ—ìÔøÿÿÿÿ
+?squid:S1148E"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Jsquid:S19058"4Remove this unnecessary cast to "AppCompatTextView".(—Ï›3
+Ksquid:S1905<"4Remove this unnecessary cast to "AppCompatTextView".(º–ç¹
+Hsquid:S1905f",Remove this unnecessary cast to "ViewPager".(°œäÌøÿÿÿÿ
+bsquid:CommentedOutCodeLine)"<This block of commented-out lines of code should be removed.(±Ö
+bsquid:CommentedOutCodeLine`"<This block of commented-out lines of code should be removed.(ÍÕ¿±

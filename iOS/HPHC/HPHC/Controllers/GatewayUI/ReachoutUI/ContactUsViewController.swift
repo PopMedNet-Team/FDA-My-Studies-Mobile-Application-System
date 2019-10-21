@@ -73,11 +73,12 @@ class ContactUsViewController: UIViewController{
         //Used for background tap dismiss keyboard
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ContactUsViewController.handleTapGesture))
         self.tableView?.addGestureRecognizer(tapGestureRecognizer)
+         _ = ContactUsFeilds.init()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        _ = ContactUsFeilds.init()
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {

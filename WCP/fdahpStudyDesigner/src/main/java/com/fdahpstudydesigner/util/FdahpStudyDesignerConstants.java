@@ -1,20 +1,3 @@
-/*******************************************************************************
- * Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all copies or substantial
- * portions of the Software.
- * 
- * Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
- * Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
- * 
- * THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
- * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
- * OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- ******************************************************************************/
 package com.fdahpstudydesigner.util;
 
 /**
@@ -217,7 +200,8 @@ public class FdahpStudyDesignerConstants {
 	public static final String NOTIFICATION = "notification";
 	public static final String NOTIFICATION_ACTIVETASK_TEXT = "A new activity $shortTitle has been added for the study: $customId. Check it out now.";
 	// public static final String NOTIFICATION_ACTIVETASK_TEXT =
-	// "New activity $shortTitle available for the study: $customId. Check it out now.";
+	// "New activity $shortTitle available for the study: $customId. Check it out
+	// now.";
 	public static final String NOTIFICATION_ACTIVETASK_TEXT_PUBLISH = "1 or more activities have been added for the study: $customId. Check it out now.";
 	public static final String NOTIFICATION_DEACTIVATE_TEXT = "The study $customId has been closed. We thank you for your participation.";
 	public static final String NOTIFICATION_ERROR_MSG = "One or more of the study's  notifications for the study is scheduled for a date that has already expired. Please correct the dates and try again.";
@@ -234,7 +218,9 @@ public class FdahpStudyDesignerConstants {
 	public static final String NOTIFICATION_SUBTYPE_RESOURCE = "Resource";
 
 	// STUDY NOTIFICATION TEST
-	public static final String NOTIFICATION_UPCOMING_OR_ACTIVE_TEXT = "A new study is available in the FDA My Studies App. Check it out now.";
+	// public static final String NOTIFICATION_UPCOMING_OR_ACTIVE_TEXT = "A new
+	// study is available in the FDA MyStudies App. Check it out now.";
+	public static final String NOTIFICATION_UPCOMING_OR_ACTIVE_TEXT = "A new study is available. Check it out now.";
 	public static final String NOTIFICATION_VIEWED = "Y";
 	// Notification flags
 	public static final String NOTIFICATIONID = "notificationId";
@@ -389,12 +375,11 @@ public class FdahpStudyDesignerConstants {
 	public static final String WEEKS_OF_THE_CURRENT_MONTH = "Weeks of the current month";
 
 	public static final String YES = "Yes";
-	
+
 	public static final String ANCHOR_TYPE_ENROLLMENTDATE = "Enrollment Date";
 	public static final String SCHEDULETYPE_REGULAR = "Regular";
-	public static final String SCHEDULETYPE_ANCHORDATE= "AnchorDate";
+	public static final String SCHEDULETYPE_ANCHORDATE = "AnchorDate";
 	public static final String ANCHOR_ERROR_MSG = "One or more activity or resources has a period of visibility that uses anchor date. However, there is no anchor date set for the study yet. Please visit the Questionnaires section, select a question for the anchor date and then try again.";
-	
 
 	private FdahpStudyDesignerConstants() {
 		// Do nothing

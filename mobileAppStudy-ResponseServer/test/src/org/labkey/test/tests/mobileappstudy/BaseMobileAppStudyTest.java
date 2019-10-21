@@ -15,6 +15,7 @@
  */
 package org.labkey.test.tests.mobileappstudy;
 
+import org.jetbrains.annotations.Nullable;
 import org.junit.BeforeClass;
 import org.labkey.remoteapi.Command;
 import org.labkey.remoteapi.CommandException;
@@ -26,12 +27,13 @@ import org.labkey.remoteapi.query.SelectRowsResponse;
 import org.labkey.test.BaseWebDriverTest;
 import org.labkey.test.ModulePropertyValue;
 import org.labkey.test.TestFileUtils;
-import org.labkey.test.TestTimeoutException;
 import org.labkey.test.commands.mobileappstudy.EnrollParticipantCommand;
 import org.labkey.test.commands.mobileappstudy.SubmitResponseCommand;
 import org.labkey.test.data.mobileappstudy.InitialSurvey;
 import org.labkey.test.data.mobileappstudy.QuestionResponse;
 import org.labkey.test.data.mobileappstudy.Survey;
+import org.labkey.test.pages.mobileappstudy.SetupPage;
+import org.labkey.test.util.ListHelper;
 import org.labkey.test.util.LogMethod;
 import org.labkey.test.util.LoggedParam;
 import org.labkey.test.util.Maps;
@@ -54,6 +56,17 @@ public abstract class BaseMobileAppStudyTest extends BaseWebDriverTest implement
 {
     protected static final String MOBILEAPP_SCHEMA = "mobileappstudy";
     protected static final String LIST_SCHEMA = "lists";
+    protected final static String BASE_RESULTS = "{\n" +
+            "\t\t\"start\": \"2016-09-06T15:48:13.000+0000\",\n" +
+            "\t\t\"end\": \"2016-09-06T15:48:45.000+0000\",\n" +
+            "\t\t\"results\": []\n" +
+            "}";
+
+    @Override
+    protected @Nullable String getProjectName()
+    {
+        return null;
+    }
 
     @Override
     protected BrowserType bestBrowser()
@@ -87,7 +100,7 @@ public abstract class BaseMobileAppStudyTest extends BaseWebDriverTest implement
         return appToken;
     }
 
-    protected boolean mobileAppTableExists(String table, String schema)
+    protected boolean mobileAppTableExists(String table, String schema) throws CommandException, IOException
     {
         Connection cn = createDefaultConnection(true);
         SelectRowsCommand selectCmd = new SelectRowsCommand(schema, table);
@@ -96,13 +109,15 @@ public abstract class BaseMobileAppStudyTest extends BaseWebDriverTest implement
         try
         {
             selectCmd.execute(cn, getCurrentContainerPath());
+            return true;
         }
-        catch (CommandException | IOException e)
+        catch (CommandException e)
         {
-            return false;
+            if (e.getStatusCode() == 404)
+                return false;
+            else
+                throw e;
         }
-
-        return true;
     }
 
     protected SelectRowsResponse getMobileAppData(String table, String schema)
@@ -189,15 +204,6 @@ public abstract class BaseMobileAppStudyTest extends BaseWebDriverTest implement
         //Do nothing as default, Tests can override if needed
     }
 
-    @Override
-    protected void doCleanup(boolean afterTest) throws TestTimeoutException
-    {
-        for (String project : _containerHelper.getCreatedProjects())
-        {
-            _containerHelper.deleteProject(project, false);
-        }
-    }
-
     /**
      * Wrap question response and submit to server via the API
      *
@@ -232,5 +238,19 @@ public abstract class BaseMobileAppStudyTest extends BaseWebDriverTest implement
     {
         ModulePropertyValue val = new ModulePropertyValue("MobileAppStudy", "/", "SurveyMetadataDirectory", TestFileUtils.getLabKeyRoot() + "/server/optionalModules/mobileAppStudy/test/sampledata/SurveyMetadata/");
         setModuleProperties(Arrays.asList(val));
+    }
+
+    protected void setupProject(String studyName, String projectName, String surveyName, boolean enableResponseCollection)
+    {
+        _containerHelper.createProject(projectName, "Mobile App Study");
+        log("Set a study name.");
+        goToProjectHome(projectName);
+        SetupPage setupPage = new SetupPage(this);
+        setupPage.getStudySetupWebPart().setShortName(studyName);
+        if (enableResponseCollection)
+            setupPage.getStudySetupWebPart().checkResponseCollection();
+        setupPage.validateSubmitButtonEnabled();
+        setupPage.getStudySetupWebPart().clickSubmit();
+        _listHelper.createList(projectName, surveyName, ListHelper.ListColumnType.AutoInteger, "Key");
     }
 }

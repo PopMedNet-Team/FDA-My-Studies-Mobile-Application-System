@@ -1,20 +1,3 @@
-#-------------------------------------------------------------------------------
-# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
-# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
-# 
-# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-#-------------------------------------------------------------------------------
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -142,6 +125,16 @@ $(document).ready(function(){
     }else{
     	reorder = true;
     } 
+// 	dataTable = $('#resource_list').DataTable({
+// 	    "paging":   false	,
+// 	    "order": [],
+// 	     rowReorder: reorder,
+// 		"columnDefs": [ { orderable: false, targets: [0] } ],
+// 	    "info" : false, 
+// 	    "lengthChange": false, 
+// 	    "searching": false, 
+// 	});
+	
 	var dataTable = $('#resource_list').DataTable( {
 	    "paging":false,
 	    "info": false,
@@ -238,6 +231,10 @@ function deleteResourceInfo(resourceInfoId){
 	    				var status = data.message;
 	    				var resourceSaved = data.resourceSaved;
 	    				if(status == "SUCCESS"){
+// 							dataTable
+// 	    			        .row($('#row'+resourceInfoId))
+// 	    			        .remove()
+// 	    			        .draw();
 	    					if(resourceSaved){
 	    						$('#markAsComp').prop('disabled',true);
 	    						$('[data-toggle="tooltip"]').tooltip();
@@ -315,10 +312,13 @@ function  reloadResourceDataTable(resourceList,markAsComplete){
 			 actions+="<span class='sprites_icon copy delete' onclick='deleteResourceInfo("+obj.id+");'></span>";
 			 datarow.push(actions);
 			 $('#resource_list').DataTable().row.add(datarow);
+			// $('#resource_list tr').find('td[1]').addClass("wid50");
+			 
 			 }
 		 });
 		 if(typeof markAsComplete !='undefined' && markAsComplete != null && markAsComplete){
 			 $("#markAsComp").attr("disabled",false);
+			 //$('#helpNote').attr('data-original-title', '');
 		 }
 		 $('#resource_list').DataTable().draw();
 	 	 $('#resource_list tr').each(function() {
@@ -327,6 +327,7 @@ function  reloadResourceDataTable(resourceList,markAsComplete){
 		});
 	 }else{
 		 $('#resource_list').DataTable().draw();
+		 //$('#helpNote').attr('data-original-title', 'Please ensure you add one or more Resource Sections before attempting to mark this section as Complete.');
 	 }
 }
 

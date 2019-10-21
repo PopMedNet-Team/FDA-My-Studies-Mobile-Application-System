@@ -209,12 +209,14 @@ class PageViewController: UIPageViewController{
             controllers.append(firstController)
             
             let sections = overview.sections.count
-            for section in 1...(sections-1) {
-                
-                let restControllers = (storyboard.instantiateViewController(withIdentifier: "SecondViewController") as? SecondGatewayOverviewViewController)!
-                restControllers.overviewSectionDetail = overview.sections[section]
-                restControllers.pageIndex = section
-                controllers.append(restControllers)
+            if sections > 1 {
+                for section in 1...(sections-1) {
+                    
+                    let restControllers = (storyboard.instantiateViewController(withIdentifier: "SecondViewController") as? SecondGatewayOverviewViewController)!
+                    restControllers.overviewSectionDetail = overview.sections[section]
+                    restControllers.pageIndex = section
+                    controllers.append(restControllers)
+                }
             }
         }
         

@@ -319,6 +319,7 @@ public class StudyWithdrawTest extends BaseMobileAppStudyTest
      * @param expectedStatusCode status code to expect from server
      * @return error message from response (if it exists)
      */
+    @Override
     protected String submitSurvey(Survey survey, int expectedStatusCode)
     {
         SubmitResponseCommand cmd = new SubmitResponseCommand(this::log, survey);

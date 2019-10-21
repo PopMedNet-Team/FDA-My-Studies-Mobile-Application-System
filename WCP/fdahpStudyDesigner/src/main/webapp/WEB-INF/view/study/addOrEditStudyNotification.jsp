@@ -1,20 +1,3 @@
-#-------------------------------------------------------------------------------
-# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
-# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
-# 
-# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-#-------------------------------------------------------------------------------
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
@@ -30,6 +13,7 @@
        <!-- <input type="hidden" name="currentDateTime" id="currentDateTime"> -->
        <input type="hidden" name="notificationId" value="${notificationBO.notificationId}">
        <input type="hidden" name="actionPage" value="${notificationBO.actionPage}">
+       <input type="hidden" name="appId" value="${appId}">
        <div class="right-content-head"> 
            <div class="text-right">
                <div class="black-md-f dis-line pull-left line34">
@@ -138,7 +122,8 @@
 	<input type="hidden" name="notificationId" value="${notificationBO.notificationId}">
 </form:form>
 <script>
-     $(document).ready(function(){  
+     $(document).ready(function(){ 
+    	 var appId = '${appId}';
          $(".menuNav li").removeClass('active');
          $(".eigthNotification").addClass('active'); 
          $("#createStudyId").show();
@@ -323,6 +308,7 @@
       				} else if($('#inlineRadio1').prop('checked')){
         			  if(validateTime()){
         				  $('#doneStudyId').prop('disabled',true);
+        				  //$('#appId').val(appId);
         				  $('#studyNotificationFormId').submit();
       	  			}
         		  }

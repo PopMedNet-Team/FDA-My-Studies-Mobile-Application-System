@@ -44,11 +44,20 @@
     cursor: pointer;
 }
 
-.delete{
+/* .delete{
 	background-position: -113px -63px ;
 	width: 17px;
 	height: 22px;
     display: inline-block;
+    cursor: pointer;
+    vertical-align:middle;
+} */
+
+.delete{
+	background-position: -113px -63px ;
+	width: 17px;
+	height: 22px;
+    display: inline-block !important;
     cursor: pointer;
     vertical-align:middle;
 }

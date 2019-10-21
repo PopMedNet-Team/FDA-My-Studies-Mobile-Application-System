@@ -1,20 +1,3 @@
-#-------------------------------------------------------------------------------
-# Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# Funding Source: Food and Drug Administration (?Funding Agency?) effective 18 September 2014 as
-# Contract no. HHSF22320140030I/HHSF22301006T (the ?Prime Contract?).
-# 
-# THE SOFTWARE IS PROVIDED "AS IS" ,WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-# PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-# OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-#-------------------------------------------------------------------------------
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -96,6 +79,42 @@
 					</div>
 				</div>
 			</div>
+			<!-- phase2a-sp1 -->
+			<div class="col-md-12 p-none">
+				<div class="col-md-6 pl-none">
+					<div class="gray-xs-f mb-xs">
+						App ID <small>(15 characters max)</small><span
+							class="requiredStar"> *</span><span><span
+							data-toggle="tooltip" data-placement="top"
+							title="Enter a unique human-readable identifier corresponding to the app that this study must belong to."
+							class="filled-tooltip"></span></span>
+					</div>
+					<div class="form-group">
+						<input type="text" custAttType="cust" autofocus="autofocus"
+							class="form-control aq-inp appIdCls" name="appId" id="appId"
+							maxlength="15" value="${studyBo.appId}"
+							<c:if test="${not empty studyBo.status && (studyBo.status == 'Active' || studyBo.status == 'Published' || studyBo.status == 'Paused' || studyBo.status == 'Deactivated')}"> disabled</c:if>
+							required />
+						<div class="help-block with-errors red-txt"></div>
+					</div>
+				</div>
+				<!-- 				<div class="col-md-6 pr-none"> -->
+				<!-- 					<div class="gray-xs-f mb-xs"> -->
+				<!-- 						Org ID <small>(15 characters max)</small><span -->
+				<!-- 							class="requiredStar"> *</span><span><span data-toggle="tooltip" data-placement="top" title="Enter a unique human-readable identifier corresponding to the organization that this study belongs to." class="filled-tooltip"></span></span> -->
+				<!-- 					</div> -->
+				<!-- 					<div class="form-group appIdClass"> -->
+				<!-- 						<input type="text" custAttType="cust" -->
+				<!-- 							class="form-control aq-inp orgIdCls" name="orgId" -->
+				<!-- 							id="orgId" maxlength="15" -->
+				<%-- 							value="${studyBo.orgId}" --%>
+				<%-- 							<c:if test="${not empty studyBo.status && (studyBo.status == 'Active' || studyBo.status == 'Published' || studyBo.status == 'Paused' || studyBo.status == 'Deactivated')}"> disabled</c:if> --%>
+				<!-- 							required /> -->
+				<!-- 						<div class="help-block with-errors red-txt"></div> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
+			</div>
+			<!--phase2a sp1-->
 
 			<div class="col-md-12 p-none">
 				<div class="gray-xs-f mb-xs">
@@ -128,9 +147,14 @@
 				</div>
 				<div class="col-md-6 pr-none">
 					<div class="gray-xs-f mb-xs">
-						Research Sponsor<span class="requiredStar"> *</span>
+						Research Sponsor <small>(100 characters max)</small><span class="requiredStar"> *</span>
 					</div>
 					<div class="form-group">
+						<input type="text" class="form-control" name="researchSponsor"
+							value="${studyBo.researchSponsor}" maxlength="100" required />
+						<div class="help-block with-errors red-txt"></div>
+					</div>
+					<%-- <div class="form-group">
 						<select
 							class="selectpicker aq-select aq-select-form elaborateClass"
 							required title="Select" name="researchSponsor">
@@ -140,7 +164,7 @@
 							</c:forEach>
 						</select>
 						<div class="help-block with-errors red-txt"></div>
-					</div>
+					</div> --%>
 				</div>
 			</div>
 
@@ -396,29 +420,51 @@
     						if(parseInt(studyCount) >= 1){
     							return false;
 						    }else{
-						    	$('.studyTypeClass,.studyIdCls').prop('disabled', false);
-		      	               	  if(isFromValid("#basicInfoFormId"))
-		      	                	var file = $('#uploadImg').val();
-		      	                    var thumbnailImageId = $('#thumbnailImageId').val();
-		      	                   if(file || thumbnailImageId){
-		      	                	   $("#uploadImg").parent().find(".help-block").empty();
-		      	                	   $("#uploadImg").removeAttr('required');
-		      	                	   validateStudyId('',function(st){
-		      	                		   if(st){
-		      		                       		var studyCount = $('.customStudyClass').find('.help-block').children().length;
-		      		    						if(parseInt(studyCount) >= 1){
-		      		    							return false;
-		      	    						    }else{
-		      		                       		$('.studyTypeClass,.studyIdCls').prop('disabled', false);
-		      		                       		if(isFromValid("#basicInfoFormId")){
-		      		                       			 $("#buttonText").val('completed');
-		      		                        	  	 $("#basicInfoFormId").submit();
-		      		                        	  }
-		      	                                }
-		      	                       	 }
-		      	                  		}); 
-		      				       }
+						        $('.studyTypeClass,.studyIdCls,.appIdCls,.orgIdCls').prop('disabled', false);
+				      	        if(isFromValid("#basicInfoFormId"))
+						        validateAppId('',function(valid){
+							     if(valid){
+							       var appCount = $('.appIdClass').find('.help-block').children().length;
+    						       if(parseInt(appCount) >= 1){
+    							     return false;
+						           }else{
+									      $('.studyTypeClass,.studyIdCls,.appIdCls,.orgIdCls').prop('disabled', false);
+				      	               	  if(isFromValid("#basicInfoFormId"))
+				      	                	var file = $('#uploadImg').val();
+				      	                    var thumbnailImageId = $('#thumbnailImageId').val();
+				      	                   if(file || thumbnailImageId){
+				      	                	   $("#uploadImg").parent().find(".help-block").empty();
+				      	                	   $("#uploadImg").removeAttr('required');
+				      	                	   validateStudyId('',function(st){
+				      	                		   if(st){
+				      		                       		var studyCount = $('.customStudyClass').find('.help-block').children().length;
+				      		    						if(parseInt(studyCount) >= 1){
+				      		    							return false;
+				      	    						    }else{
+				      	    						          validateAppId('',function(valid){
+														      if(valid){
+														            var appCount = $('.appIdClass').find('.help-block').children().length;
+							    						            if(parseInt(appCount) >= 1){
+							    							         return false;
+														            }else{
+																	     $('.studyTypeClass,.studyIdCls,.appIdCls,.orgIdCls').prop('disabled', false);
+									      		                       	 if(isFromValid("#basicInfoFormId")){
+									      		                       		 $("#buttonText").val('completed');
+									      		                        	 $("#basicInfoFormId").submit();
+									      		                         }
+																    }
+														      }
+														      });
+				      	                                }
+				      	                       	     }
+				      	                  		}); 
+				      				          }
+								     }
+							       }
+							     });
 						    }
+                       	}else{
+                       		isFromValid("#basicInfoFormId");
                        	}
                 	}); 
                 } else {
@@ -429,13 +475,26 @@
 						if(parseInt(studyCount) >= 1){
 							return false;
 						}else{
-							$('.studyTypeClass,.studyIdCls').prop('disabled', false);
-	                   		if(isFromValid("#basicInfoFormId")){
-	                   			 $("#buttonText").val('completed');
-	                    	  	 $("#basicInfoFormId").submit();
-	                    	  }
+						      $('.studyTypeClass,.studyIdCls,.appIdCls,.orgIdCls').prop('disabled', false);
+						      if(isFromValid("#basicInfoFormId"));
+						       validateAppId('',function(valid){
+							     if(valid){
+							       var appCount = $('.appIdClass').find('.help-block').children().length;
+    						       if(parseInt(appCount) >= 1){
+    							     return false;
+						           }else{
+									     $('.studyTypeClass,.studyIdCls,.appIdCls,.orgIdCls').prop('disabled', false);
+				                   		 if(isFromValid("#basicInfoFormId")){
+				                   			 $("#buttonText").val('completed');
+				                    	  	 $("#basicInfoFormId").submit();
+				                    	 }
+								   }
+							     }
+							   });
 						}
-                      }
+                      }else{
+                     		isFromValid("#basicInfoFormId");
+                     	}
               		});
                 }
          });
@@ -464,10 +523,27 @@
 							$("#customStudyName").parent().addClass('has-error has-danger').find(".help-block").empty().append('<ul class="list-unstyled"><li>This is a required field.</li></ul>');
                         	return false;
                         }else{
-                        	$('.studyTypeClass,.studyIdCls').prop('disabled', false);
-                			$('#basicInfoFormId').validator('destroy');
-                        	$("#buttonText").val('save');
-                        	$('#basicInfoFormId').submit();
+                            var appId = $('#appId').val();
+                            if(null != appId && appId !='' && typeof appId != 'undefined'){
+                               validateAppId('',function(valid){
+							     if(valid){
+							         $('.studyTypeClass,.studyIdCls,.appIdCls,.orgIdCls').prop('disabled', false);
+			                		 $('#basicInfoFormId').validator('destroy');
+			                         $("#buttonText").val('save');
+			                         $('#basicInfoFormId').submit();
+							     }else{
+							           $('.studyTypeClass,.studyIdCls,.appIdCls,.orgIdCls').prop('disabled', false);
+			                		   $('#basicInfoFormId').validator('destroy');
+			                           $("#buttonText").val('save');
+			                           $('#basicInfoFormId').submit();
+							     }
+							   });
+                            }else{
+                               $('.studyTypeClass,.studyIdCls,.appIdCls,.orgIdCls').prop('disabled', false);
+	                		   $('#basicInfoFormId').validator('destroy');
+	                           $("#buttonText").val('save');
+	                           $('#basicInfoFormId').submit();
+                            }
                         }
             		}else{
             			var studyCount = $('.customStudyClass').find('.help-block').children().length;
@@ -486,6 +562,13 @@
         $(".studyIdCls").blur(function(){
         	validateStudyId('',function(val){});
         });
+        $(".appIdCls").blur(function(){
+        	validateAppId('',function(val){});
+        });
+        $("#inlineRadio6").change(function() {
+            	validateAppId('',function(val){});
+        });
+        
   });
         // Displaying images from file upload 
         function readURL(input) {
@@ -621,5 +704,43 @@
         		resetValidation($("#uploadImg").parents('form'));
         	}
         }
+        
+function validateAppId(item,callback){
+	var appId = $("#appId").val();
+	var studyType = $('input[name=type]:checked').val();
+	var thisAttr= $("#appId");
+	var customStudyId = $("#customStudyId").val();
+	if(appId != null && appId !='' && typeof appId!= 'undefined'){
+			$.ajax({
+				url: "/fdahpStudyDesigner/adminStudies/validateAppId.do?_S=${param._S}",
+                type: "POST",
+                datatype: "json",
+                data: {
+                       customStudyId:customStudyId,
+                	   appId:appId,
+                	   studyType:studyType,
+                       "${_csrf.parameterName}":"${_csrf.token}",
+                },
+                success:  function getResponse(data){
+                    var message = data.message;
+                    if('SUCCESS' != message){
+                        $(thisAttr).validator('validate');
+                        $(thisAttr).parent().removeClass("has-danger").removeClass("has-error");
+                        $(thisAttr).parent().find(".help-block").html("");
+                        callback(true);
+                    }else{
+                        $(thisAttr).val('');
+                        $(thisAttr).parent().addClass("has-danger").addClass("has-error");
+                        $(thisAttr).parent().find(".help-block").empty();
+                        $(thisAttr).parent().find(".help-block").append("<ul class='list-unstyled'><li>'" + appId + "' has already been used in the past.</li></ul>");
+                        callback(false);
+                    }
+                },
+                global : false
+          });
+	}else{
+		 callback(false);
+	}
+}
                  
 </script>

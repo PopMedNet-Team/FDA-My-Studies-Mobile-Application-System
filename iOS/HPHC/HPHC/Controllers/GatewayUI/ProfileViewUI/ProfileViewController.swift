@@ -41,7 +41,8 @@ let kProfileTitleText = "My Account"
 let kSignOutText = "Sign Out"
 let kLabelName = "LabelName"
 
-let kUseTouchIdOrPasscode = "Use Touch ID/Passcode to Access App"
+let kUseTouchIdOrPasscode = "Use Passcode or Touch ID to access app"
+let kUseFaceIdOrPasscode = "Use Passcode or Face ID to access app"
 
 let kUsePasscodeToAccessApp = "Use Passcode to access app"
 
@@ -287,7 +288,17 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                 self.performSegue(withIdentifier: "confirmationSegue", sender: joinedStudies)
             }
             else {
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleDeleteAccount, comment: ""), errorMessage: NSLocalizedString(kDeleteAccountConfirmationMessage, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleDeleteAccount, comment: ""),
+                
+                var infoDict: NSDictionary?
+                if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+                    infoDict = NSDictionary(contentsOfFile: path)
+                }
+                let navTitle = infoDict!["ProductTitleName"] as! String
+                
+                var descriptionText =  kDeleteAccountConfirmationMessage
+                descriptionText = descriptionText.replacingOccurrences(of: "#APPNAME#", with: navTitle)
+                
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleDeleteAccount, comment: ""), errorMessage: NSLocalizedString(descriptionText, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleDeleteAccount, comment: ""),
                                                                      errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                                      action1: {
 
@@ -443,23 +454,25 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             return
         }
         
-//        let keychainPasscodeDict: Dictionary<String,Any>? = ORKKeychainWrapper.object(forKey: korkPasscode) == nil ? nil : (ORKKeychainWrapper.object(forKey: korkPasscode)  as?  Dictionary<String,Any>)
-        
+
         var istouchIdEnabled: Bool =  false
         if keychainPasscodeDict.count > 0 {
             istouchIdEnabled = keychainPasscodeDict[ktouchid] as? Bool ?? false
         }
         
-        print("touch;;;\(istouchIdEnabled)")
         
-        if touchIdEnabled! && istouchIdEnabled {
-            passcodeDict[kLabelName] =  kUseTouchIdOrPasscode
-            tableViewRowDetails?.replaceObject(at: 3, with: passcodeDict)
+        var touchLabelText = kUsePasscodeToAccessApp
+        if istouchIdEnabled {
+            if authenticationContext.biometryType == .faceID {
+                touchLabelText = kUseFaceIdOrPasscode
+            }
+            else if authenticationContext.biometryType == .touchID{
+                touchLabelText = kUseTouchIdOrPasscode
+            }
         }
-        else{
-            passcodeDict[kLabelName] =  kUsePasscodeToAccessApp
-            tableViewRowDetails?.replaceObject(at: 3, with: passcodeDict)
-        }
+        passcodeDict[kLabelName] =  touchLabelText
+        tableViewRowDetails?.replaceObject(at: 3, with: passcodeDict)
+        
         
     }
     
@@ -605,6 +618,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                 let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
                 taskViewController.delegate = self
                 taskViewController.isNavigationBarHidden = true
+                taskViewController.modalPresentationStyle = .fullScreen
                 self.navigationController?.present(taskViewController, animated: false, completion: nil)
             }
             else{

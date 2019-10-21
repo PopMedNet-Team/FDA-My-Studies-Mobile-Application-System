@@ -41,12 +41,22 @@ import static org.junit.Assert.assertFalse;
 @Category({Git.class})
 public class ConfigAndEnrollTest extends BaseMobileAppStudyTest
 {
+    private static final String PROJECT_NAME01 = "ConfigAndEnrollTest TestStudyName01";
+    private static final String PROJECT_NAME02 = "ConfigAndEnrollTest TestStudyName02";
+    private static final String PROJECT_NAME03 = "ConfigAndEnrollTest CollectionToggling";
+    private static final String PROJECT_NAME04 = "ConfigAndEnrollTest TestEnroll01";
+    private static final String PROJECT_NAME05 = "ConfigAndEnrollTest TestEnroll02";
+
     protected final PortalHelper _portalHelper = new PortalHelper(this);
 
     @Override
-    protected String getProjectName()
+    protected void doCleanup(boolean afterTest)
     {
-        return "ConfigAndEnrollTest Project";
+        _containerHelper.deleteProject(PROJECT_NAME01, false);
+        _containerHelper.deleteProject(PROJECT_NAME02, false);
+        _containerHelper.deleteProject(PROJECT_NAME03, false);
+        _containerHelper.deleteProject(PROJECT_NAME04, false);
+        _containerHelper.deleteProject(PROJECT_NAME05, false);
     }
 
     @Test
@@ -57,15 +67,10 @@ public class ConfigAndEnrollTest extends BaseMobileAppStudyTest
         final String STUDY_NAME01 = "StudyName01";  // Study names are case insensitive, so test it once.
         final String STUDY_NAME02 = "STUDYNAME02";
         final String REUSED_STUDY_NAME_ERROR = "There were problems storing the configuration. StudyId '$STUDY_NAME$' is already associated with a different container within this folder. Each study can be associated with only one container per folder.";
-        final String PROJECT_NAME01 = getProjectName() + " TestStudyName01";
-        final String PROJECT_NAME02 = getProjectName() + " TestStudyName02";
 
         String batchId, expectedTokenCount = "100";
         List<String> tokensToAssign = new ArrayList<>();
         SetupPage setupPage;
-
-        _containerHelper.deleteProject(PROJECT_NAME01, false);
-        _containerHelper.deleteProject(PROJECT_NAME02, false);
 
         _containerHelper.createProject(PROJECT_NAME01, "Mobile App Study");
         goToProjectHome(PROJECT_NAME01);
@@ -158,12 +163,10 @@ public class ConfigAndEnrollTest extends BaseMobileAppStudyTest
     public void testCollectionToggling()
     {
         final String STUDY_NAME01 = "STUDYNAME01";
-        final String PROJECT_NAME01 = getProjectName() + " TestStudyName01";
 
-        _containerHelper.deleteProject(PROJECT_NAME01, false);
-        _containerHelper.createProject(PROJECT_NAME01, "Mobile App Study");
+        _containerHelper.createProject(PROJECT_NAME03, "Mobile App Study");
 
-        goToProjectHome(PROJECT_NAME01);
+        goToProjectHome(PROJECT_NAME03);
         SetupPage setupPage = new SetupPage(this);
 
         //Validate collection checkbox behavior
@@ -191,8 +194,6 @@ public class ConfigAndEnrollTest extends BaseMobileAppStudyTest
     @Test
     public void testEnroll()
     {
-        final String PROJECT_NAME01 = getProjectName() + " TestEnroll01";
-        final String PROJECT_NAME02 = getProjectName() + " TestEnroll02";
         final String PROJECT01_STUDY_NAME = "TEST_ENROLL_STUDY01";
         final String PROJECT02_STUDY_NAME = "TEST_ENROLL_STUDY02";
 
@@ -207,11 +208,8 @@ public class ConfigAndEnrollTest extends BaseMobileAppStudyTest
         List<String> proj01_tokensToAssignBatch03 = new ArrayList<>();
         List<String> proj02_tokensToAssignBatch01 = new ArrayList<>();
 
-        _containerHelper.deleteProject(PROJECT_NAME01, false);
-        _containerHelper.deleteProject(PROJECT_NAME02, false);
-
-        _containerHelper.createProject(PROJECT_NAME01, "Mobile App Study");
-        goToProjectHome(PROJECT_NAME01);
+        _containerHelper.createProject(PROJECT_NAME04, "Mobile App Study");
+        goToProjectHome(PROJECT_NAME04);
 
         SetupPage setupPage = new SetupPage(this);
 
@@ -245,7 +243,7 @@ public class ConfigAndEnrollTest extends BaseMobileAppStudyTest
         proj01_tokensToAssignBatch01.remove(4);
 
         log("Go back to the setup page.");
-        goToProjectHome(PROJECT_NAME01);
+        goToProjectHome(PROJECT_NAME04);
 
         log("Validate that the correct info for the tokens is shown in the grid.");
         validateGridInfo(setupPage, proj01_batchId01, proj01_tokenCount01, "0");
@@ -264,28 +262,28 @@ public class ConfigAndEnrollTest extends BaseMobileAppStudyTest
         proj01_tokensToAssignBatch02.add(tokenListPage.getToken(2));
 
         log("Go back to the setup page.");
-        goToProjectHome(PROJECT_NAME01);
+        goToProjectHome(PROJECT_NAME04);
 
         log("Validate that the correct info for the tokens is shown in the grid.");
         validateGridInfo(setupPage, proj01_batchId02, proj01_tokenCount02, "0");
 
         log("Now assign some of the tokens from the first batch.");
-        assignTokens(proj01_tokensToAssignBatch01, PROJECT_NAME01, PROJECT01_STUDY_NAME);
+        assignTokens(proj01_tokensToAssignBatch01, PROJECT_NAME04, PROJECT01_STUDY_NAME);
 
         log("Looks like the assignment for the first batch worked, now go check that the data is reflected in the setup page.");
 
-        goToProjectHome(PROJECT_NAME01);
+        goToProjectHome(PROJECT_NAME04);
 
         // Get a new setupPage.
         setupPage = new SetupPage(this);
         validateGridInfo(setupPage, proj01_batchId01, proj01_tokenCount01, Integer.toString(proj01_tokensToAssignBatch01.size()));
 
         log("Now assign some of the tokens from the second batch.");
-        assignTokens(proj01_tokensToAssignBatch02, PROJECT_NAME01, PROJECT01_STUDY_NAME);
+        assignTokens(proj01_tokensToAssignBatch02, PROJECT_NAME04, PROJECT01_STUDY_NAME);
 
         log("Looks like the assignment for the second batch worked, now go check that the data is reflected in the setup page.");
 
-        goToProjectHome(PROJECT_NAME01);
+        goToProjectHome(PROJECT_NAME04);
 
         // Get a new setupPage.
         setupPage = new SetupPage(this);
@@ -305,25 +303,25 @@ public class ConfigAndEnrollTest extends BaseMobileAppStudyTest
         proj01_tokensToAssignBatch03.add(tokenListPage.getToken(0));
 
         log("Go back to the setup page.");
-        goToProjectHome(PROJECT_NAME01);
+        goToProjectHome(PROJECT_NAME04);
 
         log("Validate that the correct info for the tokens is shown in the grid.");
         validateGridInfo(setupPage, proj01_batchId03, proj01_tokenCount03, "0");
 
         log("Now assign some of the tokens from the third batch.");
-        assignTokens(proj01_tokensToAssignBatch03, PROJECT_NAME01, PROJECT01_STUDY_NAME);
+        assignTokens(proj01_tokensToAssignBatch03, PROJECT_NAME04, PROJECT01_STUDY_NAME);
 
         log("Looks like the assignment for the third batch worked, now go check that the data is reflected in the setup page.");
 
-        goToProjectHome(PROJECT_NAME01);
+        goToProjectHome(PROJECT_NAME04);
 
         // Get a new setupPage.
         setupPage = new SetupPage(this);
         validateGridInfo(setupPage, proj01_batchId03, proj01_tokenCount03, Integer.toString(proj01_tokensToAssignBatch03.size()));
 
         log("Now create a second project and validate that tokens from the first project can't be assigned to this project.");
-        _containerHelper.createProject(PROJECT_NAME02, "Mobile App Study");
-        goToProjectHome(PROJECT_NAME02);
+        _containerHelper.createProject(PROJECT_NAME05, "Mobile App Study");
+        goToProjectHome(PROJECT_NAME05);
 
         setupPage = new SetupPage(this);
 
@@ -345,17 +343,17 @@ public class ConfigAndEnrollTest extends BaseMobileAppStudyTest
         proj02_tokensToAssignBatch01.add(tokenListPage.getToken(4));
 
         log("Go back to the setup page.");
-        goToProjectHome(PROJECT_NAME02);
+        goToProjectHome(PROJECT_NAME05);
 
         log("Validate that the correct info for the tokens is shown in the grid.");
         validateGridInfo(setupPage, proj02_batchId01, proj02_tokenCount01, "0");
 
         log("Now assign some of the tokens from the second project.");
-        assignTokens(proj02_tokensToAssignBatch01, PROJECT_NAME02, PROJECT02_STUDY_NAME);
+        assignTokens(proj02_tokensToAssignBatch01, PROJECT_NAME05, PROJECT02_STUDY_NAME);
 
         log("Looks like the assignment for the the second project worked, now go check that the data is reflected in the setup page.");
 
-        goToProjectHome(PROJECT_NAME02);
+        goToProjectHome(PROJECT_NAME05);
 
         // Get a new setupPage.
         setupPage = new SetupPage(this);
@@ -366,27 +364,27 @@ public class ConfigAndEnrollTest extends BaseMobileAppStudyTest
 
         log("Give data that can not be parsed.");
         String invalidToken = proj01_tokensNotAssignBatch01.get(1) + 1;
-        failureMessage = assignTokenAndFail(invalidToken, PROJECT_NAME01, PROJECT01_STUDY_NAME);
+        failureMessage = assignTokenAndFail(invalidToken, PROJECT_NAME04, PROJECT01_STUDY_NAME);
         assertEquals("Wrong enrollment error.", "Invalid token: '" + invalidToken + "'", failureMessage);
 
         log("Do not provide a study name (but have a valid token).");
-        failureMessage = assignTokenAndFail(proj01_tokensNotAssignBatch01.get(0), PROJECT_NAME01, "");
+        failureMessage = assignTokenAndFail(proj01_tokensNotAssignBatch01.get(0), PROJECT_NAME04, "");
         assertEquals("Wrong enrollment error.", EnrollmentTokenValidationCommand.BLANK_STUDYID, failureMessage);
 
         log("Provide a study name that doesn't exists (but have a valid token).");
-        failureMessage = assignTokenAndFail(proj01_tokensNotAssignBatch01.get(0), PROJECT_NAME01, "THIS_STUDY_IS_NOT_HERE");
+        failureMessage = assignTokenAndFail(proj01_tokensNotAssignBatch01.get(0), PROJECT_NAME04, "THIS_STUDY_IS_NOT_HERE");
         assertEquals("Wrong enrollment error.", "Study with StudyId 'THIS_STUDY_IS_NOT_HERE' does not exist", failureMessage);
 
         log("Try to assign a token that has already been assigned.");
-        failureMessage = assignTokenAndFail(proj01_tokensToAssignBatch03.get(0), PROJECT_NAME01, PROJECT01_STUDY_NAME);
+        failureMessage = assignTokenAndFail(proj01_tokensToAssignBatch03.get(0), PROJECT_NAME04, PROJECT01_STUDY_NAME);
         assertEquals("Wrong enrollment error.", "Token already in use", failureMessage);
 
         log("Try to assign tokens from Project01 to a study in Project02.");
-        failureMessage = assignTokenAndFail(proj01_tokensToAssignBatch01.get(0), PROJECT_NAME02, PROJECT02_STUDY_NAME);
+        failureMessage = assignTokenAndFail(proj01_tokensToAssignBatch01.get(0), PROJECT_NAME05, PROJECT02_STUDY_NAME);
         assertEquals("Wrong enrollment error.", "Unknown token: '" + proj01_tokensToAssignBatch01.get(0) + "'", failureMessage);
 
         log("Try to assign tokens from Project02 to a study in Project01.");
-        failureMessage = assignTokenAndFail(proj02_tokensToAssignBatch01.get(3), PROJECT_NAME01, PROJECT01_STUDY_NAME);
+        failureMessage = assignTokenAndFail(proj02_tokensToAssignBatch01.get(3), PROJECT_NAME04, PROJECT01_STUDY_NAME);
         assertEquals("Wrong enrollment error.", "Unknown token: '" + proj02_tokensToAssignBatch01.get(3) + "'", failureMessage);
 
         log("Invalidate the checksum of a valid token.");
@@ -401,15 +399,15 @@ public class ConfigAndEnrollTest extends BaseMobileAppStudyTest
         checkSum = (char)intVal;
         invalidToken = invalidToken.substring(0, invalidToken.length()-1) + checkSum;
         log("Token after changing checksum: " + invalidToken);
-        failureMessage = assignTokenAndFail(invalidToken, PROJECT_NAME01, PROJECT01_STUDY_NAME);
+        failureMessage = assignTokenAndFail(invalidToken, PROJECT_NAME04, PROJECT01_STUDY_NAME);
         assertEquals("Wrong enrollment error.", "Invalid token: '" + invalidToken + "'", failureMessage);
 
         log("Provide a token but the wrong (valid) study name.");
-        failureMessage = assignTokenAndFail(proj01_tokensNotAssignBatch01.get(0), PROJECT_NAME02, PROJECT02_STUDY_NAME);
+        failureMessage = assignTokenAndFail(proj01_tokensNotAssignBatch01.get(0), PROJECT_NAME05, PROJECT02_STUDY_NAME);
         assertEquals("Wrong enrollment error.", "Unknown token: '" + proj01_tokensNotAssignBatch01.get(0) + "'", failureMessage);
 
         log("Provide a valid token but no study name.");
-        failureMessage = assignTokenAndFail(proj01_tokensNotAssignBatch01.get(2), PROJECT_NAME01, "");
+        failureMessage = assignTokenAndFail(proj01_tokensNotAssignBatch01.get(2), PROJECT_NAME04, "");
         assertEquals("Wrong enrollment error.", EnrollmentTokenValidationCommand.BLANK_STUDYID, failureMessage);
     }
 

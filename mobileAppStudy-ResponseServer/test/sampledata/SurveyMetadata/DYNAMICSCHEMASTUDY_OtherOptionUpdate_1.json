@@ -10,13 +10,15 @@
         "key": "NoOption",
         "resultType": "textChoice",
         "repeatable": true,
-        "type": "question"
+        "type": "question",
+        "format": {}
       },
       {
         "key": "OtherOption",
         "resultType": "textChoice",
         "repeatable": true,
-        "type": "question"
+        "type": "question",
+        "format": {}
       },
       {
         "key": "GroupedList",
@@ -27,13 +29,15 @@
             "key": "OtherOption",
             "resultType": "textChoice",
             "repeatable": true,
-            "type": "question"
+            "type": "question",
+            "format": {}
           },
           {
             "key": "Norepeat",
             "resultType": "textChoice",
             "repeatable": false,
-            "type": "question"
+            "type": "question",
+            "format": {}
           },
           {
             "key": "SubGroupedList",
@@ -44,7 +48,8 @@
                 "key": "OtherOption",
                 "resultType": "textChoice",
                 "repeatable": true,
-                "type": "question"
+                "type": "question",
+                "format": {}
               }
             ]
           }
