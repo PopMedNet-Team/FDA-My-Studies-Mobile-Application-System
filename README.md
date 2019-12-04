@@ -24,7 +24,7 @@ direction of FDA and the Harvard Pilgrim Research Institute, (HPHCI).
 <li>mobileAppStudy-ResponseServer
 </ul>
 
-<b>Setup Instructions: FDAMyStudies_Release 2019.05__SetupInstructions_V1.0.pdf</b>
+<b>Setup Instructions: FDAMyStudies_Release 2019.10__SetupInstructions_V1.0.pdf</b>
 
 
 # FDA MyStudies Release Notes - Version 2019.10:
