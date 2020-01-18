@@ -360,7 +360,7 @@ public class MobileAppStudyController extends SpringActionController
                 return;
             }
 
-            Set<String> listIds = DataRegionSelection.getSelected(getViewContext(), form.getKey(), true, false);
+            Set<String> listIds = DataRegionSelection.getSelected(getViewContext(), form.getKey(), false);
             _ids = listIds.stream().map(Integer::valueOf).collect(Collectors.toSet());
 
             if (_ids.isEmpty())
@@ -527,7 +527,7 @@ public class MobileAppStudyController extends SpringActionController
 
         @NotNull
         @Override
-        public UserSchema getSchema()
+        public UserSchema createSchema()
         {
             return _userSchema;
         }
