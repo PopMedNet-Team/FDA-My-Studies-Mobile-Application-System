@@ -24,7 +24,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.harvard.fda.AppConfig;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.gatewayModule.events.GetStartedEvent;
 import com.harvard.fda.studyAppModule.StandaloneActivity;
 import com.harvard.fda.studyAppModule.StudyActivity;

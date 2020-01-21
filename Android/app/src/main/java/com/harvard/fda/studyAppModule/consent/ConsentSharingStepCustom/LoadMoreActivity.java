@@ -20,7 +20,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 
 public class LoadMoreActivity extends AppCompatActivity {
 

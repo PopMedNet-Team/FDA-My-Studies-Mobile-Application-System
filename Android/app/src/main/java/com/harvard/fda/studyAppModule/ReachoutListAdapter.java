@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.utils.AppController;
 
 import java.util.ArrayList;

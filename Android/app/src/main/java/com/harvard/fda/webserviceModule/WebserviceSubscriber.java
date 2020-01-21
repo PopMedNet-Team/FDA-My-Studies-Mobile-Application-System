@@ -14,7 +14,7 @@
 
 package com.harvard.fda.webserviceModule;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.base.BaseSubscriber;
 import com.harvard.fda.webserviceModule.apiHelper.ApiCall;
 import com.harvard.fda.webserviceModule.apiHelper.ApiCallResponseServer;

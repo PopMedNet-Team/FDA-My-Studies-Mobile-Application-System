@@ -40,7 +40,7 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.harvard.fda.AppConfig;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.userModule.TermsPrivacyPolicyActivity;
 import com.harvard.fda.userModule.UserModulePresenter;
 import com.harvard.fda.userModule.VerificationStepActivity;
@@ -61,7 +61,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-import static com.harvard.fda.BuildConfig.VERSION_NAME;
+import static com.harvard.BuildConfig.VERSION_NAME;
 
 
 public class SignupFragment extends Fragment implements ApiCall.OnAsyncRequestComplete {

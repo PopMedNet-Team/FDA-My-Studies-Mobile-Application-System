@@ -30,7 +30,7 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 
 import static android.support.v4.view.ViewPager.OnPageChangeListener;
 

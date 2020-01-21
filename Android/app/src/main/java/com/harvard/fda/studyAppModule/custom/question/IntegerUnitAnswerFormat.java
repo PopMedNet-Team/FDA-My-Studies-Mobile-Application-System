@@ -14,7 +14,7 @@
 
 package com.harvard.fda.studyAppModule.custom.question;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.custom.ChoiceAnswerFormatCustom;
 
 import org.researchstack.backbone.ui.step.body.BodyAnswer;

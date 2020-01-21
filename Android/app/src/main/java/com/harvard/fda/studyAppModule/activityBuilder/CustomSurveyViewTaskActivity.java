@@ -39,7 +39,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.notificationModule.NotificationModuleSubscriber;
 import com.harvard.fda.storageModule.DBServiceSubscriber;
 import com.harvard.fda.studyAppModule.SurveyCompleteActivity;

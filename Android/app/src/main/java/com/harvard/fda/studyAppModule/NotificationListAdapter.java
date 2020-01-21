@@ -26,7 +26,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.storageModule.DBServiceSubscriber;
 import com.harvard.fda.studyAppModule.studyModel.Notification;
 import com.harvard.fda.studyAppModule.studyModel.Study;

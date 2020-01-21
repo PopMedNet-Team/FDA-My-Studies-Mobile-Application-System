@@ -38,7 +38,7 @@ import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.utils.AppController;
 import com.harvard.fda.webserviceModule.apiHelper.ConnectionDetector;
 

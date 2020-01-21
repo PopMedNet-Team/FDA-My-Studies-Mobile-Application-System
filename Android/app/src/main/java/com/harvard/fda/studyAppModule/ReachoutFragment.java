@@ -23,7 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 
 import java.util.ArrayList;
 

@@ -29,7 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.acvitityListModel.ActivitiesWS;
 import com.harvard.fda.studyAppModule.survayScheduler.SurvayScheduler;
 import com.harvard.fda.studyAppModule.survayScheduler.model.ActivityStatus;

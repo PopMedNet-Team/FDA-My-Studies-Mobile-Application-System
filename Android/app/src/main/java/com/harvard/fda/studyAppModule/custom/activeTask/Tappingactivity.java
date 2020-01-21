@@ -36,7 +36,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.activityBuilder.CustomSurveyViewTaskActivity;
 import com.harvard.fda.studyAppModule.custom.QuestionStepCustom;
 import com.harvard.fda.utils.ActiveTaskService;

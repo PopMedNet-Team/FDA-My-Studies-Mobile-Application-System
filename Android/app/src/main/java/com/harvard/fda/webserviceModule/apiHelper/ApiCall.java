@@ -21,7 +21,7 @@ import android.support.v7.app.AlertDialog;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.activityBuilder.model.serviceModel.ActivityInfoData;
 import com.harvard.fda.userModule.webserviceModel.RefreshToken;
 import com.harvard.fda.utils.AppController;

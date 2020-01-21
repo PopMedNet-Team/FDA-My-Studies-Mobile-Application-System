@@ -21,7 +21,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 
 import org.researchstack.backbone.ui.step.layout.StepLayout;
 

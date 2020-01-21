@@ -28,7 +28,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.internal.LinkedTreeMap;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.storageModule.DBServiceSubscriber;
 import com.harvard.fda.studyAppModule.activityBuilder.CustomSurveyViewTaskActivity;
 import com.harvard.fda.studyAppModule.activityBuilder.model.serviceModel.ActivityObj;

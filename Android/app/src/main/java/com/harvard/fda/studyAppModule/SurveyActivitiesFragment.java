@@ -48,7 +48,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.harvard.fda.AppConfig;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.notificationModule.NotificationModuleSubscriber;
 import com.harvard.fda.offlineModule.model.OfflineData;
 import com.harvard.fda.storageModule.DBServiceSubscriber;

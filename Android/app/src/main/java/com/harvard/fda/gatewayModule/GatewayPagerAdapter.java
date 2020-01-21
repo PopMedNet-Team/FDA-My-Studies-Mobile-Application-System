@@ -25,7 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.utils.AppController;
 
 public class GatewayPagerAdapter extends PagerAdapter {

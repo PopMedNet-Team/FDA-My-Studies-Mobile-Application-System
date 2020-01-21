@@ -25,7 +25,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.custom.QuestionStepCustom;
 import com.harvard.fda.utils.VerticalSeekBar;
 

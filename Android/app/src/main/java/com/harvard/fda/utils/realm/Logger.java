@@ -17,7 +17,7 @@ package com.harvard.fda.utils.realm;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.harvard.fda.BuildConfig;
+import com.harvard.BuildConfig;
 import com.harvard.fda.FDAApplication;
 
 import java.io.File;

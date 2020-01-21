@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.harvard.fda.R;
+import com.harvard.R;
 
 /**
  * Created by Naveen Raj on 11/15/2017.

@@ -17,7 +17,7 @@ package com.harvard.fda.studyAppModule.consent;
 import android.content.Context;
 
 import com.harvard.fda.EligibilityModule.StepsBuilder;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.activityBuilder.model.serviceModel.Steps;
 import com.harvard.fda.studyAppModule.consent.ConsentSharingStepCustom.ConsentSharingStepCustom;
 import com.harvard.fda.studyAppModule.consent.model.Consent;

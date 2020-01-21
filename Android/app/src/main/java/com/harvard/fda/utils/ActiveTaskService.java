@@ -30,7 +30,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
 import com.harvard.fda.FDAApplication;
-import com.harvard.fda.R;
+import com.harvard.R;
 
 import java.util.Calendar;
 

@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.harvard.fda.AppConfig;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.storageModule.DBServiceSubscriber;
 import com.harvard.fda.studyAppModule.ConsentCompletedActivity;
 import com.harvard.fda.studyAppModule.StandaloneActivity;

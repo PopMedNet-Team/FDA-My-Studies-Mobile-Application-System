@@ -51,7 +51,7 @@ import android.widget.Toast;
 
 import com.harvard.fda.AppConfig;
 import com.harvard.fda.MyFirebaseMessagingService;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.notificationModule.AlarmReceiver;
 import com.harvard.fda.notificationModule.NotificationModuleSubscriber;
 import com.harvard.fda.offlineModule.model.OfflineData;

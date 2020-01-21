@@ -22,7 +22,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.NumberPicker;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 
 public class CustomDialogClass<V> extends Dialog implements View.OnClickListener {
 

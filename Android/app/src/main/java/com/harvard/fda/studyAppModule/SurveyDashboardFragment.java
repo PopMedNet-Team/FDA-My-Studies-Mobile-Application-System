@@ -56,7 +56,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.harvard.fda.AppConfig;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.storageModule.DBServiceSubscriber;
 import com.harvard.fda.studyAppModule.acvitityListModel.ActivitiesWS;
 import com.harvard.fda.studyAppModule.acvitityListModel.ActivityListData;

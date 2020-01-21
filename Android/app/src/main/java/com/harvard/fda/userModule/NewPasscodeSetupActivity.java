@@ -22,7 +22,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.passcodeModule.PasscodeView;
 import com.harvard.fda.utils.AppController;
 

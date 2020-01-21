@@ -41,7 +41,7 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.storageModule.DBServiceSubscriber;
 import com.harvard.fda.studyAppModule.activityBuilder.model.ActivityRun;
 import com.harvard.fda.studyAppModule.acvitityListModel.ActivitiesWS;

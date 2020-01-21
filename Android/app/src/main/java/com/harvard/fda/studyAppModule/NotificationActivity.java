@@ -24,7 +24,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.notificationModule.model.LocalNotification;
 import com.harvard.fda.notificationModule.model.NotificationDb;
 import com.harvard.fda.storageModule.DBServiceSubscriber;

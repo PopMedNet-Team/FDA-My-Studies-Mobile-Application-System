@@ -37,7 +37,7 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.harvard.fda.AppConfig;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.notificationModule.NotificationModuleSubscriber;
 import com.harvard.fda.studyAppModule.ChangePasswordActivity;
 import com.harvard.fda.studyAppModule.StandaloneActivity;
@@ -64,7 +64,7 @@ import org.json.JSONObject;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import static com.harvard.fda.BuildConfig.VERSION_NAME;
+import static com.harvard.BuildConfig.VERSION_NAME;
 
 public class SignInActivity extends AppCompatActivity implements ApiCall.OnAsyncRequestComplete {
 

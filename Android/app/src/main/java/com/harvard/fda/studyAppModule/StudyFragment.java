@@ -38,7 +38,7 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.offlineModule.model.OfflineData;
 import com.harvard.fda.storageModule.DBServiceSubscriber;
 import com.harvard.fda.storageModule.events.DatabaseEvent;

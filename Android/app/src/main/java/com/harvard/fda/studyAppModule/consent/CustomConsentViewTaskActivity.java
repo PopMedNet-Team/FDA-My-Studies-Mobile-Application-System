@@ -36,7 +36,7 @@ import android.widget.Toast;
 
 import com.harvard.fda.EligibilityModule.ComprehensionFailureActivity;
 import com.harvard.fda.EligibilityModule.ComprehensionSuccessActivity;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.storageModule.DBServiceSubscriber;
 import com.harvard.fda.studyAppModule.consent.model.ComprehensionCorrectAnswers;
 import com.harvard.fda.studyAppModule.consent.model.Consent;

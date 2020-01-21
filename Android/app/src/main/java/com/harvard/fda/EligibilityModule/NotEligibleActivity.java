@@ -20,7 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.storageModule.DBServiceSubscriber;
 import com.harvard.fda.studyAppModule.ConsentCompletedActivity;
 import com.harvard.fda.studyAppModule.StudyFragment;

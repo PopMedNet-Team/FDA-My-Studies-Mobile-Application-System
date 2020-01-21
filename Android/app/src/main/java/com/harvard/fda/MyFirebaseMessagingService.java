@@ -14,6 +14,8 @@
 
 package com.harvard.fda;
 
+import com.harvard.R;
+
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;

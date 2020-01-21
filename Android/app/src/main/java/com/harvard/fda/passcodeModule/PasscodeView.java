@@ -38,7 +38,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 
 public class PasscodeView extends ViewGroup {
 

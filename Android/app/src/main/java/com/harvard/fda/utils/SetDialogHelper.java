@@ -19,7 +19,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 
 
 public class SetDialogHelper {

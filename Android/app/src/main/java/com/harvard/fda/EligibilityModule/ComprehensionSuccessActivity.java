@@ -20,7 +20,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 
 public class ComprehensionSuccessActivity extends AppCompatActivity {
 

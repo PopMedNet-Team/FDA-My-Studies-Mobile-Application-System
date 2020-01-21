@@ -16,7 +16,7 @@ package com.harvard.fda.EligibilityModule;
 
 import android.content.Context;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.activityBuilder.model.serviceModel.Steps;
 import com.harvard.fda.studyAppModule.custom.AnswerFormatCustom;
 import com.harvard.fda.studyAppModule.custom.ChoiceAnswerFormatCustom;

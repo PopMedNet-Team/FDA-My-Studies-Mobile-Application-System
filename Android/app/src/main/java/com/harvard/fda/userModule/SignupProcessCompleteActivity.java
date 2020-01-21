@@ -22,7 +22,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
 import com.harvard.fda.AppConfig;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.StandaloneActivity;
 import com.harvard.fda.studyAppModule.StudyActivity;
 import com.harvard.fda.utils.AppController;

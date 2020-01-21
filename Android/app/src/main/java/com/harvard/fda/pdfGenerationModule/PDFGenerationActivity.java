@@ -20,7 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.utils.AppController;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;

@@ -33,7 +33,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.harvard.fda.AppConfig;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.notificationModule.NotificationModuleSubscriber;
 import com.harvard.fda.offlineModule.model.OfflineData;
 import com.harvard.fda.passcodeModule.PasscodeSetupActivity;
@@ -61,7 +61,7 @@ import java.util.HashMap;
 
 import io.realm.Realm;
 
-import static com.harvard.fda.R.id.signOutButton;
+import static com.harvard.R.id.signOutButton;
 
 
 public class ProfileFragment extends Fragment implements ApiCall.OnAsyncRequestComplete, CompoundButton.OnCheckedChangeListener {

@@ -22,7 +22,7 @@ import android.content.SyncResult;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.offlineModule.model.OfflineData;
 import com.harvard.fda.storageModule.DBServiceSubscriber;
 import com.harvard.fda.studyAppModule.StudyModulePresenter;

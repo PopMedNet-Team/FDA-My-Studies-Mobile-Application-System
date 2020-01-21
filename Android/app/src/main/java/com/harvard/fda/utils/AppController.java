@@ -37,7 +37,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.harvard.fda.AppConfig;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.SplashActivity;
 import com.harvard.fda.notificationModule.NotificationModuleSubscriber;
 import com.harvard.fda.offlineModule.model.OfflineData;

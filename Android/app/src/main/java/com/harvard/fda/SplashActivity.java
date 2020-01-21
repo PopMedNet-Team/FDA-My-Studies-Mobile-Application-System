@@ -14,6 +14,8 @@
 
 package com.harvard.fda;
 
+import com.harvard.R;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;

@@ -28,7 +28,7 @@ import android.support.v4.app.NotificationManagerCompat;
 
 import com.harvard.fda.AppConfig;
 import com.harvard.fda.FDAApplication;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.storageModule.DBServiceSubscriber;
 import com.harvard.fda.studyAppModule.NotificationActivity;
 import com.harvard.fda.studyAppModule.StandaloneActivity;

@@ -40,7 +40,7 @@ import com.google.gson.stream.JsonWriter;
 import com.harvard.fda.AppConfig;
 import com.harvard.fda.EligibilityModule.CustomViewTaskActivity;
 import com.harvard.fda.EligibilityModule.StepsBuilder;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.WebViewActivity;
 import com.harvard.fda.gatewayModule.CircleIndicator;
 import com.harvard.fda.offlineModule.model.OfflineData;

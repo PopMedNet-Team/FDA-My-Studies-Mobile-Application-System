@@ -37,7 +37,7 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.harvard.fda.AppConfig;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.StandaloneActivity;
 import com.harvard.fda.studyAppModule.StudyActivity;
 import com.harvard.fda.studyAppModule.StudyModulePresenter;
@@ -59,8 +59,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-import static com.harvard.fda.BuildConfig.VERSION_NAME;
-import static com.harvard.fda.R.string.signup;
+import static com.harvard.BuildConfig.VERSION_NAME;
+import static com.harvard.R.string.signup;
 
 public class SignupActivity extends AppCompatActivity implements ApiCall.OnAsyncRequestComplete {
     private static final int UPDATE_USER_PROFILE = 101;

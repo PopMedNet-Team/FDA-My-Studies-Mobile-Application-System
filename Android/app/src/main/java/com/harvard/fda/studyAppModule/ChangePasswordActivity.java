@@ -28,7 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.harvard.fda.AppConfig;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.userModule.UserModulePresenter;
 import com.harvard.fda.userModule.VerificationStepActivity;
 import com.harvard.fda.userModule.event.ChangePasswordEvent;

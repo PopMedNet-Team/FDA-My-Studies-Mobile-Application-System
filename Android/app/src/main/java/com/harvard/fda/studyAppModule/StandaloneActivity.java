@@ -35,7 +35,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.harvard.fda.AppConfig;
 import com.harvard.fda.MyFirebaseMessagingService;
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.notificationModule.AlarmReceiver;
 import com.harvard.fda.storageModule.DBServiceSubscriber;
 import com.harvard.fda.storageModule.events.DatabaseEvent;

@@ -17,7 +17,7 @@ package com.harvard.fda.studyAppModule.activityBuilder;
 import android.content.Context;
 import android.util.Log;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.activityBuilder.model.serviceModel.ActivityObj;
 import com.harvard.fda.studyAppModule.activityBuilder.model.serviceModel.Steps;
 import com.harvard.fda.studyAppModule.custom.AnswerFormatCustom;

@@ -28,7 +28,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.activityBuilder.CustomSurveyViewTaskActivity;
 import com.harvard.fda.studyAppModule.custom.ChoiceAnswerFormatCustom;
 import com.harvard.fda.studyAppModule.custom.QuestionStepCustom;

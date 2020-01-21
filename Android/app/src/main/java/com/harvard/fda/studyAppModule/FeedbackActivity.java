@@ -24,7 +24,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.events.ContactUsEvent;
 import com.harvard.fda.studyAppModule.studyModel.ReachOut;
 import com.harvard.fda.utils.AppController;

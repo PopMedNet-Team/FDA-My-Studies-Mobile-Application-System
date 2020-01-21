@@ -24,7 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.custom.QuestionStepCustom;
 
 import org.researchstack.backbone.result.StepResult;
@@ -34,7 +34,7 @@ import org.researchstack.backbone.ui.step.body.StepBody;
 
 import java.util.ArrayList;
 
-import static com.harvard.fda.R.id.min;
+import static com.harvard.R.id.min;
 
 
 /**

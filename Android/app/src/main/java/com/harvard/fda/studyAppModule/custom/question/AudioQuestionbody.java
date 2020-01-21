@@ -24,7 +24,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.custom.QuestionStepCustom;
 
 import org.researchstack.backbone.result.StepResult;

@@ -23,7 +23,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.utils.AppController;
 
 public class ChooseTouchIDSignInActivity extends AppCompatActivity {

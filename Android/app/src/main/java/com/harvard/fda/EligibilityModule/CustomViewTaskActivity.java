@@ -32,7 +32,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.activityBuilder.model.Eligibility;
 import com.harvard.fda.studyAppModule.activityBuilder.model.serviceModel.ActivityObj;
 import com.harvard.fda.studyAppModule.consent.model.CorrectAnswers;

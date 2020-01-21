@@ -25,7 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 
 import org.researchstack.backbone.answerformat.DateAnswerFormat;
 import org.researchstack.backbone.result.StepResult;

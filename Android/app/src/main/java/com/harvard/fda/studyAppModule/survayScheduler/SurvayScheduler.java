@@ -16,7 +16,7 @@ package com.harvard.fda.studyAppModule.survayScheduler;
 
 import android.content.Context;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.notificationModule.NotificationModuleSubscriber;
 import com.harvard.fda.storageModule.DBServiceSubscriber;
 import com.harvard.fda.storageModule.events.DatabaseEvent;

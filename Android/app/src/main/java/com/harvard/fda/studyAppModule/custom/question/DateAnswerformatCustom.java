@@ -16,7 +16,7 @@ package com.harvard.fda.studyAppModule.custom.question;
 
 import android.util.Log;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.studyAppModule.custom.AnswerFormatCustom;
 
 import org.researchstack.backbone.ui.step.body.BodyAnswer;

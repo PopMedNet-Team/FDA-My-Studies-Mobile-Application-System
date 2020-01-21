@@ -20,7 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import com.harvard.fda.R;
+import com.harvard.R;
 import com.harvard.fda.notificationModule.model.NotificationDb;
 import com.harvard.fda.storageModule.DBServiceSubscriber;
 import com.harvard.fda.studyAppModule.activityBuilder.model.ActivityRun;
