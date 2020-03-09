@@ -1,4 +1,4 @@
-# Released under MIT License
+MIT License
 
 # Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
 
