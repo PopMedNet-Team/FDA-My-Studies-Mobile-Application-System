@@ -1,0 +1,84 @@
+PODS:
+  - ActionSheetPicker-3.0 (2.3.0)
+  - Crashlytics (3.14.0):
+    - Fabric (~> 1.10.2)
+  - CryptoSwift (1.0.0)
+  - Embassy (4.1.0)
+  - EnvoyAmbassador (4.0.5):
+    - Embassy (~> 4.0)
+  - Fabric (1.10.2)
+  - IQKeyboardManagerSwift (6.5.1)
+  - Mockingjay (3.0.0-alpha.1):
+    - Mockingjay/Core (= 3.0.0-alpha.1)
+    - Mockingjay/XCTest (= 3.0.0-alpha.1)
+  - Mockingjay/Core (3.0.0-alpha.1):
+    - URITemplate (~> 3.0)
+  - Mockingjay/XCTest (3.0.0-alpha.1):
+    - Mockingjay/Core
+  - Realm (3.19.0):
+    - Realm/Headers (= 3.19.0)
+  - Realm/Headers (3.19.0)
+  - RealmSwift (3.19.0):
+    - Realm (= 3.19.0)
+  - SDWebImage (5.2.2):
+    - SDWebImage/Core (= 5.2.2)
+  - SDWebImage/Core (5.2.2)
+  - SlideMenuControllerSwift (5.0.0)
+  - URITemplate (3.0.0)
+
+DEPENDENCIES:
+  - ActionSheetPicker-3.0
+  - Crashlytics
+  - CryptoSwift
+  - Embassy
+  - EnvoyAmbassador
+  - Fabric
+  - IQKeyboardManagerSwift
+  - Mockingjay (= 3.0.0-alpha.1)
+  - RealmSwift
+  - SDWebImage
+  - SlideMenuControllerSwift (from `https://github.com/AtomicSLLC/SlideMenuControllerSwift.git`, branch `swift5`)
+
+SPEC REPOS:
+  trunk:
+    - ActionSheetPicker-3.0
+    - Crashlytics
+    - CryptoSwift
+    - Embassy
+    - EnvoyAmbassador
+    - Fabric
+    - IQKeyboardManagerSwift
+    - Mockingjay
+    - Realm
+    - RealmSwift
+    - SDWebImage
+    - URITemplate
+
+EXTERNAL SOURCES:
+  SlideMenuControllerSwift:
+    :branch: swift5
+    :git: https://github.com/AtomicSLLC/SlideMenuControllerSwift.git
+
+CHECKOUT OPTIONS:
+  SlideMenuControllerSwift:
+    :commit: 21240fd221adc2e50adb366d45bc19185bb62e3c
+    :git: https://github.com/AtomicSLLC/SlideMenuControllerSwift.git
+
+SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
+  CryptoSwift: d81eeaa59dc5a8d03720fe919a6fd07b51f7439f
+  Embassy: 296c51c4b16b8377b413f48f413a99aa736adc22
+  EnvoyAmbassador: 21cef10e70d003801c68ba5281948684a4e25486
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
+  IQKeyboardManagerSwift: 9ac7524fad9f9fe9a3b98c927e7772471ca546d2
+  Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
+  Realm: 995d585bcf699aaff226715886c849a29dd3d07f
+  RealmSwift: 35f284a537989f2187b413e5917091948cb87a3f
+  SDWebImage: 5fcdb02cc35e05fc35791ec514b191d27189f872
+  SlideMenuControllerSwift: d740ea24105a658fe6a8c256f2bf5832fee7c047
+  URITemplate: 58e0d47f967006c5d59888af5356c4a8ed3b197d
+
+PODFILE CHECKSUM: dc0eb85ce5b1c027ee12d03eab98c8c7acaa35c5
+
+COCOAPODS: 1.8.3

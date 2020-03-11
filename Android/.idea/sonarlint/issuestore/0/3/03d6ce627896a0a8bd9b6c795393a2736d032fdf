@@ -1,0 +1,91 @@
+
+isquid:S3776û"RRefactor this method to reduce its Cognitive Complexity from 94 to the 15 allowed.(Ïòİ&
+_squid:S1126ğ"BReplace this if-then-else statement by a single method invocation.(ã¬Ô¬şÿÿÿÿ
+Lsquid:S1905•"4Remove this unnecessary cast to "AppCompatCheckBox".(ñÁõü
+_squid:S1126å"BReplace this if-then-else statement by a single method invocation.(”° ïıÿÿÿÿ
+Psquid:S1905{"4Remove this unnecessary cast to "AppCompatTextView".(Üàˆùÿÿÿÿ
+Ksquid:S1905w"4Remove this unnecessary cast to "AppCompatTextView".(·ŞÏ¢
+Lsquid:S1905"4Remove this unnecessary cast to "AppCompatCheckBox".(½ĞØ´
+@squid:S1148÷"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Lsquid:S1905€"4Remove this unnecessary cast to "AppCompatTextView".(ú‰‰¢
+Zsquid:S1126±"BReplace this if-then-else statement by a single method invocation.(˜ÿ
+Ksquid:S1905p"4Remove this unnecessary cast to "AppCompatTextView".(ˆÙãğ
+Zsquid:S1126„"BReplace this if-then-else statement by a single method invocation.(Ã€
+Zsquid:S1126ã"BReplace this if-then-else statement by a single method invocation.(òÏµ™
+_squid:S1126•"BReplace this if-then-else statement by a single method invocation.(Êì©‰úÿÿÿÿ
+Lsquid:S1905–"4Remove this unnecessary cast to "AppCompatCheckBox".(±âˆú
+Psquid:S1905m"4Remove this unnecessary cast to "AppCompatTextView".(ÜÜÄÉşÿÿÿÿ
+_squid:S1126À"BReplace this if-then-else statement by a single method invocation.(æŞˆÿÿÿÿÿ
+Ksquid:S1905s"4Remove this unnecessary cast to "AppCompatTextView".(ÉåÛ
+_squid:S1126˜"BReplace this if-then-else statement by a single method invocation.(åİ®üÿÿÿÿ
+Lsquid:S1905"4Remove this unnecessary cast to "AppCompatCheckBox".(ù¢ÑÁ
+_squid:S1126ë"BReplace this if-then-else statement by a single method invocation.(ªşüáøÿÿÿÿ
+Qsquid:S1905…"4Remove this unnecessary cast to "AppCompatCheckBox".(Ëığæÿÿÿÿÿ
+_squid:S1126Ÿ"BReplace this if-then-else statement by a single method invocation.(¢¸û—ÿÿÿÿÿ
+Lsquid:S1905‡"4Remove this unnecessary cast to "AppCompatCheckBox".(Ë–«
+Zsquid:S1126Û"BReplace this if-then-else statement by a single method invocation.(¼„„ß
+_squid:S1126Ö"BReplace this if-then-else statement by a single method invocation.(Š—¯‡üÿÿÿÿ
+Ksquid:S1905“"4Remove this unnecessary cast to "AppCompatCheckBox".(²Ÿ´>
+Qsquid:S1905Š"4Remove this unnecessary cast to "AppCompatCheckBox".(‡ï¸şÿÿÿÿ
+hsquid:CommentedOutCodeLine»"<This block of commented-out lines of code should be removed.(¹ÛÌĞúÿÿÿÿ
+_squid:S1126Ô"BReplace this if-then-else statement by a single method invocation.(Ğæ§§ÿÿÿÿÿ
+Psquid:S1905}"4Remove this unnecessary cast to "AppCompatTextView".(‹Ôÿÿÿÿÿ
+_squid:S1126Ë"BReplace this if-then-else statement by a single method invocation.(ûÊÛòúÿÿÿÿ
+Zsquid:S1126"BReplace this if-then-else statement by a single method invocation.(ÈêÜå
+Psquid:S1905n"4Remove this unnecessary cast to "AppCompatTextView".(½Ùæ­øÿÿÿÿ
+Zsquid:S1126š"BReplace this if-then-else statement by a single method invocation.(Øçï¥
+Zsquid:S1126õ"BReplace this if-then-else statement by a single method invocation.(¥ªæª
+Qsquid:S1905Œ"4Remove this unnecessary cast to "AppCompatCheckBox".(ÔÏ½¼ıÿÿÿÿ
+Ksquid:S1905k"4Remove this unnecessary cast to "AppCompatTextView".(şí‰ô
+_squid:S1126à"BReplace this if-then-else statement by a single method invocation.(ÿú„£ıÿÿÿÿ
+Qsquid:S1905”"4Remove this unnecessary cast to "AppCompatCheckBox".(÷Ùèûÿÿÿÿ
+Psquid:S1905x"4Remove this unnecessary cast to "AppCompatTextView".(€äÂ¼şÿÿÿÿ
+Lsquid:S1905—"4Remove this unnecessary cast to "AppCompatCheckBox".(½×íå
+Lsquid:S1905†"4Remove this unnecessary cast to "AppCompatCheckBox".(Ùë¬â
+_squid:S1126¶"BReplace this if-then-else statement by a single method invocation.(¼Öüşÿÿÿÿ
+Psquid:S1905r"4Remove this unnecessary cast to "AppCompatTextView".(İÑ³ìúÿÿÿÿ
+Ksquid:S1905|"4Remove this unnecessary cast to "AppCompatTextView".(æà’”
+Ksquid:S1905v"4Remove this unnecessary cast to "AppCompatTextView".(©Ù®
+Qsquid:S1905˜"4Remove this unnecessary cast to "AppCompatCheckBox".(ÂŠŒ¯şÿÿÿÿ
+Lsquid:S1905"4Remove this unnecessary cast to "AppCompatTextView".(ìé˜Œ
+bsquid:CommentedOutCodeLineO"<This block of commented-out lines of code should be removed.(€Äƒ¦
+_squid:S1126ÿ"BReplace this if-then-else statement by a single method invocation.(æ×Õşıÿÿÿÿ
+Lsquid:S1905"4Remove this unnecessary cast to "AppCompatCheckBox".(Û£¥
+Lsquid:S1905‰"4Remove this unnecessary cast to "AppCompatCheckBox".(‘Üù
+jsquid:S3776²"RRefactor this method to reduce its Cognitive Complexity from 40 to the 15 allowed.(ìÏ±›
+Psquid:S1905y"4Remove this unnecessary cast to "AppCompatTextView".(İÂ¶İüÿÿÿÿ
+Psquid:S1905o"4Remove this unnecessary cast to "AppCompatTextView".(õéáÌıÿÿÿÿ
+_squid:S1126»"BReplace this if-then-else statement by a single method invocation.(›Á£åûÿÿÿÿ
+Psquid:S1905z"4Remove this unnecessary cast to "AppCompatTextView".(öûÉ¢ıÿÿÿÿ
+_squid:S1126¥"BReplace this if-then-else statement by a single method invocation.(úÉÛ›şÿÿÿÿ
+Zsquid:S1126Æ"BReplace this if-then-else statement by a single method invocation.(±‹«ø
+Ysquid:S1126"BReplace this if-then-else statement by a single method invocation.(•Ãñ
+Zsquid:S1126Ê"BReplace this if-then-else statement by a single method invocation.(”ª²
+Lsquid:S1905‘"4Remove this unnecessary cast to "AppCompatCheckBox".(İµÚ¼
+_squid:S1126Ş"BReplace this if-then-else statement by a single method invocation.(Ö…ÕÖÿÿÿÿÿ
+Psquid:S1905u"4Remove this unnecessary cast to "AppCompatTextView".(ã¼şÿÿÿÿ
+Zsquid:S1126Á"BReplace this if-then-else statement by a single method invocation.(â·ÀÚ
+Psquid:S1905l"4Remove this unnecessary cast to "AppCompatTextView".(‹¹ªıÿÿÿÿ
+Ksquid:S1905q"4Remove this unnecessary cast to "AppCompatTextView".(­§ğ
+Psquid:S1905"4Remove this unnecessary cast to "AppCompatTextView".(Ìîøøÿÿÿÿ
+Lsquid:S1905’"4Remove this unnecessary cast to "AppCompatCheckBox".(±æø’
+_squid:S1126‰"BReplace this if-then-else statement by a single method invocation.(µ¡Šúÿÿÿÿ
+Ysquid:S1126í"BReplace this if-then-else statement by a single method invocation.(óú‡%
+Zsquid:S1126Å"BReplace this if-then-else statement by a single method invocation.(ùïİµ
+Zsquid:S1126«"BReplace this if-then-else statement by a single method invocation.(Ó‚ì”
+Zsquid:S1126Ñ"BReplace this if-then-else statement by a single method invocation.(©“¿
+Qsquid:S1905ƒ"4Remove this unnecessary cast to "AppCompatTextView".(’”´Èøÿÿÿÿ
+Qsquid:S1905‚"4Remove this unnecessary cast to "AppCompatTextView".(ºùùƒûÿÿÿÿ
+Ksquid:S1905t"4Remove this unnecessary cast to "AppCompatTextView".(Àæ–¾
+hsquid:CommentedOutCodeLine¹"<This block of commented-out lines of code should be removed.(¼æº¨øÿÿÿÿ
+Lsquid:S1905"4Remove this unnecessary cast to "AppCompatCheckBox".(×Ó†ì
+_squid:S1126Ï"BReplace this if-then-else statement by a single method invocation.(î¦ÀÓıÿÿÿÿ
+Qsquid:S1905‹"4Remove this unnecessary cast to "AppCompatCheckBox".(Ùôİ‹üÿÿÿÿ
+Lsquid:S1905ˆ"4Remove this unnecessary cast to "AppCompatCheckBox".(¸Ú»Œ
+_squid:S1126Ù"BReplace this if-then-else statement by a single method invocation.(–Îˆ¶ùÿÿÿÿ
+_squid:S1126‹"BReplace this if-then-else statement by a single method invocation.(¯àÚüüÿÿÿÿ
+Ksquid:S1905~"4Remove this unnecessary cast to "AppCompatTextView".(Î«·®
+Zsquid:S1126¼"BReplace this if-then-else statement by a single method invocation.(¬Ë™õ
+Ysquid:S1126è"BReplace this if-then-else statement by a single method invocation.(‚›Î`
+_squid:S1126“"BReplace this if-then-else statement by a single method invocation.(ˆÆê§üÿÿÿÿ
+_squid:S1126ú"BReplace this if-then-else statement by a single method invocation.(èï¼ıÿÿÿÿ

@@ -1,0 +1,44 @@
+
+Gsquid:S1656’"/Remove or correct this useless self-assignment.(ŒØ´
+Bsquid:S3398À",Move this method into "callConsentMetaData".(„À^
+Lsquid:S1066£"/Merge this if statement with the enclosing one.(±„‘‰ıÿÿÿÿ
+Gsquid:S1066¤"/Merge this if statement with the enclosing one.(®åÙ
+psquid:S2293½"YReplace the type specification in this constructor call with the diamond operator ("<>").(°ïÆ!
+~squid:S4165’"fRemove this useless assignment; "response" already holds the assigned value along all execution paths.(ŒØ´
+csquid:CommentedOutCodeLineÏ"<This block of commented-out lines of code should be removed.(Äƒö¢
+csquid:CommentedOutCodeLineØ"<This block of commented-out lines of code should be removed.(ìĞ
+hsquid:CommentedOutCodeLineá"<This block of commented-out lines of code should be removed.(Ñ…‡Úøÿÿÿÿ
+hsquid:CommentedOutCodeLineã"<This block of commented-out lines of code should be removed.(ñ¥ùšøÿÿÿÿ
+csquid:CommentedOutCodeLineå"<This block of commented-out lines of code should be removed.(áïÖ³
+csquid:CommentedOutCodeLineç"<This block of commented-out lines of code should be removed.(¹³ª
+csquid:CommentedOutCodeLineì"<This block of commented-out lines of code should be removed.(¤ºÈ
+csquid:CommentedOutCodeLineğ"<This block of commented-out lines of code should be removed.(Ù£¼ì
+hsquid:CommentedOutCodeLineô"<This block of commented-out lines of code should be removed.(º¨˜®ûÿÿÿÿ
+hsquid:CommentedOutCodeLineö"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ
+hsquid:CommentedOutCodeLineù"<This block of commented-out lines of code should be removed.(İ«·›ÿÿÿÿÿ
+hsquid:CommentedOutCodeLine…"<This block of commented-out lines of code should be removed.(‘š”›ùÿÿÿÿ
+csquid:CommentedOutCodeLine‡"<This block of commented-out lines of code should be removed.(â¡ç„
+bsquid:CommentedOutCodeLineå"<This block of commented-out lines of code should be removed.(¬©ÖI
+hsquid:CommentedOutCodeLineé"<This block of commented-out lines of code should be removed.(İƒàĞøÿÿÿÿ
+hsquid:CommentedOutCodeLine "<This block of commented-out lines of code should be removed.(öÅ¯áşÿÿÿÿ
+csquid:CommentedOutCodeLine¶"<This block of commented-out lines of code should be removed.(Çæ²è
+hsquid:CommentedOutCodeLineÔ"<This block of commented-out lines of code should be removed.(ßäûÿÿÿÿ
+hsquid:CommentedOutCodeLine‹"<This block of commented-out lines of code should be removed.(­ÍÀÛüÿÿÿÿ
+csquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(®ƒ÷
+hsquid:CommentedOutCodeLineİ"<This block of commented-out lines of code should be removed.(•‡˜øøÿÿÿÿ
+csquid:CommentedOutCodeLineä"<This block of commented-out lines of code should be removed.(Çæ²è
+_squid:S1126Ä"BReplace this if-then-else statement by a single method invocation.(òˆÇ‚úÿÿÿÿ
+Tsquid:S2589Ú"7Remove this expression which always evaluates to "true"(¦–À¨ÿÿÿÿÿ
+Osquid:S2589¶"7Remove this expression which always evaluates to "true"(«Ùï
+Osquid:S2589º"7Remove this expression which always evaluates to "true"(Éû»à
+osquid:S3776ú"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(ŒËİåÿÿÿÿÿ
+isquid:S3776›"RRefactor this method to reduce its Cognitive Complexity from 65 to the 15 allowed.(­–ÀS
+osquid:S3776±"RRefactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.(ÓÏ­ûùÿÿÿÿ
+ksquid:S00101ï"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(èÈ«ùÿÿÿÿ
+squid:S1186®"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(™Î«şÿÿÿÿ
+squid:S1186±"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ø´´øÿÿÿÿ
+@squid:S1148‚"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148—"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148£"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148¯"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148˜"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ

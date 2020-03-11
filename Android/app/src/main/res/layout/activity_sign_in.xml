@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/activity_sign_in"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/white"
+              android:orientation="vertical"
+              tools:context="com.harvard.userModule.SignInActivity">
+
+    <include layout="@layout/top_bar_layout"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:paddingBottom="5dp"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rel_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="18dp">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/email_label"
+                    style="@style/signUpTextField"
+                    android:text="@string/email"/>
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edittxt_email"
+                    style="@style/signUpEditText"
+                    android:layout_alignParentRight="true"
+                    android:hint="@string/enter_email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@drawable/custom_cursor_drawable"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/hrline2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/edittxt_email"
+                    android:layout_marginTop="18dp"
+                    android:background="@color/colorSecondaryBg"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rel_email"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="18dp">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/password_label"
+                    style="@style/signUpTextField"
+                    android:text="@string/password"/>
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edittxt_password"
+                    style="@style/signUpEditText"
+                    android:hint="@string/enter_password"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:maxLength="64"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@drawable/custom_cursor_drawable"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/hrline3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/edittxt_password"
+                    android:layout_marginTop="18dp"
+                    android:background="@color/colorSecondaryBg"/>
+            </RelativeLayout>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/forgot_password"
+                style="@style/TextType2"
+                android:layout_below="@id/rel_password"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:text="@string/forgot_password"
+                android:textColor="@color/colorSecondary"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/forgot_password"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/agree_terms"
+                    style="@style/TextType4"
+                    android:layout_above="@+id/signInButton"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textColor="@color/colorSecondary"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/signInButton"
+                    style="@style/TextType2"
+                    android:layout_above="@+id/newUsrSignUp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="42dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/rectangle_black_white"
+                    android:gravity="center"
+                    android:text="@string/sign_in_btn"
+                    android:textColor="@color/colorPrimary"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/newUsrSignUp"
+                    style="@style/TextType2"
+                    android:layout_above="@+id/margin"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/new_usr_signup"
+                    android:textColor="@color/colorSecondary"/>
+                <View
+                    android:id="@+id/margin"
+                    android:layout_width="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_height="15dp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

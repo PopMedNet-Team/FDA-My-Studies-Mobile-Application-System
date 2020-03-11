@@ -1,0 +1,145 @@
+
+‡"squid:ClassVariableVisibilityCheck0"YMake REFRESH_TOKEN a static final constant or non-public and provide accessors if needed.(º÷±
+Psquid:S1444#"9Make this "public static UPDATE_USER_PROFILE" field final(ş®¿
+‹"squid:ClassVariableVisibilityCheckM"]Make WITHDRAWFROMSTUDY a static final constant or non-public and provide accessors if needed.(¨ƒ¡¡
+tsquid:S30087"XRename this field "STUDY_UPDATES" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¶êŠıÿÿÿÿ
+esquid:S1444"NMake this "public static BASE_URL_DEVELOPMENT_REGISTRATION_SERVER" field final(¯ÉÆ‘
+"squid:ClassVariableVisibilityCheck("RMake LOGOUT a static final constant or non-public and provide accessors if needed.(Œ¥‚Z
+Wsquid:S1444'"@Make this "public static UPDATE_ACTIVITY_PREFERENCE" field final(åÕµ³
+"squid:ClassVariableVisibilityCheck"QMake LOGIN a static final constant or non-public and provide accessors if needed.(Î¹âŸ
+”"squid:ClassVariableVisibilityCheck"aMake CONFIRM_REGISTER_USER a static final constant or non-public and provide accessors if needed.(ŒÛŸúÿÿÿÿ
+}squid:S3008$"aRename this field "UPDATE_USER_PREFERENCE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ç™°¤ûÿÿÿÿ
+Osquid:S14447"3Make this "public static STUDY_UPDATES" field final(¶êŠıÿÿÿÿ
+"squid:ClassVariableVisibilityCheckN"_Make PROCESSRESPONSEDATA a static final constant or non-public and provide accessors if needed.(¼´»Ä
+Lsquid:S1444 "5Make this "public static FORGOT_PASSWORD" field final(ÙÄ¿Ë
+‰"squid:ClassVariableVisibilityCheck%"[Make USER_PREFERENCE a static final constant or non-public and provide accessors if needed.(˜Îªù
+Xsquid:S1444$"<Make this "public static UPDATE_USER_PREFERENCE" field final(ç™°¤ûÿÿÿÿ
+gsquid:S3008"PRename this field "LOGIN" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Î¹âŸ
+qsquid:S3008!"ZRename this field "CHANGE_PASSWORD" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ï‹­
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ó¬“•ıÿÿÿÿ
+Jsquid:S1444:".Make this "public static FEEDBACK" field final(¤ÆìÆøÿÿÿÿ
+¡"squid:ClassVariableVisibilityCheck"sMake BASE_URL_PRODUCTION_REGISTRATION_SERVER a static final constant or non-public and provide accessors if needed.(ÒÈÍû
+Š"squid:ClassVariableVisibilityCheck""\Make GET_USER_PROFILE a static final constant or non-public and provide accessors if needed.(Œ²¦ß
+qsquid:S3008%"ZRename this field "USER_PREFERENCE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜Îªù
+esquid:S1444"IMake this "public static BASE_URL_PRODUCTION_RESPONSE_SERVER" field final(½©Ìáÿÿÿÿÿ
+bsquid:CommentedOutCodeLine
+"<This block of commented-out lines of code should be removed.(´Æñ
+Hsquid:S1444,"1Make this "public static STUDY_STATE" field final(­öÒÒ
+"squid:ClassVariableVisibilityCheck"jMake BASE_URL_PRODUCTION_WCP_SERVER a static final constant or non-public and provide accessors if needed.(¦Ñ”²úÿÿÿÿ
+Qsquid:S1118":Add a private constructor to hide the implicit public one.(Œ·‰À
+‰"squid:ClassVariableVisibilityCheck!"[Make CHANGE_PASSWORD a static final constant or non-public and provide accessors if needed.(Ï‹­
+~squid:S3008H"bRename this field "GET_TERMS_AND_CONDITION" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ëüßŸüÿÿÿÿ
+‰"squid:ClassVariableVisibilityCheck4"VMake STUDY_INFO a static final constant or non-public and provide accessors if needed.(ˆ™µ±ÿÿÿÿÿ
+‰squid:S3008"rRename this field "BASE_URL_PRODUCTION_REGISTRATION_SERVER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÒÈÍû
+Ksquid:S1444*"4Make this "public static DELETE_ACCOUNT" field final(Øİé‡
+wsquid:S3008)"[Rename this field "CONSENT_METADATA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ê…Ìíûÿÿÿÿ
+¢"squid:ClassVariableVisibilityCheck"oMake BASE_URL_PRODUCTION_RESPONSE_SERVER a static final constant or non-public and provide accessors if needed.(½©Ìáÿÿÿÿÿ
+msquid:S3008,"VRename this field "STUDY_STATE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­öÒÒ
+tsquid:S3008="XRename this field "NOTIFICATIONS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óÂãüÿÿÿÿÿ
+rsquid:S3008I"[Rename this field "PROCESS_RESPONSE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ü…¼‡
+Lsquid:S1444%"5Make this "public static USER_PREFERENCE" field final(˜Îªù
+Osquid:S1444="3Make this "public static NOTIFICATIONS" field final(óÂãüÿÿÿÿÿ
+qsquid:S3008F"ZRename this field "GET_CONSENT_DOC" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ÜõÊ
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ó¬“•ıÿÿÿÿ
+usquid:S3008N"^Rename this field "PROCESSRESPONSEDATA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼´»Ä
+†"squid:ClassVariableVisibilityCheck;"YMake RESOURCE_LIST a static final constant or non-public and provide accessors if needed.(ùÆZ
+squid:S3008"jRename this field "BASE_URL_DEVELOPMENT_WCP_SERVER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»Ğê›
+ˆ"squid:ClassVariableVisibilityCheckE"UMake ENROLL_ID a static final constant or non-public and provide accessors if needed.(¡¹¯îıÿÿÿÿ
+Jsquid:S1444+".Make this "public static ACTIVITY" field final(ÈŠ¿Şøÿÿÿÿ
+qsquid:S3008K"URename this field "CONSENTPDF" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Âô¸ºøÿÿÿÿ
+|squid:S3008"`Rename this field "CONFIRM_REGISTER_USER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÛŸúÿÿÿÿ
+™"squid:ClassVariableVisibilityCheck"kMake BASE_URL_DEVELOPMENT_WCP_SERVER a static final constant or non-public and provide accessors if needed.(»Ğê›
+osquid:S3008+"SRename this field "ACTIVITY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÈŠ¿Şøÿÿÿÿ
+rsquid:S3008""[Rename this field "GET_USER_PROFILE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ²¦ß
+|squid:S3008'"eRename this field "UPDATE_ACTIVITY_PREFERENCE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(åÕµ³
+Osquid:S1444"3Make this "public static REGISTER_USER" field final(ìÃğışÿÿÿÿ
+usquid:S3008#"^Rename this field "UPDATE_USER_PROFILE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ş®¿
+dsquid:S1444"MMake this "public static BASE_URL_PRODUCTION_REGISTRATION_SERVER" field final(ÒÈÍû
+Œ"squid:ClassVariableVisibilityCheck="YMake NOTIFICATIONS a static final constant or non-public and provide accessors if needed.(óÂãüÿÿÿÿÿ
+Psquid:S1444N"9Make this "public static PROCESSRESPONSEDATA" field final(¼´»Ä
+squid:S3008/"eRename this field "UPDATE_ELIGIBILITY_CONSENT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ıîéïúÿÿÿÿ
+…squid:S3008"iRename this field "BASE_URL_PRODUCTION_WCP_SERVER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¦Ñ”²úÿÿÿÿ
+‡"squid:ClassVariableVisibilityCheck:"TMake FEEDBACK a static final constant or non-public and provide accessors if needed.(¤ÆìÆøÿÿÿÿ
+Lsquid:S1444!"5Make this "public static CHANGE_PASSWORD" field final(Ï‹­
+ysquid:S3008&"bRename this field "UPDATE_STUDY_PREFERENCE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹ÏÍó
+qsquid:S3008 "ZRename this field "FORGOT_PASSWORD" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÙÄ¿Ë
+tsquid:S3008"XRename this field "REGISTER_USER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìÃğışÿÿÿÿ
+ˆ"squid:ClassVariableVisibilityCheck*"ZMake DELETE_ACCOUNT a static final constant or non-public and provide accessors if needed.(Øİé‡
+•"squid:ClassVariableVisibilityCheck$"bMake UPDATE_USER_PREFERENCE a static final constant or non-public and provide accessors if needed.(ç™°¤ûÿÿÿÿ
+"squid:ClassVariableVisibilityCheck."TMake WITHDRAW a static final constant or non-public and provide accessors if needed.(à·÷k
+•"squid:ClassVariableVisibilityCheckC"bMake VALIDATE_ENROLLMENT_ID a static final constant or non-public and provide accessors if needed.(®€¶úÿÿÿÿ
+Msquid:S1444I"6Make this "public static PROCESS_RESPONSE" field final(Ü…¼‡
+Šsquid:S3008"sRename this field "BASE_URL_DEVELOPMENT_REGISTRATION_SERVER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯ÉÆ‘
+‰"squid:ClassVariableVisibilityCheckF"[Make GET_CONSENT_DOC a static final constant or non-public and provide accessors if needed.(­ÜõÊ
+tsquid:S30088"XRename this field "ACTIVITY_LIST" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÙÚÁ şÿÿÿÿ
+Psquid:S1444-"4Make this "public static ACTIVITY_STATE" field final(üæ±Ûûÿÿÿÿ
+msquid:S3008<"VRename this field "APP_UPDATES" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ùô»ÿ
+Fsquid:S14449"0Make this "public static CONTACT_US" field final(¨¾ÿ5
+ƒ"squid:ClassVariableVisibilityCheck9"VMake CONTACT_US a static final constant or non-public and provide accessors if needed.(¨¾ÿ5
+psquid:S3008E"TRename this field "ENROLL_ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡¹¯îıÿÿÿÿ
+Lsquid:S1444K"0Make this "public static CONSENTPDF" field final(Âô¸ºøÿÿÿÿ
+Bsquid:S1444(",Make this "public static LOGOUT" field final(Œ¥‚Z
+”"squid:ClassVariableVisibilityCheck'"fMake UPDATE_ACTIVITY_PREFERENCE a static final constant or non-public and provide accessors if needed.(åÕµ³
+}squid:S3008C"aRename this field "VALIDATE_ENROLLMENT_ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®€¶úÿÿÿÿ
+Dsquid:S1444.".Make this "public static WITHDRAW" field final(à·÷k
+‰"squid:ClassVariableVisibilityCheck "[Make FORGOT_PASSWORD a static final constant or non-public and provide accessors if needed.(ÙÄ¿Ë
+Jsquid:S14446"4Make this "public static SPECIFIC_STUDY" field final(ğšİ
+"squid:ClassVariableVisibilityCheck#"_Make UPDATE_USER_PROFILE a static final constant or non-public and provide accessors if needed.(ş®¿
+osquid:S3008:"SRename this field "FEEDBACK" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤ÆìÆøÿÿÿÿ
+nsquid:S3008;"XRename this field "RESOURCE_LIST" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ùÆZ
+’"squid:ClassVariableVisibilityCheck"_Make RESEND_CONFIRMATION a static final constant or non-public and provide accessors if needed.(óÌÁŸûÿÿÿÿ
+Jsquid:S14440"3Make this "public static REFRESH_TOKEN" field final(º÷±
+‡"squid:ClassVariableVisibilityCheck6"ZMake SPECIFIC_STUDY a static final constant or non-public and provide accessors if needed.(ğšİ
+usquid:S3008>"YRename this field "DASHBOARD_INFO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°ÓÔ·øÿÿÿÿ
+Usquid:S1444"9Make this "public static RESEND_CONFIRMATION" field final(óÌÁŸûÿÿÿÿ
+Isquid:S1444;"3Make this "public static RESOURCE_LIST" field final(ùÆZ
+Psquid:S1444>"4Make this "public static DASHBOARD_INFO" field final(°ÓÔ·øÿÿÿÿ
+Xsquid:S1444C"<Make this "public static VALIDATE_ENROLLMENT_ID" field final(®€¶úÿÿÿÿ
+Lsquid:S14444"0Make this "public static STUDY_INFO" field final(ˆ™µ±ÿÿÿÿÿ
+Œ"squid:ClassVariableVisibilityCheck8"YMake ACTIVITY_LIST a static final constant or non-public and provide accessors if needed.(ÙÚÁ şÿÿÿÿ
+…"squid:ClassVariableVisibilityCheck<"WMake APP_UPDATES a static final constant or non-public and provide accessors if needed.(Ùô»ÿ
+Œ"squid:ClassVariableVisibilityCheck"YMake REGISTER_USER a static final constant or non-public and provide accessors if needed.(ìÃğışÿÿÿÿ
+fsquid:S1444"JMake this "public static BASE_URL_DEVELOPMENT_RESPONSE_SERVER" field final(şÖÈğûÿÿÿÿ
+Wsquid:S1444";Make this "public static CONFIRM_REGISTER_USER" field final(ŒÛŸúÿÿÿÿ
+osquid:S30080"XRename this field "REFRESH_TOKEN" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(º÷±
+Lsquid:S1444F"5Make this "public static GET_CONSENT_DOC" field final(­ÜõÊ
+\squid:S1444/"@Make this "public static UPDATE_ELIGIBILITY_CONSENT" field final(ıîéïúÿÿÿÿ
+"squid:ClassVariableVisibilityCheck>"ZMake DASHBOARD_INFO a static final constant or non-public and provide accessors if needed.(°ÓÔ·øÿÿÿÿ
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Îıòãùÿÿÿÿ
+gsquid:S3008("QRename this field "LOGOUT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ¥‚Z
+"squid:ClassVariableVisibilityCheck-"ZMake ACTIVITY_STATE a static final constant or non-public and provide accessors if needed.(üæ±Ûûÿÿÿÿ
+Osquid:S14448"3Make this "public static ACTIVITY_LIST" field final(ÙÚÁ şÿÿÿÿ
+Šsquid:S3008"nRename this field "BASE_URL_PRODUCTION_RESPONSE_SERVER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½©Ìáÿÿÿÿÿ
+isquid:S3008."SRename this field "WITHDRAW" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(à·÷k
+ssquid:S3008M"\Rename this field "WITHDRAWFROMSTUDY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨ƒ¡¡
+‰"squid:ClassVariableVisibilityCheckK"VMake CONSENTPDF a static final constant or non-public and provide accessors if needed.(Âô¸ºøÿÿÿÿ
+£"squid:ClassVariableVisibilityCheck"pMake BASE_URL_DEVELOPMENT_RESPONSE_SERVER a static final constant or non-public and provide accessors if needed.(şÖÈğûÿÿÿÿ
+`squid:S1444"DMake this "public static BASE_URL_PRODUCTION_WCP_SERVER" field final(¦Ñ”²úÿÿÿÿ
+zsquid:S3008"^Rename this field "RESEND_CONFIRMATION" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óÌÁŸûÿÿÿÿ
+Œ"squid:ClassVariableVisibilityCheck7"YMake STUDY_UPDATES a static final constant or non-public and provide accessors if needed.(¶êŠıÿÿÿÿ
+qsquid:S30085"URename this field "STUDY_LIST" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¶…ÿÿÿÿÿ
+Hsquid:S1444<"1Make this "public static APP_UPDATES" field final(Ùô»ÿ
+Bsquid:S1444"+Make this "public static LOGIN" field final(Î¹âŸ
+Msquid:S1444""6Make this "public static GET_USER_PROFILE" field final(Œ²¦ß
+Nsquid:S1444M"7Make this "public static WITHDRAWFROMSTUDY" field final(¨ƒ¡¡
+–"squid:ClassVariableVisibilityCheckH"cMake GET_TERMS_AND_CONDITION a static final constant or non-public and provide accessors if needed.(ëüßŸüÿÿÿÿ
+Rsquid:S1444)"6Make this "public static CONSENT_METADATA" field final(ê…Ìíûÿÿÿÿ
+osquid:S30086"YRename this field "SPECIFIC_STUDY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğšİ
+ksquid:S30089"URename this field "CONTACT_US" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨¾ÿ5
+™"squid:ClassVariableVisibilityCheck/"fMake UPDATE_ELIGIBILITY_CONSENT a static final constant or non-public and provide accessors if needed.(ıîéïúÿÿÿÿ
+‘"squid:ClassVariableVisibilityCheck&"cMake UPDATE_STUDY_PREFERENCE a static final constant or non-public and provide accessors if needed.(¹ÏÍó
+"squid:ClassVariableVisibilityCheck)"\Make CONSENT_METADATA a static final constant or non-public and provide accessors if needed.(ê…Ìíûÿÿÿÿ
+‹squid:S3008"oRename this field "BASE_URL_DEVELOPMENT_RESPONSE_SERVER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(şÖÈğûÿÿÿÿ
+¢"squid:ClassVariableVisibilityCheck"tMake BASE_URL_DEVELOPMENT_REGISTRATION_SERVER a static final constant or non-public and provide accessors if needed.(¯ÉÆ‘
+\squid:S1444"EMake this "public static BASE_URL_DEVELOPMENT_WCP_SERVER" field final(»Ğê›
+Tsquid:S1444&"=Make this "public static UPDATE_STUDY_PREFERENCE" field final(¹ÏÍó
+Lsquid:S14445"0Make this "public static STUDY_LIST" field final(¶…ÿÿÿÿÿ
+qsquid:S30084"URename this field "STUDY_INFO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆ™µ±ÿÿÿÿÿ
+‰"squid:ClassVariableVisibilityCheck5"VMake STUDY_LIST a static final constant or non-public and provide accessors if needed.(¶…ÿÿÿÿÿ
+psquid:S3008*"YRename this field "DELETE_ACCOUNT" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Øİé‡
+Ksquid:S1444E"/Make this "public static ENROLL_ID" field final(¡¹¯îıÿÿÿÿ
+…"squid:ClassVariableVisibilityCheck,"WMake STUDY_STATE a static final constant or non-public and provide accessors if needed.(­öÒÒ
+‡"squid:ClassVariableVisibilityCheck+"TMake ACTIVITY a static final constant or non-public and provide accessors if needed.(ÈŠ¿Şøÿÿÿÿ
+usquid:S3008-"YRename this field "ACTIVITY_STATE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(üæ±Ûûÿÿÿÿ
+Ysquid:S1444H"=Make this "public static GET_TERMS_AND_CONDITION" field final(ëüßŸüÿÿÿÿ
+Š"squid:ClassVariableVisibilityCheckI"\Make PROCESS_RESPONSE a static final constant or non-public and provide accessors if needed.(Ü…¼‡

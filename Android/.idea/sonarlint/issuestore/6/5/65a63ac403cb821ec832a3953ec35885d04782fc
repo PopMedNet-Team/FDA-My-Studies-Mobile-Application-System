@@ -1,0 +1,9 @@
+
+csquid:S1858@"G"getHttpMethod" returns a string, there's no need to call "toString()".(Íºı‡úÿÿÿÿ
+?squid:S1148O"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+^squid:S1858H"G"getServerType" returns a string, there's no need to call "toString()".(ü¬ò
+Šsquid:S00116%"mRename this field "UPDATE_USERPREFERENCE_RESPONSECODE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ç´¥ıÿÿÿÿ
+_squid:S1858D"H"getNormalParam" returns a string, there's no need to call "toString()".(¸‘Æå
+bsquid:S1858F"F"getJsonParam" returns a string, there's no need to call "toString()".(É£¢´ûÿÿÿÿ
+bsquid:CommentedOutCodeLineU"<This block of commented-out lines of code should be removed.(ÀÛ‰Ü
+Wsquid:S1858B"@"getUrl" returns a string, there's no need to call "toString()".(È¸Çß

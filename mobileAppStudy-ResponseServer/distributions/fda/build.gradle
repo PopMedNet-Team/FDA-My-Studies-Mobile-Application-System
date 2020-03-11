@@ -1,0 +1,40 @@
+import org.labkey.gradle.task.ModuleDistribution
+import org.labkey.gradle.util.BuildUtils
+import org.labkey.gradle.util.GroupNames
+
+apply plugin: 'org.labkey.distribution'
+
+buildscript {
+    repositories {
+        maven {
+            url "${artifactory_contextUrl}/plugins-release"
+        }
+    }
+    dependencies {
+        classpath "org.labkey.build:gradlePlugins:${gradlePluginsVersion}"
+    }
+}
+
+BuildUtils.addModuleDistributionDependencies(project, [BuildUtils.getApiProjectPath(project.gradle),
+                                                       BuildUtils.getInternalProjectPath(project.gradle),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "announcements"),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "audit"),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "core"),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "experiment"),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "filecontent"),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "pipeline"),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "query"),
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "wiki"),
+                                                       ":server:optionalModules:mobileAppStudy",
+                                                       BuildUtils.getPlatformModuleProjectPath(project.gradle, "list")])
+
+project.task(
+        "distribution",
+        group: GroupNames.DISTRIBUTION,
+        type: ModuleDistribution,
+        {ModuleDistribution dist ->
+            dist.subDirName='mobileAppStudy'
+            dist.includeTarGZArchive=true
+            dist.extraFileIdentifier='-mobileAppStudy'
+        }
+)

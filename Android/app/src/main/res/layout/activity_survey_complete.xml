@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_signup_process_complete"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.harvard.userModule.SignupProcessCompleteActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/surveyCompleted"
+                style="@style/TextType1"
+                android:layout_above="@+id/surveyCompletedThankyou"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:text="@string/survey_completed"
+                android:textColor="@color/colorPrimaryBlack" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/surveyCompletedThankyou"
+                style="@style/TextType2"
+                android:layout_above="@+id/msg"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:text="@string/thank_you_for_your_time"
+                android:textColor="@color/colorPrimaryBlack" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/msg"
+                style="@style/TextType2"
+                android:layout_above="@+id/success_img"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/surveycompletedmsg"
+                android:textColor="@color/colorPrimaryBlack" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/success_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/success_icn1" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/nextButton"
+                style="@style/TextType2"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/rectangle_black_white"
+                android:gravity="center"
+                android:text="@string/done"
+                android:textColor="@color/colorPrimary" />
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>
+

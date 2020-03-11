@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_study"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <include layout="@layout/drawer_app_bar" />
+
+    <RelativeLayout
+        android:id="@+id/drawerPaneLeft"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="@android:color/white"
+        android:clickable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="40dp"
+            android:weightSum="4">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".75"
+                android:paddingTop="40dp">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/mSidebarTitle"
+                    style="@style/TextType2"
+                    android:text="@string/fda_listens"
+                    android:textColor="@color/colorPrimary" />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_below="@+id/mSidebarTitle"
+                    android:layout_marginRight="20dp">
+
+                    <TextView
+                        android:id="@+id/poweredBy"
+                        style="@style/TextType3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/poweredby"
+                        android:textColor="@color/colorSecondary" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/mHomeLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/homeImg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/home_menu1" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/mHomeLabel"
+                            style="@style/textTypeMenuItem"
+                            android:layout_marginLeft="30dp"
+                            android:layout_toRightOf="@id/homeImg"
+                            android:text="@string/side_menu_home"
+                            android:textColor="@android:color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/mResourcesLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/resourceImg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/resources_menu1" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/mResourceLabel"
+                            style="@style/textTypeMenuItem"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="30dp"
+                            android:layout_toRightOf="@id/resourceImg"
+                            android:text="@string/side_menu_resources"
+                            android:textColor="@android:color/black" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/mResourceNotification"
+                            style="@style/TextType2"
+                            android:layout_marginLeft="18dp"
+                            android:layout_toRightOf="@id/mResourceLabel"
+                            android:background="@drawable/blue_radius"
+                            android:text="14"
+                            android:visibility="invisible"
+                            android:textColor="@android:color/white" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/mReachoutLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/mReachoutImg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/reachout_menu1" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/mReachoutLabel"
+                            style="@style/textTypeMenuItem"
+                            android:layout_marginLeft="30dp"
+                            android:layout_toRightOf="@id/mReachoutImg"
+                            android:text="@string/side_menu_reach_out"
+                            android:textColor="@android:color/black" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/mSignInProfileLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/signinImg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/signin_menu1" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/mSigninLabel"
+                            style="@style/textTypeMenuItem"
+                            android:layout_marginLeft="30dp"
+                            android:layout_toRightOf="@id/signinImg"
+                            android:text="@string/side_menu_sign_in"
+                            android:textColor="@android:color/black" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/mNewUsrReachoutLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/mNewUsrReachoutImg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/newuser_menu1" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/mNewUsrReachoutImg">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/mNewUsrReachoutLabel"
+                                style="@style/textTypeMenuItem"
+                                android:layout_marginLeft="30dp"
+                                android:text="@string/side_menu_new_user"
+                                android:textColor="@android:color/black" />
+
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/mSignUpLabel"
+                                style="@style/TextType2"
+                                android:layout_below="@id/mNewUsrReachoutLabel"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="30dp"
+                                android:text="@string/side_menu_sign_up"
+                                android:textColor="@color/colorSecondary" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight=".75"
+                android:gravity="bottom">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+
+
+                    <RelativeLayout
+                        android:id="@+id/mSignOutLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/mSignOutLabel"
+                            style="@style/textTypeMenuItem"
+                            android:layout_marginLeft="10dp"
+                            android:text="@string/side_menu_sign_out"
+                            android:textColor="@color/colorSecondary" />
+                    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/version"
+                        style="@style/TextType3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/mSignOutLayout"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/side_menu_version"
+                        android:textColor="@color/colorSecondary" />
+
+
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v4.widget.DrawerLayout>

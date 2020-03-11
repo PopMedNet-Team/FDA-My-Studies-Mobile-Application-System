@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:background="@color/white">
+
+
+    <View
+        android:id="@+id/mCenterView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:background="@color/bullet_green_color"
+        android:visibility="invisible"/>
+
+
+    <TextView
+        android:id="@+id/consentcomplete"
+        style="@style/TextType1"
+        android:layout_above="@id/mCenterView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="@string/consentthanksmsg"
+        android:textColor="@color/colorPrimaryBlack"/>
+
+
+    <TextView
+        android:id="@+id/mTextSecRow"
+        style="@style/TextType2"
+        android:layout_below="@+id/mCenterView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/studystartmsg"
+        android:textColor="@color/colorPrimaryBlack"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/viewpdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="40dp"
+            android:text="@string/viewpdf"
+            android:textColor="@color/colorPrimaryBlack"
+            android:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/next"
+            style="@style/TextType2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewpdf"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rectangle_black_white"
+            android:gravity="center"
+            android:text="@string/done"
+            android:textColor="@color/colorPrimary"/>
+    </RelativeLayout>
+</RelativeLayout>

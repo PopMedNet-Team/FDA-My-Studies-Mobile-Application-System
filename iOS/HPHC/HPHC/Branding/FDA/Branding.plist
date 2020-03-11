@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>JoinStudyButtonTitle</key>
+	<string>Join Study</string>
+	<key>ViewConsentButtonTitle</key>
+	<string>View Consent</string>
+	<key>VisitWebsiteButtonTitle</key>
+	<string>Visit Website</string>
+	<key>ConsentPDF</key>
+	<string>Consent PDF</string>
+	<key>LeaveStudy</key>
+	<string>Leave Study</string>
+	<key>LeaveStudyConfirmationText</key>
+	<string>If you tap “Proceed” you will no longer be able to use this app for eye doctor appointments and medication tracking</string>
+	<key>WebsiteLink</key>
+	<string>www.fda.gov</string>
+	<key>WebsiteButtonTitle</key>
+	<string>www.fda.gov</string>
+	<key>TermsAndConditionURL</key>
+	<string>https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/</string>
+	<key>PrivacyPolicyURL</key>
+	<string>https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy</string>
+	<key>ValidatedTitle</key>
+	<string>Validated!</string>
+</dict>
+</plist>

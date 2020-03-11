@@ -1,0 +1,35 @@
+{
+    "message": "SUCCESS",
+    "studies": [
+        {
+            "studyId": "Study02",
+            "studyVersion": "1.3",
+            "title": "Food Nutrition",
+            "category": "Food Safety",
+            "sponsorName": " FDA",
+            "tagline": "Path to improved health",
+            "status": "Closed",
+            "logo": "https://hpwcp-stage.lkcompliant.net/fdaResources/studylogo/STUDY_FS_05282018040302.jpeg?v=1564127523483",
+            "settings": {
+                "enrolling": true,
+                "platform": "all",
+                "rejoin": true
+            }
+        },
+        {
+            "studyId": "Study02",
+            "studyVersion": "1.3",
+            "title": "Food Nutrition",
+            "category": "Food Safety",
+            "sponsorName": " FDA",
+            "tagline": "Path to improved health",
+            "status": "Closed",
+            "logo": "https://hpwcp-stage.lkcompliant.net/fdaResources/studylogo/STUDY_FS_05282018040302.jpeg?v=1564127523483",
+            "settings": {
+                "enrolling": true,
+                "platform": "all",
+                "rejoin": true
+            }
+        }
+    ]
+}

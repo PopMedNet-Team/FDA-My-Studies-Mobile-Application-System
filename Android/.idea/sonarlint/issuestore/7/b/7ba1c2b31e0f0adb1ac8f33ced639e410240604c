@@ -1,0 +1,71 @@
+
+hsquid:CommentedOutCodeLineô"<This block of commented-out lines of code should be removed.(ä¡ÙÄ¯ˇˇˇˇ
+]squid:S2147∂"ECombine this catch with the one at line 692, which has the same body.(ÀáÖ®
+ôsquid:S1186‚"ÄAdd a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(˝ßÑ‘
+lsquid:S2259 "O"NullPointerException" will be thrown when invoking method "stringToIvBytes()".(Ï•ñ¨˝ˇˇˇˇ
+@squid:S1148â"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+fsquid:S2095û"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(‹ˆëÃ
+@squid:S1148ª"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+Rsquid:S2440["6Remove this instantiation of "SharedPreferenceHelper".(ö É£˚ˇˇˇˇ
+asquid:UnusedPrivateMethodÆ"6Remove this unused private "canExecuteCommand" method.(Ï§Ãü¸ˇˇˇˇ
+@squid:S1148µ"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+xsquid:S1488–"[Immediately return this expression instead of assigning it to the temporary variable "cis".(≥£Ëø¸ˇˇˇˇ
+Fsquid:S2440m"/Remove this instantiation of "SetDialogHelper".(Å—ÿë
+@squid:S1148Œ"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+csquid:CommentedOutCodeLine»"<This block of commented-out lines of code should be removed.(Àùçå
+@squid:S1148ë"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+jsquid:S3776‹"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(¸Éä¬
+Asquid:S1172z"*Remove this unused method parameter "msg".(Ó≥ﬂí
+hsquid:CommentedOutCodeLine¨"<This block of commented-out lines of code should be removed.(®‘Œ™˝ˇˇˇˇ
+;squid:S2119€"Save and re-use this "Random".(º⁄í∏˛ˇˇˇˇ
+Zsquid:UnusedPrivateMethod⁄"4Remove this unused private "getRandomString" method.(…Å¯·
+lsquid:S2259•"O"NullPointerException" will be thrown when invoking method "stringToIvBytes()".(∫Ñ˝è¸ˇˇˇˇ
+@squid:S1148π"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+Qsquid:S1118L":Add a private constructor to hide the implicit public one.(œ£ﬂŒ
+@squid:S1148Ü"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+@squid:S1148◊"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+@squid:S1148Ô"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+\squid:S2147∏"ECombine this catch with the one at line 692, which has the same body.(ˇ“Ñp
+@squid:S1148’"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+@squid:S1148¯"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+@squid:S1148™"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+Msquid:S4432ü"0Use Galois/Counter Mode (GCM/NoPadding) instead.(µˆûƒ¯ˇˇˇˇ
+csquid:CommentedOutCodeLineè"<This block of commented-out lines of code should be removed.(πÉæÇ
+@squid:S1148Ω"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+esquid:S2095≈"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(π∏ñ—
+]squid:S2147∫"ECombine this catch with the one at line 692, which has the same body.(Ô≠£ƒ
+\squid:S2147÷"ECombine this catch with the one at line 722, which has the same body.(ˇ“Ñp
+Ñsquid:S1488Ë"gImmediately return this expression instead of assigning it to the temporary variable "cipherByteArray".(ÙÕÆÓ˛ˇˇˇˇ
+hsquid:CommentedOutCodeLineˆ"<This block of commented-out lines of code should be removed.(ä¡ÙÄ¯ˇˇˇˇ
+Ksquid:S1172ô".Remove this unused method parameter "context".(Œ Ù‰˝ˇˇˇˇ
+Ösquid:S1488Ô"hImmediately return this expression instead of assigning it to the temporary variable "simpleDateFormat".(ﬂ¯Éªˇˇˇˇˇ
+hsquid:CommentedOutCodeLineæ"<This block of commented-out lines of code should be removed.(Åèá„ˇˇˇˇˇ
+Vsquid:S00107˚"=Method has 10 parameters, which is greater than 7 authorized.(Ï˝ÒÊ
+esquid:S2095ô"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(±´¨Ì
+@squid:S1148œ"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+@squid:S1148∑"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+Äsquid:S1488ı"hImmediately return this expression instead of assigning it to the temporary variable "simpleDateFormat".(‰’©Ù
+Usquid:S00107‹"<Method has 9 parameters, which is greater than 7 authorized.(¸Éä¬
+@squid:S1148”"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+Rsquid:S1141ß"5Extract this nested try block into a separate method.(°ª¢¸˘ˇˇˇˇ
+@squid:S1148Ÿ"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+hsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ä¡ÙÄ¯ˇˇˇˇ
+@squid:S1148Ï"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+bsquid:S2147ÿ"ECombine this catch with the one at line 722, which has the same body.(ì≥€›¸ˇˇˇˇ
+@squid:S1148°"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+lsquid:S2095¨"OUse try-with-resources or close this "CipherInputStream" in a "finally" clause.(≥£Ëø¸ˇˇˇˇ
+Ksquid:S1172µ".Remove this unused method parameter "context".(…ÒéÊˇˇˇˇˇ
+Msquid:S4432∆"0Use Galois/Counter Mode (GCM/NoPadding) instead.(µˆûƒ¯ˇˇˇˇ
+]squid:S2147‘"ECombine this catch with the one at line 722, which has the same body.(ÀáÖ®
+Y
+squid:S899ù"BDo something with the "boolean" value returned by "createNewFile".(∆õ—°
+Usquid:S1197Í"8Move the array designator from the variable to the type.(Ã•⁄ó¸ˇˇˇˇ
+bsquid:S2147º"ECombine this catch with the one at line 692, which has the same body.(ì≥€›¸ˇˇˇˇ
+Msquid:S1481ò"5Remove this unused "simpleDateFormat" local variable.(ù¿®œ
+{squid:S1488Î"cImmediately return this expression instead of assigning it to the temporary variable "originalKey".(≤¯•à
+Hsquid:S1068W",Remove this unused "mIvBytes" private field.(ÑÿÌ∏ˇˇˇˇˇ
+csquid:CommentedOutCodeLineë"<This block of commented-out lines of code should be removed.(πÉæÇ
+>squid:S1168Ó"&Return an empty array instead of null.(•πÔç
+hsquid:CommentedOutCodeLine›"<This block of commented-out lines of code should be removed.(Ö…©˝ˇˇˇˇˇ
+@squid:S1148é"#Use a logger to log this exception.(Ä…‘Ö˝ˇˇˇˇ
+Rsquid:S1141À"5Extract this nested try block into a separate method.(°ª¢¸˘ˇˇˇˇ

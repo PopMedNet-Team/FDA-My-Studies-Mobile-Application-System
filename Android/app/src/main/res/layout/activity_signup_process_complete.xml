@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_signup_process_complete"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.harvard.userModule.SignupProcessCompleteActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/congrats_label"
+                style="@style/TextType1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="90dp"
+                android:text="@string/congrats_txt"
+                android:textColor="@color/colorPrimaryBlack" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/signup_complete_txt_label"
+                style="@style/TextType2"
+                android:layout_below="@id/congrats_label"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="@string/signup_process_complete"
+                android:textColor="@color/colorPrimaryBlack" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/success_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/signup_complete_txt_label"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/success_icn1" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/nextButton"
+                style="@style/TextType2"
+                android:layout_below="@id/success_img"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/rectangle_black_white"
+                android:gravity="center"
+                android:text="@string/next"
+                android:textColor="@color/colorPrimary" />
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>
+

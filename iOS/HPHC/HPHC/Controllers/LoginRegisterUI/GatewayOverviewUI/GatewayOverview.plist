@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Welcome! </string>
+		<key>text</key>
+		<string>The FDA is pleased to offer the FDA MyStudies app as a tool to gather real time, contextual data about medication use and other health issues facing the people we serve.</string>
+		<key>type</key>
+		<string>video</string>
+		<key>image</key>
+		<string>welcomeBg</string>
+		<key>videoLink</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Leveraging the Power of Mobility for Research </string>
+		<key>text</key>
+		<string>Available for iOS and Android devices, this app will house studies conducted by FDA and other institutions, enabling researchers to engage more directly with people to gather data via questionnaires.</string>
+		<key>type</key>
+		<string></string>
+		<key>image</key>
+		<string>img_01</string>
+		<key>videoLink</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Improving Health Outcomes</string>
+		<key>text</key>
+		<string>Explore and participate in studies for which you are eligible and help generate more data, better insights and improved outcomes.</string>
+		<key>type</key>
+		<string></string>
+		<key>image</key>
+		<string>img_02</string>
+		<key>videoLink</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Protecting Your Privacy</string>
+		<key>text</key>
+		<string>All studies in this app have been approved by an Institutional Review Board, follow strict federal research guidelines, and securely store your responses to ensure your privacy is always protected.</string>
+		<key>type</key>
+		<string></string>
+		<key>image</key>
+		<string>img_03</string>
+		<key>videoLink</key>
+		<string></string>
+	</dict>
+</array>
+</plist>

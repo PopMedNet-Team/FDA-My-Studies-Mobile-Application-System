@@ -1,0 +1,120 @@
+{
+  "message": "SUCCESS",
+  "activity": {
+    "metadata": {
+      "activityId": "OtherOptionUpdate",
+      "version": "2"
+    },
+    "steps": [
+      {
+        "key": "NoOption",
+        "resultType": "textChoice",
+        "repeatable": true,
+        "type": "question",
+        "format": {
+          "textChoices": [
+            {
+              "description": "required other choice",
+              "type": "text",
+              "text": "second"
+            }
+          ]
+        }
+      },
+      {
+        "key": "OtherOption",
+        "resultType": "textChoice",
+        "repeatable": true,
+        "type": "question",
+        "format": {
+          "textChoices": [
+            {
+              "description": "required other choice",
+              "type": "text",
+              "text": "second",
+              "other": {
+                "textfieldReq": true,
+                "placeholder": "I am unknown placeholdertext",
+                "isMandatory": false
+              }
+            }
+          ]
+        }
+      },
+      {
+        "key": "GroupedList",
+        "resultType": "grouped",
+        "type": "form",
+        "steps":[
+          {
+            "key": "OtherOption",
+            "resultType": "textChoice",
+            "repeatable": true,
+            "type": "question",
+            "format": {
+              "textChoices": [
+                {
+                  "description": "required other choice",
+                  "type": "text",
+                  "text": "second",
+                  "other": {
+                    "textfieldReq": true,
+                    "placeholder": "I am unknown placeholdertext",
+                    "isMandatory": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "Norepeat",
+            "resultType": "textChoice",
+            "repeatable": false,
+            "type": "question",
+            "format": {
+              "textChoices": [
+                {
+                  "description": "required other choice",
+                  "type": "text",
+                  "text": "second",
+                  "other": {
+                    "textfieldReq": true,
+                    "placeholder": "I am unknown placeholdertext",
+                    "isMandatory": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "SubGroupedList",
+            "resultType": "grouped",
+            "type": "form",
+            "steps":[
+              {
+                "key": "OtherOption",
+                "resultType": "textChoice",
+                "repeatable": true,
+                "type": "question",
+                "format": {
+                  "textChoices": [
+                    {
+                      "description": "required other choice",
+                      "type": "text",
+                      "text": "second",
+                      "other": {
+                        "textfieldReq": true,
+                        "placeholder": "I am unknown placeholdertext",
+                        "isMandatory": false
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

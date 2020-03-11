@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">MyStudies</string>
+    <string name="fda_listens">FDA MyStudies</string>
+    <string name="website">https://www.fda.gov/</string>
+    <string name="websitetxt">www.fda.gov</string>
+    <string name="gateway_des">The FDA is pleased to offer the FDA MyStudies app as a tool to gather real time, contextual data about medication use and other health issues facing the people we serve.</string>
+    <string name="gateway_des1">Available for iOS and Android devices, this app will house studies conducted by FDA and other institutions, enabling researchers to engage more directly with people to gather data via questionnaires.</string>
+    <string name="delete_account_content">You have chosen to delete your FDA MyStudies Account. This will result in automatic withdrawal from all studies.\n\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm.</string>
+    <string name="delete_message">Are you sure you wish to permanently delete your FDA Health Studies Gateway app account?  You will need to register again if you wish to join a study.</string>
+    <string name="my_studies">MyStudies</string>
+    <string name="studie_your_enrolled">It\'s been a while since you visited the FDA MyStudies app. Please consider continuing your participation in any studies in which you\'re enrolled.</string>
+    <string name="prject_name">FDA</string>
+
+
+    <string name="termsurl">https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/</string>
+    <string name="privacyurl">https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy</string>
+
+    <string name="view_consent">View Consent</string>
+    <string name="visit_website">Visit Website</string>
+    <string name="join_study">Join Study</string>
+
+    <!--must change strings-->
+    <string name="FileProvider_authorities">com.myfileprovider</string>
+</resources>

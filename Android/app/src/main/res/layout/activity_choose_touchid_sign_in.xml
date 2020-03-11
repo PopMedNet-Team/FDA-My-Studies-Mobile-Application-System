@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_coose_touchid_sign_in"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.harvard.userModule.ChooseTouchIDSignInActivity">
+
+    <include layout="@layout/top_bar_layout" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/use_touch_id"
+                style="@style/TextType1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="130dp"
+                android:text="@string/use_touch_id"
+                android:textColor="@color/colorPrimaryBlack" />
+
+            <LinearLayout
+                android:id="@+id/passcod_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/use_touch_id"
+                android:layout_marginTop="30dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatImageView
+                    style="@style/TextType2"
+                    android:background="@drawable/passcode_icn1"
+                    android:textColor="@color/colorPrimaryBlack" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    style="@style/TextType2"
+                    android:layout_marginLeft="13dp"
+                    android:background="@drawable/passcode_icn1"
+                    android:textColor="@color/colorPrimaryBlack" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    style="@style/TextType2"
+                    android:layout_marginLeft="13dp"
+                    android:background="@drawable/passcode_icn1"
+                    android:textColor="@color/colorPrimaryBlack" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    style="@style/TextType2"
+                    android:layout_marginLeft="13dp"
+                    android:background="@drawable/passcode_icn1"
+                    android:textColor="@color/colorPrimaryBlack" />
+            </LinearLayout>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/or"
+                style="@style/TextType1"
+                android:layout_below="@id/passcod_img"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:text="@string/or"
+                android:textColor="@color/colorSecondary" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/sign_in"
+                style="@style/TextType1"
+                android:layout_below="@id/or"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:text="@string/sign_in_btn"
+                android:textColor="@color/colorPrimaryBlack" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/username_and_pwd"
+                style="@style/TextType1"
+                android:layout_below="@id/sign_in"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/usr_pwd"
+                android:textColor="@color/colorPrimaryBlack" />
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>
+
+

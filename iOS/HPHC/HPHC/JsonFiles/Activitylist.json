@@ -1,0 +1,927 @@
+{
+    "message": "SUCCESS",
+    "activities": [
+        {
+            "activityId": "activetaskmanual",
+            "activityVersion": "1.0",
+            "title": "activetaskmanualtitle",
+            "type": "task",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T11:30:50.000+0530",
+            "state": "active",
+            "taskSubType": "fetalKickCounter",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "ActivityResponse",
+                "sourceActivityId": "anchornameTitle",
+                "sourceKey": "anchornamequest",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 2,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "05:30:00"
+                },
+                "end": {
+                    "anchorDays": 8,
+                    "repeatInterval": 0,
+                    "time": "05:30:00"
+                }
+            },
+            "frequency": {
+                "type": "Manually Schedule",
+                "runs": [
+                    {
+                        "startTime": "",
+                        "endTime": ""
+                    },
+                    {
+                        "startTime": "",
+                        "endTime": ""
+                    }
+                ],
+                "anchorRuns": [
+                    {
+                        "startDays": 2,
+                        "endDays": 5,
+                        "time": "05:30:00"
+                    },
+                    {
+                        "startDays": 7,
+                        "endDays": 8,
+                        "time": "05:30:00"
+                    }
+                ]
+            }
+        },
+        {
+            "activityId": "activetaskmonthly",
+            "activityVersion": "1.0",
+            "title": "activetaskmonthlytitle",
+            "type": "task",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T11:29:21.000+0530",
+            "state": "active",
+            "taskSubType": "fetalKickCounter",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "ActivityResponse",
+                "sourceActivityId": "anchornameTitle",
+                "sourceKey": "anchornamequest",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": -3,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "06:28:00"
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 1,
+                    "time": "06:28:00"
+                }
+            },
+            "frequency": {
+                "type": "Monthly",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "activetaskweekly",
+            "activityVersion": "1.0",
+            "title": "activetaskweeklytitle",
+            "type": "task",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T11:28:03.000+0530",
+            "state": "active",
+            "taskSubType": "fetalKickCounter",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "EnrollmentDate",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": -4,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "12:27:00"
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 3,
+                    "time": "12:27:00"
+                }
+            },
+            "frequency": {
+                "type": "Weekly",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "activetaskdaily",
+            "activityVersion": "1.0",
+            "title": "activetaskdailytitle",
+            "type": "task",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T11:26:34.000+0530",
+            "state": "active",
+            "taskSubType": "fetalKickCounter",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "ActivityResponse",
+                "sourceActivityId": "anchornameTitle",
+                "sourceKey": "anchornamequest",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "06:25:00"
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 4,
+                    "time": "23:59:59"
+                }
+            },
+            "frequency": {
+                "type": "Daily",
+                "runs": [
+                    {
+                        "startTime": "06:25:00",
+                        "endTime": "23:59:59"
+                    }
+                ],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "activetaskonetimestartend",
+            "activityVersion": "1.0",
+            "title": "activetaskonetimestartendTitle",
+            "type": "task",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T11:24:43.000+0530",
+            "state": "active",
+            "taskSubType": "fetalKickCounter",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "ActivityResponse",
+                "sourceActivityId": "formQuestAnchorname",
+                "sourceKey": "formQuestAncho",
+                "sourceFormKey": "formstep",
+                "start": {
+                    "anchorDays": -3,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "04:24:00"
+                },
+                "end": {
+                    "anchorDays": 4,
+                    "repeatInterval": 0,
+                    "time": "23:59:59"
+                }
+            },
+            "frequency": {
+                "type": "One time",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "activetaskonetimestartnoend",
+            "activityVersion": "1.0",
+            "title": "activetaskonetimestartnoendtitle",
+            "type": "task",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T11:23:26.000+0530",
+            "state": "active",
+            "taskSubType": "fetalKickCounter",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "EnrollmentDate",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": -2,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "05:23:00"
+                },
+                "end": null
+            },
+            "frequency": {
+                "type": "One time",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "activetaskonetimenostartend",
+            "activityVersion": "1.0",
+            "title": "activetaskonetimenostartendtitle",
+            "type": "task",
+            "startTime": "2019-03-27T00:00:00.000+0530",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T11:17:13.000+0530",
+            "state": "active",
+            "taskSubType": "fetalKickCounter",
+            "schedulingType": "Regular",
+            "anchorDate": {
+                "sourceType": "ActivityResponse",
+                "sourceActivityId": "anchornameTitle",
+                "sourceKey": "anchornamequest",
+                "sourceFormKey": "",
+                "start": null,
+                "end": null
+            },
+            "frequency": {
+                "type": "One time",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "formQuestAnchorname",
+            "activityVersion": "1.1",
+            "title": "formQuestAnchorname",
+            "type": "questionnaire",
+            "startTime": "2019-03-27T00:00:00.000+0530",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T10:34:02.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "Regular",
+            "anchorDate": {
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": ""
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 0,
+                    "time": ""
+                }
+            },
+            "frequency": {
+                "type": "One time",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "Anchortestdaily",
+            "activityVersion": "1.1",
+            "title": "Anchortestdaily",
+            "type": "questionnaire",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T10:27:04.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "ActivityResponse",
+                "sourceActivityId": "formQuestAnchorname",
+                "sourceKey": "formQuestAncho",
+                "sourceFormKey": "formstep",
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "18:36:00"
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 9,
+                    "time": "23:59:59"
+                }
+            },
+            "frequency": {
+                "type": "Daily",
+                "runs": [
+                    {
+                        "startTime": "18:36:00",
+                        "endTime": "23:59:59"
+                    }
+                ],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "Anchor2name",
+            "activityVersion": "1.1",
+            "title": "Anchor2namechange",
+            "type": "questionnaire",
+            "startTime": "2019-03-26T00:00:00.000+0530",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-26T18:40:27.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "Regular",
+            "anchorDate": {
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": ""
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 0,
+                    "time": ""
+                }
+            },
+            "frequency": {
+                "type": "One time",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "regularManually2",
+            "activityVersion": "1.0",
+            "title": "regularManually",
+            "type": "questionnaire",
+            "startTime": "2019-03-29T17:02:00.000+0530",
+            "endTime": "2019-04-06T17:02:00.000+0530",
+            "branching": false,
+            "lastModified": "2019-03-26T17:03:03.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "Regular",
+            "anchorDate": {
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": ""
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 0,
+                    "time": ""
+                }
+            },
+            "frequency": {
+                "type": "Manually Schedule",
+                "runs": [
+                    {
+                        "startTime": "2019-03-29T17:02:00.000+0530",
+                        "endTime": "2019-04-06T17:02:00.000+0530"
+                    }
+                ],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "regularManually1",
+            "activityVersion": "1.0",
+            "title": "regularManuallyTitle",
+            "type": "questionnaire",
+            "startTime": "2019-03-27T16:37:00.000+0530",
+            "endTime": "2019-03-30T16:37:00.000+0530",
+            "branching": false,
+            "lastModified": "2019-03-26T17:03:03.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "Regular",
+            "anchorDate": {
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": ""
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 0,
+                    "time": ""
+                }
+            },
+            "frequency": {
+                "type": "Manually Schedule",
+                "runs": [
+                    {
+                        "startTime": "2019-03-27T16:37:00.000+0530",
+                        "endTime": "2019-03-30T16:37:00.000+0530"
+                    }
+                ],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "regularmonthly",
+            "activityVersion": "1.0",
+            "title": "regularmonthlyTitle",
+            "type": "questionnaire",
+            "startTime": "2019-04-02T16:30:00.000+0530",
+            "endTime": "2020-01-02T16:30:00.000+0530",
+            "branching": false,
+            "lastModified": "2019-03-26T16:07:53.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "Regular",
+            "anchorDate": {
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": ""
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 0,
+                    "time": ""
+                }
+            },
+            "frequency": {
+                "type": "Monthly",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "regularweekly",
+            "activityVersion": "1.0",
+            "title": "regularweeklyTitle",
+            "type": "questionnaire",
+            "startTime": "2019-04-21T18:02:00.000+0530",
+            "endTime": "2019-06-23T18:02:00.000+0530",
+            "branching": false,
+            "lastModified": "2019-03-26T16:07:54.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "Regular",
+            "anchorDate": {
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": ""
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 0,
+                    "time": ""
+                }
+            },
+            "frequency": {
+                "type": "Weekly",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "anchormanually",
+            "activityVersion": "1.1",
+            "title": "anchormanuallyTitle",
+            "type": "questionnaire",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T10:42:34.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "ActivityResponse",
+                "sourceActivityId": "anchornameTitle",
+                "sourceKey": "anchornamequest",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 5,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "16:48:00"
+                },
+                "end": {
+                    "anchorDays": 9,
+                    "repeatInterval": 0,
+                    "time": "16:48:00"
+                }
+            },
+            "frequency": {
+                "type": "Manually Schedule",
+                "runs": [
+                    {
+                        "startTime": "",
+                        "endTime": ""
+                    },
+                    {
+                        "startTime": "",
+                        "endTime": ""
+                    }
+                ],
+                "anchorRuns": [
+                    {
+                        "startDays": 5,
+                        "endDays": 6,
+                        "time": "16:48:00"
+                    },
+                    {
+                        "startDays": 8,
+                        "endDays": 9,
+                        "time": "16:48:00"
+                    }
+                ]
+            }
+        },
+        {
+            "activityId": "anchorweekly",
+            "activityVersion": "1.1",
+            "title": "anchorweeklytitle",
+            "type": "questionnaire",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T10:42:34.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "ActivityResponse",
+                "sourceActivityId": "anchornameTitle",
+                "sourceKey": "anchornamequest",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 4,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "17:46:00"
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 7,
+                    "time": "17:46:00"
+                }
+            },
+            "frequency": {
+                "type": "Weekly",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "anchormonthly",
+            "activityVersion": "1.1",
+            "title": "anchormonthlytitle",
+            "type": "questionnaire",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T10:42:34.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "ActivityResponse",
+                "sourceActivityId": "formQuestAnchorname",
+                "sourceKey": "formQuestAncho",
+                "sourceFormKey": "formstep",
+                "start": {
+                    "anchorDays": -5,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "18:37:00"
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 3,
+                    "time": "18:37:00"
+                }
+            },
+            "frequency": {
+                "type": "Monthly",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "regulardaily",
+            "activityVersion": "1.0",
+            "title": "regulardailytitle",
+            "type": "questionnaire",
+            "startTime": "2019-04-06T16:47:00.000+0530",
+            "endTime": "2019-04-12T23:59:59.000+0530",
+            "branching": false,
+            "lastModified": "2019-03-26T14:48:29.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "Regular",
+            "anchorDate": {
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": ""
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 0,
+                    "time": ""
+                }
+            },
+            "frequency": {
+                "type": "Daily",
+                "runs": [
+                    {
+                        "startTime": "16:47:00",
+                        "endTime": "18:47:59"
+                    },
+                    {
+                        "startTime": "18:48:00",
+                        "endTime": "23:59:59"
+                    }
+                ],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "anchordaily",
+            "activityVersion": "1.1",
+            "title": "anchordailytitle",
+            "type": "questionnaire",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T10:42:35.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "EnrollmentDate",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "18:44:00"
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 6,
+                    "time": "23:59:59"
+                }
+            },
+            "frequency": {
+                "type": "Daily",
+                "runs": [
+                    {
+                        "startTime": "18:44:00",
+                        "endTime": "22:44:59"
+                    },
+                    {
+                        "startTime": "22:45:00",
+                        "endTime": "23:59:59"
+                    }
+                ],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "anchornostartend",
+            "activityVersion": "1.1",
+            "title": "anchornostartendtitle",
+            "type": "questionnaire",
+            "startTime": "2019-03-26T00:00:00.000+0530",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T10:42:35.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "EnrollmentDate",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "start": null,
+                "end": null
+            },
+            "frequency": {
+                "type": "One time",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "regularonetime",
+            "activityVersion": "1.0",
+            "title": "regularonetimetitle",
+            "type": "questionnaire",
+            "startTime": "2019-03-26T00:00:00.000+0530",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-26T14:32:28.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "Regular",
+            "anchorDate": {
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": ""
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 0,
+                    "time": ""
+                }
+            },
+            "frequency": {
+                "type": "One time",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "anchoronestartend",
+            "activityVersion": "1.1",
+            "title": "anchoronestartendtitle",
+            "type": "questionnaire",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T10:42:35.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "ActivityResponse",
+                "sourceActivityId": "anchornameTitle",
+                "sourceKey": "anchornamequest",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": -4,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "18:24:00"
+                },
+                "end": {
+                    "anchorDays": 5,
+                    "repeatInterval": 0,
+                    "time": "23:59:59"
+                }
+            },
+            "frequency": {
+                "type": "One time",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "anchoroneend",
+            "activityVersion": "1.1",
+            "title": "anchoroneendtitle",
+            "type": "questionnaire",
+            "startTime": "2019-03-26T00:00:00.000+0530",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T10:42:35.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "ActivityResponse",
+                "sourceActivityId": "formQuestAnchorname",
+                "sourceKey": "formQuestAncho",
+                "sourceFormKey": "formstep",
+                "start": null,
+                "end": {
+                    "anchorDays": 4,
+                    "repeatInterval": 0,
+                    "time": "23:59:59"
+                }
+            },
+            "frequency": {
+                "type": "One time",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "anchoronestart",
+            "activityVersion": "1.0",
+            "title": "anchoronestartTitle",
+            "type": "questionnaire",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-26T11:56:16.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "ActivityResponse",
+                "sourceActivityId": "anchornameTitle",
+                "sourceKey": "anchornamequest",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 12,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "05:34:00"
+                },
+                "end": null
+            },
+            "frequency": {
+                "type": "One time",
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "anchornameTitle",
+            "activityVersion": "1.0",
+            "title": "anchornameTitle",
+            "type": "questionnaire",
+            "startTime": "2019-03-26T00:00:00.000+0530",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-26T11:56:16.000+0530",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "Regular",
+            "anchorDate": {
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": ""
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 0,
+                    "time": ""
+                }
+            },
+            "frequency": {
+                "type": "One time",
+                "runs": [],
+                "anchorRuns": []
+            }
+        }
+    ]
+}

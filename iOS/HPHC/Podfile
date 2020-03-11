@@ -1,0 +1,37 @@
+project 'HPHC.xcodeproj/'
+
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+# Pods for FDA
+def main_pods
+  
+  pod 'IQKeyboardManagerSwift'
+  pod 'SlideMenuControllerSwift', :git => 'https://github.com/AtomicSLLC/SlideMenuControllerSwift.git', :branch => 'swift5'
+  pod 'Fabric'
+  pod 'Crashlytics'
+  pod 'SDWebImage'
+  pod 'RealmSwift'
+  pod 'CryptoSwift'
+  pod 'ActionSheetPicker-3.0'
+  
+end
+
+target 'HPHC' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+  main_pods
+  
+end
+
+target 'HPHCUITests' do
+  use_frameworks!
+  pod 'Embassy'
+  pod 'EnvoyAmbassador'
+end
+
+target 'HPHCTests' do
+  # inherit! :search_paths
+  
+  pod 'Mockingjay', '3.0.0-alpha.1'
+end

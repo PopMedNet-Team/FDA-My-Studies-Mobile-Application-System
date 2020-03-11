@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/activity_gateway"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                tools:context="com.harvard.gatewayModule.GatewayActivity">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.harvard.gatewayModule.CircleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="140dp" />
+
+    </FrameLayout>
+
+    <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+                                       android:id="@+id/topView"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="?attr/actionBarSize"
+                                       android:background="@android:color/transparent"
+                                       android:clickable="false"
+                                       android:paddingLeft="18dp"
+                                       android:paddingRight="18dp"
+                                       app:contentInsetLeft="0dp"
+                                       app:contentInsetStart="0dp"
+                                       app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/back_btn1_grey" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rightBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
+
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imageViewRight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/star_grey_big" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:alpha=".6"
+        android:background="@color/colorPrimaryBlack"
+        android:baselineAligned="true"
+        android:visibility="invisible"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <RelativeLayout
+            android:id="@+id/mVisitWebsiteButtonLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.4">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mVisitWebsiteButton"
+                style="@style/TextType2"
+                android:layout_centerInParent="true"
+                android:text="@string/visit_website"
+                android:gravity="center"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/center"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_weight=".2">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/hrLine2"
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:alpha=".4"
+                android:background="@android:color/white" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/mLernMoreButtonLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.4">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/mLernMoreButton"
+                style="@style/TextType2"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:text="@string/view_consent"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/bottom_bar1"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:alpha=".6"
+        android:background="@color/colorPrimaryBlack"
+        android:baselineAligned="true"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        >
+
+
+        <RelativeLayout
+            android:id="@+id/consentLay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/consentLayButton"
+                style="@style/TextType2"
+                android:layout_centerInParent="true"
+                android:text="@string/view_consent"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/joinButton"
+        style="@style/TextType2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_above="@+id/bottom_bar"
+        android:background="@drawable/rectangle_blue_white"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:text="@string/join_study"
+        android:textColor="@android:color/white" />
+</RelativeLayout>

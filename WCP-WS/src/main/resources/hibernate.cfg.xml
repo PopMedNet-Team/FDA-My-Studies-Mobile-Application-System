@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration 
+	DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd"> -->
+<!DOCTYPE hibernate-configuration SYSTEM 
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="show_sql">true</property>
+		<property name="hibernate.connection.autocommit">true</property>
+		<property name="hibernate.c3p0.min_size">5</property>
+		<property name="hibernate.c3p0.max_size">50</property>
+		<property name="hibernate.c3p0.timeout">300</property>
+		<property name="hibernate.c3p0.max_statements">20</property>
+		<property name="hibernate.c3p0.idle_test_period">250</property>
+		<property name="hibernate.c3p0.acquire_increment">2</property>
+		<property name="hibernate.c3p0.preferredTestQuery">SELECT 1</property>
+		<property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
+		<property name="hibernate.c3p0.idleConnectionTestPeriod">200</property>
+		<property name="hibernate.cache.use_second_level_cache">false</property>
+		<property name="hibernate.cache.use_query_cache">false</property>
+		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+
+		<mapping class="com.hphc.mystudies.dto.BrandingDto" />
+		<mapping class="com.hphc.mystudies.dto.ChartsDto" />
+		<mapping class="com.hphc.mystudies.dto.ComprehensionTestQuestionDto" />
+		<mapping class="com.hphc.mystudies.dto.ComprehensionTestResponseDto" />
+		<mapping class="com.hphc.mystudies.dto.ConsentDto" />
+		<mapping class="com.hphc.mystudies.dto.ConsentInfoDto" />
+		<mapping class="com.hphc.mystudies.dto.EligibilityDto" />
+		<mapping class="com.hphc.mystudies.dto.EligibilityTestDto" />
+		<mapping class="com.hphc.mystudies.dto.EligibilityTestResponseDto" />
+		<mapping class="com.hphc.mystudies.dto.GatewayInfoDto" />
+		<mapping class="com.hphc.mystudies.dto.GatewayWelcomeInfoDto" />
+		<mapping class="com.hphc.mystudies.dto.LegalTextDto" />
+		<mapping class="com.hphc.mystudies.dto.NotificationDto" />
+		<mapping class="com.hphc.mystudies.dto.QuestionnairesDto" />
+		<mapping class="com.hphc.mystudies.dto.QuestionnairesFrequenciesDto" />
+		<mapping class="com.hphc.mystudies.dto.QuestionnairesStepsDto" />
+		<mapping class="com.hphc.mystudies.dto.QuestionsDto" />
+		<mapping class="com.hphc.mystudies.dto.QuestionsResponseTypeDto" />
+		<mapping class="com.hphc.mystudies.dto.ResourcesDto" />
+		<mapping class="com.hphc.mystudies.dto.StudyDto" />
+		<mapping class="com.hphc.mystudies.dto.StudyPageDto" />
+		<mapping class="com.hphc.mystudies.dto.ActiveTaskDto" />
+		<mapping class="com.hphc.mystudies.dto.ActiveTaskFrequencyDto" />
+		<mapping class="com.hphc.mystudies.dto.ActiveTaskStepsDto" />
+		<mapping class="com.hphc.mystudies.dto.LineChartDto" />
+		<mapping class="com.hphc.mystudies.dto.LineChartDatasourceDto" />
+		<mapping class="com.hphc.mystudies.dto.LineChartXAxisDto" />
+		<mapping class="com.hphc.mystudies.dto.StatisticsDto" />
+		<mapping class="com.hphc.mystudies.dto.ReferenceTablesDto" />
+		<mapping class="com.hphc.mystudies.dto.QuestionnairesCustomFrequenciesDto" />
+		<mapping class="com.hphc.mystudies.dto.FormDto" />
+		<mapping class="com.hphc.mystudies.dto.FormMappingDto" />
+		<mapping class="com.hphc.mystudies.dto.InstructionsDto" />
+		<mapping class="com.hphc.mystudies.dto.StudySequenceDto" />
+		<mapping class="com.hphc.mystudies.dto.ActiveTaskCustomFrequenciesDto" />
+		<mapping class="com.hphc.mystudies.dto.ActiveTaskAttrtibutesValuesDto" />
+		<mapping class="com.hphc.mystudies.dto.ActiveTaskFormulaDto" />
+		<mapping class="com.hphc.mystudies.dto.ActiveTaskListDto" />
+		<mapping class="com.hphc.mystudies.dto.ActiveTaskMasterAttributeDto" />
+		<mapping class="com.hphc.mystudies.dto.ActiveTaskSelectOptionsDto" />
+		<mapping class="com.hphc.mystudies.dto.ConsentMasterInfoDto" />
+		<mapping class="com.hphc.mystudies.dto.QuestionResponsetypeMasterInfoDto" />
+		<mapping class="com.hphc.mystudies.dto.QuestionResponseSubTypeDto" />
+		<mapping class="com.hphc.mystudies.dto.QuestionReponseTypeDto" />
+		<mapping class="com.hphc.mystudies.dto.StatisticImageListDto" />
+		<mapping class="com.hphc.mystudies.dto.StudyVersionDto" />
+		<mapping class="com.hphc.mystudies.dto.AppVersionDto" />
+		<mapping class="com.hphc.mystudies.dto.HealthKitDataKeyDto" />
+		<mapping class="com.hphc.mystudies.dto.QuestionConditionBranchDto" />
+		<mapping class="com.hphc.mystudies.dto.EnrollmentTokenDto" />
+		<mapping class="com.hphc.mystudies.dto.AnchorDateTypeDto" />
+		<mapping class="com.hphc.mystudies.dto.AppVersionInfo" />
+	</session-factory>
+</hibernate-configuration>

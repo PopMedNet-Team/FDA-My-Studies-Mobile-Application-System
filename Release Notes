@@ -1,0 +1,17 @@
+# FDA MyStudies Release Notes - Version 2019.10:
+<ul>
+
+ <li>New Features
+    <ul>
+      <li>Ability to schedule study activities and resources based on study enrollment (or other WCP-configured date elements) as Anchor Date.
+      <li>Ability to support multiple mobile apps from a single instance of the Web Configuration Portal (WCP)
+      <li>Ability to include an “other” open-text option in single/multi select questions
+      <li>Ability to automatically forward survey responses stored in Response Server to external systems
+      <li>Ability to partition user email addresses by folder in the Registration Server 
+    </ul>
+<li>Application Security and Compabitility Updates
+   <ul>
+     <li> Compatibility with LabKey Server 19.2.X
+   </ul>
+</ul>
+ 

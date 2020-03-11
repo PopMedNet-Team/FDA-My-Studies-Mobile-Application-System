@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.harvard.studyAppModule.ProfileFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rel_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="18dp"
+                android:visibility="gone">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/first_name_label"
+                    style="@style/profileTextField"
+                    android:text="@string/first_name" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edittxt_first_name"
+                    style="@style/signUpEditText"
+                    android:layout_alignBaseline="@+id/first_name_label"
+                    android:layout_alignBottom="@+id/first_name_label"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:enabled="false"
+                    android:hint="@string/enter_first_name"
+                    android:inputType="textPersonName"
+                    android:maxLength="32"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@drawable/custom_cursor_drawable" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/hrline2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/edittxt_first_name"
+                    android:layout_marginTop="18dp"
+                    android:background="@color/colorSecondaryBg" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rel_first_name"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="18dp"
+                android:visibility="gone">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/last_name_label"
+                    style="@style/profileTextField"
+                    android:text="@string/last_name" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edittxt_last_name"
+                    style="@style/signUpEditText"
+                    android:enabled="false"
+                    android:hint="@string/enter_last_name"
+                    android:inputType="textPersonName"
+                    android:maxLength="32"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@drawable/custom_cursor_drawable" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/hrline3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/edittxt_last_name"
+                    android:layout_marginTop="18dp"
+                    android:background="@color/colorSecondaryBg" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rel_last_name"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="18dp">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/email_label"
+                    style="@style/profileTextField"
+                    android:text="@string/email_id" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edittxt_email"
+                    style="@style/signUpEditText"
+                    android:enabled="false"
+                    android:hint="@string/enter_email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@drawable/custom_cursor_drawable" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/hrline4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/edittxt_email"
+                    android:layout_marginTop="18dp"
+                    android:background="@color/colorSecondaryBg" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rel_email"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:paddingTop="8dp">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/password_label"
+                    style="@style/profileTextField"
+                    android:text="@string/password" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/edittxt_password"
+                    style="@style/TextType2"
+                    android:layout_alignParentRight="true"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:text="@string/change_password"
+                    android:textColor="@color/colorSecondaryStatBar" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/hrline5"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/edittxt_password"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/colorSecondaryBg" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_passcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/rel_password"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="18dp">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/passcode_label"
+                    style="@style/profileTextField"
+                    android:text="@string/passcode" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/edittxt_passcode"
+                    style="@style/TextType2"
+                    android:layout_alignParentRight="true"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:text="@string/change_passcode"
+                    android:textColor="@color/colorSecondaryStatBar" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/hrline6"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/edittxt_passcode"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/colorSecondaryBg" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_use_passcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/rel_passcode"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="18dp"
+                android:visibility="visible">
+
+                <Switch
+                    android:id="@+id/switch_use_passcode"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:theme="@style/BrandedSwitch.control" />
+
+                <RelativeLayout
+                    android:id="@+id/rel_use_passcode_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/switch_use_passcode">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/use_passcode_label"
+                        style="@style/profileTextField"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/use_passcode_txt" />
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/hrline7"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/rel_use_passcode_label"
+                    android:layout_marginTop="18dp"
+                    android:background="@color/colorSecondaryBg" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_use_touch_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/rel_use_passcode"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="18dp"
+                android:visibility="gone">
+
+                <Switch
+                    android:id="@+id/switch_touch"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:saveEnabled="false"
+                    android:theme="@style/BrandedSwitch.control" />
+
+                <RelativeLayout
+                    android:id="@+id/rel_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/switch_touch">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/touch_id_label"
+                        style="@style/TextType2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/touch_txt"
+                        android:textColor="@color/colorPrimaryBlack" />
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/hrline8"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/rel_txt"
+                    android:layout_marginTop="18dp"
+                    android:background="@color/colorSecondaryBg" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_recv_push_notifctn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/rel_use_touch_id"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="18dp"
+                android:visibility="visible">
+
+                <Switch
+                    android:id="@+id/switch_recv_push_notifctn"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:theme="@style/BrandedSwitch.control" />
+
+                <RelativeLayout
+                    android:id="@+id/rel_recv_push_notifctn_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/switch_recv_push_notifctn">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/recv_push_notifctn_label"
+                        style="@style/profileTextField"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/receive_push_notifctn" />
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/hrline9"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/rel_recv_push_notifctn_label"
+                    android:layout_marginTop="18dp"
+                    android:background="@color/colorSecondaryBg" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_recv_stdy_actrem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/rel_recv_push_notifctn"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="18dp"
+                android:visibility="visible">
+
+                <Switch
+                    android:id="@+id/switch_recv_stdy_actrem"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:theme="@style/BrandedSwitch.control" />
+
+                <RelativeLayout
+                    android:id="@+id/rel_recv_stdy_actrem_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/switch_recv_stdy_actrem">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/recv_stdy_actrem_label"
+                        style="@style/profileTextField"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/recv_stdy_actrem" />
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/hrline11"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/rel_recv_stdy_actrem_label"
+                    android:layout_marginTop="18dp"
+                    android:background="@color/colorSecondaryBg" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_reminder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/rel_recv_stdy_actrem"
+                android:paddingBottom="18dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="12dp"
+                android:paddingTop="18dp"
+                android:visibility="invisible">
+
+                <RelativeLayout
+                    android:id="@+id/rel_picker_reminder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:padding="8dp">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/picker_reminder"
+                        style="@style/TextType2"
+                        android:layout_centerVertical="true"
+                        android:text="00:00"
+                        android:textColor="@color/colorSecondaryStatBar" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_reminder_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/rel_picker_reminder"
+                    android:paddingRight="20dp">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/reminder_label"
+                        style="@style/TextType2"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/reminder"
+                        android:textColor="@color/colorSecondary" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/signOutButton"
+                style="@style/TextType2"
+                android:layout_below="@id/rel_reminder"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/sign_out"
+                android:textColor="@color/colorPrimaryBlack"
+                android:visibility="gone" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/hrline12"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/signOutButton"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorSecondaryBg" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/deleteMyAccount"
+                style="@style/TextType2"
+                android:layout_below="@id/hrline12"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/delete_my_account"
+                android:textColor="@android:color/holo_red_dark"
+                android:visibility="invisible" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/hrLine1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorSecondaryBg" />
+
+</LinearLayout>

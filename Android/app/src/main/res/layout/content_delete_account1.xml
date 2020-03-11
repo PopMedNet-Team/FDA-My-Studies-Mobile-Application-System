@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_delete_account1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.harvard.studyAppModule.DeleteAccountActivity">
+
+    <View
+        android:id="@+id/mHrLine1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorSecondaryBg" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/mMedicationSurveyTitle"
+        style="@style/TextType2"
+        android:layout_below="@id/mHrLine1"
+        android:text=""
+        android:textColor="@color/colorPrimaryBlack" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/mMedicationSurveyValue"
+        style="@style/TextType2"
+        android:layout_below="@id/mMedicationSurveyTitle"
+        android:text=""
+        android:textColor="@color/colorSecondary" />
+
+
+</RelativeLayout>

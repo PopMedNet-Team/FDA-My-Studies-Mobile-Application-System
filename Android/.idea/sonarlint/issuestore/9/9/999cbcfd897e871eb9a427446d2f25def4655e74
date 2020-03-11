@@ -1,0 +1,16 @@
+
+<squid:S3398["&Move this method into "LongOperation".(¬íîm
+Gsquid:S1068"+Remove this unused "UPGRADE" private field.(ÿíÕ«ýÿÿÿÿ
+Fsquid:S1068"/Remove this unused "APP_UPDATES" private field.(˜¸Çú
+Fsquid:S1068!"/Remove this unused "alertDialog" private field.(ÓÑÝ“
+bsquid:CommentedOutCodeLine:"<This block of commented-out lines of code should be removed.(ˆÂèò
+bsquid:CommentedOutCodeLine?"<This block of commented-out lines of code should be removed.(ß­Ó­
+gsquid:CommentedOutCodeLineE"<This block of commented-out lines of code should be removed.(•·ýÔüÿÿÿÿ
+gsquid:CommentedOutCodeLineN"<This block of commented-out lines of code should be removed.(ð’ýÈþÿÿÿÿ
+gsquid:CommentedOutCodeLineT"<This block of commented-out lines of code should be removed.(ûŠ”¾ûÿÿÿÿ
+bsquid:CommentedOutCodeLine`"<This block of commented-out lines of code should be removed.(ŠìÆÊ
+bsquid:CommentedOutCodeLineh"<This block of commented-out lines of code should be removed.(¡Õ±š
+gsquid:HiddenFieldCheckä"?Rename "alertDialog" which hides the field declared at line 33.(Ìß´úÿÿÿÿ
+jsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(ŸŒ¹Ñ
+`squid:S2259¦"CA "NullPointerException" could be thrown; "pInfo" is nullable here.(¿Ðƒåþÿÿÿÿ
+™squid:S1186¾"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ËÐƒ

@@ -1,0 +1,152 @@
+{
+  "message": "SUCCESS",
+  "activity": {
+    "metadata": {
+      "activityId": "OtherOption",
+      "version": "1"
+    },
+    "steps": [
+      {
+        "key": "NoOption",
+        "resultType": "textChoice",
+        "repeatable": true,
+        "type": "question"
+      },
+      {
+        "key": "OptionRequired",
+        "resultType": "textChoice",
+        "repeatable": true,
+        "type": "question",
+        "format": {
+          "textChoices": [
+            {
+              "description": "required other choice",
+              "type": "text",
+              "text": "second",
+              "other": {
+                "textfieldReq": true,
+                "placeholder": "I am unknown placeholdertext",
+                "isMandatory": false
+              }
+            }
+          ],
+          "selectionStyle": "Single"
+        }
+      },
+      {
+        "key": "OptionNotRequired",
+        "resultType": "textChoice",
+        "repeatable": true,
+        "type": "question",
+        "format": {
+          "textChoices": [
+            {
+              "description": "required other choice",
+              "type": "text",
+              "text": "second",
+              "other": {
+                "textfieldReq": false,
+                "placeholder": "I am unknown placeholdertext",
+                "isMandatory": false
+              }
+            }
+          ],
+          "selectionStyle": "Multiple"
+        }
+      },
+      {
+        "key": "MultipleNoOption",
+        "resultType": "textChoice",
+        "repeatable": true,
+        "type": "question",
+        "format": {
+          "textChoices": [
+            {
+              "description": "first choice",
+              "type": "text",
+              "text": "first"
+            },
+            {
+              "description": "second choice",
+              "type": "text",
+              "text": "second"
+            }
+          ],
+          "selectionStyle": "Multiple"
+        }
+      },
+      {
+        "key": "MultipleRequiredOptions",
+        "resultType": "textChoice",
+        "repeatable": true,
+        "type": "question",
+        "format": {
+          "textChoices": [
+            {
+              "description": "first choice",
+              "type": "text",
+              "text": "first"
+            },
+            {
+              "description": "second choice",
+              "type": "text",
+              "text": "second",
+              "other": {
+                "textfieldReq": true,
+                "placeholder": "I am unknown placeholdertext",
+                "isMandatory": false
+              }
+            },
+            {
+              "description": "Third choice",
+              "type": "text",
+              "text": "third",
+              "other": {
+                "textfieldReq": true,
+                "placeholder": "I am unknown placeholdertext",
+                "isMandatory": false
+              }
+            }
+          ],
+          "selectionStyle": "Multiple"
+        }
+      },
+      {
+        "key": "MixedMultiple",
+        "resultType": "textChoice",
+        "repeatable": true,
+        "type": "question",
+        "format": {
+          "textChoices": [
+            {
+              "description": "first choice",
+              "type": "text",
+              "text": "first",
+              "other": {
+                "textfieldReq": false,
+                "placeholder": "I am unknown placeholdertext",
+                "isMandatory": false
+              }
+            },
+            {
+              "description": "second choice",
+              "type": "text",
+              "text": "second",
+              "other": {
+                "textfieldReq": true,
+                "placeholder": "I am unknown placeholdertext",
+                "isMandatory": false
+              }
+            },
+            {
+              "description": "Third choice",
+              "type": "text",
+              "text": "third"
+            }
+          ],
+          "selectionStyle": "Single"
+        }
+      }
+    ]
+  }
+}

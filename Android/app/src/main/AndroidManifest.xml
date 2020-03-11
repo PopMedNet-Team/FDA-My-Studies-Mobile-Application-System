@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.harvard">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+    <application
+        android:name=".FDAApplication"
+        android:allowBackup="false"
+        android:hardwareAccelerated="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:resizeableActivity="false"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".studyAppModule.StandaloneStudyInfoActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppThemeNoActionBar">
+        </activity>
+        <activity
+            android:name=".studyAppModule.StandaloneActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"/>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="@string/FileProvider_authorities"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths"/>
+        </provider>
+
+        <activity
+            android:name=".gatewayModule.GatewayActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".SplashActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".userModule.SignupActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity
+            android:name=".userModule.VerificationStepActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".userModule.SignupProcessCompleteActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".passcodeModule.PasscodeSetupActivity"
+            android:configChanges="screenLayout|orientation"
+            android:theme="@style/passcodeTheme"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".userModule.ChooseTouchIDSignInActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".userModule.SignInActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustNothing"/>
+        <activity
+            android:name=".userModule.ForgotPasswordActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity
+            android:name=".userModule.UseTouchIDPasscodeActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".studyAppModule.StudyActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustNothing"/>
+        <activity
+            android:name=".studyAppModule.StudySignInActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".studyAppModule.StudyInfoActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".studyAppModule.SurveyActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".studyAppModule.NotificationActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".studyAppModule.ChangePasswordActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity
+            android:name=".studyAppModule.DeleteAccountActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".userModule.TermsPrivacyPolicyActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".studyAppModule.consent.CustomConsentViewTaskActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name="org.researchstack.backbone.ui.ViewWebDocumentActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="17d66c1b46986f6f6633cc62617443d13b9fbf1d"/>
+
+        <activity
+            android:name=".studyAppModule.EligibilityEnrollmentActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar1"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".studyAppModule.activityBuilder.CustomSurveyViewTaskActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity
+            android:name=".EligibilityModule.CustomViewTaskActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="17d66c1b46986f6f6633cc62617443d13b9fbf1d"/>
+
+        <activity
+            android:name=".WebViewActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".studyAppModule.ConsentCompletedActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".studyAppModule.ContactUsActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity
+            android:name=".studyAppModule.FeedbackActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity
+            android:name=".studyAppModule.EnrollmentValidatedActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="MAPS_KEY"/>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+
+        <activity
+            android:name=".studyAppModule.SurveyCompleteActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".studyAppModule.ResourcesWebViewActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".studyAppModule.PDFDisplayActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".userModule.NewPasscodeSetupActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity
+            android:name=".userModule.ConfirmPasscodeSetup"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:name=".MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".studyAppModule.ChartActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".studyAppModule.GatewayResourcesWebViewActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <receiver android:name=".notificationModule.AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.media.action.DISPLAY_NOTIFICATION"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name=".offlineModule.auth.StubContentProvider"
+            android:authorities="com.harvard.offlineModule.auth.syncadapterexample.provider"
+            android:exported="false"
+            android:syncable="true"
+            tools:replace="android:authorities"/>
+
+        <service android:name=".offlineModule.auth.StubAuthenticatorService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator"/>
+        </service>
+        <service
+            android:name=".offlineModule.auth.SyncAdapterService"
+            android:exported="false"
+            android:process=":sync">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter"/>
+        </service>
+        <service android:name=".utils.ActiveTaskService">
+            <intent-filter>
+                <action android:name="com.harvard.ActiveTask"/>
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".utils.AlarmService"/>
+
+        <activity
+            android:name=".studyAppModule.FilterActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <receiver android:name=".utils.BootCompleteListener">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".EligibilityModule.NotEligibleActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp">
+        </activity>
+        <activity
+            android:name=".EligibilityModule.EligibleActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp">
+        </activity>
+        <activity
+            android:name=".EligibilityModule.ComprehensionSuccessActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp">
+        </activity>
+        <activity
+            android:name=".EligibilityModule.ComprehensionFailureActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp">
+        </activity>
+        <activity
+            android:name=".studyAppModule.consent.ConsentSharingStepCustom.LoadMoreActivity"
+            android:configChanges="screenLayout|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.BackboneApp">
+        </activity>
+    </application>
+
+</manifest>

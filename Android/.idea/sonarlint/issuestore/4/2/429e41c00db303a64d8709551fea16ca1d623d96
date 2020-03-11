@@ -1,0 +1,116 @@
+
+„ squid:ForLoopCounterChangedChecké"XRefactor the code in order to not assign to this loop counter from within the loop body.(¨…ÄK
+Gsquid:S1656„"/Remove or correct this useless self-assignment.(ŒØ´
+lsquid:S3008€"ORename this field "FROM" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Øåıûÿÿÿÿ
+Lsquid:S1066Ë"/Merge this if statement with the enclosing one.(ïÚ³’üÿÿÿÿ
+psquid:S2293¯"YReplace the type specification in this constructor call with the diamond operator ("<>").(°ïÆ!
+qsquid:S1450}"URemove the "myFile" field and declare it as a local variable in the relevant methods.(Ù‡ùÅıÿÿÿÿ
+osquid:S1450}"SRemove the "file" field and declare it as a local variable in the relevant methods.(Ù‡ùÅıÿÿÿÿ
+vsquid:S1450}"ZRemove the "encryptFile" field and declare it as a local variable in the relevant methods.(Ù‡ùÅıÿÿÿÿ
+~squid:S4165„"fRemove this useless assignment; "response" already holds the assigned value along all execution paths.(ŒØ´
+fsquid:S4042"IUse "java.nio.Files#delete" here for better messages on error conditions.(²Œ­ûÿÿÿÿ
+Gsquid:S1444€"*Make this "public static FROM" field final(Øåıûÿÿÿÿ
+p
+squid:S135Ò"YReduce the total number of break and continue statements in this loop to use at most one.(å…¸ê
+csquid:CommentedOutCodeLineŠ"<This block of commented-out lines of code should be removed.(–ªï
+hsquid:CommentedOutCodeLine›"<This block of commented-out lines of code should be removed.(êƒŸôûÿÿÿÿ
+hsquid:CommentedOutCodeLineŸ"<This block of commented-out lines of code should be removed.(ÓÎğ¤ıÿÿÿÿ
+hsquid:CommentedOutCodeLine»"<This block of commented-out lines of code should be removed.(ÒÌâ–øÿÿÿÿ
+hsquid:CommentedOutCodeLineÖ"<This block of commented-out lines of code should be removed.(÷à¿Çøÿÿÿÿ
+hsquid:CommentedOutCodeLineá"<This block of commented-out lines of code should be removed.(æ‘ƒıÿÿÿÿ
+bsquid:CommentedOutCodeLineò"<This block of commented-out lines of code should be removed.(óØûl
+csquid:CommentedOutCodeLine§"<This block of commented-out lines of code should be removed.(ƒêµê
+csquid:CommentedOutCodeLine²"<This block of commented-out lines of code should be removed.(ÂüÖî
+csquid:CommentedOutCodeLine¿"<This block of commented-out lines of code should be removed.(šüë”
+csquid:CommentedOutCodeLineÅ"<This block of commented-out lines of code should be removed.(–ªï
+hsquid:CommentedOutCodeLineÖ"<This block of commented-out lines of code should be removed.(êƒŸôûÿÿÿÿ
+hsquid:CommentedOutCodeLineÚ"<This block of commented-out lines of code should be removed.(ÓÎğ¤ıÿÿÿÿ
+hsquid:CommentedOutCodeLineÊ"<This block of commented-out lines of code should be removed.(—§–¥ùÿÿÿÿ
+csquid:CommentedOutCodeLineâ"<This block of commented-out lines of code should be removed.(öó«¡
+csquid:CommentedOutCodeLine”"<This block of commented-out lines of code should be removed.(ˆóş
+hsquid:CommentedOutCodeLine "<This block of commented-out lines of code should be removed.(ş²Õ®úÿÿÿÿ
+hsquid:CommentedOutCodeLine¬"<This block of commented-out lines of code should be removed.(£¢€üÿÿÿÿ
+hsquid:CommentedOutCodeLine°"<This block of commented-out lines of code should be removed.(û®»ıùÿÿÿÿ
+hsquid:CommentedOutCodeLine»"<This block of commented-out lines of code should be removed.(£¢€üÿÿÿÿ
+csquid:CommentedOutCodeLine¾"<This block of commented-out lines of code should be removed.(Çæ²è
+csquid:CommentedOutCodeLineÏ"<This block of commented-out lines of code should be removed.(Çæ²è
+hsquid:CommentedOutCodeLineÙ"<This block of commented-out lines of code should be removed.(”ÌŸ¶şÿÿÿÿ
+csquid:CommentedOutCodeLineß"<This block of commented-out lines of code should be removed.(¡ÆÒ¥
+hsquid:CommentedOutCodeLineİ"<This block of commented-out lines of code should be removed.(³ÎÆäşÿÿÿÿ
+csquid:CommentedOutCodeLine’"<This block of commented-out lines of code should be removed.(‰‘«Ú
+hsquid:CommentedOutCodeLine—"<This block of commented-out lines of code should be removed.(ı£ĞÃûÿÿÿÿ
+csquid:CommentedOutCodeLine×"<This block of commented-out lines of code should be removed.(¹ “Ş
+csquid:CommentedOutCodeLineÃ"<This block of commented-out lines of code should be removed.(¼ÓùÈ
+csquid:CommentedOutCodeLineÍ"<This block of commented-out lines of code should be removed.(º¾˜
+csquid:CommentedOutCodeLineÔ"<This block of commented-out lines of code should be removed.(º¾˜
+csquid:CommentedOutCodeLineÛ
+"<This block of commented-out lines of code should be removed.(–ªï
+Ssquid:S2696‹"6Make the enclosing method "static" or remove this set.(™°Ü¹ùÿÿÿÿ
+Nsquid:S2696«"6Make the enclosing method "static" or remove this set.(™üÍ 
+Nsquid:S2696"6Make the enclosing method "static" or remove this set.(í·û¸
+]squid:HiddenFieldCheck‘";Rename "mStudy" which hides the field declared at line 132.(Õ¡ÕZ
+isquid:HiddenFieldCheck“"FRename "studyListArrayList" which hides the field declared at line 98.(Àïûè
+]squid:HiddenFieldCheckÌ";Rename "mStudy" which hides the field declared at line 132.(Õ¡ÕZ
+isquid:HiddenFieldCheckÎ"FRename "studyListArrayList" which hides the field declared at line 98.(Àïûè
+\squid:HiddenFieldCheck"9Rename "file" which hides the field declared at line 125.(˜¿·½
+„"squid:ClassVariableVisibilityCheck€"PMake FROM a static final constant or non-public and provide accessors if needed.(Øåıûÿÿÿÿ
+Jsquid:S1481"-Remove this unused "audience" local variable.(ÃÈ‹ëüÿÿÿÿ
+Fsquid:S1481§")Remove this unused "date" local variable.(”Ç©šùÿÿÿÿ
+osquid:S3776¶"RRefactor this method to reduce its Cognitive Complexity from 91 to the 15 allowed.(ÓÏ­ûùÿÿÿÿ
+ksquid:S3776û"SRefactor this method to reduce its Cognitive Complexity from 139 to the 15 allowed.(æÛÖÎ
+osquid:S3776ì"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(ŒËİåÿÿÿÿÿ
+isquid:S3776¤"RRefactor this method to reduce its Cognitive Complexity from 91 to the 15 allowed.(×—˜
+ksquid:S00101æ"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(èÈ«ùÿÿÿÿ
+=squid:S1170Y"!Make this final field static too.(·¡øşÿÿÿÿ
+=squid:S1170Z"!Make this final field static too.(Ú¡µåÿÿÿÿÿ
+fsquid:S2259™"IA "NullPointerException" could be thrown; "encryptFile" is nullable here.(ÓŞ€—úÿÿÿÿ
+vsquid:S00116Y"YRename this field "SPECIFIC_STUDY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·¡øşÿÿÿÿ
+wsquid:S00116Z"ZRename this field "GET_PREFERENCES" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ú¡µåÿÿÿÿÿ
+@squid:S1148¢"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148ß"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148…"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148€"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148Ö"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148é"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148ğ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148÷"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148ş"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148…	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148Œ	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148“	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148œ	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148¡	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148§	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148­	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148³	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148¹	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148¿	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148Å	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148Ë	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148Ğ	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148×	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148Ş	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148å	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148ì	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148ó	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148ú	"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148„
+"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148‰
+"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148
+"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148—
+"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148
+"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148¥
+"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148¬
+"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148³
+"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+W
+squid:S899";Do something with the "boolean" value returned by "delete".(²Œ­ûÿÿÿÿ
+^
+squid:S899­"BDo something with the "boolean" value returned by "createNewFile".(ô©È¾ıÿÿÿÿ

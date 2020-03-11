@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_delete_account2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.harvard.studyAppModule.DeleteAccountActivity">
+
+    <View
+        android:id="@+id/mHrLine3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorSecondaryBg" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/mentalHealthSurveyTitle"
+        style="@style/TextType2"
+        android:layout_below="@id/mHrLine3"
+        android:text=""
+        android:textColor="@color/colorPrimaryBlack" />
+
+    <RelativeLayout
+        android:id="@+id/mentalHealthSurveyLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mentalHealthSurveyTitle"
+        android:layout_centerVertical="true">
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/mDeleteButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:button="@drawable/radio_button_netwok_selector"
+            android:saveEnabled="false" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/mDeleteMyData1"
+            style="@style/TextType2"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/mDeleteButton1"
+            android:text="@string/delete_my_data"
+            android:textColor="@color/colorSecondary" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/mRetainButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/mDeleteMyData1"
+            android:button="@drawable/radio_button_netwok_selector"
+            android:saveEnabled="false" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/mRetainData1"
+            style="@style/TextType2"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/mRetainButton1"
+            android:text="@string/retain_my_data"
+            android:textColor="@color/colorSecondary" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,179 @@
+{
+  "type": "Questionnaire",
+  "info": {
+    "studyId": "STUDY123",
+    "qId": "initial",
+    "name": "Initial Questionnaire",
+    "version": "1",
+    "lastModified": "2016-08-01T08:00:00+0900",
+    "startDate": "2016-08-01T08:00:00+0900",
+    "endDate": "2016-08-01T08:00:00+0900"
+  },
+  "questionnaireConfiguration": {
+    "branching":true,
+    "randomization":false,
+    "frequency":"one-time"
+  },
+  "steps": [
+    {
+      "type": "instruction",
+      "resultType": null,
+      "key": "intro",
+      "title": "Intro",
+      "text": "text",
+      "image": "image-path",
+      "skippable": false,
+      "destinations":{
+        "default":"dueDate"
+      }
+    },
+    {
+      "type": "question",
+      "resultType": "date",
+      "key": "dueDate",
+      "title": "Pick date",
+      "skippable": false,
+      "groupName": "Basic",
+      "phi": "NotPHI",
+      "destinations":{
+        "default":"plannedPregnancy"
+      }
+    },
+    {
+      "type": "question",
+      "resultType": "boolean",
+      "key": "plannedPregnancy",
+      "title": "Is it a planned pregnancy?",
+      "skippable": false,
+      "groupName": "Basic",
+      "phi": "Limited",
+      "destinations": {
+        "true":"folicAcid",
+        "false":"birthControlType"
+      }
+    },{
+      "type": "task",
+      "resultType": "fetalKickCounter",
+      "key": "birthControlType",
+      "title": "Birth control used?",
+      "skippable": false,
+      "format": {
+        "textChoices":[
+          "Condoms",
+          "Pills",
+          "Others"
+        ],
+        "selectionStyle": 1
+      },
+      "destinations": {
+        "default": "folicAcid"
+      },
+      "groupName": "",
+      "phi": "NotPHI"
+    },
+    {
+      "type": "question",
+      "resultType": "numeric",
+      "key": "folicAcid",
+      "title": "Folic Acid",
+      "skippable": true,
+      "format": {
+        "unit": "ug",
+        "minValue": 100,
+        "maxValue": 600,
+        "placeholder": "Folic Acid"
+      },
+      "destinations": {
+        "default": "completion"
+      },
+      "groupName": "",
+      "phi": "NotPHI"
+    },
+    {
+      "type": "question",
+      "resultType": "valuePicker",
+      "key": "medicationName",
+      "title": "Pick Medication",
+      "skippable": false,
+      "format":{
+        "textChoices":[
+          "medicationA",
+          "medicationB",
+          "medicationC"
+        ]
+      },"phi": "Limited"
+    },
+    {
+      "type": "form",
+      "resultType": "grouped",
+      "key": "medication",
+      "title": "Medications",
+      "skippable": false,
+      "steps": [
+        {
+          "resultType": "valuePicker",
+          "key": "medicationName",
+          "title": "Pick Medication",
+          "skippable": false,
+          "format":{
+            "textChoices":[
+              "medicationA",
+              "medicationB",
+              "medicationC"
+            ]
+          },"phi": "Limited"
+        },
+        {
+          "resultType": "numeric",
+          "key": "medicationQuantity",
+          "title": "Enter dosage",
+          "skippable": false,
+          "format": {
+            "unit": "mg",
+            "placeholder": "Quantity"
+          },
+          "phi": "Limited"
+        },
+        {
+          "resultType": "imageChoice",
+          "key": "birthControlTypeForm",
+          "title": "Birth control used?",
+          "skippable": false,
+          "format": {
+            "textChoices":[
+              "Condoms",
+              "Pills",
+              "Others"
+            ],
+            "selectionStyle": 1
+          },
+          "destinations": {
+            "default": "folicAcid"
+          },
+          "groupName": "",
+          "phi": "NotPHI"
+        }
+      ],
+      "groupName": "",
+      "repeatable":true,
+      "repeatableText":"Add more..."
+    },
+    {
+      "type": "instruction",
+      "resultType": null,
+      "key": "completion",
+      "title": "title",
+      "text": "text",
+      "image": "image-path",
+      "skippable": false,
+      "destinations": {
+        "default": ""
+      }
+    }
+  ],
+  "randomizationSets":[
+  ],
+  "resourceContext": [
+    "dueDate"
+  ]
+}

@@ -1,0 +1,25 @@
+
+Usquid:S1444"2Make this "public static APP_ID_VALUE" field final(Õ×àĞşÿÿÿÿ8îÂ±Æ¹-
+"squid:ClassVariableVisibilityCheck	"SMake StudyId a static final constant or non-public and provide accessors if needed.(ÏÏÀ§
+"squid:ClassVariableVisibilityCheck"XMake ORG_ID_VALUE a static final constant or non-public and provide accessors if needed.(„Ú›„8îÂ±Æ¹-
+Ssquid:S1444"0Make this "public static ORG_ID_KEY" field final(Êşçöúÿÿÿÿ8îÂ±Æ¹-
+Ssquid:S1444"0Make this "public static APP_ID_KEY" field final(õÛÅŒıÿÿÿÿ8’±Æ¹-
+Š"squid:ClassVariableVisibilityCheck"WMake PackageName a static final constant or non-public and provide accessors if needed.(µ†È¥øÿÿÿÿ
+usquid:S3008"WRename this field "ORG_ID_VALUE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„Ú›„8Òã®Æ¹-
+"squid:ClassVariableVisibilityCheck"VMake APP_ID_KEY a static final constant or non-public and provide accessors if needed.(õÛÅŒıÿÿÿÿ8’±Æ¹-
+"squid:ClassVariableVisibilityCheck"VMake ORG_ID_KEY a static final constant or non-public and provide accessors if needed.(Êşçöúÿÿÿÿ8îÂ±Æ¹-
+isquid:S3008"RRename this field "GateWay" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²÷›
+zsquid:S3008"WRename this field "APP_ID_VALUE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Õ×àĞşÿÿÿÿ8Òã®Æ¹-
+Psquid:S1444"2Make this "public static ORG_ID_VALUE" field final(„Ú›„8îÂ±Æ¹-
+xsquid:S3008"URename this field "ORG_ID_KEY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Êşçöúÿÿÿÿ8Òã®Æ¹-
+’"squid:ClassVariableVisibilityCheck"XMake APP_ID_VALUE a static final constant or non-public and provide accessors if needed.(Õ×àĞşÿÿÿÿ8îÂ±Æ¹-
+rsquid:S3008"VRename this field "PackageName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µ†È¥øÿÿÿÿ
+nsquid:S3008"RRename this field "AppType" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®ÆÒ¤ùÿÿÿÿ
+isquid:S3008	"RRename this field "StudyId" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÏÏÀ§
+Vsquid:S1118":Add a private constructor to hide the implicit public one.(àüÌöüÿÿÿÿ
+†"squid:ClassVariableVisibilityCheck"SMake AppType a static final constant or non-public and provide accessors if needed.(®ÆÒ¤ùÿÿÿÿ
+Dsquid:S1444	"-Make this "public static StudyId" field final(ÏÏÀ§
+Isquid:S1444"-Make this "public static AppType" field final(®ÆÒ¤ùÿÿÿÿ
+lsquid:S3008"URename this field "Standalone" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œîà¢
+Msquid:S1444"1Make this "public static PackageName" field final(µ†È¥øÿÿÿÿ
+xsquid:S3008"URename this field "APP_ID_KEY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õÛÅŒıÿÿÿÿ8Òã®Æ¹-

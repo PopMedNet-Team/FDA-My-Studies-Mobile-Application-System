@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="base.definition.setpassword"
+		template="/WEB-INF/templates/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+	</definition>
+
+	<definition name="base.definition.changePassword"
+		template="/WEB-INF/templates/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="subheader" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+	</definition>
+
+	<definition name="base.definition"
+		template="/WEB-INF/templates/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/templates/header.jsp" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="subheader"
+			value="/WEB-INF/templates/subheader.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/templates/footer.jsp" />
+	</definition>
+
+	<definition name="user.base.definition"
+		template="/WEB-INF/templates/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/templates/header.jsp" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="subheader" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/templates/footer.jsp" />
+	</definition>
+
+	<!-- Blank Template for Login Page -->
+	<definition name="blank.definition"
+		template="/WEB-INF/view/loginPage.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="subheader" value="" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+	</definition>
+
+	<!-- Blank Template for DashBoard Page -->
+	<definition name="blank.definition.dashboard"
+		template="/WEB-INF/view/fdaAdminDashBoardPage.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+	</definition>
+	<definition name="blank.definition.expired.password"
+		template="/WEB-INF/view/changeExpiredPassword.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+	</definition>
+	<!--Template for Study Page -->
+	<definition name="study.definition"
+		template="/WEB-INF/templates/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/templates/header.jsp" />
+		<put-attribute name="subheader"
+			value="/WEB-INF/templates/subheader.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/templates/studyMenu.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/templates/footer.jsp" />
+	</definition>
+
+	<definition name="userPasswordReset"
+		template="/WEB-INF/view/userPasswordReset.jsp"></definition>
+
+	<definition name="emailChangeVarificationPage"
+		template="/WEB-INF/view/emailChangeVarificationPage.jsp"></definition>
+
+	<definition name="signUpPage"
+		template="/WEB-INF/view/signUpPage.jsp"></definition>
+
+	<definition name="inAppNotificationList"
+		extends="base.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/inAppNotificationList.jsp" />
+	</definition>
+
+	<definition name="loginPage" extends="blank.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/loginPage.jsp" />
+	</definition>
+
+	<definition name="privacypolicy"
+		template="/WEB-INF/view/privacypolicy.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+	</definition>
+
+	<definition name="termsAndCondition"
+		template="/WEB-INF/view/termsAndCondition.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+	</definition>
+
+	<definition name="unauthorized" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/view/403.jsp" />
+	</definition>
+
+	<definition name="changeExpiredPassword"
+		extends="blank.definition.expired.password">
+		<put-attribute name="body"
+			value="/WEB-INF/view/changeExpiredPassword.jsp" />
+	</definition>
+
+	<definition name="fdaAdminDashBoardPage"
+		extends="blank.definition.dashboard">
+		<put-attribute name="body"
+			value="/WEB-INF/view/fdaAdminDashBoardPage.jsp" />
+	</definition>
+	<!-- Study Starts -->
+	<definition name="studyListPage" extends="base.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/studyList.jsp" />
+	</definition>
+	<definition name="viewBasicInfo" extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/basicInformation.jsp" />
+	</definition>
+	<definition name="consentInfoListPage"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/consentInfoList.jsp" />
+	</definition>
+
+	<definition name="consentInfoPage"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/consentInfo.jsp" />
+	</definition>
+	<definition name="consentReviewAndEConsentPage"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/consentReviewAndEConsentPage.jsp" />
+	</definition>
+	<definition name="studyEligibiltyPage"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/studyEligibilty.jsp" />
+	</definition>
+
+	<definition name="comprehensionListPage"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/comprehensionList.jsp" />
+	</definition>
+
+	<definition name="comprehensionQuestionPage"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/comprehensionQuestion.jsp" />
+	</definition>
+
+	<definition name="viewSettingAndAdmins"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/viewSettingAndAdmins.jsp" />
+	</definition>
+
+	<definition name="resourceListPage"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/resourceListPage.jsp" />
+	</definition>
+
+	<definition name="addOrEditResourcePage"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/addOrEditResourcePage.jsp" />
+	</definition>
+
+	<definition name="studyNotificationList"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/studyNotificationList.jsp" />
+	</definition>
+
+	<definition name="addOrEditStudyNotification"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/addOrEditStudyNotification.jsp" />
+	</definition>
+
+	<definition name="checklist" extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/checklist.jsp" />
+	</definition>
+
+	<definition name="viewSettingAndAdmins"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/viewSettingAndAdmins.jsp" />
+	</definition>
+
+	<definition name="overviewStudyPages"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/overViewPage.jsp" />
+	</definition>
+
+	<definition name="studyQuestionaryListPage"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/questionaryListPage.jsp" />
+	</definition>
+
+	<definition name="instructionsStepPage"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/instructionsStep.jsp" />
+	</definition>
+
+	<definition name="formStepPage" extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/formStep.jsp" />
+	</definition>
+
+	<definition name="questionStepPage"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/questionStep.jsp" />
+	</definition>
+
+	<definition name="questionPage" extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/questionPage.jsp" />
+	</definition>
+
+	<definition name="studyActiveTaskListPage"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/activeTaskListPage.jsp" />
+	</definition>
+
+	<definition name="viewStudyActiveTask"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/addOrEditStudyActiveTask.jsp" />
+	</definition>
+
+	<definition name="viewFetalStudyActiveTask"
+		template="/WEB-INF/view/study/viewFetalStudyActiveTask.jsp" />
+
+	<definition name="viewTowerStudyActiveTask"
+		template="/WEB-INF/view/study/viewTowerStudyActiveTask.jsp" />
+
+	<definition name="viewSpatialStudyActiveTask"
+		template="/WEB-INF/view/study/viewSpatialStudyActiveTask.jsp" />
+
+	<definition name="activeTaskScheduled"
+		template="/WEB-INF/view/study/activeTaskScheduled.jsp" />
+
+	<definition name="questionnairePage"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/questionnaire.jsp" />
+	</definition>
+
+	<definition name="actionList" extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/actionListPage.jsp" />
+	</definition>
+
+	<definition name="studyEligibiltyTestPage"
+		extends="study.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/study/studyEligibiltyTest.jsp" />
+	</definition>
+
+
+	<!-- Users Section Starts -->
+	<definition name="userListPage" extends="base.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/users/userListPage.jsp" />
+	</definition>
+
+	<!-- Notification Starts -->
+
+	<definition name="notificationListPage"
+		extends="base.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/notification/notificationListPage.jsp" />
+	</definition>
+
+	<definition name="createOrUpdateNotification"
+		extends="base.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/notification/createOrUpdateNotification.jsp" />
+	</definition>
+
+	<!-- Notification Ends -->
+
+	<!-- MyAccount Starts -->
+
+	<definition name="myAccount" extends="base.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/myAccount.jsp" />
+	</definition>
+
+	<!-- MyAccount Ends -->
+
+	<definition name="addOrEditUserPage"
+		extends="base.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/view/users/addOrEditUserPage.jsp" />
+	</definition>
+	<!-- Users Section Ends -->
+
+	<definition name="appDetails"
+		template="/WEB-INF/view/appDetails.jsp" />
+
+</tiles-definitions>

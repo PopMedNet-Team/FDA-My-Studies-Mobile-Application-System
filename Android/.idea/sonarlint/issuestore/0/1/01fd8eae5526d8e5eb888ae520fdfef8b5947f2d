@@ -1,0 +1,28 @@
+
+[squid:UnusedPrivateMethodb"6Remove this unused private "deleteaccount_old" method.(°Ù±¬
+usquid:S2293e"YReplace the type specification in this constructor call with the diamond operator ("<>").(­¯ÚÄıÿÿÿÿ
+psquid:S1450A"YRemove the "mStudyHome" field and declare it as a local variable in the relevant methods.(£‡İ
+bsquid:CommentedOutCodeLine2"<This block of commented-out lines of code should be removed.(¾¹¹³
+bsquid:CommentedOutCodeLineC"<This block of commented-out lines of code should be removed.(ï °Á
+gsquid:CommentedOutCodeLineX"<This block of commented-out lines of code should be removed.(ƒ§øÿÿÿÿÿ
+gsquid:CommentedOutCodeLiney"<This block of commented-out lines of code should be removed.(¤ÌÁ‚ûÿÿÿÿ
+gsquid:CommentedOutCodeLine{"<This block of commented-out lines of code should be removed.(¤ÌÁ‚ûÿÿÿÿ
+hsquid:CommentedOutCodeLineÆ"<This block of commented-out lines of code should be removed.(–ŞÒØüÿÿÿÿ
+csquid:CommentedOutCodeLineô"<This block of commented-out lines of code should be removed.(ûùÂê
+csquid:CommentedOutCodeLineî"<This block of commented-out lines of code should be removed.(ƒêµê
+bsquid:CommentedOutCodeLineõ"<This block of commented-out lines of code should be removed.(–Ü`
+Rsquid:S1141È"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+Usquid:S2589¬"8Remove this expression which always evaluates to "false"(ò»¡øÿÿÿÿ
+Dsquid:S1481²"'Remove this unused "r1" local variable.(‘§¾–ûÿÿÿÿ
+isquid:S3776‰"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(Ïòİ&
+osquid:S3776µ"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(©ö»‚ÿÿÿÿÿ
+osquid:S3776×"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(ÓÏ­ûùÿÿÿÿ
+fsquid:S00100b"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°Ù±¬
+?squid:S1148r"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148…"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148Õ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148İ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148Ò"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148á"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148¡"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148Ä"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
